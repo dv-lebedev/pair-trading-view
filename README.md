@@ -1,0 +1,11 @@
+# PairTradingView
+
+
+
+1. Download market data in csv format.
+
+2. Put the downloaded files to the /MarketData directory.
+
+3. Run PairTradingView.
+
+4. Set the price and volume indices and press start.
