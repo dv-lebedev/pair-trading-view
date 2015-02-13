@@ -1,6 +1,6 @@
 # PairTradingView
 
-[Screenshot](https://github.com/dv-lebedev/PairTradingView/blob/master/screenshot.png)
+![Screenshot](https://github.com/dv-lebedev/PairTradingView/blob/master/screenshot.png)
 
 Pair Trading View - application for the visual analysis of synthetic financial instruments based on econometrics models. App uses market data in csv file format.
 
