@@ -2,7 +2,7 @@
 
 ![Screenshot](https://github.com/dv-lebedev/PairTradingView/blob/master/screenshot.png)
 
-Pair Trading View - application for the visual analysis of synthetic financial instruments based on econometrics models. App uses market data in csv file format.
+**Pair Trading View** - application for the visual analysis of synthetic financial instruments based on econometrics models. App uses market data in csv file format.
 
 1. Download market data in csv format.
 
