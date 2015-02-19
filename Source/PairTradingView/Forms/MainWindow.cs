@@ -8,6 +8,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Threading;
 using System.Windows.Forms;
 using EmetricGears;
 using PairTradingView.Controls;
@@ -77,30 +78,47 @@ namespace PairTradingView.Forms
 
         private void MainWindow_Load(object sender, EventArgs e)
         {
+            ICollection<Task> tasks = new List<Task>();
+
             foreach (var file in Directory.EnumerateFiles("MarketData/"))
             {
-                var stockTicker = file.Replace("MarketData/", "").Replace(".txt", "").Replace(".csv", "");
+                var t = new Task(() =>
+                {
+                    var stockTicker = file.Replace("MarketData/", "").Replace(".txt", "").Replace(".csv", "");
 
-                Stocks.Add(stockTicker, CsvFile.Read(file, CsvFormat));
+                    Stocks.Add(stockTicker, CsvFile.Read(file, CsvFormat));
+                });
+
+                t.RunSynchronously();
+                tasks.Add(t);
             }
 
+            Task.WaitAll(tasks.ToArray());
+            tasks.Clear();
 
             for (int i = 0; i < Stocks.Count; i++)
             {
                 for (int j = i + 1; j < Stocks.Count; j++)
                 {
-
-                    var pair = new FinancialPair(
-                        Stocks.ElementAt(i).Value.Select(item => item.Price).ToArray(),
-                        Stocks.ElementAt(j).Value.Select(item => item.Price).ToArray())
+                    var t = new Task(() =>
                     {
-                        XName = Stocks.ElementAt(i).Key,
-                        YName = Stocks.ElementAt(j).Key
-                    };
+                        var pair = new FinancialPair(
+                            Stocks.ElementAt(i).Value.Select(item => item.Price).ToArray(),
+                            Stocks.ElementAt(j).Value.Select(item => item.Price).ToArray())
+                        {
+                            XName = Stocks.ElementAt(i).Key,
+                            YName = Stocks.ElementAt(j).Key
+                        };
 
-                    FinancialPairs.Add(pair);
+                        FinancialPairs.Add(pair);
+                    });
+
+                    t.RunSynchronously();
+                    tasks.Add(t);
                 }
             }
+
+            Task.WaitAll(tasks.ToArray());
 
             foreach (var item in FinancialPairs)
             {
