@@ -4,13 +4,17 @@
 
 **Pair Trading View** - application for the visual analysis of synthetic financial instruments based on econometrics models. App uses market data in csv file format.
 
-1. Download market data in csv format.
+**How To Use:**
 
-2. Put the downloaded files to the /MarketData directory.
+- Download market data in csv format.
 
-3. Run PairTradingView.
+- Put the downloaded files to the /MarketData directory.
 
-4. Set the price and volume indices and press start.
+- Run PairTradingView.
 
-**Third-party:**
+- Set the price and volume indices and press start.
+
+
+**Third-party**
+
 - ZedGraph
