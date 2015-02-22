@@ -11,3 +11,6 @@
 3. Run PairTradingView.
 
 4. Set the price and volume indices and press start.
+
+*Third-party*
+- ZedGraph
