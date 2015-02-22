@@ -15,6 +15,6 @@
 - Set the price and volume indices and press start.
 
 
-**Third-party**
+**Third-party:**
 
 - ZedGraph
