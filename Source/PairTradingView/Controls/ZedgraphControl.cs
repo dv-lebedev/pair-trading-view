@@ -59,7 +59,7 @@ namespace PairTradingView.Controls
             }
 
             AxisChange();
-           Invalidate();
+            Invalidate();
         }
 
         public void SetWMA(double[] values, int interval)
