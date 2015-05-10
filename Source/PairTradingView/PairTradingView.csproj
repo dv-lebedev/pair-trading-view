@@ -68,6 +68,12 @@
     <Compile Include="Forms\AppStartWindow.Designer.cs">
       <DependentUpon>AppStartWindow.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\Downloader.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Downloader.Designer.cs">
+      <DependentUpon>Downloader.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\MainWindow.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -78,6 +84,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Forms\AppStartWindow.resx">
       <DependentUpon>AppStartWindow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Downloader.resx">
+      <DependentUpon>Downloader.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\MainWindow.resx">
       <DependentUpon>MainWindow.cs</DependentUpon>

@@ -49,5 +49,11 @@ namespace PairTradingView.Forms
         {
             CsvFormat.ContainsHeader = ContainsHeaderCheckBox.Checked;
         }
+
+        private void openDownloaderToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Downloader DlForm = new Downloader();
+            DlForm.Show();
+        }
     }
 }
