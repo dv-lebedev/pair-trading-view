@@ -21,8 +21,8 @@ namespace PairTradingView.Forms
 
             CsvFormat = new CsvFormat();
 
-            priceIndexUpDown.Minimum = 1;
-            volumeIndexUpDown.Minimum = 1;
+            priceIndexUpDown.Minimum = 5;
+            volumeIndexUpDown.Minimum = 6;
         }
 
         private void AppStartWindow_Load(object sender, EventArgs e)
@@ -42,6 +42,12 @@ namespace PairTradingView.Forms
 
         private void Start_Click(object sender, EventArgs e)
         {
+            if (CsvFormat.PriceIndex == CsvFormat.VolumeIndex)
+            {
+                MessageBox.Show("Price and Volume indeces should have a different values!");
+                return;
+            }
+
             this.Close();
         }
 

@@ -371,21 +371,21 @@
             // dow30ToolStripMenuItem
             // 
             this.dow30ToolStripMenuItem.Name = "dow30ToolStripMenuItem";
-            this.dow30ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.dow30ToolStripMenuItem.Size = new System.Drawing.Size(135, 22);
             this.dow30ToolStripMenuItem.Text = "Dow 30";
             this.dow30ToolStripMenuItem.Click += new System.EventHandler(this.dow30ToolStripMenuItem_Click);
             // 
             // sP100ToolStripMenuItem
             // 
             this.sP100ToolStripMenuItem.Name = "sP100ToolStripMenuItem";
-            this.sP100ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.sP100ToolStripMenuItem.Size = new System.Drawing.Size(135, 22);
             this.sP100ToolStripMenuItem.Text = "S&&P 100";
             this.sP100ToolStripMenuItem.Click += new System.EventHandler(this.sP100ToolStripMenuItem_Click);
             // 
             // nasdaq100ToolStripMenuItem
             // 
             this.nasdaq100ToolStripMenuItem.Name = "nasdaq100ToolStripMenuItem";
-            this.nasdaq100ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.nasdaq100ToolStripMenuItem.Size = new System.Drawing.Size(135, 22);
             this.nasdaq100ToolStripMenuItem.Text = "Nasdaq 100";
             this.nasdaq100ToolStripMenuItem.Click += new System.EventHandler(this.nasdaq100ToolStripMenuItem_Click);
             // 
@@ -416,6 +416,7 @@
             this.ForeColor = System.Drawing.Color.Gray;
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "Downloader";
+            this.ShowIcon = false;
             this.Text = "Quote Downloader";
             ((System.ComponentModel.ISupportInitialize)(this.toYear)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.fromYear)).EndInit();
