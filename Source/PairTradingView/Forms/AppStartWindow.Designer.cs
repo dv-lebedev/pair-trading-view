@@ -38,6 +38,9 @@
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.downloadQuotesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openDownloaderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.label4 = new System.Windows.Forms.Label();
+            this.deltaTypeBox = new System.Windows.Forms.ComboBox();
+            this.label5 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.priceIndexUpDown)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.volumeIndexUpDown)).BeginInit();
             this.menuStrip1.SuspendLayout();
@@ -95,7 +98,7 @@
             this.label3.BackColor = System.Drawing.Color.Black;
             this.label3.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.label3.ForeColor = System.Drawing.Color.Gray;
-            this.label3.Location = new System.Drawing.Point(200, 35);
+            this.label3.Location = new System.Drawing.Point(212, 35);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(77, 15);
             this.label3.TabIndex = 4;
@@ -106,9 +109,9 @@
             this.Start.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.Start.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.Start.ForeColor = System.Drawing.Color.Gray;
-            this.Start.Location = new System.Drawing.Point(203, 177);
+            this.Start.Location = new System.Drawing.Point(196, 251);
             this.Start.Name = "Start";
-            this.Start.Size = new System.Drawing.Size(75, 23);
+            this.Start.Size = new System.Drawing.Size(112, 23);
             this.Start.TabIndex = 5;
             this.Start.Text = "Start";
             this.Start.UseVisualStyleBackColor = true;
@@ -152,12 +155,49 @@
             this.openDownloaderToolStripMenuItem.Text = "Open Downloader";
             this.openDownloaderToolStripMenuItem.Click += new System.EventHandler(this.openDownloaderToolStripMenuItem_Click);
             // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.BackColor = System.Drawing.Color.Black;
+            this.label4.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label4.ForeColor = System.Drawing.Color.Gray;
+            this.label4.Location = new System.Drawing.Point(172, 163);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(154, 15);
+            this.label4.TabIndex = 8;
+            this.label4.Text = "_____________________";
+            // 
+            // deltaTypeBox
+            // 
+            this.deltaTypeBox.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.deltaTypeBox.FormattingEnabled = true;
+            this.deltaTypeBox.Location = new System.Drawing.Point(242, 198);
+            this.deltaTypeBox.Name = "deltaTypeBox";
+            this.deltaTypeBox.Size = new System.Drawing.Size(120, 23);
+            this.deltaTypeBox.TabIndex = 9;
+            this.deltaTypeBox.SelectedIndexChanged += new System.EventHandler(this.deltaTypeBox_SelectedIndexChanged);
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.BackColor = System.Drawing.Color.Black;
+            this.label5.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label5.ForeColor = System.Drawing.Color.Gray;
+            this.label5.Location = new System.Drawing.Point(131, 200);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(77, 15);
+            this.label5.TabIndex = 10;
+            this.label5.Text = "Delta type";
+            // 
             // AppStartWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Black;
-            this.ClientSize = new System.Drawing.Size(489, 221);
+            this.ClientSize = new System.Drawing.Size(489, 296);
+            this.Controls.Add(this.label5);
+            this.Controls.Add(this.deltaTypeBox);
+            this.Controls.Add(this.label4);
             this.Controls.Add(this.ContainsHeaderCheckBox);
             this.Controls.Add(this.Start);
             this.Controls.Add(this.label3);
@@ -192,5 +232,8 @@
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem downloadQuotesToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem openDownloaderToolStripMenuItem;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.ComboBox deltaTypeBox;
+        private System.Windows.Forms.Label label5;
     }
 }

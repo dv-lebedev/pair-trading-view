@@ -14,6 +14,7 @@ namespace PairTradingView.Forms
     public partial class AppStartWindow : Form
     {
         public CsvFormat CsvFormat { get; private set; }
+        public DeltaType DeltaType { get; private set; }
 
         public AppStartWindow()
         {
@@ -23,11 +24,15 @@ namespace PairTradingView.Forms
 
             priceIndexUpDown.Minimum = 5;
             volumeIndexUpDown.Minimum = 6;
+
+            deltaTypeBox.Items.Add("Ratio");
+            deltaTypeBox.Items.Add("Spread");
+            deltaTypeBox.Text = deltaTypeBox.Items[0].ToString();      
         }
 
         private void AppStartWindow_Load(object sender, EventArgs e)
-        {
-           
+        {      
+
         }
 
         private void priceIndexUpDown_ValueChanged(object sender, EventArgs e)
@@ -60,6 +65,24 @@ namespace PairTradingView.Forms
         {
             Downloader DlForm = new Downloader();
             DlForm.Show();
+        }
+
+        private void deltaTypeBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            switch (deltaTypeBox.Text)
+            {
+                case "Ratio":
+                    DeltaType = DataProcessing.DeltaType.Ratio;
+                    break;
+
+                case "Spread":
+                    DeltaType = DataProcessing.DeltaType.Spread;
+                    break;
+
+                default:
+                    DeltaType = DataProcessing.DeltaType.Ratio;
+                    break;
+            }
         }
     }
 }
