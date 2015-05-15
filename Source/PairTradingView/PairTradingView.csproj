@@ -61,6 +61,7 @@
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="DataProcessing\CSV.cs" />
+    <Compile Include="DataProcessing\DeltaType.cs" />
     <Compile Include="DataProcessing\FinancialPair.cs" />
     <Compile Include="Forms\AppStartWindow.cs">
       <SubType>Form</SubType>

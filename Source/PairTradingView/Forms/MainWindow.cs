@@ -22,6 +22,7 @@ namespace PairTradingView.Forms
         public Dictionary<string, List<PairTradingView.DataProcessing.Value>> Stocks { get; private set; }
 
         public CsvFormat CsvFormat { get; private set; }
+        public DeltaType DeltaType { get; private set; }
 
         public List<FinancialPair> FinancialPairs { get; private set; }
 
@@ -38,6 +39,7 @@ namespace PairTradingView.Forms
 
             this.CsvFormat = asw.CsvFormat;
             this.CsvFormat.Separator = ',';
+            this.DeltaType = asw.DeltaType;
 
             InitializeComponent();
 
@@ -104,7 +106,8 @@ namespace PairTradingView.Forms
                     {
                         var pair = new FinancialPair(
                             Stocks.ElementAt(i).Value.Select(item => item.Price).ToArray(),
-                            Stocks.ElementAt(j).Value.Select(item => item.Price).ToArray())
+                            Stocks.ElementAt(j).Value.Select(item => item.Price).ToArray(),
+                            DeltaType)
                         {
                             XName = Stocks.ElementAt(i).Key,
                             YName = Stocks.ElementAt(j).Key

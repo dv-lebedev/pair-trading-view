@@ -43,21 +43,30 @@ namespace PairTradingView.DataProcessing
 
         public IEnumerable<double> DeltaValues { get; set; }
 
-        public FinancialPair(double[] x, double[] y, int xLot = 1, int yLot = 1)
+        public FinancialPair(double[] x, double[] y, DeltaType delta)
         {
-            Update(x, y, xLot, yLot);
+            Update(x, y, delta);
         }
 
-        public void Update(double[] x, double[] y, int xLot = 1, int yLot = 1)
+        public void Update(double[] x, double[] y, DeltaType delta)
         {
-            Regression = new LinearRegressionModel(
-                x.Select(i => i * xLot).ToArray(),
-                y.Select(i => i * yLot).ToArray());
+            Regression = new LinearRegressionModel(x, y);
 
             XStandardDev = StdFuncs.StandardDeviation(x);
             YStandardDev = StdFuncs.StandardDeviation(y);
-    
-            DeltaValues = x.Zip(y, (i, j) => j * yLot / i * xLot);
+
+
+            switch (delta)
+            {
+                case DeltaType.Ratio:
+                    DeltaValues = x.Zip(y, (i, j) => j / i);
+                    break;
+
+                case DeltaType.Spread:
+                    DeltaValues = x.Zip(y, (i, j) => j - i);
+                    break;
+            }
+            
 
             DeltaStandardDev = StdFuncs.StandardDeviation(DeltaValues.ToArray());
         }
