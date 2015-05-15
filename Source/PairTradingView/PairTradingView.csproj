@@ -17,7 +17,7 @@
     <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
-    <Optimize>true</Optimize>
+    <Optimize>false</Optimize>
     <OutputPath>bin\Debug\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
@@ -61,7 +61,6 @@
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="DataProcessing\CSV.cs" />
-    <Compile Include="DataProcessing\DeltaType.cs" />
     <Compile Include="DataProcessing\FinancialPair.cs" />
     <Compile Include="Forms\AppStartWindow.cs">
       <SubType>Form</SubType>
