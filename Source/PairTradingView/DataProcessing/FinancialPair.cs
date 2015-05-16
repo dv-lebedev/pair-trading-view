@@ -20,6 +20,7 @@
 //THE SOFTWARE.
 #endregion
 
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using EmetricGears;
@@ -59,11 +60,56 @@ namespace PairTradingView.DataProcessing
             switch (delta)
             {
                 case DeltaType.Ratio:
-                    DeltaValues = x.Zip(y, (i, j) => j / i);
+                    {
+                        if (Regression.Correlation >= 0)
+                        {
+                            DeltaValues = x.Zip(y, (i, j) => j / i);
+                        }
+                        else
+                        {
+                            DeltaValues = x.Zip(y, (i, j) => Math.Log10(j) * Math.Log10(i));
+                        }
+                    }
+                    break;
+
+                case DeltaType.RatioIncludingBeta:
+                    {
+                        if (Regression.Correlation >= 0)
+                        {
+                            DeltaValues = x.Zip(y, (i, j) => j / (Math.Abs(Regression.Beta) * i));
+                        }
+                        else
+                        {
+                            DeltaValues = x.Zip(y, (i, j) => Math.Log10(j) * Math.Log10(Math.Abs(Regression.Beta) * i));
+                        }
+
+                    }
                     break;
 
                 case DeltaType.Spread:
-                    DeltaValues = x.Zip(y, (i, j) => j - i);
+                    {
+                        if (Regression.Correlation >= 0)
+                        {
+                            DeltaValues = x.Zip(y, (i, j) => j - i);
+                        }
+                        else
+                        {
+                            DeltaValues = x.Zip(y, (i, j) => j + i);
+                        }
+                    }
+                    break;
+
+                case DeltaType.SpreadIncludingBeta:
+                    {
+                        if (Regression.Correlation >= 0)
+                        {
+                            DeltaValues = x.Zip(y, (i, j) => j - Math.Abs(Regression.Beta) * i);
+                        }
+                        else
+                        {
+                            DeltaValues = x.Zip(y, (i, j) => j + Math.Abs(Regression.Beta) * i);
+                        }
+                    }
                     break;
             }
             

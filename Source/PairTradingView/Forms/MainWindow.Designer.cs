@@ -209,7 +209,7 @@ namespace PairTradingView.Forms
             this.label10.AutoSize = true;
             this.label10.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label10.ForeColor = System.Drawing.Color.Gray;
-            this.label10.Location = new System.Drawing.Point(803, 153);
+            this.label10.Location = new System.Drawing.Point(804, 153);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(119, 14);
             this.label10.TabIndex = 13;
@@ -222,7 +222,7 @@ namespace PairTradingView.Forms
             this.ReloadApp.ForeColor = System.Drawing.Color.Gray;
             this.ReloadApp.Location = new System.Drawing.Point(874, 336);
             this.ReloadApp.Name = "ReloadApp";
-            this.ReloadApp.Size = new System.Drawing.Size(119, 23);
+            this.ReloadApp.Size = new System.Drawing.Size(105, 23);
             this.ReloadApp.TabIndex = 15;
             this.ReloadApp.Text = "Reload App";
             this.ReloadApp.UseVisualStyleBackColor = true;

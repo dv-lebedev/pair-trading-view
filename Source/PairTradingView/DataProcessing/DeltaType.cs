@@ -7,10 +7,10 @@ namespace PairTradingView.DataProcessing
 {
     public enum DeltaType
     {
-
         Ratio,
-
-        Spread
+        RatioIncludingBeta,
+        Spread,
+        SpreadIncludingBeta
 
     }
 }

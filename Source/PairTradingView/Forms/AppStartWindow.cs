@@ -26,7 +26,11 @@ namespace PairTradingView.Forms
             volumeIndexUpDown.Minimum = 6;
 
             deltaTypeBox.Items.Add("Ratio");
+            deltaTypeBox.Items.Add("RatioIncludingBeta");
+
             deltaTypeBox.Items.Add("Spread");
+            deltaTypeBox.Items.Add("SpreadIncludingBeta");
+
             deltaTypeBox.Text = deltaTypeBox.Items[0].ToString();
         }
 
@@ -73,10 +77,22 @@ namespace PairTradingView.Forms
             {
                 case "Ratio":
                     DeltaType = DataProcessing.DeltaType.Ratio;
+                    explanationLabel.Text = "if r_value >= 0: y / x \nelse: log(y) * log(x)";
+                    break;
+
+                case "RatioIncludingBeta":
+                    DeltaType = DataProcessing.DeltaType.RatioIncludingBeta;
+                    explanationLabel.Text = "if r_value >= 0: y / (beta * x) \nelse: log(y) * (beta * log(x))";
                     break;
 
                 case "Spread":
                     DeltaType = DataProcessing.DeltaType.Spread;
+                    explanationLabel.Text = "if r_value >= 0: y - x \nelse: y + x";
+                    break;
+
+                case "SpreadIncludingBeta":
+                    DeltaType = DataProcessing.DeltaType.SpreadIncludingBeta;
+                    explanationLabel.Text = "if r_value >= 0: y - beta * x \nelse: y + beta * x";
                     break;
             }
         }
