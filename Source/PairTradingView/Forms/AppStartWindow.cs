@@ -82,7 +82,7 @@ namespace PairTradingView.Forms
 
                 case "RatioIncludingBeta":
                     DeltaType = DataProcessing.DeltaType.RatioIncludingBeta;
-                    explanationLabel.Text = "if r_value >= 0: y / (beta * x) \nelse: log(y) * (beta * log(x))";
+                    explanationLabel.Text = "if r_value >= 0: y / (beta * x) \nelse: log(y) * log(beta * x)";
                     break;
 
                 case "Spread":
