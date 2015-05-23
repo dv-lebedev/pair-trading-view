@@ -13,10 +13,18 @@
 
 **How To Use:**
 
+*>CSV format files*
+
 - Download market data in csv format using Quote Downloader
 or just put downloaded files to the /MarketData directory.
 
-- Set the price and volume indices and press start.
+- Set the price and volume columns and press start.
+
+*>SQL Server connection*
+
+- After first run app create 'PairTradingViewDb' with 2 tables: Stocks and StockValues.
+
+- App read new market data from 'Stocks' table, update pairs data, save new values to 'StockValues' table.
 
 
 

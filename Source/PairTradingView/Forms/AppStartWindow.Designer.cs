@@ -134,7 +134,7 @@
             this.Start.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.Start.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.Start.ForeColor = System.Drawing.Color.Gray;
-            this.Start.Location = new System.Drawing.Point(339, 429);
+            this.Start.Location = new System.Drawing.Point(304, 428);
             this.Start.Name = "Start";
             this.Start.Size = new System.Drawing.Size(101, 23);
             this.Start.TabIndex = 5;
@@ -340,7 +340,7 @@
             this.radioCSV.AutoSize = true;
             this.radioCSV.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.radioCSV.ForeColor = System.Drawing.Color.Gray;
-            this.radioCSV.Location = new System.Drawing.Point(294, 359);
+            this.radioCSV.Location = new System.Drawing.Point(304, 357);
             this.radioCSV.Name = "radioCSV";
             this.radioCSV.Size = new System.Drawing.Size(137, 19);
             this.radioCSV.TabIndex = 30;
@@ -353,7 +353,7 @@
             this.radioSQL.AutoSize = true;
             this.radioSQL.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.radioSQL.ForeColor = System.Drawing.Color.Gray;
-            this.radioSQL.Location = new System.Drawing.Point(294, 382);
+            this.radioSQL.Location = new System.Drawing.Point(304, 380);
             this.radioSQL.Name = "radioSQL";
             this.radioSQL.Size = new System.Drawing.Size(172, 19);
             this.radioSQL.TabIndex = 31;
@@ -367,7 +367,7 @@
             this.label15.BackColor = System.Drawing.Color.Black;
             this.label15.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.label15.ForeColor = System.Drawing.Color.Gray;
-            this.label15.Location = new System.Drawing.Point(164, 361);
+            this.label15.Location = new System.Drawing.Point(174, 359);
             this.label15.Name = "label15";
             this.label15.Size = new System.Drawing.Size(105, 15);
             this.label15.TabIndex = 32;
@@ -420,7 +420,7 @@
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.Gray;
-            this.panel1.Location = new System.Drawing.Point(359, 68);
+            this.panel1.Location = new System.Drawing.Point(349, 69);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(2, 225);
             this.panel1.TabIndex = 37;

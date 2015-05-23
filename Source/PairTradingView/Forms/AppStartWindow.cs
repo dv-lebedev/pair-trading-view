@@ -60,6 +60,11 @@ namespace PairTradingView.Forms
           
         }
 
+        private void AppStartWindow_Load(object sender, EventArgs e)
+        {
+
+        }
+
         private void priceIndexUpDown_ValueChanged(object sender, EventArgs e)
         {
             mWindow.CsvFormat.PriceIndex = (int)priceIndexUpDown.Value - 1;
@@ -215,9 +220,5 @@ namespace PairTradingView.Forms
             }
         }
 
-        private void AppStartWindow_Load(object sender, EventArgs e)
-        {
-
-        }
     }
 }
