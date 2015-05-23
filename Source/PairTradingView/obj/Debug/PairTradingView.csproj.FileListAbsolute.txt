@@ -128,3 +128,7 @@ C:\GitHub\PairTradingView\Source\PairTradingView\obj\Debug\PairTradingView.Forms
 C:\GitHub\PairTradingView\Source\PairTradingView\obj\Debug\PairTradingView.Forms.MainWindow.resources
 C:\GitHub\PairTradingView\Source\PairTradingView\obj\Debug\PairTradingView.Properties.Resources.resources
 C:\GitHub\PairTradingView\Source\PairTradingView\obj\Debug\PairTradingView.csproj.GenerateResource.Cache
+C:\GitHub\PairTradingView\Source\PairTradingView\bin\Debug\EntityFramework.dll
+C:\GitHub\PairTradingView\Source\PairTradingView\bin\Debug\EntityFramework.SqlServer.dll
+C:\GitHub\PairTradingView\Source\PairTradingView\bin\Debug\EntityFramework.xml
+C:\GitHub\PairTradingView\Source\PairTradingView\bin\Debug\EntityFramework.SqlServer.xml

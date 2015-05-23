@@ -40,6 +40,8 @@ namespace PairTradingView.DataProcessing
         public double YStandardDev { get; private set; }
         public double DeltaStandardDev { get; private set; }
 
+        public DeltaType DeltaType { get; private set; }
+
         public LinearRegressionModel Regression { get; set; }
 
         public IEnumerable<double> DeltaValues { get; set; }
@@ -51,70 +53,28 @@ namespace PairTradingView.DataProcessing
 
         public void Update(double[] x, double[] y, DeltaType delta)
         {
-            Regression = new LinearRegressionModel(x, y);
+            DeltaType = delta;
 
-            XStandardDev = StdFuncs.StandardDeviation(x);
-            YStandardDev = StdFuncs.StandardDeviation(y);
-
-
-            switch (delta)
+            try
             {
-                case DeltaType.Ratio:
-                    {
-                        if (Regression.Correlation >= 0)
-                        {
-                            DeltaValues = x.Zip(y, (i, j) => j / i);
-                        }
-                        else
-                        {
-                            DeltaValues = x.Zip(y, (i, j) => Math.Log10(j) * Math.Log10(i));
-                        }
-                    }
-                    break;
+                Regression = new LinearRegressionModel(x, y);
 
-                case DeltaType.RatioIncludingBeta:
-                    {
-                        if (Regression.Correlation >= 0)
-                        {
-                            DeltaValues = x.Zip(y, (i, j) => j / (Math.Abs(Regression.Beta) * i));
-                        }
-                        else
-                        {
-                            DeltaValues = x.Zip(y, (i, j) => Math.Log10(j) * Math.Log10(Math.Abs(Regression.Beta) * i));
-                        }
+                XStandardDev = StdFuncs.StandardDeviation(x);
+                YStandardDev = StdFuncs.StandardDeviation(y);
 
-                    }
-                    break;
+                DeltaValues = Delta.GetDeltaValues(x, y, Regression.Beta, Regression.Correlation, delta);
 
-                case DeltaType.Spread:
-                    {
-                        if (Regression.Correlation >= 0)
-                        {
-                            DeltaValues = x.Zip(y, (i, j) => j - i);
-                        }
-                        else
-                        {
-                            DeltaValues = x.Zip(y, (i, j) => j + i);
-                        }
-                    }
-                    break;
-
-                case DeltaType.SpreadIncludingBeta:
-                    {
-                        if (Regression.Correlation >= 0)
-                        {
-                            DeltaValues = x.Zip(y, (i, j) => j - Math.Abs(Regression.Beta) * i);
-                        }
-                        else
-                        {
-                            DeltaValues = x.Zip(y, (i, j) => j + Math.Abs(Regression.Beta) * i);
-                        }
-                    }
-                    break;
+                DeltaStandardDev = StdFuncs.StandardDeviation(DeltaValues.ToArray());
             }
-            
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
 
-            DeltaStandardDev = StdFuncs.StandardDeviation(DeltaValues.ToArray());
+        public double GetCurrentDelta(double x, double y)
+        {
+            return Delta.GetCurrentDelta(x, y, Regression.Beta, Regression.Correlation, DeltaType);
         }
     }
 }

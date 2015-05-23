@@ -1,61 +1,128 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Diagnostics;
 using System.Drawing;
-using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Threading;
 using System.Windows.Forms;
 using EmetricGears;
-using PairTradingView.Controls;
 using PairTradingView.DataProcessing;
+using PairTradingView.SqlData;
+using PairTradingView.SqlData.Entities;
+using PairTradingView.CSVData;
 
 namespace PairTradingView.Forms
 {
     public partial class MainWindow : Form
     {
+        public Dictionary<string, List<StockValue>> Stocks { get; private set; }
 
-        public Dictionary<string, List<PairTradingView.DataProcessing.Value>> Stocks { get; private set; }
+        public Configuration Cfg { get; private set; }
 
-        public CsvFormat CsvFormat { get; private set; }
-        public DeltaType DeltaType { get; private set; }
+        public DataTasks Tasks { get; private set; }
+
+        public CSVFormat CsvFormat { get; private set; }
+        public DeltaType DeltaType { get; set; }
 
         public List<FinancialPair> FinancialPairs { get; private set; }
 
-        public FinancialPair SelectedPair { get; private set; }
-
-        public int RValueHighCount { get; private set; }
-        public int RValueLowCount { get; private set; }
+        private FinancialPair SelectedPair { get; set; }
 
         public MainWindow()
         {
+            CsvFormat = new CSVFormat();
+            CsvFormat.Separator = ',';
 
-            AppStartWindow asw = new AppStartWindow();
+            FinancialPairs = new List<FinancialPair>();
+
+            Stocks = new Dictionary<string, List<StockValue>>();
+
+            Tasks = new DataTasks();
+            Tasks.DataSaver.Elapsed += DataSaver_Elapsed;
+            Tasks.DataUpdater.Elapsed += DataUpdater_Elapsed;
+
+            try
+            {
+                Cfg = Configuration.Deserialize("ptview.cfg");
+            }
+            catch
+            {
+                Cfg = Configuration.GetDefaultSetting();
+            }
+
+
+            AppStartWindow asw = new AppStartWindow(this);
             asw.ShowDialog();
-
-            this.CsvFormat = asw.CsvFormat;
-            this.CsvFormat.Separator = ',';
-            this.DeltaType = asw.DeltaType;
 
             InitializeComponent();
 
-
-            zedGraphControl.BlackTheme();
-
-            FinancialPairs = new List<FinancialPair>();
-            Stocks = new Dictionary<string, List<PairTradingView.DataProcessing.Value>>();
-
             listView1.MouseDoubleClick += listView1_MouseDoubleClick;
-
+            
             SMAperiodNUD.Maximum = decimal.MaxValue;
             WMAperiodNUD.Maximum = decimal.MaxValue;
+
+            this.FormClosing += MainWindow_FormClosing;
         }
 
-        void listView1_MouseDoubleClick(object sender, MouseEventArgs e)
+        void MainWindow_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            Configuration.Serialize("ptview.cfg", Cfg);
+        }
+
+        void DataUpdater_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
+        {
+            BeginInvoke(new Action(() =>
+            {
+                try
+                {
+                    using (var db = new StocksContext(Cfg.SqlConnectionString))
+                    {
+                        var xStock = db.Stocks.Find(SelectedPair.XName);
+                        var yStock = db.Stocks.Find(SelectedPair.YName);
+
+                        if (xStock != null && yStock != null)
+                        {
+                            var delta = SelectedPair.GetCurrentDelta(xStock.Price, yStock.Price);
+
+                            zedGraphControl.SetDeltaCurrent(delta);
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    //MessageBox.Show(ex.Message);
+                }
+            }));
+        }
+
+        void DataSaver_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
+        {
+            DateTime dt = DateTime.Now;
+
+            try
+            {
+                using (var db = new StocksContext(Cfg.SqlConnectionString))
+                {
+
+                    foreach (var stock in db.Stocks)
+                    {
+                        stock.History.Add(new SqlData.Entities.StockValue
+                        {
+                            DateTime = dt,
+                            Price = stock.Price,
+                            Volume = stock.Volume
+                        });
+                    }
+
+                    db.SaveChanges();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+
+        private void listView1_MouseDoubleClick(object sender, MouseEventArgs e)
         {
             try
             {
@@ -69,60 +136,63 @@ namespace PairTradingView.Forms
                      .First(i => i.XName == xSecurity && i.YName == ySecurity);
 
                 var deltas = SelectedPair.DeltaValues.ToArray();
-                zedGraphControl.SetDeltas(deltas.ToArray());
 
-                SetSMA();
-                SetWMA();
+                zedGraphControl.SetDeltas(deltas);
+                zedGraphControl.SetDeltaCurrent(deltas.Last());
+
+                SMAperiodNUD_ValueChanged(null, null);
+                WMAperiodNUD_ValueChanged(null, null);
 
             }
-            finally { }
+            finally          
+            {
+                // ...
+            }
         }
 
-        private void MainWindow_Load(object sender, EventArgs e)
+        public void CreateFinancialPairs()
         {
-            ICollection<Task> tasks = new List<Task>();
-
-            foreach (var file in Directory.EnumerateFiles("MarketData/"))
-            {
-                var t = new Task(() =>
-                {
-                    var stockTicker = file.Replace("MarketData/", "").Replace(".txt", "").Replace(".csv", "");
-
-                    Stocks.Add(stockTicker, CsvFile.Read(file, CsvFormat));
-                });
-
-                t.RunSynchronously();
-                tasks.Add(t);
-            }
-
-            Task.WaitAll(tasks.ToArray());
-            tasks.Clear();
-
             for (int i = 0; i < Stocks.Count; i++)
             {
                 for (int j = i + 1; j < Stocks.Count; j++)
                 {
-                    var t = new Task(() =>
+                    var pair = new FinancialPair(
+                             Stocks.ElementAt(i).Value.Select(item => item.Price).ToArray(),
+                             Stocks.ElementAt(j).Value.Select(item => item.Price).ToArray(),
+                             DeltaType)
                     {
-                        var pair = new FinancialPair(
-                            Stocks.ElementAt(i).Value.Select(item => item.Price).ToArray(),
-                            Stocks.ElementAt(j).Value.Select(item => item.Price).ToArray(),
-                            DeltaType)
-                        {
-                            XName = Stocks.ElementAt(i).Key,
-                            YName = Stocks.ElementAt(j).Key
-                        };
+                        XName = Stocks.ElementAt(i).Key,
+                        YName = Stocks.ElementAt(j).Key
+                    };
 
-                        FinancialPairs.Add(pair);
-                    });
-
-                    t.RunSynchronously();
-                    tasks.Add(t);
+                    FinancialPairs.Add(pair);
                 }
             }
+        }
 
-            Task.WaitAll(tasks.ToArray());
+        private void MainWindow_Load(object sender, EventArgs e)
+        {
+            CreateFinancialPairs();
 
+            UpdateListView();
+
+            r_valueHighLabel.Text = FinancialPairs.Where
+                (i => i.Regression.Correlation >= 0.7 && i.Regression.Correlation <= 1)
+                .Count()
+                .ToString();
+
+            r_valueLowLabel.Text = FinancialPairs.Where
+                (i => i.Regression.Correlation <= -0.7 && i.Regression.Correlation >= -1)
+                .Count()
+                .ToString();
+
+            stocksCountLabel.Text = Stocks.Count.ToString();
+            pairsCreatedLabel.Text = FinancialPairs.Count.ToString();
+
+        }
+
+        private void UpdateListView()
+        {
             foreach (var item in FinancialPairs)
             {
                 int index = listView1.Items.Add(item.XName).Index;
@@ -142,24 +212,16 @@ namespace PairTradingView.Forms
                 if (item.Regression.Correlation >= 0.7 && item.Regression.Correlation <= 1)
                 {
                     listView1.Items[index].BackColor = Color.FromArgb(38, 153, 38);
-                    RValueHighCount++;
                 }
 
                 if (item.Regression.Correlation <= -0.7 && item.Regression.Correlation >= -1)
                 {
                     listView1.Items[index].BackColor = Color.FromArgb(191, 48, 48);
-                    RValueLowCount++;
                 }
             }
-
-            r_valueHighLabel.Text = RValueHighCount.ToString();
-            r_valueLowLabel.Text = RValueLowCount.ToString();
-            stocksCountLabel.Text = Stocks.Count.ToString();
-            pairsCreatedLabel.Text = FinancialPairs.Count.ToString();
-
         }
 
-        public void SetSMA()
+        private void SMAperiodNUD_ValueChanged(object sender, EventArgs e)
         {
             if (SelectedPair == null)
             {
@@ -175,9 +237,8 @@ namespace PairTradingView.Forms
             }
         }
 
-        public void SetWMA()
+        private void WMAperiodNUD_ValueChanged(object sender, EventArgs e)
         {
-
             if (SelectedPair == null)
             {
                 MessageBox.Show("Pair is not selected.");
@@ -192,39 +253,5 @@ namespace PairTradingView.Forms
             }
         }
 
-        private void SMAperiodNUD_ValueChanged(object sender, EventArgs e)
-        {
-            SetSMA();
-        }
-
-        private void WMAperiodNUD_ValueChanged(object sender, EventArgs e)
-        {
-            SetWMA();
-        }
-
-        private void ReloadApp_Click(object sender, EventArgs e)
-        {
-            Application.Restart();
-        }
-
-        private void IncrementSMAPeriod_Click(object sender, EventArgs e)
-        {
-            SMAperiodNUD.Value += 1;
-        }
-
-        private void DecrementSMAPeriod_Click(object sender, EventArgs e)
-        {
-            SMAperiodNUD.Value -= 1;
-        }
-
-        private void IncrementWMAPeriod_Click(object sender, EventArgs e)
-        {
-            WMAperiodNUD.Value += 1;
-        }
-
-        private void DecrementWMAPeriod_Click(object sender, EventArgs e)
-        {
-            WMAperiodNUD.Value -= 1;
-        }
     }
 }
