@@ -23,3 +23,4 @@ or just put downloaded files to the /MarketData directory.
 **Third-party:**
 
 - ZedGraph
+- EntityFramework 6.1.3

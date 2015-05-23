@@ -219,7 +219,7 @@
             this.explanationLabel.AutoSize = true;
             this.explanationLabel.BackColor = System.Drawing.Color.Black;
             this.explanationLabel.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.explanationLabel.ForeColor = System.Drawing.Color.CadetBlue;
+            this.explanationLabel.ForeColor = System.Drawing.Color.Gray;
             this.explanationLabel.Location = new System.Drawing.Point(51, 289);
             this.explanationLabel.Name = "explanationLabel";
             this.explanationLabel.Size = new System.Drawing.Size(14, 15);
@@ -427,16 +427,18 @@
             // 
             // startTimeTxt
             // 
+            this.startTimeTxt.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.startTimeTxt.Location = new System.Drawing.Point(550, 144);
             this.startTimeTxt.Name = "startTimeTxt";
-            this.startTimeTxt.Size = new System.Drawing.Size(120, 20);
+            this.startTimeTxt.Size = new System.Drawing.Size(120, 23);
             this.startTimeTxt.TabIndex = 38;
             // 
             // stopTimeTxt
             // 
+            this.stopTimeTxt.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.stopTimeTxt.Location = new System.Drawing.Point(550, 170);
             this.stopTimeTxt.Name = "stopTimeTxt";
-            this.stopTimeTxt.Size = new System.Drawing.Size(120, 20);
+            this.stopTimeTxt.Size = new System.Drawing.Size(120, 23);
             this.stopTimeTxt.TabIndex = 39;
             // 
             // label13
