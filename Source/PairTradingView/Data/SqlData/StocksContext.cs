@@ -1,7 +1,7 @@
 ﻿using System.Data.Entity;
-using PairTradingView.SqlData.Entities;
+using PairTradingView.Data.Entities;
 
-namespace PairTradingView.SqlData
+namespace PairTradingView.Data.SqlData
 {
     public class StocksContext : DbContext
     {

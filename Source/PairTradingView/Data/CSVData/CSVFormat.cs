@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace PairTradingView.CSVData
+namespace PairTradingView.Data.CSVData
 {
     [Serializable]
     public class CSVFormat

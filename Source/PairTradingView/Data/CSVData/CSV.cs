@@ -25,9 +25,9 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.Windows.Forms;
-using PairTradingView.SqlData.Entities;
+using PairTradingView.Data.Entities;
 
-namespace PairTradingView.CSVData
+namespace PairTradingView.Data.CSVData
 {
     public static class CSV
     {

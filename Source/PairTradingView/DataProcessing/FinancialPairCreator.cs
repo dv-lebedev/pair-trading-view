@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using PairTradingView.SqlData.Entities;
+using PairTradingView.Data.Entities;
 
 namespace PairTradingView.DataProcessing
 {

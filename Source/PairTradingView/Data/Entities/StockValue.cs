@@ -2,7 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace PairTradingView.SqlData.Entities
+namespace PairTradingView.Data.Entities
 {
     public class StockValue
     {

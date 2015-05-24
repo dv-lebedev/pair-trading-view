@@ -1,13 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.Globalization;
-using System.IO;
-using System.Linq;
 using System.Windows.Forms;
-using PairTradingView.CSVData;
-using PairTradingView.SqlData;
-using PairTradingView.SqlData.Entities;
+using PairTradingView.Data;
+using PairTradingView.Data.CSVData;
+using PairTradingView.Data.SqlData;
+using PairTradingView.DataProcessing;
+
 
 namespace PairTradingView.Forms
 {
@@ -85,7 +84,9 @@ namespace PairTradingView.Forms
                     return; 
                 }
 
-                mWindow.CreateFinancialPairs(CSV.LoadDataFromDirectory("MarketData/", mWindow.CsvFormat).ToList(), mWindow.DeltaType);
+                IDataProvider provider = new CSVDataProvider("MarketData/", mWindow.CsvFormat);
+
+                mWindow.PairsContainer = new PairsContainer(provider, mWindow.DeltaType);
             }
             if (radioSQL.Checked)
             {
@@ -132,19 +133,6 @@ namespace PairTradingView.Forms
             }
         }
 
-        public void LoadDataFromDirectory()
-        {
-            foreach (var file in Directory.EnumerateFiles("MarketData/"))
-            {
-                var stockTicker = file.Replace("MarketData/", "").Replace(".txt", "").Replace(".csv", "");
-
-                var values = CSV.Read(file, mWindow.CsvFormat);
-
-                mWindow.Stocks.Add(stockTicker, values);
-
-            }
-        }
-
         public void InitSqlConnection()
         {
             TimeSpan startTime, stopTime;
@@ -163,42 +151,19 @@ namespace PairTradingView.Forms
             mWindow.Cfg.DataUpdateInterval = (int)dataUpdateInterval.Value;
             mWindow.Cfg.LoadingValuesCount = (int)loadValuesCount.Value;
 
-            ConnectToSqlServer();
+            if (serverNameBox.Text == string.Empty) 
+                MessageBox.Show("Server not found.");
+            
+            mWindow.Cfg.SqlConnectionString = string.Format("Data Source={0};Initial Catalog=PairTradingViewDb;Integrated Security=True;MultipleActiveResultSets=True;", serverNameBox.Text);
+
+            IDataProvider provider = new SqlDataProvider(mWindow.Cfg);
+
+            mWindow.PairsContainer = new PairsContainer(provider, mWindow.DeltaType);
 
             mWindow.Tasks.SetDataUpdateInterval((int)dataUpdateInterval.Value);
             mWindow.Tasks.SetDataSaveInterval((int)dataSaveInterval.Value);
             mWindow.Tasks.Start();
             
         }
-
-        public void ConnectToSqlServer()
-        {
-            if (serverNameBox.Text == string.Empty)
-            {
-                MessageBox.Show("Server not found.");
-            }
-
-            string connectionStr = string.Format("Data Source={0};Initial Catalog=PairTradingViewDb;Integrated Security=True;MultipleActiveResultSets=True;", serverNameBox.Text);
-
-            mWindow.Cfg.SqlConnectionString = connectionStr;
-
-            try
-            {
-                using (var db = new StocksContext(mWindow.Cfg.SqlConnectionString))
-                {
-                    foreach (var item in db.Stocks)
-                    {
-                        var values = item.History.OrderByDescending(i => i.DateTime).Take(mWindow.Cfg.LoadingValuesCount).Reverse();
-
-                        mWindow.Stocks.Add(item.Code, values.ToList());
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-        }
-
     }
 }

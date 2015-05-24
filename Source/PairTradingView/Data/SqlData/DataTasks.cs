@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace PairTradingView.SqlData
+namespace PairTradingView.Data.SqlData
 {
     public class DataTasks : IDisposable
     {

@@ -70,12 +70,15 @@
     <Compile Include="Controls\ZedgraphControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="CSVData\CSV.cs" />
-    <Compile Include="CSVData\CSVFormat.cs" />
+    <Compile Include="Data\CSVData\CSV.cs" />
+    <Compile Include="Data\CSVData\CSVDataProvider.cs" />
+    <Compile Include="Data\CSVData\CSVFormat.cs" />
     <Compile Include="DataProcessing\Delta.cs" />
     <Compile Include="DataProcessing\DeltaType.cs" />
     <Compile Include="DataProcessing\FinancialPair.cs" />
     <Compile Include="DataProcessing\FinancialPairCreator.cs" />
+    <Compile Include="Data\IDataProvider.cs" />
+    <Compile Include="DataProcessing\PairsContainer.cs" />
     <Compile Include="Forms\AppStartWindow.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -96,10 +99,11 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SqlData\DataTasks.cs" />
-    <Compile Include="SqlData\Entities\Stock.cs" />
-    <Compile Include="SqlData\Entities\StockValue.cs" />
-    <Compile Include="SqlData\StocksContext.cs" />
+    <Compile Include="Data\SqlData\DataTasks.cs" />
+    <Compile Include="Data\Entities\Stock.cs" />
+    <Compile Include="Data\Entities\StockValue.cs" />
+    <Compile Include="Data\SqlData\SqlDataProvider.cs" />
+    <Compile Include="Data\SqlData\StocksContext.cs" />
     <Compile Include="SqlHelpers.cs" />
     <EmbeddedResource Include="Forms\AppStartWindow.resx">
       <DependentUpon>AppStartWindow.cs</DependentUpon>

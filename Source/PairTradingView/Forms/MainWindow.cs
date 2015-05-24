@@ -1,20 +1,17 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
 using EmetricGears;
 using PairTradingView.DataProcessing;
-using PairTradingView.SqlData;
-using PairTradingView.SqlData.Entities;
-using PairTradingView.CSVData;
+using PairTradingView.Data.SqlData;
+using PairTradingView.Data.CSVData;
+using PairTradingView.Data.Entities;
 
 namespace PairTradingView.Forms
 {
     public partial class MainWindow : Form
     {
-        public Dictionary<string, List<StockValue>> Stocks { get; private set; }
-
         public Configuration Cfg { get; private set; }
 
         public DataTasks Tasks { get; private set; }
@@ -22,18 +19,13 @@ namespace PairTradingView.Forms
         public CSVFormat CsvFormat { get; private set; }
         public DeltaType DeltaType { get; set; }
 
-        public List<FinancialPair> FinancialPairs { get; private set; }
+        public PairsContainer PairsContainer { get; set; }
 
         private FinancialPair SelectedPair { get; set; }
 
         public MainWindow()
         {
-            CsvFormat = new CSVFormat();
-            CsvFormat.Separator = ',';
-
-            FinancialPairs = new List<FinancialPair>();
-
-            Stocks = new Dictionary<string, List<StockValue>>();
+            CsvFormat = new CSVFormat() { Separator = ',' };
 
             Tasks = new DataTasks();
             Tasks.DataSaver.Elapsed += DataSaver_Elapsed;
@@ -48,9 +40,7 @@ namespace PairTradingView.Forms
                 Cfg = Configuration.GetDefaultSetting();
             }
 
-
-            AppStartWindow asw = new AppStartWindow(this);
-            asw.ShowDialog();
+            new AppStartWindow(this).ShowDialog();
 
             InitializeComponent();
 
@@ -104,7 +94,7 @@ namespace PairTradingView.Forms
 
                     foreach (var stock in db.Stocks)
                     {
-                        stock.History.Add(new SqlData.Entities.StockValue
+                        stock.History.Add(new StockValue
                         {
                             DateTime = dt,
                             Price = stock.Price,
@@ -132,7 +122,7 @@ namespace PairTradingView.Forms
 
                 zedGraphControl.GraphPane.Title.Text = ySecurity + " / " + xSecurity;
 
-                SelectedPair = FinancialPairs
+                SelectedPair = PairsContainer.Items
                      .First(i => i.XName == xSecurity && i.YName == ySecurity);
 
                 var deltas = SelectedPair.DeltaValues.ToArray();
@@ -150,55 +140,29 @@ namespace PairTradingView.Forms
             }
         }
 
-        public void CreateFinancialPairs()
-        {
-            for (int i = 0; i < Stocks.Count; i++)
-            {
-                for (int j = i + 1; j < Stocks.Count; j++)
-                {
-                    var pair = new FinancialPair(
-                             Stocks.ElementAt(i).Value.Select(item => item.Price).ToArray(),
-                             Stocks.ElementAt(j).Value.Select(item => item.Price).ToArray(),
-                             DeltaType)
-                    {
-                        XName = Stocks.ElementAt(i).Key,
-                        YName = Stocks.ElementAt(j).Key
-                    };
-
-                    FinancialPairs.Add(pair);
-                }
-            }
-        }
-
-        public void CreateFinancialPairs(List<Stock> stocks, DeltaType deltaType)
-        {
-            FinancialPairs = new List<FinancialPair>(FinancialPairCreator.CreatePairs(stocks, deltaType));
-        }
 
         private void MainWindow_Load(object sender, EventArgs e)
         {
-            CreateFinancialPairs();
-
             UpdateListView();
 
-            r_valueHighLabel.Text = FinancialPairs.Where
+            r_valueHighLabel.Text = PairsContainer.Items.Where
                 (i => i.Regression.Correlation >= 0.7 && i.Regression.Correlation <= 1)
                 .Count()
                 .ToString();
 
-            r_valueLowLabel.Text = FinancialPairs.Where
+            r_valueLowLabel.Text = PairsContainer.Items.Where
                 (i => i.Regression.Correlation <= -0.7 && i.Regression.Correlation >= -1)
                 .Count()
                 .ToString();
 
-            stocksCountLabel.Text = Stocks.Count.ToString();
-            pairsCreatedLabel.Text = FinancialPairs.Count.ToString();
+            stocksCountLabel.Text = PairsContainer.StocksCount.ToString();
+            pairsCreatedLabel.Text = PairsContainer.Items.Count.ToString();
 
         }
 
         private void UpdateListView()
         {
-            foreach (var item in FinancialPairs)
+            foreach (var item in PairsContainer.Items)
             {
                 int index = listView1.Items.Add(item.XName).Index;
 
