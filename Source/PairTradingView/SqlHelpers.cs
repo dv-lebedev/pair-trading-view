@@ -22,7 +22,6 @@ namespace PairTradingView
                         values[i] = System.Environment.MachineName;
                     else
                         values[i] = System.Environment.MachineName + @"\" + instances[i];
-
                 }
             }
 

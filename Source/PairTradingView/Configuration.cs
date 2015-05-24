@@ -7,6 +7,8 @@ namespace PairTradingView
     [Serializable]
     public class Configuration
     {
+        private static Configuration cfg = null;
+
         public string SqlConnectionString { get; set; }
 
         public int DataSaveInterval { get; set; }
@@ -15,11 +17,22 @@ namespace PairTradingView
 
         public int LoadingValuesCount { get; set; }
 
-
         public TimeSpan StartTime { get; set; }
 
         public TimeSpan StopTime { get; set; }
 
+        public static Configuration Instance
+        {
+            get
+            {
+                if (cfg == null)
+                {
+                    cfg = Configuration.Deserialize("ptview.cfg");
+                }
+
+                return cfg;
+            }
+        }
 
         public static void Serialize(string path, Configuration item)
         {

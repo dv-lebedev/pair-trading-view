@@ -61,5 +61,25 @@ namespace PairTradingView.CSVData
             }
             return result;
         }
+
+        public static ICollection<Stock> LoadDataFromDirectory(string path, CSVFormat format)
+        {
+            ICollection<Stock> stocks = new List<Stock>();
+
+            foreach (var file in Directory.EnumerateFiles(path))
+            {
+                var stockTicker = file.Replace(path, "").Replace(".txt", "").Replace(".csv", "");
+
+                var values = CSV.Read(file, format);
+
+                stocks.Add(new Stock
+                {
+                    Code = stockTicker,
+                    History = values
+                });
+            }
+
+            return stocks;
+        }
     }
 }

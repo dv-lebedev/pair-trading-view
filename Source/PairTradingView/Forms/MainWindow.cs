@@ -170,6 +170,11 @@ namespace PairTradingView.Forms
             }
         }
 
+        public void CreateFinancialPairs(List<Stock> stocks, DeltaType deltaType)
+        {
+            FinancialPairs = new List<FinancialPair>(FinancialPairCreator.CreatePairs(stocks, deltaType));
+        }
+
         private void MainWindow_Load(object sender, EventArgs e)
         {
             CreateFinancialPairs();
@@ -198,8 +203,8 @@ namespace PairTradingView.Forms
                 int index = listView1.Items.Add(item.XName).Index;
 
                 listView1.Items[index].SubItems.Add(item.YName);
-                listView1.Items[index].SubItems.Add(Math.Round(item.XStandardDev, 6).ToString());
-                listView1.Items[index].SubItems.Add(Math.Round(item.YStandardDev, 6).ToString());
+                listView1.Items[index].SubItems.Add(Math.Round(item.XStdDev, 6).ToString());
+                listView1.Items[index].SubItems.Add(Math.Round(item.YStdDev, 6).ToString());
                 listView1.Items[index].SubItems.Add(Math.Round(item.Regression.Alpha, 6).ToString());
                 listView1.Items[index].SubItems.Add(Math.Round(item.Regression.Beta, 6).ToString());
                 listView1.Items[index].SubItems.Add(Math.Round(item.Regression.Correlation, 6).ToString());
@@ -207,7 +212,7 @@ namespace PairTradingView.Forms
                 listView1.Items[index].SubItems.Add(Math.Round(item.DeltaValues.Average(), 6).ToString());
                 listView1.Items[index].SubItems.Add(Math.Round(item.DeltaValues.Min(), 6).ToString());
                 listView1.Items[index].SubItems.Add(Math.Round(item.DeltaValues.Max(), 6).ToString());
-                listView1.Items[index].SubItems.Add(Math.Round(item.DeltaStandardDev, 6).ToString());
+                listView1.Items[index].SubItems.Add(Math.Round(item.DeltaStdDev, 6).ToString());
 
                 if (item.Regression.Correlation >= 0.7 && item.Regression.Correlation <= 1)
                 {

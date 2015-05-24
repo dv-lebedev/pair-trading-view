@@ -82,10 +82,10 @@ namespace PairTradingView.Forms
                 if (mWindow.CsvFormat.PriceIndex == mWindow.CsvFormat.VolumeIndex)
                 {
                     MessageBox.Show("Price and Volume indeces should have a different values!");
-                    return;
+                    return; 
                 }
 
-                LoadDataFromDirectory();
+                mWindow.CreateFinancialPairs(CSV.LoadDataFromDirectory("MarketData/", mWindow.CsvFormat).ToList(), mWindow.DeltaType);
             }
             if (radioSQL.Checked)
             {
@@ -145,26 +145,6 @@ namespace PairTradingView.Forms
             }
         }
 
-        public ICollection<Stock> LoadDataFromDirectory(string path = "MarketData/")
-        {
-            ICollection<Stock> stocks = new List<Stock>();
-
-            foreach (var file in Directory.EnumerateFiles(path))
-            {
-                var stockTicker = file.Replace(path, "").Replace(".txt", "").Replace(".csv", "");
-
-                var values = CSV.Read(file, mWindow.CsvFormat);
-
-                stocks.Add(new Stock
-                {
-                    Code = stockTicker,
-                    History = values
-                });
-            }
-
-            return stocks;
-        }
-
         public void InitSqlConnection()
         {
             TimeSpan startTime, stopTime;
@@ -208,7 +188,7 @@ namespace PairTradingView.Forms
                 {
                     foreach (var item in db.Stocks)
                     {
-                        var values = item.History.OrderBy(i => i.DateTime).Take(mWindow.Cfg.LoadingValuesCount);
+                        var values = item.History.OrderByDescending(i => i.DateTime).Take(mWindow.Cfg.LoadingValuesCount).Reverse();
 
                         mWindow.Stocks.Add(item.Code, values.ToList());
                     }

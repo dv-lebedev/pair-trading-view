@@ -107,22 +107,6 @@ C:\GitHub\PairTradingView\Source\PairTradingView\obj\Debug\PairTradingView.exe
 C:\GitHub\PairTradingView\Source\PairTradingView\obj\Debug\PairTradingView.pdb
 C:\GitHub\PairTradingView\Source\PairTradingView\bin\Debug\PairTradingView.exe
 C:\GitHub\PairTradingView\Source\PairTradingView\bin\Debug\PairTradingView.pdb
-C:\GitHub\PairTradingView\Source\PairTradingView\bin\Debug\EmetricGears.pdb
-C:\GitHub\PairTradingView\Source\PairTradingView\bin\Debug\ZedGraph.xml
-C:\GitHub\PairTradingView\Source\PairTradingView\bin\Debug\de\ZedGraph.resources.dll
-C:\GitHub\PairTradingView\Source\PairTradingView\bin\Debug\es\ZedGraph.resources.dll
-C:\GitHub\PairTradingView\Source\PairTradingView\bin\Debug\fr\ZedGraph.resources.dll
-C:\GitHub\PairTradingView\Source\PairTradingView\bin\Debug\hu\ZedGraph.resources.dll
-C:\GitHub\PairTradingView\Source\PairTradingView\bin\Debug\it\ZedGraph.resources.dll
-C:\GitHub\PairTradingView\Source\PairTradingView\bin\Debug\ja\ZedGraph.resources.dll
-C:\GitHub\PairTradingView\Source\PairTradingView\bin\Debug\pt\ZedGraph.resources.dll
-C:\GitHub\PairTradingView\Source\PairTradingView\bin\Debug\ru\ZedGraph.resources.dll
-C:\GitHub\PairTradingView\Source\PairTradingView\bin\Debug\sk\ZedGraph.resources.dll
-C:\GitHub\PairTradingView\Source\PairTradingView\bin\Debug\sv\ZedGraph.resources.dll
-C:\GitHub\PairTradingView\Source\PairTradingView\bin\Debug\tr\ZedGraph.resources.dll
-C:\GitHub\PairTradingView\Source\PairTradingView\bin\Debug\zh-cn\ZedGraph.resources.dll
-C:\GitHub\PairTradingView\Source\PairTradingView\bin\Debug\zh-tw\ZedGraph.resources.dll
-C:\GitHub\PairTradingView\Source\PairTradingView\obj\Debug\PairTradingView.csprojResolveAssemblyReference.cache
 C:\GitHub\PairTradingView\Source\PairTradingView\obj\Debug\PairTradingView.Forms.AppStartWindow.resources
 C:\GitHub\PairTradingView\Source\PairTradingView\obj\Debug\PairTradingView.Forms.Downloader.resources
 C:\GitHub\PairTradingView\Source\PairTradingView\obj\Debug\PairTradingView.Forms.MainWindow.resources
@@ -132,3 +116,4 @@ C:\GitHub\PairTradingView\Source\PairTradingView\bin\Debug\EntityFramework.dll
 C:\GitHub\PairTradingView\Source\PairTradingView\bin\Debug\EntityFramework.SqlServer.dll
 C:\GitHub\PairTradingView\Source\PairTradingView\bin\Debug\EntityFramework.xml
 C:\GitHub\PairTradingView\Source\PairTradingView\bin\Debug\EntityFramework.SqlServer.xml
+C:\GitHub\PairTradingView\Source\PairTradingView\obj\Debug\PairTradingView.csprojResolveAssemblyReference.cache

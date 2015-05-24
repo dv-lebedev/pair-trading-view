@@ -33,12 +33,9 @@ namespace PairTradingView.DataProcessing
         public string XName { get; set; }
         public string YName { get; set; }
 
-        public double[] X { get; set; }
-        public double[] Y { get; set; }
-
-        public double XStandardDev { get; private set; }
-        public double YStandardDev { get; private set; }
-        public double DeltaStandardDev { get; private set; }
+        public double XStdDev { get; private set; }
+        public double YStdDev { get; private set; }
+        public double DeltaStdDev { get; private set; }
 
         public DeltaType DeltaType { get; private set; }
 
@@ -59,12 +56,12 @@ namespace PairTradingView.DataProcessing
             {
                 Regression = new LinearRegressionModel(x, y);
 
-                XStandardDev = StdFuncs.StandardDeviation(x);
-                YStandardDev = StdFuncs.StandardDeviation(y);
+                XStdDev = StdFuncs.StandardDeviation(x);
+                YStdDev = StdFuncs.StandardDeviation(y);
 
                 DeltaValues = Delta.GetDeltaValues(x, y, Regression.Beta, Regression.Correlation, delta);
 
-                DeltaStandardDev = StdFuncs.StandardDeviation(DeltaValues.ToArray());
+                DeltaStdDev = StdFuncs.StandardDeviation(DeltaValues.ToArray());
             }
             catch (Exception ex)
             {
