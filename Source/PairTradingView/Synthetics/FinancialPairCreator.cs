@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using PairTradingView.Data.Entities;
 
-namespace PairTradingView.DataProcessing
+namespace PairTradingView.Synthetics
 {
     public class FinancialPairCreator
     {
@@ -16,16 +16,18 @@ namespace PairTradingView.DataProcessing
             {
                 for (int j = i + 1; j < Stocks.Count; j++)
                 {
-                    var pair = new FinancialPair(
-                             Stocks.ElementAt(i).History.Select(item => item.Price).ToArray(),
-                             Stocks.ElementAt(j).History.Select(item => item.Price).ToArray(),
-                             DeltaType)
-                    {
-                        XName = Stocks.ElementAt(i).Code,
-                        YName = Stocks.ElementAt(j).Code
-                    };
 
-                    pairs.Add(pair);
+                    var xSecurity = Stocks.ElementAt(i).History.Select(item => item.Price).ToArray();
+                    var ySecurity = Stocks.ElementAt(j).History.Select(item => item.Price).ToArray();
+
+                    if (xSecurity != null && ySecurity != null)
+                    {
+                        var pair = new FinancialPair(xSecurity, ySecurity,
+                                 new FinancialPairName(Stocks.ElementAt(i).Code, Stocks.ElementAt(j).Code),
+                                 DeltaType);
+
+                        pairs.Add(pair);
+                    }
                 }
             }
 

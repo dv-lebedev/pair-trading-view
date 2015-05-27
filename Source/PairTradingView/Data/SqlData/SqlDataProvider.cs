@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using PairTradingView.Data.Entities;
-using PairTradingView.DataProcessing;
+using PairTradingView.Synthetics;
 
 namespace PairTradingView.Data.SqlData
 {
@@ -29,11 +29,14 @@ namespace PairTradingView.Data.SqlData
                     {
                         var values = item.History.OrderByDescending(i => i.DateTime).Take(configuration.LoadingValuesCount).Reverse();
 
-                        stocks.Add(new Stock
+                        if (values.Count() > 0)
                         {
-                            Code = item.Code,
-                            History = new List<StockValue>(values)
-                        });
+                            stocks.Add(new Stock
+                            {
+                                Code = item.Code,
+                                History = new List<StockValue>(values)
+                            });
+                        }
                     }
                 }
             }

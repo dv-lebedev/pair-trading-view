@@ -4,9 +4,9 @@ using System.Globalization;
 using System.Windows.Forms;
 using PairTradingView.Data;
 using PairTradingView.Data.CSVData;
+using PairTradingView.Data.Entities;
 using PairTradingView.Data.SqlData;
-using PairTradingView.DataProcessing;
-
+using PairTradingView.Synthetics;
 
 namespace PairTradingView.Forms
 {
@@ -112,22 +112,22 @@ namespace PairTradingView.Forms
             switch (deltaTypeBox.Text)
             {
                 case "Ratio":
-                    mWindow.DeltaType = DataProcessing.DeltaType.Ratio;
+                    mWindow.DeltaType = Synthetics.DeltaType.Ratio;
                     explanationLabel.Text = "if r_value >= 0: y / x \nelse: log(y) * log(x)";
                     break;
 
                 case "RatioIncludingBeta":
-                    mWindow.DeltaType = DataProcessing.DeltaType.RatioIncludingBeta;
+                    mWindow.DeltaType = Synthetics.DeltaType.RatioIncludingBeta;
                     explanationLabel.Text = "if r_value >= 0: y / (beta * x) \nelse: log(y) * log(beta * x)";
                     break;
 
                 case "Spread":
-                    mWindow.DeltaType = DataProcessing.DeltaType.Spread;
+                    mWindow.DeltaType = Synthetics.DeltaType.Spread;
                     explanationLabel.Text = "if r_value >= 0: y - x \nelse: y + x";
                     break;
 
                 case "SpreadIncludingBeta":
-                    mWindow.DeltaType = DataProcessing.DeltaType.SpreadIncludingBeta;
+                    mWindow.DeltaType = Synthetics.DeltaType.SpreadIncludingBeta;
                     explanationLabel.Text = "if r_value >= 0: y - beta * x \nelse: y + beta * x";
                     break;
             }
@@ -163,7 +163,8 @@ namespace PairTradingView.Forms
             mWindow.Tasks.SetDataUpdateInterval((int)dataUpdateInterval.Value);
             mWindow.Tasks.SetDataSaveInterval((int)dataSaveInterval.Value);
             mWindow.Tasks.Start();
-            
+
+
         }
     }
 }

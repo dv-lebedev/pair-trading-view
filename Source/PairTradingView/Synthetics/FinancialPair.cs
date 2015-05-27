@@ -23,15 +23,16 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Windows.Forms;
 using EmetricGears;
 using EmetricGears.Models;
+using PairTradingView.RiskManagement;
 
-namespace PairTradingView.DataProcessing
+namespace PairTradingView.Synthetics
 {
     public class FinancialPair
     {
-        public string XName { get; set; }
-        public string YName { get; set; }
+        public FinancialPairName Name { get; private set; }
 
         public double XStdDev { get; private set; }
         public double YStdDev { get; private set; }
@@ -43,8 +44,12 @@ namespace PairTradingView.DataProcessing
 
         public IEnumerable<double> DeltaValues { get; set; }
 
-        public FinancialPair(double[] x, double[] y, DeltaType delta)
+        public RiskParameters RiskParameters { get; set; }
+
+        public FinancialPair(double[] x, double[] y, FinancialPairName name, DeltaType delta)
         {
+            Name = name;
+
             Update(x, y, delta);
         }
 
@@ -65,7 +70,7 @@ namespace PairTradingView.DataProcessing
             }
             catch (Exception ex)
             {
-                throw ex;
+                
             }
         }
 

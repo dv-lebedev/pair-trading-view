@@ -4,7 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using PairTradingView.Data.Entities;
-using PairTradingView.DataProcessing;
+using PairTradingView.Synthetics;
 
 namespace PairTradingView.Data.CSVData
 {

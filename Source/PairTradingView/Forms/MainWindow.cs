@@ -3,10 +3,12 @@ using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
 using EmetricGears;
-using PairTradingView.DataProcessing;
+using PairTradingView.Synthetics;
 using PairTradingView.Data.SqlData;
 using PairTradingView.Data.CSVData;
 using PairTradingView.Data.Entities;
+using PairTradingView.RiskManagement;
+using System.Collections.Generic;
 
 namespace PairTradingView.Forms
 {
@@ -22,6 +24,8 @@ namespace PairTradingView.Forms
         public PairsContainer PairsContainer { get; set; }
 
         private FinancialPair SelectedPair { get; set; }
+
+        private RiskCalculation RiskCalculation { get; set; }
 
         public MainWindow()
         {
@@ -40,79 +44,28 @@ namespace PairTradingView.Forms
                 Cfg = Configuration.GetDefaultSetting();
             }
 
-            new AppStartWindow(this).ShowDialog();
-
             InitializeComponent();
 
-            listView1.MouseDoubleClick += listView1_MouseDoubleClick;
+            new AppStartWindow(this).ShowDialog();
+
+
+            listView1.Click += listView1_Click;
             
             SMAperiodNUD.Maximum = decimal.MaxValue;
             WMAperiodNUD.Maximum = decimal.MaxValue;
 
+            tradeBalanceNUD.Maximum = decimal.MaxValue;
+            tradeBalanceNUD.DecimalPlaces = 2;
+            tradeBalanceNUD.Value = 1000000.00M;
+
+            tradeRiskNUD.DecimalPlaces = 2;
+
             this.FormClosing += MainWindow_FormClosing;
+
+            MessageBox.Show(PairsContainer.Items.Count.ToString());
         }
 
-        void MainWindow_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            Configuration.Serialize("ptview.cfg", Cfg);
-        }
-
-        void DataUpdater_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
-        {
-            BeginInvoke(new Action(() =>
-            {
-                try
-                {
-                    using (var db = new StocksContext(Cfg.SqlConnectionString))
-                    {
-                        var xStock = db.Stocks.Find(SelectedPair.XName);
-                        var yStock = db.Stocks.Find(SelectedPair.YName);
-
-                        if (xStock != null && yStock != null)
-                        {
-                            var delta = SelectedPair.GetCurrentDelta(xStock.Price, yStock.Price);
-
-                            zedGraphControl.SetDeltaCurrent(delta);
-                        }
-                    }
-                }
-                catch (Exception ex)
-                {
-                    //MessageBox.Show(ex.Message);
-                }
-            }));
-        }
-
-        void DataSaver_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
-        {
-            DateTime dt = DateTime.Now;
-
-            try
-            {
-                using (var db = new StocksContext(Cfg.SqlConnectionString))
-                {
-
-                    foreach (var stock in db.Stocks)
-                    {
-                        stock.History.Add(new StockValue
-                        {
-                            DateTime = dt,
-                            Price = stock.Price,
-                            Volume = stock.Volume
-                        });
-                    }
-
-                    db.SaveChanges();
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-        }
-
-
-        private void listView1_MouseDoubleClick(object sender, MouseEventArgs e)
+        void listView1_Click(object sender, EventArgs e)
         {
             try
             {
@@ -123,7 +76,7 @@ namespace PairTradingView.Forms
                 zedGraphControl.GraphPane.Title.Text = ySecurity + " / " + xSecurity;
 
                 SelectedPair = PairsContainer.Items
-                     .First(i => i.XName == xSecurity && i.YName == ySecurity);
+                     .First(i => i.Name.X == xSecurity && i.Name.Y == ySecurity);
 
                 var deltas = SelectedPair.DeltaValues.ToArray();
 
@@ -133,13 +86,103 @@ namespace PairTradingView.Forms
                 SMAperiodNUD_ValueChanged(null, null);
                 WMAperiodNUD_ValueChanged(null, null);
 
+
+                if (SelectedPair.RiskParameters != null)
+                {
+                    pairName.Text = SelectedPair.Name.ToString();
+                    xName.Text = SelectedPair.Name.X;
+                    yName.Text = SelectedPair.Name.Y;
+                    pairsTradeBalance.Text = SelectedPair.RiskParameters.TradeBalance.ToString();
+                    yTradeVolume.Text = SelectedPair.RiskParameters.YTradeBalance.ToString();
+                    xTradeVolume.Text =  SelectedPair.RiskParameters.XTradeBalanace.ToString();
+                    riskLimit.Text = (SelectedPair.RiskParameters.TradeBalance * ((double)tradeRiskNUD.Value) / 100).ToString();
+                }
+                else
+                {
+
+                    pairName.Text = "-";
+                    xName.Text = "-";
+                    yName.Text = "-";
+                    pairsTradeBalance.Text = "0";
+                    yTradeVolume.Text = "0";
+                    xTradeVolume.Text = "0";
+                    riskLimit.Text = "0";
+                }
+
             }
-            finally          
+            catch
             {
-                // ...
+
             }
         }
 
+        void MainWindow_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            Configuration.Serialize("ptview.cfg", Cfg);
+        }
+
+        void DataUpdater_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
+        {
+            try
+            {
+                BeginInvoke(new Action(() =>
+                {
+                    if (SelectedPair != null)
+                    {
+                        using (var db = new StocksContext(Cfg.SqlConnectionString))
+                        {
+
+                            var xStock = db.Stocks.Find(SelectedPair.Name.X);
+                            var yStock = db.Stocks.Find(SelectedPair.Name.Y);
+
+
+                            if (xStock != null && yStock != null)
+                            {
+                                var delta = SelectedPair.GetCurrentDelta(xStock.Price, yStock.Price);
+
+                                zedGraphControl.SetDeltaCurrent(delta);
+                            }
+                        }
+                    }
+
+                }));
+            }
+            catch
+            {
+
+            }
+        }
+
+        void DataSaver_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
+        {
+            DateTime dt = DateTime.Now;
+
+            if (dt.TimeOfDay >= Cfg.StartTime && dt.TimeOfDay <= Cfg.StopTime)
+            {
+                try
+                {
+                    using (var db = new StocksContext(Cfg.SqlConnectionString))
+                    {
+
+                        foreach (var stock in db.Stocks)
+                        {
+                            stock.History.Add(new StockValue
+                            {
+                                DateTime = dt,
+                                Price = stock.Price,
+                                Volume = stock.Volume
+                            });
+                        }
+
+                        db.SaveChanges();
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+            }
+        }
 
         private void MainWindow_Load(object sender, EventArgs e)
         {
@@ -164,9 +207,9 @@ namespace PairTradingView.Forms
         {
             foreach (var item in PairsContainer.Items)
             {
-                int index = listView1.Items.Add(item.XName).Index;
+                int index = listView1.Items.Add(item.Name.ToString(), item.Name.X, 0).Index;
 
-                listView1.Items[index].SubItems.Add(item.YName);
+                listView1.Items[index].SubItems.Add(item.Name.Y);
                 listView1.Items[index].SubItems.Add(Math.Round(item.XStdDev, 6).ToString());
                 listView1.Items[index].SubItems.Add(Math.Round(item.YStdDev, 6).ToString());
                 listView1.Items[index].SubItems.Add(Math.Round(item.Regression.Alpha, 6).ToString());
@@ -220,6 +263,52 @@ namespace PairTradingView.Forms
             {
                 zedGraphControl.SetWMA(MovingAverages.WMA(SelectedPair.DeltaValues.ToArray(), (int)WMAperiodNUD.Value), (int)WMAperiodNUD.Value);
             }
+        }
+
+
+
+        private void CalculateRisk_Click(object sender, EventArgs e)
+        {
+            if (listView1.CheckedItems.Count > 0)
+            {
+
+                foreach (var item in PairsContainer.Items)
+                {
+                    item.RiskParameters = null;
+                }
+
+
+                var pairs = new List<FinancialPair>();
+
+                foreach (var item in listView1.CheckedItems)
+                {
+                    var name = ((ListViewItem)item).Name;
+
+                    var result = PairsContainer.Items.Find(i => i.Name.ToString() == name);
+
+                    if (result != null)
+                    {
+                        pairs.Add(result);
+                    }
+                }
+
+                RiskCalculation = new RiskCalculation(pairs);
+                RiskCalculation.TradeBalance = (double)tradeBalanceNUD.Value;
+
+
+                try
+                {
+                    RiskCalculation.Calculate();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Risk calculation failed. " + ex.Message);
+                }
+
+                listView1_Click(this, null);
+
+            }
+
         }
 
     }

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace PairTradingView.DataProcessing
+namespace PairTradingView.Synthetics
 {
     public enum DeltaType
     {

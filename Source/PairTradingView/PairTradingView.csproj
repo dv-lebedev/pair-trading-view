@@ -70,15 +70,17 @@
     <Compile Include="Controls\ZedgraphControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="RiskManagement\RiskParameters.cs" />
+    <Compile Include="Synthetics\FinancialPairName.cs" />
     <Compile Include="Data\CSVData\CSV.cs" />
     <Compile Include="Data\CSVData\CSVDataProvider.cs" />
     <Compile Include="Data\CSVData\CSVFormat.cs" />
-    <Compile Include="DataProcessing\Delta.cs" />
-    <Compile Include="DataProcessing\DeltaType.cs" />
-    <Compile Include="DataProcessing\FinancialPair.cs" />
-    <Compile Include="DataProcessing\FinancialPairCreator.cs" />
+    <Compile Include="Synthetics\Delta.cs" />
+    <Compile Include="Synthetics\DeltaType.cs" />
+    <Compile Include="Synthetics\FinancialPair.cs" />
+    <Compile Include="Synthetics\FinancialPairCreator.cs" />
     <Compile Include="Data\IDataProvider.cs" />
-    <Compile Include="DataProcessing\PairsContainer.cs" />
+    <Compile Include="Synthetics\PairsContainer.cs" />
     <Compile Include="Forms\AppStartWindow.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -104,6 +106,7 @@
     <Compile Include="Data\Entities\StockValue.cs" />
     <Compile Include="Data\SqlData\SqlDataProvider.cs" />
     <Compile Include="Data\SqlData\StocksContext.cs" />
+    <Compile Include="RiskManagement\RiskCalculation.cs" />
     <Compile Include="SqlHelpers.cs" />
     <EmbeddedResource Include="Forms\AppStartWindow.resx">
       <DependentUpon>AppStartWindow.cs</DependentUpon>
@@ -141,6 +144,7 @@
   <ItemGroup>
     <Content Include="main.ico" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

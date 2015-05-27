@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using PairTradingView.Data;
 
-namespace PairTradingView.DataProcessing
+namespace PairTradingView.Synthetics
 {
     public class PairsContainer
     {
@@ -19,6 +19,7 @@ namespace PairTradingView.DataProcessing
             var stocks = provider.GetStocks();
 
             StocksCount = stocks.Count;
+            DeltaType = type;
 
             Items = new List<FinancialPair>(FinancialPairCreator.CreatePairs(stocks, type));
         }
