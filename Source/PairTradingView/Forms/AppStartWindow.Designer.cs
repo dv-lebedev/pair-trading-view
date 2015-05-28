@@ -63,6 +63,8 @@
             this.startTimeTxt = new System.Windows.Forms.TextBox();
             this.stopTimeTxt = new System.Windows.Forms.TextBox();
             this.label13 = new System.Windows.Forms.Label();
+            this.csvSeparator = new System.Windows.Forms.ComboBox();
+            this.label14 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.priceIndexUpDown)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.volumeIndexUpDown)).BeginInit();
             this.menuStrip1.SuspendLayout();
@@ -147,7 +149,7 @@
             this.ContainsHeaderCheckBox.AutoSize = true;
             this.ContainsHeaderCheckBox.Font = new System.Drawing.Font("Consolas", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.ContainsHeaderCheckBox.ForeColor = System.Drawing.Color.Gray;
-            this.ContainsHeaderCheckBox.Location = new System.Drawing.Point(159, 144);
+            this.ContainsHeaderCheckBox.Location = new System.Drawing.Point(159, 170);
             this.ContainsHeaderCheckBox.Name = "ContainsHeaderCheckBox";
             this.ContainsHeaderCheckBox.Size = new System.Drawing.Size(116, 17);
             this.ContainsHeaderCheckBox.TabIndex = 6;
@@ -455,12 +457,36 @@
             this.label13.TabIndex = 40;
             this.label13.Text = "Data save : ";
             // 
+            // csvSeparator
+            // 
+            this.csvSeparator.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.csvSeparator.FormattingEnabled = true;
+            this.csvSeparator.Location = new System.Drawing.Point(159, 141);
+            this.csvSeparator.Name = "csvSeparator";
+            this.csvSeparator.Size = new System.Drawing.Size(120, 23);
+            this.csvSeparator.TabIndex = 41;
+            this.csvSeparator.SelectedIndexChanged += new System.EventHandler(this.csvSeparator_SelectedIndexChanged);
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.BackColor = System.Drawing.Color.Black;
+            this.label14.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label14.ForeColor = System.Drawing.Color.Gray;
+            this.label14.Location = new System.Drawing.Point(69, 144);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(84, 15);
+            this.label14.TabIndex = 42;
+            this.label14.Text = "Separator :";
+            // 
             // AppStartWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Black;
             this.ClientSize = new System.Drawing.Size(774, 475);
+            this.Controls.Add(this.label14);
+            this.Controls.Add(this.csvSeparator);
             this.Controls.Add(this.label13);
             this.Controls.Add(this.stopTimeTxt);
             this.Controls.Add(this.startTimeTxt);
@@ -549,5 +575,7 @@
         private System.Windows.Forms.TextBox startTimeTxt;
         private System.Windows.Forms.TextBox stopTimeTxt;
         private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.ComboBox csvSeparator;
+        private System.Windows.Forms.Label label14;
     }
 }

@@ -1,14 +1,14 @@
 ﻿using System;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
+using PairTradingView.Data.CSVData;
+using PairTradingView.Synthetics;
 
 namespace PairTradingView
 {
     [Serializable]
     public class Configuration
     {
-        private static Configuration cfg = null;
-
         public string SqlConnectionString { get; set; }
 
         public int DataSaveInterval { get; set; }
@@ -21,18 +21,9 @@ namespace PairTradingView
 
         public TimeSpan StopTime { get; set; }
 
-        public static Configuration Instance
-        {
-            get
-            {
-                if (cfg == null)
-                {
-                    cfg = Configuration.Deserialize("ptview.cfg");
-                }
+        public CSVFormat CsvFormat { get; set; }
 
-                return cfg;
-            }
-        }
+        public DeltaType DeltaType { get; set; }
 
         public static void Serialize(string path, Configuration item)
         {
@@ -47,7 +38,14 @@ namespace PairTradingView
         {
             using (FileStream fs = new FileStream(path, FileMode.OpenOrCreate))
             {
-                return (Configuration)new BinaryFormatter().Deserialize(fs);
+               var item = (Configuration)new BinaryFormatter().Deserialize(fs);
+
+               if (item.CsvFormat == null)
+               {
+                   item.CsvFormat = new CSVFormat { Separator = ',' };
+               }
+
+               return item;
             }
         }
 
@@ -59,7 +57,8 @@ namespace PairTradingView
                 DataUpdateInterval = 1,
                 LoadingValuesCount = 5,
                 StartTime = new TimeSpan(10, 00, 00),
-                StopTime = new TimeSpan(18, 45, 00)
+                StopTime = new TimeSpan(18, 45, 00),
+                CsvFormat = new CSVFormat { Separator = ',' }
             };
         }
     }

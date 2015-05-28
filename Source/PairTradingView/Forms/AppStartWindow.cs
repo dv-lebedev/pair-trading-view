@@ -27,11 +27,12 @@ namespace PairTradingView.Forms
             priceIndexUpDown.Minimum = 5;
             volumeIndexUpDown.Minimum = 6;
 
-            deltaTypeBox.Items.Add("Ratio");
-            deltaTypeBox.Items.Add("RatioIncludingBeta");
-
-            deltaTypeBox.Items.Add("Spread");
-            deltaTypeBox.Items.Add("SpreadIncludingBeta");
+            deltaTypeBox.Items.AddRange(new[] 
+            {   "Ratio", 
+                "RatioIncludingBeta", 
+                "Spread", 
+                "SpreadIncludingBeta" 
+            });
 
             deltaTypeBox.Text = deltaTypeBox.Items[0].ToString();
 
@@ -56,7 +57,10 @@ namespace PairTradingView.Forms
 
             startTimeTxt.Text = mWindow.Cfg.StartTime.ToString("g");
             stopTimeTxt.Text = mWindow.Cfg.StopTime.ToString("g");
-          
+
+            csvSeparator.Items.AddRange(new[] { ",", ".", ";", ":", "\\", "|" });
+            csvSeparator.Text = mWindow.Cfg.CsvFormat.Separator.ToString();
+                      
         }
 
         private void AppStartWindow_Load(object sender, EventArgs e)
@@ -66,27 +70,27 @@ namespace PairTradingView.Forms
 
         private void priceIndexUpDown_ValueChanged(object sender, EventArgs e)
         {
-            mWindow.CsvFormat.PriceIndex = (int)priceIndexUpDown.Value - 1;
+            mWindow.Cfg.CsvFormat.PriceIndex = (int)priceIndexUpDown.Value - 1;
         }
 
         private void volumeIndexUpDown_ValueChanged(object sender, EventArgs e)
         {
-            mWindow.CsvFormat.VolumeIndex = (int)volumeIndexUpDown.Value - 1;
+            mWindow.Cfg.CsvFormat.VolumeIndex = (int)volumeIndexUpDown.Value - 1;
         }
 
         private void Start_Click(object sender, EventArgs e)
         {
             if (radioCSV.Checked)
             {
-                if (mWindow.CsvFormat.PriceIndex == mWindow.CsvFormat.VolumeIndex)
+                if (mWindow.Cfg.CsvFormat.PriceIndex == mWindow.Cfg.CsvFormat.VolumeIndex)
                 {
                     MessageBox.Show("Price and Volume indeces should have a different values!");
                     return; 
                 }
 
-                IDataProvider provider = new CSVDataProvider("MarketData/", mWindow.CsvFormat);
+                IDataProvider provider = new CSVDataProvider("MarketData/", mWindow.Cfg.CsvFormat);
 
-                mWindow.PairsContainer = new PairsContainer(provider, mWindow.DeltaType);
+                mWindow.PairsContainer = new PairsContainer(provider, mWindow.Cfg.DeltaType);
             }
             if (radioSQL.Checked)
             {
@@ -98,7 +102,7 @@ namespace PairTradingView.Forms
 
         private void ContainsHeaderCheckBox_CheckedChanged(object sender, EventArgs e)
         {
-            mWindow.CsvFormat.ContainsHeader = ContainsHeaderCheckBox.Checked;
+            mWindow.Cfg.CsvFormat.ContainsHeader = ContainsHeaderCheckBox.Checked;
         }
 
         private void openDownloaderToolStripMenuItem_Click(object sender, EventArgs e)
@@ -112,22 +116,22 @@ namespace PairTradingView.Forms
             switch (deltaTypeBox.Text)
             {
                 case "Ratio":
-                    mWindow.DeltaType = Synthetics.DeltaType.Ratio;
+                    mWindow.Cfg.DeltaType = Synthetics.DeltaType.Ratio;
                     explanationLabel.Text = "if r_value >= 0: y / x \nelse: log(y) * log(x)";
                     break;
 
                 case "RatioIncludingBeta":
-                    mWindow.DeltaType = Synthetics.DeltaType.RatioIncludingBeta;
+                    mWindow.Cfg.DeltaType = Synthetics.DeltaType.RatioIncludingBeta;
                     explanationLabel.Text = "if r_value >= 0: y / (beta * x) \nelse: log(y) * log(beta * x)";
                     break;
 
                 case "Spread":
-                    mWindow.DeltaType = Synthetics.DeltaType.Spread;
+                    mWindow.Cfg.DeltaType = Synthetics.DeltaType.Spread;
                     explanationLabel.Text = "if r_value >= 0: y - x \nelse: y + x";
                     break;
 
                 case "SpreadIncludingBeta":
-                    mWindow.DeltaType = Synthetics.DeltaType.SpreadIncludingBeta;
+                    mWindow.Cfg.DeltaType = Synthetics.DeltaType.SpreadIncludingBeta;
                     explanationLabel.Text = "if r_value >= 0: y - beta * x \nelse: y + beta * x";
                     break;
             }
@@ -158,7 +162,7 @@ namespace PairTradingView.Forms
 
             IDataProvider provider = new SqlDataProvider(mWindow.Cfg);
 
-            mWindow.PairsContainer = new PairsContainer(provider, mWindow.DeltaType);
+            mWindow.PairsContainer = new PairsContainer(provider, mWindow.Cfg.DeltaType);
 
             mWindow.Tasks.SetDataUpdateInterval((int)dataUpdateInterval.Value);
             mWindow.Tasks.SetDataSaveInterval((int)dataSaveInterval.Value);
@@ -192,6 +196,11 @@ namespace PairTradingView.Forms
                 stopTimeTxt.BackColor = Color.Red;
             }
 
+        }
+
+        private void csvSeparator_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            mWindow.Cfg.CsvFormat.Separator = csvSeparator.Text[0];
         }
     }
 }

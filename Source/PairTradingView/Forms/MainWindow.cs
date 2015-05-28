@@ -18,9 +18,6 @@ namespace PairTradingView.Forms
 
         public DataTasks Tasks { get; private set; }
 
-        public CSVFormat CsvFormat { get; private set; }
-        public DeltaType DeltaType { get; set; }
-
         public PairsContainer PairsContainer { get; set; }
 
         private FinancialPair SelectedPair { get; set; }
@@ -29,7 +26,6 @@ namespace PairTradingView.Forms
 
         public MainWindow()
         {
-            CsvFormat = new CSVFormat() { Separator = ',' };
 
             Tasks = new DataTasks();
             Tasks.DataSaver.Elapsed += DataSaver_Elapsed;

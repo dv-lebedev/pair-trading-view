@@ -15,8 +15,6 @@ namespace PairTradingView.Synthetics
 
         public List<FinancialPair> Items { get; private set; }
 
-        public RiskCalculation RiskCalculation { get; private set; }
-
         public PairsContainer(IDataProvider provider, DeltaType type)
         {
             var stocks = provider.GetStocks();
@@ -26,15 +24,5 @@ namespace PairTradingView.Synthetics
 
             Items = new List<FinancialPair>(FinancialPairCreator.CreatePairs(stocks, type));
         }
-
-
-        public virtual void CalculateRisk(List<FinancialPairName> names)
-        {
-            foreach (var item in Items) item.RiskParameters = null;
-
-
-            
-        }
-
     }
 }
