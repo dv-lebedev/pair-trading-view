@@ -89,13 +89,14 @@ namespace PairTradingView.Forms
 
                 if (SelectedPair.RiskParameters != null)
                 {
-                    pairName.Text = SelectedPair.Name.ToString();
-                    xName.Text = SelectedPair.Name.X;
-                    yName.Text = SelectedPair.Name.Y;
-                    pairsTradeBalance.Text = SelectedPair.RiskParameters.TradeBalance.ToString();
-                    yTradeVolume.Text = SelectedPair.RiskParameters.YTradeBalance.ToString();
-                    xTradeVolume.Text =  SelectedPair.RiskParameters.XTradeBalanace.ToString();
-                    riskLimit.Text = (SelectedPair.RiskParameters.TradeBalance * ((double)tradeRiskNUD.Value) / 100).ToString();
+                    pairName.Text = SelectedPair.Name.ToString() + " => ";
+                    xName.Text = SelectedPair.Name.X + " => ";
+                    yName.Text = SelectedPair.Name.Y + " => ";
+
+                    pairsTradeBalance.Text = Math.Round(SelectedPair.RiskParameters.TradeBalance, 4).ToString();
+                    yTradeVolume.Text = Math.Round(SelectedPair.RiskParameters.YTradeBalance, 4).ToString();
+                    xTradeVolume.Text = Math.Round(SelectedPair.RiskParameters.XTradeBalanace, 4).ToString();
+                    riskLimit.Text = Math.Round((SelectedPair.RiskParameters.TradeBalance * ((double)tradeRiskNUD.Value) / 100), 4).ToString();
                 }
                 else
                 {
@@ -200,6 +201,12 @@ namespace PairTradingView.Forms
 
             stocksCountLabel.Text = PairsContainer.StocksCount.ToString();
             pairsCreatedLabel.Text = PairsContainer.Items.Count.ToString();
+
+            if (listView1.Items.Count > 0)
+            {
+                listView1.Items[0].Selected = true;
+                listView1_Click(this, null);
+            }
 
         }
 

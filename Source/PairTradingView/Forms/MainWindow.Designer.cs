@@ -92,7 +92,7 @@ namespace PairTradingView.Forms
             this.SMAperiodNUD.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.SMAperiodNUD.Font = new System.Drawing.Font("Consolas", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.SMAperiodNUD.ForeColor = System.Drawing.Color.DarkGray;
-            this.SMAperiodNUD.Location = new System.Drawing.Point(118, 306);
+            this.SMAperiodNUD.Location = new System.Drawing.Point(118, 333);
             this.SMAperiodNUD.Name = "SMAperiodNUD";
             this.SMAperiodNUD.Size = new System.Drawing.Size(119, 20);
             this.SMAperiodNUD.TabIndex = 2;
@@ -103,7 +103,7 @@ namespace PairTradingView.Forms
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.Color.Gray;
-            this.label1.Location = new System.Drawing.Point(48, 308);
+            this.label1.Location = new System.Drawing.Point(48, 335);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(28, 14);
             this.label1.TabIndex = 3;
@@ -114,7 +114,7 @@ namespace PairTradingView.Forms
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.ForeColor = System.Drawing.Color.Gray;
-            this.label2.Location = new System.Drawing.Point(48, 334);
+            this.label2.Location = new System.Drawing.Point(48, 361);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(28, 14);
             this.label2.TabIndex = 5;
@@ -126,7 +126,7 @@ namespace PairTradingView.Forms
             this.WMAperiodNUD.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.WMAperiodNUD.Font = new System.Drawing.Font("Consolas", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.WMAperiodNUD.ForeColor = System.Drawing.Color.DarkGray;
-            this.WMAperiodNUD.Location = new System.Drawing.Point(118, 333);
+            this.WMAperiodNUD.Location = new System.Drawing.Point(118, 360);
             this.WMAperiodNUD.Name = "WMAperiodNUD";
             this.WMAperiodNUD.Size = new System.Drawing.Size(119, 20);
             this.WMAperiodNUD.TabIndex = 4;
@@ -135,7 +135,7 @@ namespace PairTradingView.Forms
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.DimGray;
-            this.panel1.Location = new System.Drawing.Point(815, 31);
+            this.panel1.Location = new System.Drawing.Point(815, 44);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(1, 355);
             this.panel1.TabIndex = 6;
@@ -275,12 +275,11 @@ namespace PairTradingView.Forms
             // label11
             // 
             this.label11.AutoSize = true;
-            this.label11.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.label11.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label11.ForeColor = System.Drawing.Color.White;
-            this.label11.Location = new System.Drawing.Point(932, 12);
+            this.label11.Location = new System.Drawing.Point(949, 27);
             this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(37, 16);
+            this.label11.Size = new System.Drawing.Size(35, 14);
             this.label11.TabIndex = 27;
             this.label11.Text = "INFO";
             // 
@@ -289,7 +288,7 @@ namespace PairTradingView.Forms
             this.label12.AutoSize = true;
             this.label12.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label12.ForeColor = System.Drawing.Color.White;
-            this.label12.Location = new System.Drawing.Point(108, 273);
+            this.label12.Location = new System.Drawing.Point(95, 300);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(112, 14);
             this.label12.TabIndex = 28;
@@ -318,7 +317,7 @@ namespace PairTradingView.Forms
             this.panel2.Controls.Add(this.label2);
             this.panel2.Location = new System.Drawing.Point(822, 44);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(279, 394);
+            this.panel2.Size = new System.Drawing.Size(279, 427);
             this.panel2.TabIndex = 29;
             // 
             // tradeBalanceNUD
@@ -346,7 +345,7 @@ namespace PairTradingView.Forms
             // 
             this.yTradeVolume.AutoSize = true;
             this.yTradeVolume.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.yTradeVolume.ForeColor = System.Drawing.Color.Gray;
+            this.yTradeVolume.ForeColor = System.Drawing.Color.Gold;
             this.yTradeVolume.Location = new System.Drawing.Point(141, 133);
             this.yTradeVolume.Name = "yTradeVolume";
             this.yTradeVolume.Size = new System.Drawing.Size(14, 14);
@@ -357,7 +356,7 @@ namespace PairTradingView.Forms
             // 
             this.pairsTradeBalance.AutoSize = true;
             this.pairsTradeBalance.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.pairsTradeBalance.ForeColor = System.Drawing.Color.Gray;
+            this.pairsTradeBalance.ForeColor = System.Drawing.Color.LawnGreen;
             this.pairsTradeBalance.Location = new System.Drawing.Point(141, 98);
             this.pairsTradeBalance.Name = "pairsTradeBalance";
             this.pairsTradeBalance.Size = new System.Drawing.Size(14, 14);
@@ -369,9 +368,9 @@ namespace PairTradingView.Forms
             this.CalculateRisk.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.CalculateRisk.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.CalculateRisk.ForeColor = System.Drawing.Color.Gray;
-            this.CalculateRisk.Location = new System.Drawing.Point(29, 222);
+            this.CalculateRisk.Location = new System.Drawing.Point(144, 223);
             this.CalculateRisk.Name = "CalculateRisk";
-            this.CalculateRisk.Size = new System.Drawing.Size(235, 23);
+            this.CalculateRisk.Size = new System.Drawing.Size(120, 23);
             this.CalculateRisk.TabIndex = 35;
             this.CalculateRisk.Text = "Get Risk info";
             this.CalculateRisk.UseVisualStyleBackColor = true;
@@ -413,7 +412,7 @@ namespace PairTradingView.Forms
             // 
             this.xTradeVolume.AutoSize = true;
             this.xTradeVolume.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.xTradeVolume.ForeColor = System.Drawing.Color.Gray;
+            this.xTradeVolume.ForeColor = System.Drawing.Color.Gold;
             this.xTradeVolume.Location = new System.Drawing.Point(141, 156);
             this.xTradeVolume.Name = "xTradeVolume";
             this.xTradeVolume.Size = new System.Drawing.Size(14, 14);
@@ -435,7 +434,7 @@ namespace PairTradingView.Forms
             // 
             this.riskLimit.AutoSize = true;
             this.riskLimit.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.riskLimit.ForeColor = System.Drawing.Color.Gray;
+            this.riskLimit.ForeColor = System.Drawing.Color.Red;
             this.riskLimit.Location = new System.Drawing.Point(141, 196);
             this.riskLimit.Name = "riskLimit";
             this.riskLimit.Size = new System.Drawing.Size(14, 14);
@@ -565,7 +564,7 @@ namespace PairTradingView.Forms
             // columnHeader12
             // 
             this.columnHeader12.Text = "sd(Δ)";
-            this.columnHeader12.Width = 169;
+            this.columnHeader12.Width = 163;
             // 
             // zedGraphControl
             // 
