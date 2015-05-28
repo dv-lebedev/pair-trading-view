@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
+using System.Drawing;
 using System.Globalization;
 using System.Windows.Forms;
 using PairTradingView.Data;
@@ -18,12 +19,10 @@ namespace PairTradingView.Forms
         {
             InitializeComponent();
 
+            this.mWindow = mainWindow;
+
             radioSQL.Checked = true;
             radioCSV.Checked = false;
-
-            Debug.Assert(mainWindow != null);
-
-            this.mWindow = mainWindow;
 
             priceIndexUpDown.Minimum = 5;
             volumeIndexUpDown.Minimum = 6;
@@ -37,25 +36,26 @@ namespace PairTradingView.Forms
             deltaTypeBox.Text = deltaTypeBox.Items[0].ToString();
 
             foreach (var item in SqlHelpers.GetSqlServerNames())
-            {
                 serverNameBox.Items.Add(item);
-            }
-
+            
             if (serverNameBox.Items.Count > 0)
                 serverNameBox.Text = serverNameBox.Items[0].ToString();
 
+            dataSaveInterval.Minimum = 1;
             dataSaveInterval.Maximum = decimal.MaxValue;
-            dataUpdateInterval.Maximum = decimal.MaxValue;
-            loadValuesCount.Maximum = decimal.MaxValue;
-            loadValuesCount.Minimum = 5;
 
+            dataUpdateInterval.Minimum = 1;
+            dataUpdateInterval.Maximum = decimal.MaxValue;
+
+            loadValuesCount.Minimum = 5;
+            loadValuesCount.Maximum = decimal.MaxValue;
+                   
             dataSaveInterval.Value = mWindow.Cfg.DataSaveInterval;
             dataUpdateInterval.Value = mWindow.Cfg.DataUpdateInterval;
             loadValuesCount.Value = mWindow.Cfg.LoadingValuesCount;
 
             startTimeTxt.Text = mWindow.Cfg.StartTime.ToString("g");
             stopTimeTxt.Text = mWindow.Cfg.StopTime.ToString("g");
-
           
         }
 
@@ -153,7 +153,7 @@ namespace PairTradingView.Forms
 
             if (serverNameBox.Text == string.Empty) 
                 MessageBox.Show("Server not found.");
-            
+         
             mWindow.Cfg.SqlConnectionString = string.Format("Data Source={0};Initial Catalog=PairTradingViewDb;Integrated Security=True;MultipleActiveResultSets=True;", serverNameBox.Text);
 
             IDataProvider provider = new SqlDataProvider(mWindow.Cfg);
@@ -163,7 +163,34 @@ namespace PairTradingView.Forms
             mWindow.Tasks.SetDataUpdateInterval((int)dataUpdateInterval.Value);
             mWindow.Tasks.SetDataSaveInterval((int)dataSaveInterval.Value);
             mWindow.Tasks.Start();
+        }
 
+        private void startTimeTxt_TextChanged(object sender, EventArgs e)
+        {
+            TimeSpan ts;
+
+            if (TimeSpan.TryParseExact(startTimeTxt.Text, "g", CultureInfo.CurrentCulture, out ts))
+            {
+                startTimeTxt.BackColor = Color.LimeGreen;
+            }
+            else
+            {
+                startTimeTxt.BackColor = Color.Red;
+            }
+        }
+
+        private void stopTimeTxt_TextChanged(object sender, EventArgs e)
+        {
+            TimeSpan ts;
+
+            if (TimeSpan.TryParseExact(stopTimeTxt.Text, "g", CultureInfo.CurrentCulture, out ts))
+            {
+                stopTimeTxt.BackColor = Color.LimeGreen;
+            }
+            else
+            {
+                stopTimeTxt.BackColor = Color.Red;
+            }
 
         }
     }

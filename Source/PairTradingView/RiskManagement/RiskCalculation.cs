@@ -11,20 +11,28 @@ namespace PairTradingView.RiskManagement
 
         private List<FinancialPair> Pairs { get; set; }
 
-        public double TradeBalance { get; set; }
+        public double TradeBalance { get; private set; }
 
 
-        public RiskCalculation(List<FinancialPair> pairs)
+        public RiskCalculation(List<FinancialPair> pairs, double tradeBalance)
         {
             if (pairs == null)
                 throw new ArgumentNullException();
 
             this.Pairs = pairs;
+            this.TradeBalance = tradeBalance;
         }
 
 
         public void Calculate()
         {
+            this.Calculate(TradeBalance);
+        }
+
+
+        public void Calculate(double tradeBalance)
+        {
+            this.TradeBalance = tradeBalance;
 
             var synthIndex = GetSynthIndex(Pairs);
 

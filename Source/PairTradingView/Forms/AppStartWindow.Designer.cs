@@ -134,7 +134,7 @@
             this.Start.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.Start.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.Start.ForeColor = System.Drawing.Color.Gray;
-            this.Start.Location = new System.Drawing.Point(304, 428);
+            this.Start.Location = new System.Drawing.Point(337, 419);
             this.Start.Name = "Start";
             this.Start.Size = new System.Drawing.Size(101, 23);
             this.Start.TabIndex = 5;
@@ -340,7 +340,7 @@
             this.radioCSV.AutoSize = true;
             this.radioCSV.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.radioCSV.ForeColor = System.Drawing.Color.Gray;
-            this.radioCSV.Location = new System.Drawing.Point(304, 357);
+            this.radioCSV.Location = new System.Drawing.Point(337, 357);
             this.radioCSV.Name = "radioCSV";
             this.radioCSV.Size = new System.Drawing.Size(137, 19);
             this.radioCSV.TabIndex = 30;
@@ -353,7 +353,7 @@
             this.radioSQL.AutoSize = true;
             this.radioSQL.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.radioSQL.ForeColor = System.Drawing.Color.Gray;
-            this.radioSQL.Location = new System.Drawing.Point(304, 380);
+            this.radioSQL.Location = new System.Drawing.Point(337, 380);
             this.radioSQL.Name = "radioSQL";
             this.radioSQL.Size = new System.Drawing.Size(172, 19);
             this.radioSQL.TabIndex = 31;
@@ -367,7 +367,7 @@
             this.label15.BackColor = System.Drawing.Color.Black;
             this.label15.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.label15.ForeColor = System.Drawing.Color.Gray;
-            this.label15.Location = new System.Drawing.Point(174, 359);
+            this.label15.Location = new System.Drawing.Point(207, 359);
             this.label15.Name = "label15";
             this.label15.Size = new System.Drawing.Size(105, 15);
             this.label15.TabIndex = 32;
@@ -432,6 +432,7 @@
             this.startTimeTxt.Name = "startTimeTxt";
             this.startTimeTxt.Size = new System.Drawing.Size(120, 23);
             this.startTimeTxt.TabIndex = 38;
+            this.startTimeTxt.TextChanged += new System.EventHandler(this.startTimeTxt_TextChanged);
             // 
             // stopTimeTxt
             // 
@@ -440,6 +441,7 @@
             this.stopTimeTxt.Name = "stopTimeTxt";
             this.stopTimeTxt.Size = new System.Drawing.Size(120, 23);
             this.stopTimeTxt.TabIndex = 39;
+            this.stopTimeTxt.TextChanged += new System.EventHandler(this.stopTimeTxt_TextChanged);
             // 
             // label13
             // 
@@ -458,7 +460,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Black;
-            this.ClientSize = new System.Drawing.Size(774, 485);
+            this.ClientSize = new System.Drawing.Size(774, 475);
             this.Controls.Add(this.label13);
             this.Controls.Add(this.stopTimeTxt);
             this.Controls.Add(this.startTimeTxt);

@@ -116,3 +116,4 @@ C:\GitHub\PairTradingView\Source\PairTradingView\obj\Debug\PairTradingView.Prope
 C:\GitHub\PairTradingView\Source\PairTradingView\obj\Debug\PairTradingView.csproj.GenerateResource.Cache
 C:\GitHub\PairTradingView\Source\PairTradingView\obj\Debug\PairTradingView.exe
 C:\GitHub\PairTradingView\Source\PairTradingView\obj\Debug\PairTradingView.pdb
+C:\GitHub\PairTradingView\Source\PairTradingView\obj\Debug\PairTradingView.csprojResolveAssemblyReference.cache

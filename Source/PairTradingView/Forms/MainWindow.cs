@@ -62,7 +62,6 @@ namespace PairTradingView.Forms
 
             this.FormClosing += MainWindow_FormClosing;
 
-            MessageBox.Show(PairsContainer.Items.Count.ToString());
         }
 
         void listView1_Click(object sender, EventArgs e)
@@ -145,7 +144,6 @@ namespace PairTradingView.Forms
                             }
                         }
                     }
-
                 }));
             }
             catch
@@ -164,7 +162,6 @@ namespace PairTradingView.Forms
                 {
                     using (var db = new StocksContext(Cfg.SqlConnectionString))
                     {
-
                         foreach (var stock in db.Stocks)
                         {
                             stock.History.Add(new StockValue
@@ -299,9 +296,7 @@ namespace PairTradingView.Forms
                     }
                 }
 
-                RiskCalculation = new RiskCalculation(pairs);
-                RiskCalculation.TradeBalance = (double)tradeBalanceNUD.Value;
-
+                RiskCalculation = new RiskCalculation(pairs, (double)tradeBalanceNUD.Value);
 
                 try
                 {
@@ -315,8 +310,6 @@ namespace PairTradingView.Forms
                 listView1_Click(this, null);
 
             }
-
         }
-
     }
 }
