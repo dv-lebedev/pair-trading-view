@@ -14,6 +14,8 @@ namespace PairTradingView.Data.SqlData
 
         public SqlDataProvider(Configuration cfg)
         {
+            if (cfg == null) throw new ArgumentNullException();
+
             configuration = cfg;
         }
 
@@ -27,13 +29,17 @@ namespace PairTradingView.Data.SqlData
                 {
                     foreach (var item in db.Stocks)
                     {
-                        var values = item.History.OrderByDescending(i => i.DateTime).Take(configuration.LoadingValuesCount).Reverse();
+                        var values = item.History.OrderByDescending(i => i.Id).Take(configuration.LoadingValuesCount).Reverse();
 
                         if (values.Count() > 0)
                         {
                             stocks.Add(new Stock
                             {
                                 Code = item.Code,
+                                Ask = item.Ask,
+                                Bid = item.Bid,
+                                Price = item.Price,
+                                Volume = item.Volume,
                                 History = new List<StockValue>(values)
                             });
                         }

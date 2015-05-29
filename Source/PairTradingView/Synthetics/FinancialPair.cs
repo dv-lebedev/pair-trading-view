@@ -40,14 +40,16 @@ namespace PairTradingView.Synthetics
 
         public DeltaType DeltaType { get; private set; }
 
-        public LinearRegressionModel Regression { get; set; }
+        public LinearRegressionModel Regression { get; private set; }
 
-        public IEnumerable<double> DeltaValues { get; set; }
+        public IEnumerable<double> DeltaValues { get; private set; }
 
         public RiskParameters RiskParameters { get; set; }
 
         public FinancialPair(double[] x, double[] y, FinancialPairName name, DeltaType delta)
         {
+            if (name == null) throw new ArgumentNullException();
+
             Name = name;
 
             Update(x, y, delta);
@@ -70,7 +72,7 @@ namespace PairTradingView.Synthetics
             }
             catch (Exception ex)
             {
-                
+                MessageBox.Show(Name.ToString() + " : " + ex.Message);
             }
         }
 
