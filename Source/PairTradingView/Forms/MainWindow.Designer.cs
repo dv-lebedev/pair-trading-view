@@ -88,10 +88,10 @@ namespace PairTradingView.Forms
             // 
             // SMAperiodNUD
             // 
-            this.SMAperiodNUD.BackColor = System.Drawing.Color.Black;
+            this.SMAperiodNUD.BackColor = System.Drawing.Color.White;
             this.SMAperiodNUD.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.SMAperiodNUD.Font = new System.Drawing.Font("Consolas", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.SMAperiodNUD.ForeColor = System.Drawing.Color.White;
+            this.SMAperiodNUD.ForeColor = System.Drawing.Color.Black;
             this.SMAperiodNUD.Location = new System.Drawing.Point(118, 333);
             this.SMAperiodNUD.Name = "SMAperiodNUD";
             this.SMAperiodNUD.Size = new System.Drawing.Size(119, 20);
@@ -122,10 +122,10 @@ namespace PairTradingView.Forms
             // 
             // WMAperiodNUD
             // 
-            this.WMAperiodNUD.BackColor = System.Drawing.Color.Black;
+            this.WMAperiodNUD.BackColor = System.Drawing.Color.White;
             this.WMAperiodNUD.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.WMAperiodNUD.Font = new System.Drawing.Font("Consolas", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.WMAperiodNUD.ForeColor = System.Drawing.Color.White;
+            this.WMAperiodNUD.ForeColor = System.Drawing.Color.Black;
             this.WMAperiodNUD.Location = new System.Drawing.Point(118, 360);
             this.WMAperiodNUD.Name = "WMAperiodNUD";
             this.WMAperiodNUD.Size = new System.Drawing.Size(119, 20);
@@ -410,9 +410,9 @@ namespace PairTradingView.Forms
             // 
             // tradeRiskNUD
             // 
-            this.tradeRiskNUD.BackColor = System.Drawing.Color.Black;
+            this.tradeRiskNUD.BackColor = System.Drawing.Color.White;
             this.tradeRiskNUD.Font = new System.Drawing.Font("Consolas", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.tradeRiskNUD.ForeColor = System.Drawing.Color.White;
+            this.tradeRiskNUD.ForeColor = System.Drawing.Color.Black;
             this.tradeRiskNUD.Location = new System.Drawing.Point(144, 48);
             this.tradeRiskNUD.Name = "tradeRiskNUD";
             this.tradeRiskNUD.Size = new System.Drawing.Size(56, 20);
@@ -466,9 +466,9 @@ namespace PairTradingView.Forms
             // 
             // tradeBalanceNUD
             // 
-            this.tradeBalanceNUD.BackColor = System.Drawing.Color.Black;
+            this.tradeBalanceNUD.BackColor = System.Drawing.Color.White;
             this.tradeBalanceNUD.Font = new System.Drawing.Font("Consolas", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.tradeBalanceNUD.ForeColor = System.Drawing.Color.White;
+            this.tradeBalanceNUD.ForeColor = System.Drawing.Color.Black;
             this.tradeBalanceNUD.Location = new System.Drawing.Point(144, 22);
             this.tradeBalanceNUD.Name = "tradeBalanceNUD";
             this.tradeBalanceNUD.Size = new System.Drawing.Size(120, 20);

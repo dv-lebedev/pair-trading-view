@@ -2,6 +2,8 @@
 using System.Diagnostics;
 using System.Drawing;
 using System.Globalization;
+using System.Threading;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 using PairTradingView.Data;
 using PairTradingView.Data.CSVData;
@@ -21,6 +23,8 @@ namespace PairTradingView.Forms
 
             this.mWindow = mainWindow;
 
+            progressBar2.MarqueeAnimationSpeed = 0;
+
             radioSQL.Checked = true;
             radioCSV.Checked = false;
 
@@ -38,22 +42,26 @@ namespace PairTradingView.Forms
 
             foreach (var item in SqlHelpers.GetSqlServerNames())
                 serverNameBox.Items.Add(item);
-            
+
             if (serverNameBox.Items.Count > 0)
                 serverNameBox.Text = serverNameBox.Items[0].ToString();
 
             dataSaveInterval.Minimum = 1;
             dataSaveInterval.Maximum = decimal.MaxValue;
-
+           
             dataUpdateInterval.Minimum = 1;
             dataUpdateInterval.Maximum = decimal.MaxValue;
 
             loadValuesCount.Minimum = 5;
             loadValuesCount.Maximum = decimal.MaxValue;
-                   
+
             dataSaveInterval.Value = mWindow.Cfg.DataSaveInterval;
             dataUpdateInterval.Value = mWindow.Cfg.DataUpdateInterval;
             loadValuesCount.Value = mWindow.Cfg.LoadingValuesCount;
+
+            dataSaveInterval.ValueChanged += dataSaveInterval_ValueChanged;
+            dataUpdateInterval.ValueChanged += dataUpdateInterval_ValueChanged;
+            loadValuesCount.ValueChanged += loadValuesCount_ValueChanged;
 
             startTimeTxt.Text = mWindow.Cfg.StartTime.ToString("g");
             stopTimeTxt.Text = mWindow.Cfg.StopTime.ToString("g");
@@ -62,6 +70,26 @@ namespace PairTradingView.Forms
             csvSeparator.Text = mWindow.Cfg.CsvFormat.Separator.ToString();
                       
         }
+
+        #region EVENT_HANDLERS
+
+        void loadValuesCount_ValueChanged(object sender, EventArgs e)
+        {
+            mWindow.Cfg.LoadingValuesCount = (int)loadValuesCount.Value;
+        }
+
+        void dataUpdateInterval_ValueChanged(object sender, EventArgs e)
+        {
+
+            mWindow.Cfg.DataUpdateInterval = (int)dataUpdateInterval.Value;
+        }
+
+        void dataSaveInterval_ValueChanged(object sender, EventArgs e)
+        {
+            mWindow.Cfg.DataSaveInterval = (int)dataSaveInterval.Value;
+        }
+
+        #endregion
 
         private void AppStartWindow_Load(object sender, EventArgs e)
         {
@@ -82,22 +110,24 @@ namespace PairTradingView.Forms
         {
             if (radioCSV.Checked)
             {
-                if (mWindow.Cfg.CsvFormat.PriceIndex == mWindow.Cfg.CsvFormat.VolumeIndex)
+                progressBar2.MarqueeAnimationSpeed = 5;
+
+                Task t = new Task(() =>
                 {
-                    MessageBox.Show("Price and Volume indeces should have a different values!");
-                    return; 
-                }
-
-                IDataProvider provider = new CSVDataProvider("MarketData/", mWindow.Cfg.CsvFormat);
-
-                mWindow.PairsContainer = new PairsContainer(provider, mWindow.Cfg.DeltaType);
+                    InitCsvLoad();
+                });
+                t.Start();
             }
             if (radioSQL.Checked)
             {
-                InitSqlConnection();
-            }
+                progressBar2.MarqueeAnimationSpeed = 5;
 
-            this.Close();
+                Task t = new Task(() =>
+                {
+                    InitSqlConnection();
+                });
+                t.Start();
+            }
         }
 
         private void ContainsHeaderCheckBox_CheckedChanged(object sender, EventArgs e)
@@ -137,36 +167,39 @@ namespace PairTradingView.Forms
             }
         }
 
+        public void InitCsvLoad()
+        {
+            if (mWindow.Cfg.CsvFormat.PriceIndex == mWindow.Cfg.CsvFormat.VolumeIndex)
+            {
+                MessageBox.Show("Price and Volume indeces should have a different values!");
+                return;
+            }
+
+            IDataProvider provider = new CSVDataProvider("MarketData/", mWindow.Cfg.CsvFormat);
+
+            mWindow.PairsContainer = new PairsContainer(provider, mWindow.Cfg.DeltaType);
+
+            BeginInvoke(new Action(() => { this.Close(); }));
+        }
+
         public void InitSqlConnection()
         {
-            TimeSpan startTime, stopTime;
-
-            if (TimeSpan.TryParseExact(startTimeTxt.Text, "g", CultureInfo.CurrentCulture, out startTime))
+            BeginInvoke(new Action(() =>
             {
-                mWindow.Cfg.StartTime = startTime;
-            }
+                if (serverNameBox.Text == string.Empty)
+                    MessageBox.Show("Server not found.");
 
-            if (TimeSpan.TryParseExact(stopTimeTxt.Text, "g", CultureInfo.CurrentCulture, out stopTime))
-            {
-                mWindow.Cfg.StopTime = stopTime;
-            }
+                mWindow.Cfg.SqlConnectionString = string.Format("Data Source={0};Initial Catalog=PairTradingViewDb;Integrated Security=True;MultipleActiveResultSets=True;", serverNameBox.Text);
 
-            mWindow.Cfg.DataSaveInterval = (int)dataSaveInterval.Value;
-            mWindow.Cfg.DataUpdateInterval = (int)dataUpdateInterval.Value;
-            mWindow.Cfg.LoadingValuesCount = (int)loadValuesCount.Value;
-
-            if (serverNameBox.Text == string.Empty) 
-                MessageBox.Show("Server not found.");
-         
-            mWindow.Cfg.SqlConnectionString = string.Format("Data Source={0};Initial Catalog=PairTradingViewDb;Integrated Security=True;MultipleActiveResultSets=True;", serverNameBox.Text);
+            }));
 
             IDataProvider provider = new SqlDataProvider(mWindow.Cfg);
 
             mWindow.PairsContainer = new PairsContainer(provider, mWindow.Cfg.DeltaType);
+            mWindow.Tasks.SetDataUpdateInterval(mWindow.Cfg.DataUpdateInterval);
+            mWindow.Tasks.SetDataSaveInterval(mWindow.Cfg.DataSaveInterval);
 
-            mWindow.Tasks.SetDataUpdateInterval((int)dataUpdateInterval.Value);
-            mWindow.Tasks.SetDataSaveInterval((int)dataSaveInterval.Value);
-            mWindow.Tasks.Start();
+            BeginInvoke(new Action(() => { this.Close(); }));
         }
 
         private void startTimeTxt_TextChanged(object sender, EventArgs e)
@@ -175,11 +208,11 @@ namespace PairTradingView.Forms
 
             if (TimeSpan.TryParseExact(startTimeTxt.Text, "g", CultureInfo.CurrentCulture, out ts))
             {
-                startTimeTxt.BackColor = Color.LimeGreen;
+                startTimeTxt.ForeColor = Color.LimeGreen;
             }
             else
             {
-                startTimeTxt.BackColor = Color.Red;
+                startTimeTxt.ForeColor = Color.Red;
             }
         }
 
@@ -189,11 +222,11 @@ namespace PairTradingView.Forms
 
             if (TimeSpan.TryParseExact(stopTimeTxt.Text, "g", CultureInfo.CurrentCulture, out ts))
             {
-                stopTimeTxt.BackColor = Color.LimeGreen;
+                stopTimeTxt.ForeColor = Color.LimeGreen;
             }
             else
             {
-                stopTimeTxt.BackColor = Color.Red;
+                stopTimeTxt.ForeColor = Color.Red;
             }
 
         }
@@ -202,5 +235,85 @@ namespace PairTradingView.Forms
         {
             mWindow.Cfg.CsvFormat.Separator = csvSeparator.Text[0];
         }
+
+        private void CsvToDb_Click(object sender, EventArgs e)
+        {
+            if (serverNameBox.Text == string.Empty)
+                MessageBox.Show("Server not found.");
+
+            string connectionStr = string.Format("Data Source={0};Initial Catalog=PairTradingViewDb;Integrated Security=True;MultipleActiveResultSets=True;", serverNameBox.Text);
+
+            Task t = new Task(() =>
+            {
+                LoadCsvToDb(connectionStr);
+            });
+
+            t.Start();
+        }
+
+        public void ProgressBarInc(int count)
+        {
+            if (progressBar1.Value == 100) progressBar1.Value = 0;
+
+            double value = (1.0 / count * 100.0);
+
+            if (progressBar1.Value + value <= 100)
+                progressBar1.Value += (int)value;
+        }
+
+        public void LoadCsvToDb(string connectionStr)
+        {         
+            if (mWindow.Cfg.CsvFormat.PriceIndex == mWindow.Cfg.CsvFormat.VolumeIndex)
+            {
+                MessageBox.Show("Price and Volume indeces should have a different values!");
+                return;
+            }
+
+            IDataProvider provider = new CSVDataProvider("MarketData/", mWindow.Cfg.CsvFormat);
+
+            try
+            {
+                using (var db = new StocksContext(connectionStr))
+                {
+
+                    var stocksd = provider.GetStocks();
+
+                    foreach (var item in stocksd)
+                    {
+                        BeginInvoke(new Action(() => { this.ProgressBarInc(stocksd.Count); }));
+
+                        foreach (var d in item.History)
+                        {
+                            d.DateTime = DateTime.Now;
+                        }
+
+                        var stock = db.Stocks.Find(item.Code);
+
+                        if (stock != null)
+                        {
+                            stock.History.AddRange(item.History);
+                        }
+                        else
+                        {
+                            db.Stocks.Add(item);
+                        }
+
+                        db.SaveChanges();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                BeginInvoke(new Action(() => { this.progressBar1.Value = 0; }));
+                MessageBox.Show(ex.Message);
+            }
+            finally
+            {
+                BeginInvoke(new Action(() => { this.progressBar1.Value = 100; }));
+                MessageBox.Show("CSV Data loaded.");
+            }
+
+        }
+
     }
 }
