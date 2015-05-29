@@ -10,6 +10,7 @@ using PairTradingView.Data.CSVData;
 using PairTradingView.Data.Entities;
 using PairTradingView.Data.SqlData;
 using PairTradingView.Synthetics;
+using PairTradingView.Helpers;
 
 namespace PairTradingView.Forms
 {
@@ -40,7 +41,7 @@ namespace PairTradingView.Forms
 
             deltaTypeBox.Text = deltaTypeBox.Items[0].ToString();
 
-            foreach (var item in SqlHelpers.GetSqlServerNames())
+            foreach (var item in SqlHelpers.GetSqlServerInstances())
                 serverNameBox.Items.Add(item);
 
             if (serverNameBox.Items.Count > 0)
@@ -179,19 +180,19 @@ namespace PairTradingView.Forms
 
             mWindow.PairsContainer = new PairsContainer(provider, mWindow.Cfg.DeltaType);
 
-            BeginInvoke(new Action(() => { this.Close(); }));
+            this.DoInvoke(() => { this.Close(); });
         }
 
         public void InitSqlConnection()
         {
-            BeginInvoke(new Action(() =>
+            this.DoInvoke(() =>
             {
                 if (serverNameBox.Text == string.Empty)
                     MessageBox.Show("Server not found.");
 
                 mWindow.Cfg.SqlConnectionString = string.Format("Data Source={0};Initial Catalog=PairTradingViewDb;Integrated Security=True;MultipleActiveResultSets=True;", serverNameBox.Text);
 
-            }));
+            });
 
             IDataProvider provider = new SqlDataProvider(mWindow.Cfg);
 
@@ -199,7 +200,7 @@ namespace PairTradingView.Forms
             mWindow.Tasks.SetDataUpdateInterval(mWindow.Cfg.DataUpdateInterval);
             mWindow.Tasks.SetDataSaveInterval(mWindow.Cfg.DataSaveInterval);
 
-            BeginInvoke(new Action(() => { this.Close(); }));
+            this.DoInvoke(() => { this.Close(); });
         }
 
         private void startTimeTxt_TextChanged(object sender, EventArgs e)
@@ -276,16 +277,13 @@ namespace PairTradingView.Forms
                 using (var db = new StocksContext(connectionStr))
                 {
 
-                    var stocksd = provider.GetStocks();
+                    var stocks = provider.GetStocks();
 
-                    foreach (var item in stocksd)
+                    foreach (var item in stocks)
                     {
-                        BeginInvoke(new Action(() => { this.ProgressBarInc(stocksd.Count); }));
+                        this.DoInvoke(() => { this.ProgressBarInc(stocks.Count); });
 
-                        foreach (var d in item.History)
-                        {
-                            d.DateTime = DateTime.Now;
-                        }
+                        item.History.ForEach(i => i.DateTime = DateTime.Now);              
 
                         var stock = db.Stocks.Find(item.Code);
 
@@ -304,12 +302,12 @@ namespace PairTradingView.Forms
             }
             catch (Exception ex)
             {
-                BeginInvoke(new Action(() => { this.progressBar1.Value = 0; }));
+                this.DoInvoke(() => { this.progressBar1.Value = 0; });
                 MessageBox.Show(ex.Message);
             }
             finally
             {
-                BeginInvoke(new Action(() => { this.progressBar1.Value = 100; }));
+                this.DoInvoke(() => { this.progressBar1.Value = 100; });
                 MessageBox.Show("CSV Data loaded.");
             }
 

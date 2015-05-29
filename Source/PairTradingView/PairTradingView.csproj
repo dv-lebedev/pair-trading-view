@@ -108,6 +108,7 @@
     <Compile Include="Data\SqlData\StocksContext.cs" />
     <Compile Include="RiskManagement\RiskCalculation.cs" />
     <Compile Include="SqlHelpers.cs" />
+    <Compile Include="WinFormHelpers.cs" />
     <EmbeddedResource Include="Forms\AppStartWindow.resx">
       <DependentUpon>AppStartWindow.cs</DependentUpon>
     </EmbeddedResource>

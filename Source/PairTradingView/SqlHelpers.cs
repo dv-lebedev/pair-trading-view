@@ -5,7 +5,7 @@ namespace PairTradingView
 {
     public static class SqlHelpers
     {
-        public static string[] GetSqlServerNames()
+        public static string[] GetSqlServerInstances()
         {
             RegistryKey rk = Registry.LocalMachine.OpenSubKey(@"SOFTWARE\Microsoft\Microsoft SQL Server");
             String[] instances = (String[])rk.GetValue("InstalledInstances");
