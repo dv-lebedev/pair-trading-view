@@ -11,6 +11,9 @@ using PairTradingView.Data.Entities;
 using PairTradingView.Data.SqlData;
 using PairTradingView.Synthetics;
 using PairTradingView.Helpers;
+using System.Collections.Generic;
+using System.Linq;
+using PairTradingView.Synthetics.DeltaCalculation;
 
 namespace PairTradingView.Forms
 {
@@ -18,8 +21,14 @@ namespace PairTradingView.Forms
     {
         private MainWindow mWindow = null;
 
+        private IEnumerable<AbstractDelta> DeltaClaculation { get; set; }
+
+        private AbstractDelta SelectedDelta { get; set; }
+
         public AppStartWindow(MainWindow mainWindow)
         {
+            DeltaClaculation = DeltaHelpers.GetDeltaInstances();
+
             InitializeComponent();
 
             this.mWindow = mainWindow;
@@ -31,13 +40,8 @@ namespace PairTradingView.Forms
 
             priceIndexUpDown.Minimum = 5;
             volumeIndexUpDown.Minimum = 6;
-
-            deltaTypeBox.Items.AddRange(new[] 
-            {   "Ratio", 
-                "RatioIncludingBeta", 
-                "Spread", 
-                "SpreadIncludingBeta" 
-            });
+           
+            deltaTypeBox.Items.AddRange(DeltaClaculation.Select(i => i.Name).ToArray());
 
             deltaTypeBox.Text = deltaTypeBox.Items[0].ToString();
 
@@ -144,28 +148,9 @@ namespace PairTradingView.Forms
 
         private void deltaTypeBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            switch (deltaTypeBox.Text)
-            {
-                case "Ratio":
-                    mWindow.Cfg.DeltaType = Synthetics.DeltaType.Ratio;
-                    explanationLabel.Text = "if r_value >= 0: y / x \nelse: log(y) * log(x)";
-                    break;
+            SelectedDelta = DeltaClaculation.First(i => i.Name == deltaTypeBox.Text);
 
-                case "RatioIncludingBeta":
-                    mWindow.Cfg.DeltaType = Synthetics.DeltaType.RatioIncludingBeta;
-                    explanationLabel.Text = "if r_value >= 0: y / (beta * x) \nelse: log(y) * log(beta * x)";
-                    break;
-
-                case "Spread":
-                    mWindow.Cfg.DeltaType = Synthetics.DeltaType.Spread;
-                    explanationLabel.Text = "if r_value >= 0: y - x \nelse: y + x";
-                    break;
-
-                case "SpreadIncludingBeta":
-                    mWindow.Cfg.DeltaType = Synthetics.DeltaType.SpreadIncludingBeta;
-                    explanationLabel.Text = "if r_value >= 0: y - beta * x \nelse: y + beta * x";
-                    break;
-            }
+            descriptionLabel.Text = SelectedDelta.Description;
         }
 
         public void InitCsvLoad()
@@ -178,7 +163,7 @@ namespace PairTradingView.Forms
 
             IDataProvider provider = new CSVDataProvider("MarketData/", mWindow.Cfg.CsvFormat);
 
-            mWindow.PairsContainer = new PairsContainer(provider, mWindow.Cfg.DeltaType);
+            mWindow.PairsContainer = new PairsContainer(provider, DeltaClaculation.First(i => i.Name == deltaTypeBox.Text));
 
             this.DoInvoke(() => { this.Close(); });
         }
@@ -196,7 +181,7 @@ namespace PairTradingView.Forms
 
             IDataProvider provider = new SqlDataProvider(mWindow.Cfg);
 
-            mWindow.PairsContainer = new PairsContainer(provider, mWindow.Cfg.DeltaType);
+            mWindow.PairsContainer = new PairsContainer(provider, SelectedDelta);
             mWindow.Tasks.SetDataUpdateInterval(mWindow.Cfg.DataUpdateInterval);
             mWindow.Tasks.SetDataSaveInterval(mWindow.Cfg.DataSaveInterval);
 

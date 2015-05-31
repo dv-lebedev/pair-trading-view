@@ -41,7 +41,7 @@
             this.label4 = new System.Windows.Forms.Label();
             this.deltaTypeBox = new System.Windows.Forms.ComboBox();
             this.label5 = new System.Windows.Forms.Label();
-            this.explanationLabel = new System.Windows.Forms.Label();
+            this.descriptionLabel = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.serverNameBox = new System.Windows.Forms.ComboBox();
             this.label7 = new System.Windows.Forms.Label();
@@ -202,11 +202,11 @@
             // 
             // deltaTypeBox
             // 
-            this.deltaTypeBox.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.deltaTypeBox.Font = new System.Drawing.Font("Consolas", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.deltaTypeBox.FormattingEnabled = true;
             this.deltaTypeBox.Location = new System.Drawing.Point(138, 290);
             this.deltaTypeBox.Name = "deltaTypeBox";
-            this.deltaTypeBox.Size = new System.Drawing.Size(157, 23);
+            this.deltaTypeBox.Size = new System.Drawing.Size(157, 21);
             this.deltaTypeBox.TabIndex = 9;
             this.deltaTypeBox.SelectedIndexChanged += new System.EventHandler(this.deltaTypeBox_SelectedIndexChanged);
             // 
@@ -222,17 +222,17 @@
             this.label5.TabIndex = 10;
             this.label5.Text = "Delta type :";
             // 
-            // explanationLabel
+            // descriptionLabel
             // 
-            this.explanationLabel.AutoSize = true;
-            this.explanationLabel.BackColor = System.Drawing.Color.Black;
-            this.explanationLabel.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.explanationLabel.ForeColor = System.Drawing.Color.Gray;
-            this.explanationLabel.Location = new System.Drawing.Point(41, 328);
-            this.explanationLabel.Name = "explanationLabel";
-            this.explanationLabel.Size = new System.Drawing.Size(14, 15);
-            this.explanationLabel.TabIndex = 11;
-            this.explanationLabel.Text = "-";
+            this.descriptionLabel.AutoSize = true;
+            this.descriptionLabel.BackColor = System.Drawing.Color.Black;
+            this.descriptionLabel.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.descriptionLabel.ForeColor = System.Drawing.Color.Gray;
+            this.descriptionLabel.Location = new System.Drawing.Point(41, 328);
+            this.descriptionLabel.Name = "descriptionLabel";
+            this.descriptionLabel.Size = new System.Drawing.Size(14, 15);
+            this.descriptionLabel.TabIndex = 11;
+            this.descriptionLabel.Text = "-";
             // 
             // label6
             // 
@@ -590,7 +590,7 @@
             this.Controls.Add(this.label7);
             this.Controls.Add(this.serverNameBox);
             this.Controls.Add(this.label6);
-            this.Controls.Add(this.explanationLabel);
+            this.Controls.Add(this.descriptionLabel);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.deltaTypeBox);
             this.Controls.Add(this.label4);
@@ -635,7 +635,7 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.ComboBox deltaTypeBox;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Label explanationLabel;
+        private System.Windows.Forms.Label descriptionLabel;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.ComboBox serverNameBox;
         private System.Windows.Forms.Label label7;

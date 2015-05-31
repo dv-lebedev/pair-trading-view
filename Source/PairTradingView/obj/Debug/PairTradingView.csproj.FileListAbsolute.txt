@@ -116,3 +116,4 @@ C:\GitHub\PairTradingView\Source\PairTradingView\bin\Debug\EntityFramework.xml
 C:\GitHub\PairTradingView\Source\PairTradingView\bin\Debug\EntityFramework.SqlServer.xml
 C:\GitHub\PairTradingView\Source\PairTradingView\obj\Debug\PairTradingView.exe
 C:\GitHub\PairTradingView\Source\PairTradingView\obj\Debug\PairTradingView.pdb
+C:\GitHub\PairTradingView\Source\PairTradingView\obj\Debug\PairTradingView.csprojResolveAssemblyReference.cache

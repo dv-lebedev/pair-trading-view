@@ -23,7 +23,6 @@ namespace PairTradingView
 
         public CSVFormat CsvFormat { get; set; }
 
-        public DeltaType DeltaType { get; set; }
 
         public static void Serialize(string path, Configuration item)
         {

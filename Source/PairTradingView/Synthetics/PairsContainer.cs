@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using PairTradingView.Data;
 using PairTradingView.RiskManagement;
+using PairTradingView.Synthetics.DeltaCalculation;
 
 namespace PairTradingView.Synthetics
 {
@@ -11,18 +12,18 @@ namespace PairTradingView.Synthetics
     {
         public int StocksCount { get; private set; }
 
-        public DeltaType DeltaType { get; private set; }
+        public AbstractDelta DeltaCalculation { get; private set; }
 
         public List<FinancialPair> Items { get; private set; }
 
-        public PairsContainer(IDataProvider provider, DeltaType type)
+        public PairsContainer(IDataProvider provider, AbstractDelta delta)
         {
             var stocks = provider.GetStocks();
 
             StocksCount = stocks.Count;
-            DeltaType = type;
+            DeltaCalculation = delta;
 
-            Items = new List<FinancialPair>(FinancialPairCreator.CreatePairs(stocks, type));
+            Items = new List<FinancialPair>(FinancialPairCreator.CreatePairs(stocks, delta));
         }
     }
 }

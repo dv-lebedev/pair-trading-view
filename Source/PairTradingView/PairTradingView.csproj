@@ -71,12 +71,16 @@
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="RiskManagement\RiskParameters.cs" />
+    <Compile Include="Synthetics\DeltaCalculation\AbstractDelta.cs" />
+    <Compile Include="Synthetics\DeltaCalculation\RatioDelta.cs" />
+    <Compile Include="Synthetics\DeltaCalculation\RatioIncludingBetaDelta.cs" />
+    <Compile Include="Synthetics\DeltaCalculation\SpreadDelta.cs" />
+    <Compile Include="Synthetics\DeltaCalculation\SpreadIncludingBetaDelta.cs" />
+    <Compile Include="Synthetics\DeltaCalculation\DeltaHelpers.cs" />
     <Compile Include="Synthetics\FinancialPairName.cs" />
     <Compile Include="Data\CSVData\CSV.cs" />
     <Compile Include="Data\CSVData\CSVDataProvider.cs" />
     <Compile Include="Data\CSVData\CSVFormat.cs" />
-    <Compile Include="Synthetics\Delta.cs" />
-    <Compile Include="Synthetics\DeltaType.cs" />
     <Compile Include="Synthetics\FinancialPair.cs" />
     <Compile Include="Synthetics\FinancialPairCreator.cs" />
     <Compile Include="Data\IDataProvider.cs" />

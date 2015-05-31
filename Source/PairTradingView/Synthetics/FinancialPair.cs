@@ -27,6 +27,7 @@ using System.Windows.Forms;
 using EmetricGears;
 using EmetricGears.Models;
 using PairTradingView.RiskManagement;
+using PairTradingView.Synthetics.DeltaCalculation;
 
 namespace PairTradingView.Synthetics
 {
@@ -38,7 +39,7 @@ namespace PairTradingView.Synthetics
         public double YStdDev { get; private set; }
         public double DeltaStdDev { get; private set; }
 
-        public DeltaType DeltaType { get; private set; }
+        public AbstractDelta DeltaCalculation { get; private set; }
 
         public LinearRegressionModel Regression { get; private set; }
 
@@ -46,18 +47,20 @@ namespace PairTradingView.Synthetics
 
         public RiskParameters RiskParameters { get; set; }
 
-        public FinancialPair(double[] x, double[] y, FinancialPairName name, DeltaType delta)
+        public FinancialPair(double[] x, double[] y, FinancialPairName name, AbstractDelta delta)
         {
             if (name == null) throw new ArgumentNullException();
+
+            if (delta == null) throw new ArgumentNullException();
 
             Name = name;
 
             Update(x, y, delta);
         }
 
-        public void Update(double[] x, double[] y, DeltaType delta)
+        public void Update(double[] x, double[] y, AbstractDelta delta)
         {
-            DeltaType = delta;
+            DeltaCalculation = delta;
 
             try
             {
@@ -66,7 +69,7 @@ namespace PairTradingView.Synthetics
                 XStdDev = StdFuncs.StandardDeviation(x);
                 YStdDev = StdFuncs.StandardDeviation(y);
 
-                DeltaValues = Delta.GetDeltaValues(x, y, Regression.Beta, Regression.Correlation, delta);
+                DeltaValues = DeltaCalculation.GetDeltaValues(x, y, Regression.Beta, Regression.Correlation);
 
                 DeltaStdDev = StdFuncs.StandardDeviation(DeltaValues.ToArray());
             }
@@ -78,7 +81,7 @@ namespace PairTradingView.Synthetics
 
         public double GetCurrentDelta(double x, double y)
         {
-            return Delta.GetCurrentDelta(x, y, Regression.Beta, Regression.Correlation, DeltaType);
+            return DeltaCalculation.GetCurrentDelta(x, y, Regression.Beta, Regression.Correlation);
         }
     }
 }
