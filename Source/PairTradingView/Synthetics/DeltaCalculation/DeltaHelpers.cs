@@ -14,11 +14,9 @@ namespace PairTradingView.Synthetics.DeltaCalculation
 
             var values = Assembly.GetExecutingAssembly().GetTypes().Where(i => i.Name.EndsWith("Delta"));
 
-            foreach(var deltaType in values.Where(i=>i.IsAbstract == false))
+            foreach (var deltaType in values.Where(i => i.IsAbstract == false))
             {
-
                 deltaInstnces.Add((AbstractDelta)Activator.CreateInstance(deltaType));
-
             }
 
             return deltaInstnces;

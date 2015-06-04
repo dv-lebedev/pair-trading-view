@@ -31,7 +31,7 @@ namespace PairTradingView.Synthetics.DeltaCalculation
             }
         }
 
-        public override double[] GetDeltaValues(double[] x, double[] y, double beta, double correlation)
+        public override double[] GetDeltaValues(double[] x, double[] y, double beta = 0, double correlation = 0)
         {
             if (correlation >= 0)
             {
@@ -43,7 +43,7 @@ namespace PairTradingView.Synthetics.DeltaCalculation
             }
         }
 
-        public override double GetCurrentDelta(double x, double y, double beta, double correlation)
+        public override double GetCurrentDelta(double x, double y, double beta = 0, double correlation = 0)
         {
             if (correlation >= 0)
             {

@@ -11,9 +11,9 @@ namespace PairTradingView.Synthetics.DeltaCalculation
 
         public virtual string Description { get; protected set; }
 
-        public abstract double[] GetDeltaValues(double[] x, double[] y, double beta, double correlation);
+        public abstract double[] GetDeltaValues(double[] x, double[] y, double beta = 0, double correlation = 0);
 
-        public abstract double GetCurrentDelta(double x, double y, double beta, double correlation);
+        public abstract double GetCurrentDelta(double x, double y, double beta = 0, double correlation = 0);
 
     }
 }

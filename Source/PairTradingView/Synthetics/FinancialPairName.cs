@@ -20,6 +20,5 @@ namespace PairTradingView.Synthetics
         {
             return Y + "/" + X;
         }
-
     }
 }
