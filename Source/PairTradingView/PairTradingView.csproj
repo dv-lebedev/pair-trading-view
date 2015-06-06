@@ -76,6 +76,10 @@
     <Compile Include="Econometrics\Basics\NotNullAttribute.cs" />
     <Compile Include="Econometrics\Basics\OrdinaryLeastSquares.cs" />
     <Compile Include="Econometrics\Basics\StdFuncs.cs" />
+    <Compile Include="Econometrics\Models\AutoRegression.cs" />
+    <Compile Include="Econometrics\Models\LinearRegression.cs" />
+    <Compile Include="Econometrics\Models\LogitRegression.cs" />
+    <Compile Include="Econometrics\Models\MultipleLinearRegression.cs" />
     <Compile Include="RiskManagement\RiskParameters.cs" />
     <Compile Include="Synthetics\DeltaCalculation\AbstractDelta.cs" />
     <Compile Include="Synthetics\DeltaCalculation\RatioDelta.cs" />
@@ -155,9 +159,7 @@
   <ItemGroup>
     <Content Include="main.ico" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Econometrics\Models\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
