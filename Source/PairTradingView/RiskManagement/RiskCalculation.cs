@@ -96,11 +96,6 @@ namespace PairTradingView.RiskManagement
                 synthIndex.Add(value / pairs.Count);
             }
 
-            foreach (var item in synthIndex)
-            {
-                Console.WriteLine(item);
-            }
-
             return synthIndex;
         }
 

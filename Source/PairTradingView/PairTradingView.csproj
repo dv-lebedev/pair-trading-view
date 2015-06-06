@@ -70,6 +70,12 @@
     <Compile Include="Controls\ZedgraphControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="Econometrics\Basics\DifferentLenghtException.cs" />
+    <Compile Include="Econometrics\Basics\Matrix.cs" />
+    <Compile Include="Econometrics\Basics\MovingAverages.cs" />
+    <Compile Include="Econometrics\Basics\NotNullAttribute.cs" />
+    <Compile Include="Econometrics\Basics\OrdinaryLeastSquares.cs" />
+    <Compile Include="Econometrics\Basics\StdFuncs.cs" />
     <Compile Include="RiskManagement\RiskParameters.cs" />
     <Compile Include="Synthetics\DeltaCalculation\AbstractDelta.cs" />
     <Compile Include="Synthetics\DeltaCalculation\RatioDelta.cs" />
@@ -149,7 +155,9 @@
   <ItemGroup>
     <Content Include="main.ico" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Econometrics\Models\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
