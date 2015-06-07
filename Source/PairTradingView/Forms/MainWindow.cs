@@ -2,13 +2,13 @@
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
-using EmetricGears;
 using PairTradingView.Synthetics;
 using PairTradingView.Data.SqlData;
 using PairTradingView.Data.CSVData;
 using PairTradingView.Data.Entities;
 using PairTradingView.RiskManagement;
 using System.Collections.Generic;
+using PairTradingView.Econometrics.Basics;
 
 namespace PairTradingView.Forms
 {
@@ -183,12 +183,12 @@ namespace PairTradingView.Forms
             UpdateListView();
 
             r_valueHighLabel.Text = PairsContainer.Items.Where
-                (i => i.Regression.Correlation >= 0.7 && i.Regression.Correlation <= 1)
+                (i => i.Regression.RValue >= 0.7 && i.Regression.RValue <= 1)
                 .Count()
                 .ToString();
 
             r_valueLowLabel.Text = PairsContainer.Items.Where
-                (i => i.Regression.Correlation <= -0.7 && i.Regression.Correlation >= -1)
+                (i => i.Regression.RValue <= -0.7 && i.Regression.RValue >= -1)
                 .Count()
                 .ToString();
 
@@ -214,19 +214,19 @@ namespace PairTradingView.Forms
                 listView1.Items[index].SubItems.Add(Math.Round(item.YStdDev, 6).ToString());
                 listView1.Items[index].SubItems.Add(Math.Round(item.Regression.Alpha, 6).ToString());
                 listView1.Items[index].SubItems.Add(Math.Round(item.Regression.Beta, 6).ToString());
-                listView1.Items[index].SubItems.Add(Math.Round(item.Regression.Correlation, 6).ToString());
-                listView1.Items[index].SubItems.Add(Math.Round(item.Regression.Determination, 6).ToString());
+                listView1.Items[index].SubItems.Add(Math.Round(item.Regression.RValue, 6).ToString());
+                listView1.Items[index].SubItems.Add(Math.Round(item.Regression.RSquared, 6).ToString());
                 listView1.Items[index].SubItems.Add(Math.Round(item.DeltaValues.Average(), 6).ToString());
                 listView1.Items[index].SubItems.Add(Math.Round(item.DeltaValues.Min(), 6).ToString());
                 listView1.Items[index].SubItems.Add(Math.Round(item.DeltaValues.Max(), 6).ToString());
                 listView1.Items[index].SubItems.Add(Math.Round(item.DeltaStdDev, 6).ToString());
 
-                if (item.Regression.Correlation >= 0.7 && item.Regression.Correlation <= 1)
+                if (item.Regression.RValue >= 0.7 && item.Regression.RValue <= 1)
                 {
                     listView1.Items[index].BackColor = Color.FromArgb(38, 153, 38);
                 }
 
-                if (item.Regression.Correlation <= -0.7 && item.Regression.Correlation >= -1)
+                if (item.Regression.RValue <= -0.7 && item.Regression.RValue >= -1)
                 {
                     listView1.Items[index].BackColor = Color.FromArgb(191, 48, 48);
                 }

@@ -24,8 +24,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
-using EmetricGears;
-using EmetricGears.Models;
+using PairTradingView.Econometrics.Basics;
+using PairTradingView.Econometrics.Models;
 using PairTradingView.RiskManagement;
 using PairTradingView.Synthetics.DeltaCalculation;
 
@@ -41,7 +41,7 @@ namespace PairTradingView.Synthetics
 
         public AbstractDelta DeltaCalculation { get; private set; }
 
-        public LinearRegressionModel Regression { get; private set; }
+        public LinearRegression Regression { get; private set; }
 
         public IEnumerable<double> DeltaValues { get; private set; }
 
@@ -64,24 +64,24 @@ namespace PairTradingView.Synthetics
 
             try
             {
-                Regression = new LinearRegressionModel(x, y);
+                Regression = new LinearRegression(y, x);
 
                 XStdDev = StdFuncs.StandardDeviation(x);
                 YStdDev = StdFuncs.StandardDeviation(y);
 
-                DeltaValues = DeltaCalculation.GetDeltaValues(x, y, Regression.Beta, Regression.Correlation);
+                DeltaValues = DeltaCalculation.GetDeltaValues(x, y, Regression.Beta, Regression.RValue);
 
                 DeltaStdDev = StdFuncs.StandardDeviation(DeltaValues.ToArray());
             }
             catch (Exception ex)
             {
-                MessageBox.Show(Name.ToString() + " : " + ex.Message);
+                Console.WriteLine(ex.Message);
             }
         }
 
         public double GetCurrentDelta(double x, double y)
         {
-            return DeltaCalculation.GetCurrentDelta(x, y, Regression.Beta, Regression.Correlation);
+            return DeltaCalculation.GetCurrentDelta(x, y, Regression.Beta, Regression.RValue);
         }
     }
 }

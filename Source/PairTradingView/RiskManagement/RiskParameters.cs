@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using EmetricGears.Models;
+using PairTradingView.Econometrics.Models;
+
 
 namespace PairTradingView.RiskManagement
 {
@@ -10,7 +11,7 @@ namespace PairTradingView.RiskManagement
     {
         public bool IsActive { get; set; }
 
-        public LinearRegressionModel Regression { get; set; }
+        public LinearRegression Regression { get; set; }
 
         public double Weight { get; set; }
 

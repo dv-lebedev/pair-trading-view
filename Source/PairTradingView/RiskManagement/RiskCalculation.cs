@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using PairTradingView.Econometrics.Models;
 using PairTradingView.Synthetics;
 
 namespace PairTradingView.RiskManagement
@@ -40,7 +41,7 @@ namespace PairTradingView.RiskManagement
             {
                 item.RiskParameters = new RiskParameters
                 {
-                    Regression = new EmetricGears.Models.LinearRegressionModel(item.DeltaValues.ToArray(), synthIndex.ToArray())
+                    Regression = new LinearRegression(synthIndex.ToArray(), item.DeltaValues.ToArray())
                 };
             }
 

@@ -117,9 +117,11 @@ namespace PairTradingView.Forms
             {
                 progressBar2.MarqueeAnimationSpeed = 5;
 
+                var deltaName = deltaTypeBox.Text;
+
                 Task t = new Task(() =>
                 {
-                    InitCsvLoad();
+                    InitCsvLoad(deltaName);
                 });
                 t.Start();
             }
@@ -153,7 +155,7 @@ namespace PairTradingView.Forms
             descriptionLabel.Text = SelectedDelta.Description;
         }
 
-        public void InitCsvLoad()
+        public void InitCsvLoad(string deltaName)
         {
             if (mWindow.Cfg.CsvFormat.PriceIndex == mWindow.Cfg.CsvFormat.VolumeIndex)
             {
@@ -161,9 +163,16 @@ namespace PairTradingView.Forms
                 return;
             }
 
-            IDataProvider provider = new CSVDataProvider("MarketData/", mWindow.Cfg.CsvFormat);
+            try
+            {
+                IDataProvider provider = new CSVDataProvider("MarketData/", mWindow.Cfg.CsvFormat);
 
-            mWindow.PairsContainer = new PairsContainer(provider, DeltaClaculation.First(i => i.Name == deltaTypeBox.Text));
+                mWindow.PairsContainer = new PairsContainer(provider, DeltaClaculation.First(i => i.Name == deltaName));
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
 
             this.DoInvoke(() => { this.Close(); });
         }
