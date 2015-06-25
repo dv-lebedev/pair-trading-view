@@ -35,30 +35,24 @@ namespace PairTradingView.Data.CSVData
         {
             List<StockValue> result = null;
 
-            try
+            result = new List<StockValue>();
+
+            string[] lines = File.ReadAllLines(path);
+
+            int i = format.ContainsHeader ? 1 : 0;
+
+            for (i = 0; i < lines.Length; i++)
             {
-                result = new List<StockValue>();
+                string[] cuts = lines[i].Split(new[] { format.Separator }, StringSplitOptions.RemoveEmptyEntries);
 
-                string[] lines = File.ReadAllLines(path);
-
-                int i = format.ContainsHeader ? 1 : 0;
-
-                for (i = 0; i < lines.Length; i++)
+                result.Add(new StockValue
                 {
-                    string[] cuts = lines[i].Split(new[] { format.Separator }, StringSplitOptions.RemoveEmptyEntries);
+                    Price = double.Parse(cuts[format.PriceIndex], CultureInfo.InvariantCulture),
 
-                    result.Add(new StockValue
-                    {
-                        Price = double.Parse(cuts[format.PriceIndex], CultureInfo.InvariantCulture),
+                    Volume = long.Parse(cuts[format.VolumeIndex], CultureInfo.InvariantCulture)
+                });
+            }
 
-                        Volume = long.Parse(cuts[format.VolumeIndex], CultureInfo.InvariantCulture)
-                    });
-                }
-            }
-            catch (Exception e)
-            {
-                MessageBox.Show(e.Message);
-            }
             return result;
         }
 

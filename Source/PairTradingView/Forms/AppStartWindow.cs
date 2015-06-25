@@ -160,6 +160,9 @@ namespace PairTradingView.Forms
             if (mWindow.Cfg.CsvFormat.PriceIndex == mWindow.Cfg.CsvFormat.VolumeIndex)
             {
                 MessageBox.Show("Price and Volume indeces should have a different values!");
+
+                this.DoInvoke(() => { progressBar2.MarqueeAnimationSpeed = 0; });
+
                 return;
             }
 
@@ -171,7 +174,11 @@ namespace PairTradingView.Forms
             }
             catch(Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                MessageBox.Show(ex.Message + " Check CSV Format.");
+
+                this.DoInvoke(() => { progressBar2.MarqueeAnimationSpeed = 0; });
+
+                return;
             }
 
             this.DoInvoke(() => { this.Close(); });
@@ -257,17 +264,16 @@ namespace PairTradingView.Forms
         }
 
         public void LoadCsvToDb(string connectionStr)
-        {         
+        {
             if (mWindow.Cfg.CsvFormat.PriceIndex == mWindow.Cfg.CsvFormat.VolumeIndex)
             {
                 MessageBox.Show("Price and Volume indeces should have a different values!");
                 return;
             }
-
-            IDataProvider provider = new CSVDataProvider("MarketData/", mWindow.Cfg.CsvFormat);
-
             try
             {
+                IDataProvider provider = new CSVDataProvider("MarketData/", mWindow.Cfg.CsvFormat);
+
                 using (var db = new StocksContext(connectionStr))
                 {
 
@@ -277,7 +283,7 @@ namespace PairTradingView.Forms
                     {
                         this.DoInvoke(() => { this.ProgressBarInc(stocks.Count); });
 
-                        item.History.ForEach(i => i.DateTime = DateTime.Now);              
+                        item.History.ForEach(i => i.DateTime = DateTime.Now);
 
                         var stock = db.Stocks.Find(item.Code);
 
@@ -298,14 +304,12 @@ namespace PairTradingView.Forms
             {
                 this.DoInvoke(() => { this.progressBar1.Value = 0; });
                 MessageBox.Show(ex.Message);
+                return;
             }
-            finally
-            {
-                this.DoInvoke(() => { this.progressBar1.Value = 100; });
-                MessageBox.Show("CSV Data loaded.");
-            }
+
+            this.DoInvoke(() => { this.progressBar1.Value = 100; });
+            MessageBox.Show("CSV Data loaded.");
 
         }
-
     }
 }
