@@ -38,8 +38,8 @@ namespace PairTradingView.Forms
             radioSQL.Checked = true;
             radioCSV.Checked = false;
 
-            priceIndexUpDown.Minimum = 5;
-            volumeIndexUpDown.Minimum = 6;
+            priceIndexUpDown.Minimum = 1;
+            volumeIndexUpDown.Minimum = 1;
            
             deltaTypeBox.Items.AddRange(DeltaClaculation.Select(i => i.Name).ToArray());
 
@@ -311,5 +311,6 @@ namespace PairTradingView.Forms
             MessageBox.Show("CSV Data loaded.");
 
         }
+
     }
 }

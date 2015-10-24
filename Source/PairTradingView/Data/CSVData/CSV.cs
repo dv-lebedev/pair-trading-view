@@ -39,9 +39,9 @@ namespace PairTradingView.Data.CSVData
 
             string[] lines = File.ReadAllLines(path);
 
-            int i = format.ContainsHeader ? 1 : 0;
+            int startlineCount = format.ContainsHeader ? 1 : 0;
 
-            for (i = 0; i < lines.Length; i++)
+            for (int i = startlineCount; i < lines.Length; i++)
             {
                 string[] cuts = lines[i].Split(new[] { format.Separator }, StringSplitOptions.RemoveEmptyEntries);
 
