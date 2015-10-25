@@ -4,6 +4,140 @@
         <name>EntityFramework.SqlServer</name>
     </assembly>
     <members>
+        <member name="T:System.Data.Entity.SqlServer.Utilities.TaskExtensions">
+            <summary>
+            Contains extension methods for the <see cref="T:System.Threading.Tasks.Task"/> class.
+            </summary>
+        </member>
+        <member name="M:System.Data.Entity.SqlServer.Utilities.TaskExtensions.WithCurrentCulture``1(System.Threading.Tasks.Task{``0})">
+            <summary>
+            Configures an awaiter used to await this <see cref="T:System.Threading.Tasks.Task`1"/> to avoid
+            marshalling the continuation
+            back to the original context, but preserve the current culture and UI culture.
+            </summary>
+            <typeparam name="T">
+            The type of the result produced by the associated <see cref="T:System.Threading.Tasks.Task`1"/>.
+            </typeparam>
+            <param name="task">The task to be awaited on.</param>
+            <returns>An object used to await this task.</returns>
+        </member>
+        <member name="M:System.Data.Entity.SqlServer.Utilities.TaskExtensions.WithCurrentCulture(System.Threading.Tasks.Task)">
+            <summary>
+            Configures an awaiter used to await this <see cref="T:System.Threading.Tasks.Task"/> to avoid
+            marshalling the continuation
+            back to the original context, but preserve the current culture and UI culture.
+            </summary>
+            <param name="task">The task to be awaited on.</param>
+            <returns>An object used to await this task.</returns>
+        </member>
+        <member name="T:System.Data.Entity.SqlServer.Utilities.TaskExtensions.CultureAwaiter`1">
+            <summary>
+            Provides an awaitable object that allows for awaits on <see cref="T:System.Threading.Tasks.Task`1"/> that
+            preserve the culture.
+            </summary>
+            <typeparam name="T">
+            The type of the result produced by the associated <see cref="T:System.Threading.Tasks.Task`1"/>.
+            </typeparam>
+            <remarks>This type is intended for compiler use only.</remarks>
+        </member>
+        <member name="M:System.Data.Entity.SqlServer.Utilities.TaskExtensions.CultureAwaiter`1.#ctor(System.Threading.Tasks.Task{`0})">
+            <summary>
+            Constructs a new instance of the <see cref="T:System.Data.Entity.SqlServer.Utilities.TaskExtensions.CultureAwaiter`1"/> class.
+            </summary>
+            <param name="task">The task to be awaited on.</param>
+        </member>
+        <member name="M:System.Data.Entity.SqlServer.Utilities.TaskExtensions.CultureAwaiter`1.GetAwaiter">
+            <summary>Gets an awaiter used to await this <see cref="T:System.Threading.Tasks.Task`1"/>.</summary>
+            <returns>An awaiter instance.</returns>
+            <remarks>This method is intended for compiler user rather than use directly in code.</remarks>
+        </member>
+        <member name="M:System.Data.Entity.SqlServer.Utilities.TaskExtensions.CultureAwaiter`1.GetResult">
+            <summary>Ends the await on the completed <see cref="T:System.Threading.Tasks.Task`1"/>.</summary>
+            <returns>The result of the completed <see cref="T:System.Threading.Tasks.Task`1"/>.</returns>
+            <exception cref="T:System.NullReferenceException">The awaiter was not properly initialized.</exception>
+            <exception cref="T:System.Threading.Tasks.TaskCanceledException">The task was canceled.</exception>
+            <exception cref="T:System.Exception">The task completed in a Faulted state.</exception>
+        </member>
+        <member name="M:System.Data.Entity.SqlServer.Utilities.TaskExtensions.CultureAwaiter`1.OnCompleted(System.Action)">
+            <summary>This method is not implemented and should not be called.</summary>
+            <param name="continuation">The action to invoke when the await operation completes.</param>
+        </member>
+        <member name="M:System.Data.Entity.SqlServer.Utilities.TaskExtensions.CultureAwaiter`1.UnsafeOnCompleted(System.Action)">
+            <summary>
+            Schedules the continuation onto the <see cref="T:System.Threading.Tasks.Task`1"/> associated with this
+            <see cref="T:System.Runtime.CompilerServices.TaskAwaiter`1"/>.
+            </summary>
+            <param name="continuation">The action to invoke when the await operation completes.</param>
+            <exception cref="T:System.ArgumentNullException">
+            The <paramref name="continuation"/> argument is null
+            (Nothing in Visual Basic).
+            </exception>
+            <exception cref="T:System.InvalidOperationException">The awaiter was not properly initialized.</exception>
+            <remarks>This method is intended for compiler user rather than use directly in code.</remarks>
+        </member>
+        <member name="P:System.Data.Entity.SqlServer.Utilities.TaskExtensions.CultureAwaiter`1.IsCompleted">
+            <summary>
+            Gets whether this <see cref="T:System.Threading.Tasks.Task">Task</see> has completed.
+            </summary>
+            <remarks>
+            <see cref="P:System.Data.Entity.SqlServer.Utilities.TaskExtensions.CultureAwaiter`1.IsCompleted"/> will return true when the Task is in one of the three
+            final states: <see cref="F:System.Threading.Tasks.TaskStatus.RanToCompletion">RanToCompletion</see>,
+            <see cref="F:System.Threading.Tasks.TaskStatus.Faulted">Faulted</see>, or
+            <see cref="F:System.Threading.Tasks.TaskStatus.Canceled">Canceled</see>.
+            </remarks>
+        </member>
+        <member name="T:System.Data.Entity.SqlServer.Utilities.TaskExtensions.CultureAwaiter">
+            <summary>
+            Provides an awaitable object that allows for awaits on <see cref="T:System.Threading.Tasks.Task"/> that
+            preserve the culture.
+            </summary>
+            <remarks>This type is intended for compiler use only.</remarks>
+        </member>
+        <member name="M:System.Data.Entity.SqlServer.Utilities.TaskExtensions.CultureAwaiter.#ctor(System.Threading.Tasks.Task)">
+            <summary>
+            Constructs a new instance of the <see cref="T:System.Data.Entity.SqlServer.Utilities.TaskExtensions.CultureAwaiter"/> class.
+            </summary>
+            <param name="task">The task to be awaited on.</param>
+        </member>
+        <member name="M:System.Data.Entity.SqlServer.Utilities.TaskExtensions.CultureAwaiter.GetAwaiter">
+            <summary>Gets an awaiter used to await this <see cref="T:System.Threading.Tasks.Task"/>.</summary>
+            <returns>An awaiter instance.</returns>
+            <remarks>This method is intended for compiler user rather than use directly in code.</remarks>
+        </member>
+        <member name="M:System.Data.Entity.SqlServer.Utilities.TaskExtensions.CultureAwaiter.GetResult">
+            <summary>Ends the await on the completed <see cref="T:System.Threading.Tasks.Task"/>.</summary>
+            <exception cref="T:System.NullReferenceException">The awaiter was not properly initialized.</exception>
+            <exception cref="T:System.Threading.Tasks.TaskCanceledException">The task was canceled.</exception>
+            <exception cref="T:System.Exception">The task completed in a Faulted state.</exception>
+        </member>
+        <member name="M:System.Data.Entity.SqlServer.Utilities.TaskExtensions.CultureAwaiter.OnCompleted(System.Action)">
+            <summary>This method is not implemented and should not be called.</summary>
+            <param name="continuation">The action to invoke when the await operation completes.</param>
+        </member>
+        <member name="M:System.Data.Entity.SqlServer.Utilities.TaskExtensions.CultureAwaiter.UnsafeOnCompleted(System.Action)">
+            <summary>
+            Schedules the continuation onto the <see cref="T:System.Threading.Tasks.Task"/> associated with this
+            <see cref="T:System.Runtime.CompilerServices.TaskAwaiter"/>.
+            </summary>
+            <param name="continuation">The action to invoke when the await operation completes.</param>
+            <exception cref="T:System.ArgumentNullException">
+            The <paramref name="continuation"/> argument is null
+            (Nothing in Visual Basic).
+            </exception>
+            <exception cref="T:System.InvalidOperationException">The awaiter was not properly initialized.</exception>
+            <remarks>This method is intended for compiler user rather than use directly in code.</remarks>
+        </member>
+        <member name="P:System.Data.Entity.SqlServer.Utilities.TaskExtensions.CultureAwaiter.IsCompleted">
+            <summary>
+            Gets whether this <see cref="T:System.Threading.Tasks.Task">Task</see> has completed.
+            </summary>
+            <remarks>
+            <see cref="P:System.Data.Entity.SqlServer.Utilities.TaskExtensions.CultureAwaiter.IsCompleted"/> will return true when the Task is in one of the three
+            final states: <see cref="F:System.Threading.Tasks.TaskStatus.RanToCompletion">RanToCompletion</see>,
+            <see cref="F:System.Threading.Tasks.TaskStatus.Faulted">Faulted</see>, or
+            <see cref="F:System.Threading.Tasks.TaskStatus.Canceled">Canceled</see>.
+            </remarks>
+        </member>
         <member name="T:System.Data.Entity.SqlServer.SqlAzureExecutionStrategy">
             <summary>
             An <see cref="T:System.Data.Entity.Infrastructure.IDbExecutionStrategy"/> that retries actions that throw exceptions caused by SQL Azure transient failures.
