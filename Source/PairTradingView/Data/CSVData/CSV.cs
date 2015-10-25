@@ -45,12 +45,15 @@ namespace PairTradingView.Data.CSVData
             {
                 string[] cuts = lines[i].Split(new[] { format.Separator }, StringSplitOptions.RemoveEmptyEntries);
 
-                result.Add(new StockValue
+                if (cuts.Length > 0)
                 {
-                    Price = double.Parse(cuts[format.PriceIndex], CultureInfo.InvariantCulture),
+                    result.Add(new StockValue
+                    {
+                        Price = double.Parse(cuts[format.PriceIndex], CultureInfo.InvariantCulture),
 
-                    Volume = long.Parse(cuts[format.VolumeIndex], CultureInfo.InvariantCulture)
-                });
+                        Volume = long.Parse(cuts[format.VolumeIndex], CultureInfo.InvariantCulture)
+                    });
+                }
             }
 
             return result;

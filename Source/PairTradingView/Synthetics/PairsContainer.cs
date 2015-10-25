@@ -18,8 +18,25 @@ namespace PairTradingView.Synthetics
 
         public PairsContainer(IDataProvider provider, AbstractDelta delta)
         {
+
+            if (provider == null) throw new NullReferenceException();
+            if (delta == null) throw new NullReferenceException();
+
             var stocks = provider.GetStocks();
 
+            if (stocks.Count < 2) throw new Exception("You should have 2 or more quotes histories to start working.");
+            else
+            {
+                int historiesCount = stocks.First().History.Count;
+
+                foreach (var item in stocks)
+                {
+                    if (historiesCount != item.History.Count)
+                        throw new Exception("Quotes histories have different length.");
+                }
+            }
+
+           
             StocksCount = stocks.Count;
             DeltaCalculation = delta;
 

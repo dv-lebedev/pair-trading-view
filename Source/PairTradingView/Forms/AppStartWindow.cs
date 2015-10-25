@@ -169,7 +169,7 @@ namespace PairTradingView.Forms
         {
             if (mWindow.Cfg.CsvFormat.PriceIndex == mWindow.Cfg.CsvFormat.VolumeIndex)
             {
-                MessageBox.Show("Price and Volume indeces should have a different values!");
+                MessageBox.Show("Price and Volume indeces should have a different values.");
 
                 this.DoInvoke(() => { progressBar2.MarqueeAnimationSpeed = 0; });
 
@@ -182,9 +182,9 @@ namespace PairTradingView.Forms
 
                 mWindow.PairsContainer = new PairsContainer(provider, DeltaClaculation.First(i => i.Name == deltaName));
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
-                MessageBox.Show(ex.Message + " Check CSV Format.");
+                MessageBox.Show(ex.Message);
 
                 this.DoInvoke(() => { progressBar2.MarqueeAnimationSpeed = 0; });
 
