@@ -8,7 +8,7 @@ using PairTradingView.Data.CSVData;
 using PairTradingView.Data.Entities;
 using PairTradingView.RiskManagement;
 using System.Collections.Generic;
-using PairTradingView.Econometrics.Basics;
+using Econometrics;
 
 namespace PairTradingView.Forms
 {
@@ -26,6 +26,7 @@ namespace PairTradingView.Forms
 
         public MainWindow()
         {
+            
 
             Tasks = new DataTasks();
             Tasks.DataSaver.Elapsed += DataSaver_Elapsed;
@@ -35,15 +36,16 @@ namespace PairTradingView.Forms
             {
                 Cfg = Configuration.Deserialize("ptview.cfg");
             }
-            catch
+            catch(Exception ex)
             {
                 Cfg = Configuration.GetDefaultSetting();
+
+                MessageBox.Show(ex.Message);
             }
 
             InitializeComponent();
 
             new AppStartWindow(this).ShowDialog();
-
 
             listView1.Click += listView1_Click;
             

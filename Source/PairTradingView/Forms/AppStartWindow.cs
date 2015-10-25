@@ -27,54 +27,64 @@ namespace PairTradingView.Forms
 
         public AppStartWindow(MainWindow mainWindow)
         {
-            DeltaClaculation = DeltaHelpers.GetDeltaInstances();
 
-            InitializeComponent();
+            try
+            {
+                DeltaClaculation = DeltaHelpers.GetDeltaInstances();
 
-            this.mWindow = mainWindow;
+                InitializeComponent();
 
-            progressBar2.MarqueeAnimationSpeed = 0;
+                this.mWindow = mainWindow;
 
-            radioSQL.Checked = true;
-            radioCSV.Checked = false;
+                progressBar2.MarqueeAnimationSpeed = 0;
 
-            priceIndexUpDown.Minimum = 1;
-            volumeIndexUpDown.Minimum = 1;
-           
-            deltaTypeBox.Items.AddRange(DeltaClaculation.Select(i => i.Name).ToArray());
+                radioSQL.Checked = true;
+                radioCSV.Checked = false;
 
-            deltaTypeBox.Text = deltaTypeBox.Items[0].ToString();
+                priceIndexUpDown.Minimum = 1;
+                volumeIndexUpDown.Minimum = 1;
 
-            foreach (var item in SqlHelpers.GetSqlServerInstances())
-                serverNameBox.Items.Add(item);
+                deltaTypeBox.Items.AddRange(DeltaClaculation.Select(i => i.Name).ToArray());
 
-            if (serverNameBox.Items.Count > 0)
-                serverNameBox.Text = serverNameBox.Items[0].ToString();
+                deltaTypeBox.Text = deltaTypeBox.Items[0].ToString();
 
-            dataSaveInterval.Minimum = 1;
-            dataSaveInterval.Maximum = decimal.MaxValue;
-           
-            dataUpdateInterval.Minimum = 1;
-            dataUpdateInterval.Maximum = decimal.MaxValue;
+                foreach (var item in SqlHelpers.GetSqlServerInstances())
+                    serverNameBox.Items.Add(item);
 
-            loadValuesCount.Minimum = 5;
-            loadValuesCount.Maximum = decimal.MaxValue;
+                if (serverNameBox.Items.Count > 0)
+                    serverNameBox.Text = serverNameBox.Items[0].ToString();
 
-            dataSaveInterval.Value = mWindow.Cfg.DataSaveInterval;
-            dataUpdateInterval.Value = mWindow.Cfg.DataUpdateInterval;
-            loadValuesCount.Value = mWindow.Cfg.LoadingValuesCount;
+                dataSaveInterval.Minimum = 1;
+                dataSaveInterval.Maximum = decimal.MaxValue;
 
-            dataSaveInterval.ValueChanged += dataSaveInterval_ValueChanged;
-            dataUpdateInterval.ValueChanged += dataUpdateInterval_ValueChanged;
-            loadValuesCount.ValueChanged += loadValuesCount_ValueChanged;
+                dataUpdateInterval.Minimum = 1;
+                dataUpdateInterval.Maximum = decimal.MaxValue;
 
-            startTimeTxt.Text = mWindow.Cfg.StartTime.ToString("g");
-            stopTimeTxt.Text = mWindow.Cfg.StopTime.ToString("g");
+                loadValuesCount.Minimum = 5;
+                loadValuesCount.Maximum = decimal.MaxValue;
 
-            csvSeparator.Items.AddRange(new[] { ",", ".", ";", ":", "\\", "|" });
-            csvSeparator.Text = mWindow.Cfg.CsvFormat.Separator.ToString();
+                dataSaveInterval.Value = mWindow.Cfg.DataSaveInterval;
+                dataUpdateInterval.Value = mWindow.Cfg.DataUpdateInterval;
+                loadValuesCount.Value = mWindow.Cfg.LoadingValuesCount;
+
+                dataSaveInterval.ValueChanged += dataSaveInterval_ValueChanged;
+                dataUpdateInterval.ValueChanged += dataUpdateInterval_ValueChanged;
+                loadValuesCount.ValueChanged += loadValuesCount_ValueChanged;
+
+                startTimeTxt.Text = mWindow.Cfg.StartTime.ToString("g");
+                stopTimeTxt.Text = mWindow.Cfg.StopTime.ToString("g");
+
+                csvSeparator.Items.AddRange(new[] { ",", ".", ";", ":", "\\", "|" });
+                csvSeparator.Text = mWindow.Cfg.CsvFormat.Separator.ToString();
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
                       
         }
+
 
         #region EVENT_HANDLERS
 

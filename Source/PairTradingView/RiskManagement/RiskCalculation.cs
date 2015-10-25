@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using PairTradingView.Econometrics.Models;
+using Econometrics.Models;
 using PairTradingView.Synthetics;
 
 namespace PairTradingView.RiskManagement
