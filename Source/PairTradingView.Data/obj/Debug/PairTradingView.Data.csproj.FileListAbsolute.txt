@@ -1,0 +1,6 @@
+C:\GitHub\PairTradingView\Source\PairTradingView.Data\bin\Debug\PairTradingView.Data.dll.config
+C:\GitHub\PairTradingView\Source\PairTradingView.Data\bin\Debug\PairTradingView.Data.dll
+C:\GitHub\PairTradingView\Source\PairTradingView.Data\bin\Debug\PairTradingView.Data.pdb
+C:\GitHub\PairTradingView\Source\PairTradingView.Data\obj\Debug\PairTradingView.Data.dll
+C:\GitHub\PairTradingView\Source\PairTradingView.Data\obj\Debug\PairTradingView.Data.pdb
+C:\GitHub\PairTradingView\Source\PairTradingView.Data\obj\Debug\PairTradingView.Data.csprojResolveAssemblyReference.cache
