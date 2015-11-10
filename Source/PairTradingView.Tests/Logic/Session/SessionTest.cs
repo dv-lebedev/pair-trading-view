@@ -62,6 +62,7 @@ namespace PairTradingView.Tests.Logic.Session
             }
         }
 
+
         [TestMethod]
         public void CreateSessionTest()
         {
