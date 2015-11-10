@@ -1,68 +1,91 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
-using PairTradingView.Synthetics;
-using PairTradingView.Data.SqlData;
-using PairTradingView.Data.CSVData;
-using PairTradingView.Data.Entities;
-using PairTradingView.RiskManagement;
-using System.Collections.Generic;
-using Econometrics;
+using PairTradingView.Data.DataProviders;
+using PairTradingView.Data.DataProviders.ODBC;
+using PairTradingView.Logic.Session;
+using PairTradingView.Logic.Statistics;
+using PairTradingView.Logic.Synthetics;
+using PairTradingView.WinFormsApp.Forms;
 
 namespace PairTradingView.Forms
 {
     public partial class MainWindow : Form
     {
-        public Configuration Cfg { get; private set; }
+        public Configuration SessionConfig { get; private set; }
 
-        public DataTasks Tasks { get; private set; }
-
-        public PairsContainer PairsContainer { get; set; }
+        public ISession Session { get; private set; }
 
         private FinancialPair SelectedPair { get; set; }
 
-        private RiskCalculation RiskCalculation { get; set; }
-
         public MainWindow()
         {
-            
-
-            Tasks = new DataTasks();
-            Tasks.DataSaver.Elapsed += DataSaver_Elapsed;
-            Tasks.DataUpdater.Elapsed += DataUpdater_Elapsed;
-
-            try
-            {
-                Cfg = Configuration.Deserialize("ptview.cfg");
-            }
-            catch(Exception ex)
-            {
-                Cfg = Configuration.GetDefaultSetting();
-
-                MessageBox.Show(ex.Message);
-            }
-
             InitializeComponent();
-
-            new AppStartWindow(this).ShowDialog();
-
-            listView1.Click += listView1_Click;
-            
-            SMAperiodNUD.Maximum = decimal.MaxValue;
-            WMAperiodNUD.Maximum = decimal.MaxValue;
-
-            tradeBalanceNUD.Maximum = decimal.MaxValue;
-            tradeBalanceNUD.DecimalPlaces = 2;
-            tradeBalanceNUD.Value = 1000000.00M;
-
-            tradeRiskNUD.DecimalPlaces = 2;
-
-            this.FormClosing += MainWindow_FormClosing;
-
         }
 
-        void listView1_Click(object sender, EventArgs e)
+        private void MainWindow_Load(object sender, EventArgs e)
+        {
+            try
+            {
+                SessionConfig = Configuration.Deserialize("session.cfg");
+            }
+            catch (Exception ex)
+            {
+                SessionConfig = Configuration.GetDefaultSetting();
+
+                Debug.WriteLine(ex.Message);
+
+                MessageBox.Show("Initialize by default settings.");
+            }
+            finally
+            {
+
+                SessionConfig.SetHistoryDataProvider(new CsvStorage());
+                SessionConfig.SetMarketDataProvider(new OdbcMarketDataProvider(SessionConfig.ConnectionString));
+
+
+                Session = new BaseSession(SessionConfig);
+
+                Session.CurrentDelta += Session_CurrentDelta;
+
+                listView1.Click += listView1_Click;
+
+                SMAperiodNUD.Maximum = decimal.MaxValue;
+                WMAperiodNUD.Maximum = decimal.MaxValue;
+
+                tradeBalanceNUD.Maximum = decimal.MaxValue;
+                tradeBalanceNUD.DecimalPlaces = 2;
+                tradeBalanceNUD.Value = 100000.00M;
+
+                tradeRiskNUD.DecimalPlaces = 2;
+                tradeRiskNUD.Value = 1.7M;
+
+                this.FormClosing += MainWindow_FormClosing;
+            }
+        }
+
+        void Session_CurrentDelta(object sender, CurrentDeltaValueEventArgs e)
+        {
+            BeginInvoke(new Action(() =>
+            {
+                try
+                {
+                    if (SelectedPair != null && SelectedPair.Name == e.Name)
+                    {
+                        zedGraphControl.SetDeltaCurrent(e.Value);
+                        lastDataSavingTime.Text = "Last data saving time : " + Session.LastDataStore.ToString();
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+            }));
+        }
+
+        private void listView1_Click(object sender, EventArgs e)
         {
             try
             {
@@ -72,7 +95,7 @@ namespace PairTradingView.Forms
 
                 zedGraphControl.GraphPane.Title.Text = ySecurity + " / " + xSecurity;
 
-                SelectedPair = PairsContainer.Items
+                SelectedPair = Session.PairsContainer.Items
                      .First(i => i.Name.X == xSecurity && i.Name.Y == ySecurity);
 
                 var deltas = SelectedPair.DeltaValues.ToArray();
@@ -108,130 +131,24 @@ namespace PairTradingView.Forms
                 }
 
             }
-            catch
+            catch(Exception ex)
             {
-
+                Console.WriteLine("listView1_Click(s,e) " + ex.Message);
             }
         }
 
-        void MainWindow_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            Configuration.Serialize("ptview.cfg", Cfg);
-        }
-
-        void DataUpdater_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
+        private void MainWindow_FormClosing(object sender, FormClosingEventArgs e)
         {
             try
             {
-                BeginInvoke(new Action(() =>
-                {
-                    if (SelectedPair != null)
-                    {
-                        using (var db = new StocksContext(Cfg.SqlConnectionString))
-                        {
+                if (Session.IsSystemStarted)
+                    Session.Stop();
 
-                            var xStock = db.Stocks.Find(SelectedPair.Name.X);
-                            var yStock = db.Stocks.Find(SelectedPair.Name.Y);
-
-
-                            if (xStock != null && yStock != null)
-                            {
-                                var delta = SelectedPair.GetCurrentDelta(xStock.Price, yStock.Price);
-
-                                zedGraphControl.SetDeltaCurrent(delta);
-                            }
-                        }
-                    }
-                }));
+                Configuration.Serialize("session.cfg", SessionConfig);
             }
-            catch
+            catch (Exception ex)
             {
-
-            }
-        }
-
-        void DataSaver_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
-        {
-            DateTime dt = DateTime.Now;
-
-            if (dt.TimeOfDay >= Cfg.StartTime && dt.TimeOfDay <= Cfg.StopTime)
-            {
-                try
-                {
-                    using (var db = new StocksContext(Cfg.SqlConnectionString))
-                    {
-                        foreach (var stock in db.Stocks)
-                        {
-                            stock.History.Add(new StockValue
-                            {
-                                DateTime = dt,
-                                Price = stock.Price,
-                                Volume = stock.Volume
-                            });
-                        }
-
-                        db.SaveChanges();
-                    }
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show(ex.Message);
-                }
-            }
-        }
-
-        private void MainWindow_Load(object sender, EventArgs e)
-        {
-            UpdateListView();
-
-            r_valueHighLabel.Text = PairsContainer.Items.Where
-                (i => i.Regression.RValue >= 0.7 && i.Regression.RValue <= 1)
-                .Count()
-                .ToString();
-
-            r_valueLowLabel.Text = PairsContainer.Items.Where
-                (i => i.Regression.RValue <= -0.7 && i.Regression.RValue >= -1)
-                .Count()
-                .ToString();
-
-            stocksCountLabel.Text = PairsContainer.StocksCount.ToString();
-            pairsCreatedLabel.Text = PairsContainer.Items.Count.ToString();
-
-            if (listView1.Items.Count > 0)
-            {
-                listView1.Items[0].Selected = true;
-                listView1_Click(this, null);
-            }
-
-        }
-
-        private void UpdateListView()
-        {
-            foreach (var item in PairsContainer.Items)
-            {
-                int index = listView1.Items.Add(item.Name.ToString(), item.Name.X, 0).Index;
-
-                listView1.Items[index].SubItems.Add(item.Name.Y);
-                listView1.Items[index].SubItems.Add(Math.Round(item.XStdDev, 6).ToString());
-                listView1.Items[index].SubItems.Add(Math.Round(item.YStdDev, 6).ToString());
-                listView1.Items[index].SubItems.Add(Math.Round(item.Regression.Alpha, 6).ToString());
-                listView1.Items[index].SubItems.Add(Math.Round(item.Regression.Beta, 6).ToString());
-                listView1.Items[index].SubItems.Add(Math.Round(item.Regression.RValue, 6).ToString());
-                listView1.Items[index].SubItems.Add(Math.Round(item.Regression.RSquared, 6).ToString());
-                listView1.Items[index].SubItems.Add(Math.Round(item.DeltaValues.Average(), 6).ToString());
-                listView1.Items[index].SubItems.Add(Math.Round(item.DeltaValues.Min(), 6).ToString());
-                listView1.Items[index].SubItems.Add(Math.Round(item.DeltaValues.Max(), 6).ToString());
-                listView1.Items[index].SubItems.Add(Math.Round(item.DeltaStdDev, 6).ToString());
-
-                if (item.Regression.RValue >= 0.7 && item.Regression.RValue <= 1)
-                {
-                    listView1.Items[index].BackColor = Color.FromArgb(38, 153, 38);
-                }
-
-                if (item.Regression.RValue <= -0.7 && item.Regression.RValue >= -1)
-                {
-                    listView1.Items[index].BackColor = Color.FromArgb(191, 48, 48);
-                }
+                MessageBox.Show(ex.Message);
             }
         }
 
@@ -267,47 +184,126 @@ namespace PairTradingView.Forms
             }
         }
 
-
-
         private void CalculateRisk_Click(object sender, EventArgs e)
         {
-            if (listView1.CheckedItems.Count > 0)
+            try
             {
-
-                foreach (var item in PairsContainer.Items)
+                if (listView1.CheckedItems.Count > 0)
                 {
-                    item.RiskParameters = null;
+                    var codes = listView1.CheckedItems.OfType<ListViewItem>().Select(i => i.Name).ToArray();
+
+                    Session.CalculateRisk(codes, (double)tradeBalanceNUD.Value);
+
+                    listView1_Click(this, null);
                 }
-
-
-                var pairs = new List<FinancialPair>();
-
-                foreach (var item in listView1.CheckedItems)
+                else
                 {
-                    var name = ((ListViewItem)item).Name;
-
-                    var result = PairsContainer.Items.Find(i => i.Name.ToString() == name);
-
-                    if (result != null)
-                    {
-                        pairs.Add(result);
-                    }
+                    MessageBox.Show("Pairs are not selected.");
                 }
-
-                RiskCalculation = new RiskCalculation(pairs, (double)tradeBalanceNUD.Value);
-
-                try
-                {
-                    RiskCalculation.Calculate();
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("Risk calculation failed. " + ex.Message);
-                }
-
-                listView1_Click(this, null);
-
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
             }
         }
+
+        private void UpdateListView()
+        {
+            foreach (var item in Session.PairsContainer.Items)
+            {
+                int index = listView1.Items.Add(item.Name.ToString(), item.Name.X, 0).Index;
+
+                listView1.Items[index].SubItems.Add(item.Name.Y);
+                listView1.Items[index].SubItems.Add(Math.Round(item.XStdDev, 6).ToString());
+                listView1.Items[index].SubItems.Add(Math.Round(item.YStdDev, 6).ToString());
+                listView1.Items[index].SubItems.Add(Math.Round(item.Regression.Alpha, 6).ToString());
+                listView1.Items[index].SubItems.Add(Math.Round(item.Regression.Beta, 6).ToString());
+                listView1.Items[index].SubItems.Add(Math.Round(item.Regression.RValue, 6).ToString());
+                listView1.Items[index].SubItems.Add(Math.Round(item.Regression.RSquared, 6).ToString());
+                listView1.Items[index].SubItems.Add(Math.Round(item.DeltaValues.Average(), 6).ToString());
+                listView1.Items[index].SubItems.Add(Math.Round(item.DeltaValues.Min(), 6).ToString());
+                listView1.Items[index].SubItems.Add(Math.Round(item.DeltaValues.Max(), 6).ToString());
+                listView1.Items[index].SubItems.Add(Math.Round(item.DeltaStdDev, 6).ToString());
+
+                if (item.Regression.RValue >= 0.7 && item.Regression.RValue <= 1)
+                {
+                    listView1.Items[index].BackColor = Color.FromArgb(38, 153, 38);
+                }
+
+                if (item.Regression.RValue <= -0.7 && item.Regression.RValue >= -1)
+                {
+                    listView1.Items[index].BackColor = Color.FromArgb(191, 48, 48);
+                }
+            }
+        }
+
+
+        #region START_MENU ITEMS
+
+
+        private void startMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                Session.Start();
+
+                UpdateListView();
+
+                if (listView1.Items.Count > 0)
+                {
+                    listView1.Items[0].Selected = true;
+                    listView1_Click(this, null);
+                }
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void restartToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            stopMenuItem_Click(this, null);
+            startMenuItem_Click(this, null);
+        }
+
+        private void stopMenuItem_Click(object sender, EventArgs e)
+        {
+
+            listView1.Items.Clear();
+            listView1.Update();
+
+            Session.Stop();
+        }
+
+
+        #endregion
+
+
+        #region SERVICE_MENU ITEMS
+
+
+        private void mySqlConnectionMenuItem_Click(object sender, EventArgs e)
+        {
+            var window = new SettingsWindow(this);
+            window.ShowDialog();
+        }
+
+        private void csvToDbMenuItem_Click(object sender, EventArgs e)
+        {
+            var window = new CsvToStorageWindow(this);
+            window.ShowDialog();
+        }
+
+        private void quoteDownloaderMenuItem_Click(object sender, EventArgs e)
+        {
+            var window = new Downloader();
+            window.ShowDialog();
+        }
+
+
+        #endregion
+
     }
 }

@@ -103,7 +103,7 @@ namespace PairTradingView.Controls
 
 
             //pane.XAxis.Scale.Min = 0;
-            //pane.XAxis.Type = AxisType.DateAsOrdinal;
+            ////pane.XAxis.Type = AxisType.DateAsOrdinal;
             //IsShowHScrollBar = true;
             //ScrollMinX = 0;
             //IsAutoScrollRange = false;
@@ -111,7 +111,7 @@ namespace PairTradingView.Controls
             //IsEnableHZoom = true;
             //IsEnableVPan = false;
             //IsEnableVZoom = false;
-            //AutoScaleMode = AutoScaleMode.None;
+            //AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             //GraphPane.XAxis.Scale.Min = 0;
             //GraphPane.YAxis.Scale.MaxAuto = true;
             //GraphPane.YAxis.Scale.MinAuto = true;

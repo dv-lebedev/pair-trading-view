@@ -1,9 +1,9 @@
 ﻿using System;
-using System.Linq;
-using System.Windows.Forms;
-using System.IO;
-using System.Net;
 using System.Collections;
+using System.IO;
+using System.Linq;
+using System.Net;
+using System.Windows.Forms;
 
 namespace PairTradingView.Forms
 {
@@ -15,7 +15,7 @@ namespace PairTradingView.Forms
         public Downloader()
         {
             InitializeComponent();
-            folder = Directory.GetCurrentDirectory().ToString() + @"\MarketData";
+            folder = Directory.GetCurrentDirectory().ToString() + @"\csv-files";
             txtPath.Text = folder;
             folderBrowserDialog1.SelectedPath = folder;
             fromMonth.SelectedIndex = 0;

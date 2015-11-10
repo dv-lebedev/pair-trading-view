@@ -60,9 +60,9 @@
             // 
             // toYear
             // 
-            this.toYear.BackColor = System.Drawing.Color.Black;
-            this.toYear.Font = new System.Drawing.Font("Consolas", 9.75F);
-            this.toYear.ForeColor = System.Drawing.Color.Gray;
+            this.toYear.BackColor = System.Drawing.SystemColors.Control;
+            this.toYear.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.toYear.ForeColor = System.Drawing.SystemColors.ControlText;
             this.toYear.Location = new System.Drawing.Point(224, 94);
             this.toYear.Maximum = new decimal(new int[] {
             2100,
@@ -75,7 +75,7 @@
             0,
             0});
             this.toYear.Name = "toYear";
-            this.toYear.Size = new System.Drawing.Size(67, 23);
+            this.toYear.Size = new System.Drawing.Size(67, 20);
             this.toYear.TabIndex = 32;
             this.toYear.Value = new decimal(new int[] {
             1900,
@@ -85,9 +85,9 @@
             // 
             // fromYear
             // 
-            this.fromYear.BackColor = System.Drawing.Color.Black;
-            this.fromYear.Font = new System.Drawing.Font("Consolas", 9.75F);
-            this.fromYear.ForeColor = System.Drawing.Color.Gray;
+            this.fromYear.BackColor = System.Drawing.SystemColors.Control;
+            this.fromYear.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.fromYear.ForeColor = System.Drawing.SystemColors.ControlText;
             this.fromYear.Location = new System.Drawing.Point(224, 62);
             this.fromYear.Maximum = new decimal(new int[] {
             2100,
@@ -100,7 +100,7 @@
             0,
             0});
             this.fromYear.Name = "fromYear";
-            this.fromYear.Size = new System.Drawing.Size(67, 23);
+            this.fromYear.Size = new System.Drawing.Size(67, 20);
             this.fromYear.TabIndex = 31;
             this.fromYear.Value = new decimal(new int[] {
             1900,
@@ -110,9 +110,9 @@
             // 
             // toDay
             // 
-            this.toDay.BackColor = System.Drawing.Color.Black;
-            this.toDay.Font = new System.Drawing.Font("Consolas", 9.75F);
-            this.toDay.ForeColor = System.Drawing.Color.Gray;
+            this.toDay.BackColor = System.Drawing.SystemColors.Control;
+            this.toDay.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.toDay.ForeColor = System.Drawing.SystemColors.ControlText;
             this.toDay.Location = new System.Drawing.Point(169, 92);
             this.toDay.Maximum = new decimal(new int[] {
             31,
@@ -125,7 +125,7 @@
             0,
             0});
             this.toDay.Name = "toDay";
-            this.toDay.Size = new System.Drawing.Size(48, 23);
+            this.toDay.Size = new System.Drawing.Size(48, 20);
             this.toDay.TabIndex = 30;
             this.toDay.Value = new decimal(new int[] {
             1,
@@ -135,9 +135,9 @@
             // 
             // fromDay
             // 
-            this.fromDay.BackColor = System.Drawing.Color.Black;
-            this.fromDay.Font = new System.Drawing.Font("Consolas", 9.75F);
-            this.fromDay.ForeColor = System.Drawing.Color.Gray;
+            this.fromDay.BackColor = System.Drawing.SystemColors.Control;
+            this.fromDay.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.fromDay.ForeColor = System.Drawing.SystemColors.ControlText;
             this.fromDay.Location = new System.Drawing.Point(169, 62);
             this.fromDay.Maximum = new decimal(new int[] {
             31,
@@ -150,7 +150,7 @@
             0,
             0});
             this.fromDay.Name = "fromDay";
-            this.fromDay.Size = new System.Drawing.Size(48, 23);
+            this.fromDay.Size = new System.Drawing.Size(48, 20);
             this.fromDay.TabIndex = 29;
             this.fromDay.Value = new decimal(new int[] {
             1,
@@ -161,12 +161,12 @@
             // rbMonthly
             // 
             this.rbMonthly.AutoSize = true;
-            this.rbMonthly.BackColor = System.Drawing.Color.Black;
-            this.rbMonthly.Font = new System.Drawing.Font("Consolas", 9.75F);
-            this.rbMonthly.ForeColor = System.Drawing.Color.Gray;
+            this.rbMonthly.BackColor = System.Drawing.SystemColors.Control;
+            this.rbMonthly.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.rbMonthly.ForeColor = System.Drawing.SystemColors.ControlText;
             this.rbMonthly.Location = new System.Drawing.Point(308, 105);
             this.rbMonthly.Name = "rbMonthly";
-            this.rbMonthly.Size = new System.Drawing.Size(74, 19);
+            this.rbMonthly.Size = new System.Drawing.Size(62, 17);
             this.rbMonthly.TabIndex = 28;
             this.rbMonthly.Text = "Monthly";
             this.rbMonthly.UseVisualStyleBackColor = false;
@@ -174,12 +174,12 @@
             // rbWeekly
             // 
             this.rbWeekly.AutoSize = true;
-            this.rbWeekly.BackColor = System.Drawing.Color.Black;
-            this.rbWeekly.Font = new System.Drawing.Font("Consolas", 9.75F);
-            this.rbWeekly.ForeColor = System.Drawing.Color.Gray;
+            this.rbWeekly.BackColor = System.Drawing.SystemColors.Control;
+            this.rbWeekly.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.rbWeekly.ForeColor = System.Drawing.SystemColors.ControlText;
             this.rbWeekly.Location = new System.Drawing.Point(308, 83);
             this.rbWeekly.Name = "rbWeekly";
-            this.rbWeekly.Size = new System.Drawing.Size(67, 19);
+            this.rbWeekly.Size = new System.Drawing.Size(61, 17);
             this.rbWeekly.TabIndex = 27;
             this.rbWeekly.Text = "Weekly";
             this.rbWeekly.UseVisualStyleBackColor = false;
@@ -187,13 +187,13 @@
             // rbDaily
             // 
             this.rbDaily.AutoSize = true;
-            this.rbDaily.BackColor = System.Drawing.Color.Black;
+            this.rbDaily.BackColor = System.Drawing.SystemColors.Control;
             this.rbDaily.Checked = true;
-            this.rbDaily.Font = new System.Drawing.Font("Consolas", 9.75F);
-            this.rbDaily.ForeColor = System.Drawing.Color.Gray;
+            this.rbDaily.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.rbDaily.ForeColor = System.Drawing.SystemColors.ControlText;
             this.rbDaily.Location = new System.Drawing.Point(308, 62);
             this.rbDaily.Name = "rbDaily";
-            this.rbDaily.Size = new System.Drawing.Size(60, 19);
+            this.rbDaily.Size = new System.Drawing.Size(48, 17);
             this.rbDaily.TabIndex = 26;
             this.rbDaily.TabStop = true;
             this.rbDaily.Text = "Daily";
@@ -201,10 +201,10 @@
             // 
             // toMonth
             // 
-            this.toMonth.BackColor = System.Drawing.Color.Black;
+            this.toMonth.BackColor = System.Drawing.SystemColors.Control;
             this.toMonth.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.toMonth.Font = new System.Drawing.Font("Consolas", 9.75F);
-            this.toMonth.ForeColor = System.Drawing.Color.Gray;
+            this.toMonth.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.toMonth.ForeColor = System.Drawing.SystemColors.ControlText;
             this.toMonth.FormattingEnabled = true;
             this.toMonth.Items.AddRange(new object[] {
             "Jan",
@@ -221,15 +221,15 @@
             "Dec"});
             this.toMonth.Location = new System.Drawing.Point(111, 90);
             this.toMonth.Name = "toMonth";
-            this.toMonth.Size = new System.Drawing.Size(50, 23);
+            this.toMonth.Size = new System.Drawing.Size(50, 21);
             this.toMonth.TabIndex = 25;
             // 
             // fromMonth
             // 
-            this.fromMonth.BackColor = System.Drawing.Color.Black;
+            this.fromMonth.BackColor = System.Drawing.SystemColors.Control;
             this.fromMonth.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.fromMonth.Font = new System.Drawing.Font("Consolas", 9.75F);
-            this.fromMonth.ForeColor = System.Drawing.Color.Gray;
+            this.fromMonth.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.fromMonth.ForeColor = System.Drawing.SystemColors.ControlText;
             this.fromMonth.FormattingEnabled = true;
             this.fromMonth.Items.AddRange(new object[] {
             "Jan",
@@ -246,106 +246,103 @@
             "Dec"});
             this.fromMonth.Location = new System.Drawing.Point(111, 62);
             this.fromMonth.Name = "fromMonth";
-            this.fromMonth.Size = new System.Drawing.Size(50, 23);
+            this.fromMonth.Size = new System.Drawing.Size(50, 21);
             this.fromMonth.TabIndex = 24;
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.BackColor = System.Drawing.Color.Black;
-            this.label4.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label4.ForeColor = System.Drawing.Color.Gray;
-            this.label4.Location = new System.Drawing.Point(39, 93);
+            this.label4.BackColor = System.Drawing.SystemColors.Control;
+            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label4.ForeColor = System.Drawing.Color.Black;
+            this.label4.Location = new System.Drawing.Point(41, 94);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(70, 15);
+            this.label4.Size = new System.Drawing.Size(55, 13);
             this.label4.TabIndex = 23;
             this.label4.Text = "End Date:";
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.BackColor = System.Drawing.Color.Black;
-            this.label3.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label3.ForeColor = System.Drawing.Color.Gray;
-            this.label3.Location = new System.Drawing.Point(25, 66);
+            this.label3.BackColor = System.Drawing.SystemColors.Control;
+            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label3.ForeColor = System.Drawing.Color.Black;
+            this.label3.Location = new System.Drawing.Point(36, 65);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(84, 15);
+            this.label3.Size = new System.Drawing.Size(58, 13);
             this.label3.TabIndex = 22;
             this.label3.Text = "Start Date:";
             // 
             // button2
             // 
-            this.button2.BackColor = System.Drawing.Color.Black;
-            this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button2.Font = new System.Drawing.Font("Consolas", 9.75F);
-            this.button2.ForeColor = System.Drawing.Color.Gray;
+            this.button2.BackColor = System.Drawing.SystemColors.Control;
+            this.button2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.button2.ForeColor = System.Drawing.SystemColors.ControlText;
             this.button2.Location = new System.Drawing.Point(384, 62);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 46);
+            this.button2.Size = new System.Drawing.Size(92, 46);
             this.button2.TabIndex = 21;
             this.button2.Text = "Download to .txt";
-            this.button2.UseVisualStyleBackColor = false;
+            this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Consolas", 9.75F);
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label2.ForeColor = System.Drawing.SystemColors.ControlText;
             this.label2.Location = new System.Drawing.Point(72, 132);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(119, 45);
+            this.label2.Size = new System.Drawing.Size(83, 39);
             this.label2.TabIndex = 34;
             this.label2.Text = "Ticker symbols, \n separate with \n a comma ,";
             // 
             // textBoxTicker
             // 
-            this.textBoxTicker.BackColor = System.Drawing.Color.Black;
-            this.textBoxTicker.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.textBoxTicker.Font = new System.Drawing.Font("Consolas", 9.75F);
-            this.textBoxTicker.ForeColor = System.Drawing.Color.Gray;
+            this.textBoxTicker.BackColor = System.Drawing.SystemColors.Control;
+            this.textBoxTicker.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.textBoxTicker.ForeColor = System.Drawing.SystemColors.ControlText;
             this.textBoxTicker.Location = new System.Drawing.Point(197, 132);
             this.textBoxTicker.Multiline = true;
             this.textBoxTicker.Name = "textBoxTicker";
             this.textBoxTicker.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.textBoxTicker.Size = new System.Drawing.Size(262, 125);
+            this.textBoxTicker.Size = new System.Drawing.Size(279, 125);
             this.textBoxTicker.TabIndex = 33;
             this.textBoxTicker.Text = "GOOG, AAPL, AMZN";
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.BackColor = System.Drawing.Color.Black;
-            this.label1.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label1.ForeColor = System.Drawing.Color.Gray;
-            this.label1.Location = new System.Drawing.Point(18, 33);
+            this.label1.BackColor = System.Drawing.SystemColors.Control;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label1.ForeColor = System.Drawing.Color.Black;
+            this.label1.Location = new System.Drawing.Point(28, 34);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(91, 15);
+            this.label1.Size = new System.Drawing.Size(64, 13);
             this.label1.TabIndex = 37;
             this.label1.Text = "Folder Path:";
             // 
             // button1
             // 
-            this.button1.BackColor = System.Drawing.Color.Black;
-            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.Font = new System.Drawing.Font("Consolas", 9.75F);
-            this.button1.ForeColor = System.Drawing.Color.Gray;
+            this.button1.BackColor = System.Drawing.SystemColors.Control;
+            this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.button1.ForeColor = System.Drawing.SystemColors.ControlText;
             this.button1.Location = new System.Drawing.Point(384, 29);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 27);
+            this.button1.Size = new System.Drawing.Size(92, 27);
             this.button1.TabIndex = 36;
             this.button1.Text = "Open";
-            this.button1.UseVisualStyleBackColor = false;
+            this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // txtPath
             // 
-            this.txtPath.BackColor = System.Drawing.Color.Black;
-            this.txtPath.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txtPath.Font = new System.Drawing.Font("Consolas", 9.75F);
-            this.txtPath.ForeColor = System.Drawing.Color.Gray;
+            this.txtPath.BackColor = System.Drawing.SystemColors.Control;
+            this.txtPath.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.txtPath.ForeColor = System.Drawing.SystemColors.ControlText;
             this.txtPath.Location = new System.Drawing.Point(110, 31);
             this.txtPath.Name = "txtPath";
-            this.txtPath.Size = new System.Drawing.Size(256, 23);
+            this.txtPath.Size = new System.Drawing.Size(256, 20);
             this.txtPath.TabIndex = 35;
             // 
             // menuStrip1
@@ -354,7 +351,7 @@
             this.indexComponentsToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(519, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(515, 24);
             this.menuStrip1.TabIndex = 38;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -393,8 +390,8 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.Black;
-            this.ClientSize = new System.Drawing.Size(519, 278);
+            this.BackColor = System.Drawing.SystemColors.Control;
+            this.ClientSize = new System.Drawing.Size(515, 274);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.txtPath);

@@ -65,6 +65,17 @@ namespace PairTradingView.Forms
             this.yTradeVolume = new System.Windows.Forms.Label();
             this.label13 = new System.Windows.Forms.Label();
             this.tradeBalanceNUD = new System.Windows.Forms.NumericUpDown();
+            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.startToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.startToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.restartToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.stopToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.serviceToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.settingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.cSVToDbToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.quoteDownloaderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
+            this.lastDataSavingTime = new System.Windows.Forms.ToolStripStatusLabel();
             this.listView1 = new PairTradingView.Controls.ListViewNF();
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -84,14 +95,16 @@ namespace PairTradingView.Forms
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tradeRiskNUD)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tradeBalanceNUD)).BeginInit();
+            this.menuStrip1.SuspendLayout();
+            this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // SMAperiodNUD
             // 
-            this.SMAperiodNUD.BackColor = System.Drawing.Color.White;
+            this.SMAperiodNUD.BackColor = System.Drawing.Color.Black;
             this.SMAperiodNUD.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.SMAperiodNUD.Font = new System.Drawing.Font("Consolas", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.SMAperiodNUD.ForeColor = System.Drawing.Color.Black;
+            this.SMAperiodNUD.ForeColor = System.Drawing.Color.White;
             this.SMAperiodNUD.Location = new System.Drawing.Point(118, 333);
             this.SMAperiodNUD.Name = "SMAperiodNUD";
             this.SMAperiodNUD.Size = new System.Drawing.Size(119, 20);
@@ -102,7 +115,7 @@ namespace PairTradingView.Forms
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.ForeColor = System.Drawing.Color.Gray;
+            this.label1.ForeColor = System.Drawing.Color.LightGray;
             this.label1.Location = new System.Drawing.Point(48, 335);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(28, 14);
@@ -113,7 +126,7 @@ namespace PairTradingView.Forms
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.ForeColor = System.Drawing.Color.Gray;
+            this.label2.ForeColor = System.Drawing.Color.LightGray;
             this.label2.Location = new System.Drawing.Point(48, 361);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(28, 14);
@@ -122,10 +135,10 @@ namespace PairTradingView.Forms
             // 
             // WMAperiodNUD
             // 
-            this.WMAperiodNUD.BackColor = System.Drawing.Color.White;
+            this.WMAperiodNUD.BackColor = System.Drawing.Color.Black;
             this.WMAperiodNUD.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.WMAperiodNUD.Font = new System.Drawing.Font("Consolas", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.WMAperiodNUD.ForeColor = System.Drawing.Color.Black;
+            this.WMAperiodNUD.ForeColor = System.Drawing.Color.White;
             this.WMAperiodNUD.Location = new System.Drawing.Point(118, 360);
             this.WMAperiodNUD.Name = "WMAperiodNUD";
             this.WMAperiodNUD.Size = new System.Drawing.Size(119, 20);
@@ -277,7 +290,7 @@ namespace PairTradingView.Forms
             this.label11.AutoSize = true;
             this.label11.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label11.ForeColor = System.Drawing.Color.White;
-            this.label11.Location = new System.Drawing.Point(949, 20);
+            this.label11.Location = new System.Drawing.Point(949, 34);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(35, 14);
             this.label11.TabIndex = 27;
@@ -315,7 +328,7 @@ namespace PairTradingView.Forms
             this.panel2.Controls.Add(this.label1);
             this.panel2.Controls.Add(this.WMAperiodNUD);
             this.panel2.Controls.Add(this.label2);
-            this.panel2.Location = new System.Drawing.Point(822, 37);
+            this.panel2.Location = new System.Drawing.Point(822, 50);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(279, 434);
             this.panel2.TabIndex = 29;
@@ -324,7 +337,7 @@ namespace PairTradingView.Forms
             // 
             this.yName.AutoSize = true;
             this.yName.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.yName.ForeColor = System.Drawing.Color.Gray;
+            this.yName.ForeColor = System.Drawing.Color.LightGray;
             this.yName.Location = new System.Drawing.Point(26, 133);
             this.yName.Name = "yName";
             this.yName.Size = new System.Drawing.Size(14, 14);
@@ -335,7 +348,7 @@ namespace PairTradingView.Forms
             // 
             this.xName.AutoSize = true;
             this.xName.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.xName.ForeColor = System.Drawing.Color.Gray;
+            this.xName.ForeColor = System.Drawing.Color.LightGray;
             this.xName.Location = new System.Drawing.Point(26, 156);
             this.xName.Name = "xName";
             this.xName.Size = new System.Drawing.Size(14, 14);
@@ -346,7 +359,7 @@ namespace PairTradingView.Forms
             // 
             this.pairName.AutoSize = true;
             this.pairName.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.pairName.ForeColor = System.Drawing.Color.Gray;
+            this.pairName.ForeColor = System.Drawing.Color.LightGray;
             this.pairName.Location = new System.Drawing.Point(26, 98);
             this.pairName.Name = "pairName";
             this.pairName.Size = new System.Drawing.Size(14, 14);
@@ -368,7 +381,7 @@ namespace PairTradingView.Forms
             // 
             this.label14.AutoSize = true;
             this.label14.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label14.ForeColor = System.Drawing.Color.Gray;
+            this.label14.ForeColor = System.Drawing.Color.LightGray;
             this.label14.Location = new System.Drawing.Point(26, 196);
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(91, 14);
@@ -401,7 +414,7 @@ namespace PairTradingView.Forms
             // 
             this.label17.AutoSize = true;
             this.label17.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label17.ForeColor = System.Drawing.Color.Gray;
+            this.label17.ForeColor = System.Drawing.Color.LightGray;
             this.label17.Location = new System.Drawing.Point(26, 49);
             this.label17.Name = "label17";
             this.label17.Size = new System.Drawing.Size(91, 14);
@@ -410,9 +423,9 @@ namespace PairTradingView.Forms
             // 
             // tradeRiskNUD
             // 
-            this.tradeRiskNUD.BackColor = System.Drawing.Color.White;
+            this.tradeRiskNUD.BackColor = System.Drawing.Color.Black;
             this.tradeRiskNUD.Font = new System.Drawing.Font("Consolas", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.tradeRiskNUD.ForeColor = System.Drawing.Color.Black;
+            this.tradeRiskNUD.ForeColor = System.Drawing.Color.White;
             this.tradeRiskNUD.Location = new System.Drawing.Point(144, 48);
             this.tradeRiskNUD.Name = "tradeRiskNUD";
             this.tradeRiskNUD.Size = new System.Drawing.Size(56, 20);
@@ -422,7 +435,7 @@ namespace PairTradingView.Forms
             // 
             this.CalculateRisk.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.CalculateRisk.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.CalculateRisk.ForeColor = System.Drawing.Color.Gray;
+            this.CalculateRisk.ForeColor = System.Drawing.Color.LightGray;
             this.CalculateRisk.Location = new System.Drawing.Point(144, 223);
             this.CalculateRisk.Name = "CalculateRisk";
             this.CalculateRisk.Size = new System.Drawing.Size(120, 23);
@@ -457,7 +470,7 @@ namespace PairTradingView.Forms
             // 
             this.label13.AutoSize = true;
             this.label13.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label13.ForeColor = System.Drawing.Color.Gray;
+            this.label13.ForeColor = System.Drawing.Color.LightGray;
             this.label13.Location = new System.Drawing.Point(26, 24);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(112, 14);
@@ -466,13 +479,103 @@ namespace PairTradingView.Forms
             // 
             // tradeBalanceNUD
             // 
-            this.tradeBalanceNUD.BackColor = System.Drawing.Color.White;
+            this.tradeBalanceNUD.BackColor = System.Drawing.Color.Black;
             this.tradeBalanceNUD.Font = new System.Drawing.Font("Consolas", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.tradeBalanceNUD.ForeColor = System.Drawing.Color.Black;
+            this.tradeBalanceNUD.ForeColor = System.Drawing.Color.White;
             this.tradeBalanceNUD.Location = new System.Drawing.Point(144, 22);
             this.tradeBalanceNUD.Name = "tradeBalanceNUD";
             this.tradeBalanceNUD.Size = new System.Drawing.Size(120, 20);
             this.tradeBalanceNUD.TabIndex = 30;
+            // 
+            // menuStrip1
+            // 
+            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.startToolStripMenuItem,
+            this.serviceToolStripMenuItem});
+            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
+            this.menuStrip1.Name = "menuStrip1";
+            this.menuStrip1.Size = new System.Drawing.Size(1113, 24);
+            this.menuStrip1.TabIndex = 30;
+            this.menuStrip1.Text = "menuStrip1";
+            // 
+            // startToolStripMenuItem
+            // 
+            this.startToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.startToolStripMenuItem1,
+            this.restartToolStripMenuItem,
+            this.stopToolStripMenuItem});
+            this.startToolStripMenuItem.Name = "startToolStripMenuItem";
+            this.startToolStripMenuItem.Size = new System.Drawing.Size(57, 20);
+            this.startToolStripMenuItem.Text = "System";
+            // 
+            // startToolStripMenuItem1
+            // 
+            this.startToolStripMenuItem1.Name = "startToolStripMenuItem1";
+            this.startToolStripMenuItem1.Size = new System.Drawing.Size(110, 22);
+            this.startToolStripMenuItem1.Text = "Start";
+            this.startToolStripMenuItem1.Click += new System.EventHandler(this.startMenuItem_Click);
+            // 
+            // restartToolStripMenuItem
+            // 
+            this.restartToolStripMenuItem.Name = "restartToolStripMenuItem";
+            this.restartToolStripMenuItem.Size = new System.Drawing.Size(110, 22);
+            this.restartToolStripMenuItem.Text = "Restart";
+            this.restartToolStripMenuItem.Click += new System.EventHandler(this.restartToolStripMenuItem_Click);
+            // 
+            // stopToolStripMenuItem
+            // 
+            this.stopToolStripMenuItem.Name = "stopToolStripMenuItem";
+            this.stopToolStripMenuItem.Size = new System.Drawing.Size(110, 22);
+            this.stopToolStripMenuItem.Text = "Stop";
+            this.stopToolStripMenuItem.Click += new System.EventHandler(this.stopMenuItem_Click);
+            // 
+            // serviceToolStripMenuItem
+            // 
+            this.serviceToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.settingsToolStripMenuItem,
+            this.cSVToDbToolStripMenuItem,
+            this.quoteDownloaderToolStripMenuItem});
+            this.serviceToolStripMenuItem.Name = "serviceToolStripMenuItem";
+            this.serviceToolStripMenuItem.Size = new System.Drawing.Size(56, 20);
+            this.serviceToolStripMenuItem.Text = "Service";
+            // 
+            // settingsToolStripMenuItem
+            // 
+            this.settingsToolStripMenuItem.Name = "settingsToolStripMenuItem";
+            this.settingsToolStripMenuItem.Size = new System.Drawing.Size(174, 22);
+            this.settingsToolStripMenuItem.Text = "Settings";
+            this.settingsToolStripMenuItem.Click += new System.EventHandler(this.mySqlConnectionMenuItem_Click);
+            // 
+            // cSVToDbToolStripMenuItem
+            // 
+            this.cSVToDbToolStripMenuItem.Name = "cSVToDbToolStripMenuItem";
+            this.cSVToDbToolStripMenuItem.Size = new System.Drawing.Size(174, 22);
+            this.cSVToDbToolStripMenuItem.Text = "CSV to Db";
+            this.cSVToDbToolStripMenuItem.Click += new System.EventHandler(this.csvToDbMenuItem_Click);
+            // 
+            // quoteDownloaderToolStripMenuItem
+            // 
+            this.quoteDownloaderToolStripMenuItem.Name = "quoteDownloaderToolStripMenuItem";
+            this.quoteDownloaderToolStripMenuItem.Size = new System.Drawing.Size(174, 22);
+            this.quoteDownloaderToolStripMenuItem.Text = "Quote Downloader";
+            this.quoteDownloaderToolStripMenuItem.Click += new System.EventHandler(this.quoteDownloaderMenuItem_Click);
+            // 
+            // statusStrip1
+            // 
+            this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.lastDataSavingTime});
+            this.statusStrip1.Location = new System.Drawing.Point(0, 809);
+            this.statusStrip1.Name = "statusStrip1";
+            this.statusStrip1.Size = new System.Drawing.Size(1113, 22);
+            this.statusStrip1.TabIndex = 31;
+            this.statusStrip1.Text = "statusStrip1";
+            // 
+            // lastDataSavingTime
+            // 
+            this.lastDataSavingTime.BackColor = System.Drawing.SystemColors.Control;
+            this.lastDataSavingTime.Name = "lastDataSavingTime";
+            this.lastDataSavingTime.Size = new System.Drawing.Size(141, 17);
+            this.lastDataSavingTime.Text = "Last data saving time :    -";
             // 
             // listView1
             // 
@@ -497,11 +600,11 @@ namespace PairTradingView.Forms
             this.listView1.ForeColor = System.Drawing.Color.White;
             this.listView1.FullRowSelect = true;
             this.listView1.HideSelection = false;
-            this.listView1.Location = new System.Drawing.Point(12, 477);
+            this.listView1.Location = new System.Drawing.Point(12, 490);
             this.listView1.MultiSelect = false;
             this.listView1.Name = "listView1";
             this.listView1.OwnerDraw = true;
-            this.listView1.Size = new System.Drawing.Size(1089, 313);
+            this.listView1.Size = new System.Drawing.Size(1089, 316);
             this.listView1.TabIndex = 1;
             this.listView1.UseCompatibleStateImageBehavior = false;
             this.listView1.View = System.Windows.Forms.View.Details;
@@ -570,7 +673,7 @@ namespace PairTradingView.Forms
             // 
             this.zedGraphControl.IsEnableVPan = false;
             this.zedGraphControl.IsEnableVZoom = false;
-            this.zedGraphControl.Location = new System.Drawing.Point(12, 12);
+            this.zedGraphControl.Location = new System.Drawing.Point(12, 34);
             this.zedGraphControl.Name = "zedGraphControl";
             this.zedGraphControl.ScrollGrace = 0D;
             this.zedGraphControl.ScrollMaxX = 0D;
@@ -579,7 +682,7 @@ namespace PairTradingView.Forms
             this.zedGraphControl.ScrollMinX = 0D;
             this.zedGraphControl.ScrollMinY = 0D;
             this.zedGraphControl.ScrollMinY2 = 0D;
-            this.zedGraphControl.Size = new System.Drawing.Size(797, 459);
+            this.zedGraphControl.Size = new System.Drawing.Size(797, 450);
             this.zedGraphControl.TabIndex = 0;
             // 
             // MainWindow
@@ -587,7 +690,8 @@ namespace PairTradingView.Forms
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Black;
-            this.ClientSize = new System.Drawing.Size(1112, 802);
+            this.ClientSize = new System.Drawing.Size(1113, 831);
+            this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.label11);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
@@ -605,6 +709,7 @@ namespace PairTradingView.Forms
             this.Controls.Add(this.label7);
             this.Controls.Add(this.label8);
             this.Controls.Add(this.label5);
+            this.Controls.Add(this.menuStrip1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "MainWindow";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
@@ -616,6 +721,10 @@ namespace PairTradingView.Forms
             this.panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tradeRiskNUD)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.tradeBalanceNUD)).EndInit();
+            this.menuStrip1.ResumeLayout(false);
+            this.menuStrip1.PerformLayout();
+            this.statusStrip1.ResumeLayout(false);
+            this.statusStrip1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -671,5 +780,16 @@ namespace PairTradingView.Forms
         private System.Windows.Forms.Label yName;
         private System.Windows.Forms.Label xName;
         private System.Windows.Forms.Label pairName;
+        private System.Windows.Forms.MenuStrip menuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem startToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem serviceToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem settingsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem cSVToDbToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem quoteDownloaderToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem startToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem stopToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem restartToolStripMenuItem;
+        private System.Windows.Forms.StatusStrip statusStrip1;
+        private System.Windows.Forms.ToolStripStatusLabel lastDataSavingTime;
     }
 }
