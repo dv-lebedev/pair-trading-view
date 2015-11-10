@@ -1,0 +1,6 @@
+C:\GitHub\PairTradingView\Source\PairTradingView\bin\Release\PairTradingView.exe.config
+C:\GitHub\PairTradingView\Source\PairTradingView\obj\Release\PairTradingView.Forms.AppStartWindow.resources
+C:\GitHub\PairTradingView\Source\PairTradingView\obj\Release\PairTradingView.Forms.Downloader.resources
+C:\GitHub\PairTradingView\Source\PairTradingView\obj\Release\PairTradingView.Forms.MainWindow.resources
+C:\GitHub\PairTradingView\Source\PairTradingView\obj\Release\PairTradingView.Properties.Resources.resources
+C:\GitHub\PairTradingView\Source\PairTradingView\obj\Release\PairTradingView.csproj.GenerateResource.Cache
