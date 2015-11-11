@@ -550,7 +550,7 @@ namespace PairTradingView.Forms
             // 
             this.cSVToDbToolStripMenuItem.Name = "cSVToDbToolStripMenuItem";
             this.cSVToDbToolStripMenuItem.Size = new System.Drawing.Size(174, 22);
-            this.cSVToDbToolStripMenuItem.Text = "CSV to Db";
+            this.cSVToDbToolStripMenuItem.Text = "CSV to Storage";
             this.cSVToDbToolStripMenuItem.Click += new System.EventHandler(this.csvToDbMenuItem_Click);
             // 
             // quoteDownloaderToolStripMenuItem
