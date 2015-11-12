@@ -1,3 +1,4 @@
+C:\GitHub\PairTradingView\Source\PairTradingView.WinFormsApp\obj\Debug\PairTradingView.WinFormsApp.Forms.CsvToStorageWindow.resources
 C:\GitHub\PairTradingView\Source\PairTradingView.WinFormsApp\obj\Debug\PairTradingView.Forms.Downloader.resources
 C:\GitHub\PairTradingView\Source\PairTradingView.WinFormsApp\obj\Debug\PairTradingView.Forms.MainWindow.resources
 C:\GitHub\PairTradingView\Source\PairTradingView.WinFormsApp\obj\Debug\PairTradingView.Forms.SettingsWindow.resources
@@ -13,4 +14,3 @@ C:\GitHub\PairTradingView\Source\PairTradingView.WinFormsApp\bin\Debug\PairTradi
 C:\GitHub\PairTradingView\Source\PairTradingView.WinFormsApp\bin\Debug\PairTradingView.Logic.pdb
 C:\GitHub\PairTradingView\Source\PairTradingView.WinFormsApp\obj\Debug\PairTradingView.WinFormsApp.exe
 C:\GitHub\PairTradingView\Source\PairTradingView.WinFormsApp\obj\Debug\PairTradingView.WinFormsApp.pdb
-C:\GitHub\PairTradingView\Source\PairTradingView.WinFormsApp\obj\Debug\PairTradingView.WinFormsApp.Forms.CsvToStorageWindow.resources

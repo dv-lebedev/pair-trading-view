@@ -42,7 +42,7 @@ namespace PairTradingView.Forms
             finally
             {
 
-                SessionConfig.SetHistoryDataProvider(new CsvStorage());
+                SessionConfig.SetHistoryDataProvider(new CsvStorage("storage/"));
                 SessionConfig.SetMarketDataProvider(new OdbcMarketDataProvider(SessionConfig.ConnectionString));
 
 

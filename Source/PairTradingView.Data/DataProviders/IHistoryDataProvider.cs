@@ -5,9 +5,9 @@ namespace PairTradingView.Data.DataProviders
 {
     public interface IHistoryDataProvider
     {
-        IEnumerable<StockValue> GetValues(string code, int count);
+        IEnumerable<StockValue> GetValues(string code, int lastNRecords);
 
-        IEnumerable<StockValue> GetValues(string code, DateTime from, DateTime to);
+        IEnumerable<StockValue> GetValues(string code, DateTime first, DateTime last);
 
         IEnumerable<StockValue> GetValues(string code);
 

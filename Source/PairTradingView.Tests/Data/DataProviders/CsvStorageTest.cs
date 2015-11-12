@@ -14,10 +14,13 @@ namespace PairTradingView.Tests.Data.DataProviders
     [TestClass]
     public class CsvStorageTest
     {
+
+        private string pathToCsvStorageDirectory = "storage/";
+
         [TestMethod]
         public void InitTest()
         {
-            var storage = new CsvStorage();
+            var storage = new CsvStorage(pathToCsvStorageDirectory);
 
             Assert.AreEqual(Directory.Exists("storage/"), true);
         }
@@ -27,7 +30,7 @@ namespace PairTradingView.Tests.Data.DataProviders
         {
             var codesExpect = new string[] { "LKOH", "SBER", "TATN", "GAZP"};
 
-            var storage = new CsvStorage();
+            var storage = new CsvStorage(pathToCsvStorageDirectory);
 
             var codes = storage.GetCodes();
 
@@ -40,7 +43,7 @@ namespace PairTradingView.Tests.Data.DataProviders
         [TestMethod]
         public void IsExistTest()
         {
-            var storage = new CsvStorage();
+            var storage = new CsvStorage(pathToCsvStorageDirectory);
 
             Assert.AreEqual(storage.IsExist("LKOH"), true);
             Assert.AreEqual(storage.IsExist("SBER"), true);
@@ -51,7 +54,7 @@ namespace PairTradingView.Tests.Data.DataProviders
         [TestMethod]
         public void SaveTest()
         {
-            var storage = new CsvStorage();
+            var storage = new CsvStorage(pathToCsvStorageDirectory);
 
             var valueExpected = new StockValue
             {
@@ -70,7 +73,7 @@ namespace PairTradingView.Tests.Data.DataProviders
         [TestMethod]
         public void SaveManyTest()
         {
-            var storage = new CsvStorage();
+            var storage = new CsvStorage(pathToCsvStorageDirectory);
 
             var stockValues = new List<StockValue>();
             stockValues.Add(new StockValue { DateTime = new DateTime(2000, 1, 2), Price = 0.00085001M, Volume = 652465476355356345 });
@@ -99,7 +102,7 @@ namespace PairTradingView.Tests.Data.DataProviders
         [TestMethod]
         public void GetValuesLastTest()
         {
-            var storage = new CsvStorage();
+            var storage = new CsvStorage(pathToCsvStorageDirectory);
 
             var values = storage.GetValues("GAZP", 7);
 
@@ -113,7 +116,7 @@ namespace PairTradingView.Tests.Data.DataProviders
         [TestMethod]
         public void GetValuesAllTest()
         {
-            var storage = new CsvStorage();
+            var storage = new CsvStorage(pathToCsvStorageDirectory);
 
             var values = storage.GetValues("GAZP");
 
@@ -130,7 +133,7 @@ namespace PairTradingView.Tests.Data.DataProviders
             DateTime dtFirst = DateTime.ParseExact("20150105100300", "yyyyMMddHHmmss", CultureInfo.InvariantCulture);
             DateTime dtLast = DateTime.ParseExact("20150105100900", "yyyyMMddHHmmss", CultureInfo.InvariantCulture);
 
-            var storage = new CsvStorage();
+            var storage = new CsvStorage(pathToCsvStorageDirectory);
 
             var values = storage.GetValues("GAZP", dtFirst, dtLast);
 
@@ -157,7 +160,7 @@ namespace PairTradingView.Tests.Data.DataProviders
 
             string expectedResult = "20140102234359, 1526374859.05947382, 5235166434521";
 
-            var storage = new CsvStorage();
+            var storage = new CsvStorage(pathToCsvStorageDirectory);
 
             string result = storage.StockValueToString(value);
 

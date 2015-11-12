@@ -91,7 +91,7 @@ namespace PairTradingView.Tests.Logic.Session
             cfg.LoadingDataType = LoadingDataType.LoadLastValues;
             cfg.LoadingValuesCount = 10;
 
-            cfg.SetHistoryDataProvider(new CsvStorage());
+            cfg.SetHistoryDataProvider(new CsvStorage("storage/"));
             cfg.SetMarketDataProvider(new OdbcMarketDataProvider(_connectionString));
 
             ISession session = new BaseSession(cfg);

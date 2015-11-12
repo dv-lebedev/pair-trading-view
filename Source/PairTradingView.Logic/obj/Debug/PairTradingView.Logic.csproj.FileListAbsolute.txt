@@ -8,7 +8,6 @@ C:\GitHub\PairTradingView\Source\PairTradingView\obj\Debug\PairTradingView.Prope
 C:\GitHub\PairTradingView\Source\PairTradingView\obj\Debug\PairTradingView.Logic.csproj.GenerateResource.Cache
 C:\GitHub\PairTradingView\Source\PairTradingView\obj\Debug\PairTradingView.dll
 C:\GitHub\PairTradingView\Source\PairTradingView\obj\Debug\PairTradingView.pdb
-C:\GitHub\PairTradingView\Source\PairTradingView.Logic\obj\Debug\PairTradingView.Logic.csprojResolveAssemblyReference.cache
 C:\GitHub\PairTradingView\Source\PairTradingView.Logic\obj\Debug\PairTradingView.Logic.Properties.Resources.resources
 C:\GitHub\PairTradingView\Source\PairTradingView.Logic\obj\Debug\PairTradingView.Logic.csproj.GenerateResource.Cache
 C:\GitHub\PairTradingView\Source\PairTradingView.Logic\bin\Debug\PairTradingView.Logic.dll.config
@@ -16,5 +15,6 @@ C:\GitHub\PairTradingView\Source\PairTradingView.Logic\bin\Debug\PairTradingView
 C:\GitHub\PairTradingView\Source\PairTradingView.Logic\bin\Debug\PairTradingView.Logic.pdb
 C:\GitHub\PairTradingView\Source\PairTradingView.Logic\bin\Debug\PairTradingView.Data.dll
 C:\GitHub\PairTradingView\Source\PairTradingView.Logic\bin\Debug\PairTradingView.Data.pdb
+C:\GitHub\PairTradingView\Source\PairTradingView.Logic\obj\Debug\PairTradingView.Logic.csprojResolveAssemblyReference.cache
 C:\GitHub\PairTradingView\Source\PairTradingView.Logic\obj\Debug\PairTradingView.Logic.dll
 C:\GitHub\PairTradingView\Source\PairTradingView.Logic\obj\Debug\PairTradingView.Logic.pdb

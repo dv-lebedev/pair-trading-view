@@ -9,23 +9,17 @@ namespace PairTradingView.Data.DataProviders
 {
     public class CsvStorage : IHistoryDataProvider
     {
-        private string storeDirectoryPath;
+        private string storageDirectoryPath;
         private CsvFormat csvFormat;
 
-        private readonly object _lockObj = new object();
-
-        public CsvStorage()
-            : this("storage/")
-        {
-
-        }
+        private static readonly object _dataSaveLock = new object();
 
         public CsvStorage(string path)
         {
-            storeDirectoryPath = path;
+            storageDirectoryPath = path;
 
-            if (!Directory.Exists(storeDirectoryPath))
-                Directory.CreateDirectory(storeDirectoryPath);
+            if (!Directory.Exists(storageDirectoryPath))
+                Directory.CreateDirectory(storageDirectoryPath);
 
             csvFormat = new CsvFormat
             {
@@ -39,12 +33,21 @@ namespace PairTradingView.Data.DataProviders
             };
         }
 
-
-        public IEnumerable<StockValue> GetValues(string code, int count)
+        private string GetPathOfStock(string code)
         {
-            if (IsExist(code))
+            return Path.Combine(storageDirectoryPath, code);
+        }
+
+        private bool IsStockHistoryFileExists(string code)
+        {
+            return File.Exists(GetPathOfStock(code));
+        }
+
+        public IEnumerable<StockValue> GetValues(string code, int lastNRecords)
+        {
+            if (IsStockHistoryFileExists(code))
             {
-                var lines = File.ReadLines(storeDirectoryPath + code).Reverse().Take(count).Reverse().ToArray();
+                var lines = File.ReadLines(GetPathOfStock(code)).Reverse().Take(lastNRecords).Reverse().ToArray();
 
                 return CsvFile.Convert(lines, csvFormat);
             }
@@ -52,20 +55,19 @@ namespace PairTradingView.Data.DataProviders
             return null;
         }
 
-        public IEnumerable<StockValue> GetValues(string code, DateTime from, DateTime to)
+        public IEnumerable<StockValue> GetValues(string code, DateTime first, DateTime last)
         {
-            if (!File.Exists(storeDirectoryPath + code))
-                return null;
+            if (!IsStockHistoryFileExists(code)) return null;
 
             var values = new List<StockValue>();
 
-            var dtFromInt = Convert.ToInt64(from.ToString("yyyyMMddHHmmss"));
-            var dtToInt = Convert.ToInt64(to.ToString("yyyyMMddHHmmss"));
+            var dtFromInt = Convert.ToInt64(first.ToString("yyyyMMddHHmmss"));
+            var dtToInt = Convert.ToInt64(last.ToString("yyyyMMddHHmmss"));
 
-            using (var sr = new StreamReader(storeDirectoryPath + code))
+            using (var sr = new StreamReader(GetPathOfStock(code)))
             {
                 string line;
-
+                
                 while ((line = sr.ReadLine()) != null)
                 {
                     var date = Convert.ToInt64(line.Substring(0, 14));
@@ -82,26 +84,26 @@ namespace PairTradingView.Data.DataProviders
 
         public IEnumerable<StockValue> GetValues(string code)
         {
-            return IsExist(code) ? CsvFile.Convert(File.ReadAllLines(storeDirectoryPath + code), csvFormat) : null;
+            return IsStockHistoryFileExists(code) ? CsvFile.Convert(File.ReadAllLines(GetPathOfStock(code)), csvFormat) : null;
         }
 
         public string[] GetCodes()
         {
-            return Directory.EnumerateFiles(storeDirectoryPath)
-                .Select(i => i.Replace(storeDirectoryPath, ""))
+            return Directory.EnumerateFiles(storageDirectoryPath)
+                .Select(i => Path.GetFileNameWithoutExtension(i))
                 .ToArray();
         }
 
         public bool IsExist(string code)
         {
-            return File.Exists(storeDirectoryPath + code);
+            return IsStockHistoryFileExists(code);
         }
 
         public void Save(string code, StockValue value)
         {
-            lock (_lockObj)
+            lock (_dataSaveLock)
             {
-                using (var sr = new StreamWriter(storeDirectoryPath + code, true))
+                using (var sr = new StreamWriter(GetPathOfStock(code), true))
                 {
                     sr.WriteLine(StockValueToString(value));
                 }
@@ -110,9 +112,9 @@ namespace PairTradingView.Data.DataProviders
 
         public void Save(string code, IEnumerable<StockValue> values)
         {
-            lock (_lockObj)
+            lock (_dataSaveLock)
             {
-                using (var sr = new StreamWriter(storeDirectoryPath + code, true))
+                using (var sr = new StreamWriter(GetPathOfStock(code), true))
                 {
                     foreach (var value in values)
                     {

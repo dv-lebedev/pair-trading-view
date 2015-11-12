@@ -1,10 +1,10 @@
+C:\GitHub\PairTradingView\Source\PairTradingView.Tests\obj\Debug\PairTradingView.Tests.csprojResolveAssemblyReference.cache
 C:\GitHub\PairTradingView\Source\PairTradingView.Tests\bin\Debug\PairTradingView.Tests.dll.config
 C:\GitHub\PairTradingView\Source\PairTradingView.Tests\bin\Debug\PairTradingView.Tests.dll
 C:\GitHub\PairTradingView\Source\PairTradingView.Tests\bin\Debug\PairTradingView.Tests.pdb
 C:\GitHub\PairTradingView\Source\PairTradingView.Tests\bin\Debug\PairTradingView.Data.dll
+C:\GitHub\PairTradingView\Source\PairTradingView.Tests\bin\Debug\PairTradingView.Logic.dll
 C:\GitHub\PairTradingView\Source\PairTradingView.Tests\bin\Debug\PairTradingView.Data.pdb
-C:\GitHub\PairTradingView\Source\PairTradingView.Tests\obj\Debug\PairTradingView.Tests.csprojResolveAssemblyReference.cache
+C:\GitHub\PairTradingView\Source\PairTradingView.Tests\bin\Debug\PairTradingView.Logic.pdb
 C:\GitHub\PairTradingView\Source\PairTradingView.Tests\obj\Debug\PairTradingView.Tests.dll
 C:\GitHub\PairTradingView\Source\PairTradingView.Tests\obj\Debug\PairTradingView.Tests.pdb
-C:\GitHub\PairTradingView\Source\PairTradingView.Tests\bin\Debug\PairTradingView.Logic.dll
-C:\GitHub\PairTradingView\Source\PairTradingView.Tests\bin\Debug\PairTradingView.Logic.pdb

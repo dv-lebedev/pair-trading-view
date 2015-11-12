@@ -82,17 +82,14 @@ namespace PairTradingView.Logic.Session
 
                 if (dt.TimeOfDay >= Cfg.StartTime && dt.TimeOfDay <= Cfg.StopTime)
                 {
-                    Console.WriteLine(Cfg.StartTime + "  " + Cfg.StopTime);
-
                     var info = Cfg.GetMarketDataProvider().GetStocks();
 
                     if (info != null)
                     {
                         var storage = Cfg.GetHistoryDataProvider();
-                        Console.WriteLine(info);
+
                         foreach (var stock in info)
                         {
-                            Console.WriteLine(stock.Code);
                             storage.Save(stock.Code, new StockValue
                             {
                                 DateTime = dt,
