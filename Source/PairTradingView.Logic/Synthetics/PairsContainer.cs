@@ -35,7 +35,33 @@ namespace PairTradingView.Logic.Synthetics
             StocksCount = stocks.Count;
             DeltaCalculation = delta;
 
-            Items = new List<FinancialPair>(FinancialPairCreator.CreatePairs(stocks, delta));
+            Items = new List<FinancialPair>(CreatePairs(stocks, delta));
+        }
+
+        public IEnumerable<FinancialPair> CreatePairs(Dictionary<string, List<StockValue>> stocks, AbstractDelta delta)
+        {
+            ICollection<FinancialPair> pairs = new List<FinancialPair>();
+
+            for (int i = 0; i < stocks.Count; i++)
+            {
+                for (int j = i + 1; j < stocks.Count; j++)
+                {
+
+                    var xSecurity = stocks.ElementAt(i).Value.Select(item => (double)item.Price).ToArray();
+                    var ySecurity = stocks.ElementAt(j).Value.Select(item => (double)item.Price).ToArray();
+
+                    if (xSecurity != null && ySecurity != null)
+                    {
+                        var pair = new FinancialPair(xSecurity, ySecurity,
+                                 new FinancialPairName(stocks.ElementAt(i).Key, stocks.ElementAt(j).Key),
+                                 delta);
+
+                        pairs.Add(pair);
+                    }
+                }
+            }
+
+            return pairs;
         }
     }
 }

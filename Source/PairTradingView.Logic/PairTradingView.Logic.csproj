@@ -78,7 +78,6 @@
     <Compile Include="Synthetics\DeltaCalculation\DeltaHelpers.cs" />
     <Compile Include="Synthetics\FinancialPairName.cs" />
     <Compile Include="Synthetics\FinancialPair.cs" />
-    <Compile Include="Synthetics\FinancialPairCreator.cs" />
     <Compile Include="Synthetics\PairsContainer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RiskManagement\RiskCalculation.cs" />

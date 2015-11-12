@@ -3,7 +3,7 @@ using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
-using PairTradingView.Data.DataProviders;
+using PairTradingView.Data.DataProviders.Csv;
 using PairTradingView.Data.DataProviders.ODBC;
 using PairTradingView.Logic.Session;
 using PairTradingView.Logic.Statistics;

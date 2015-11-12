@@ -40,8 +40,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Csv\CsvFile.cs" />
-    <Compile Include="Csv\CsvFormat.cs" />
+    <Compile Include="DataProviders\CsvData\CsvFile.cs" />
+    <Compile Include="DataProviders\CsvData\CsvFormat.cs" />
     <Compile Include="DataProviders\CsvData\CsvStorage.cs" />
     <Compile Include="DataProviders\IHistoryDataProvider.cs" />
     <Compile Include="DataProviders\IMarketDataProvider.cs" />

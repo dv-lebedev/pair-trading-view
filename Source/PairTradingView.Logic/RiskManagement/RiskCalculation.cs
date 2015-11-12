@@ -29,17 +29,6 @@ namespace PairTradingView.Logic.RiskManagement
 
         public void Calculate()
         {
-            this.Calculate(Balance);
-        }
-
-
-        public void Calculate(double balance)
-        {
-            if (balance < 0)
-                throw new ArgumentException("Trade balance shouldn't be less then zero.");
-
-            this.Balance = balance;
-
             var synthIndex = GetSynthIndex();
 
             foreach (var item in _pairs)

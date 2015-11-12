@@ -4,8 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using PairTradingView.Data.Csv;
 using PairTradingView.Data.DataProviders;
+using PairTradingView.Data.DataProviders.Csv;
 using PairTradingView.Logic.Synthetics;
 using PairTradingView.Logic.Synthetics.DeltaCalculation;
 

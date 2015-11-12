@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.Serialization.Formatters.Binary;
-using PairTradingView.Data.Csv;
 using PairTradingView.Data.DataProviders;
 using PairTradingView.Data.DataProviders.ODBC;
 

@@ -4,7 +4,7 @@ namespace PairTradingView.Logic.RiskManagement
 {
     public class RiskParameters
     {
-        public bool IsActive { get; set; }
+
 
         public LinearRegression Regression { get; set; }
 

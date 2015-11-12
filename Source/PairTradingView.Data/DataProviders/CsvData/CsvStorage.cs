@@ -3,9 +3,8 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.Linq;
-using PairTradingView.Data.Csv;
 
-namespace PairTradingView.Data.DataProviders
+namespace PairTradingView.Data.DataProviders.Csv
 {
     public class CsvStorage : IHistoryDataProvider
     {

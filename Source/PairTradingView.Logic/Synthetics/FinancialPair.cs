@@ -27,16 +27,19 @@ namespace PairTradingView.Logic.Synthetics
         public FinancialPair(double[] x, double[] y, FinancialPairName name, AbstractDelta delta)
         {
             if (name == null) throw new ArgumentNullException();
-
             if (delta == null) throw new ArgumentNullException();
 
             Name = name;
 
-            Update(x, y, delta);
+            Initialize(x, y, delta);
         }
 
-        public void Update(double[] x, double[] y, AbstractDelta delta)
+        private void Initialize(double[] x, double[] y, AbstractDelta delta)
         {
+            if (x == null) throw new NullReferenceException();
+            if (y == null) throw new NullReferenceException();
+            if (delta == null) throw new NullReferenceException();
+
             DeltaCalculation = delta;
 
             try
@@ -52,11 +55,11 @@ namespace PairTradingView.Logic.Synthetics
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.Message);
+                throw new Exception(string.Format("FinancialPair.Update : {0}", ex.Message));
             }
         }
 
-        public double GetCurrentDelta(double x, double y)
+        public double CalculateCurrentDelta(double x, double y)
         {
             return DeltaCalculation.GetCurrentDelta(x, y, Regression.Beta, Regression.RValue);
         }

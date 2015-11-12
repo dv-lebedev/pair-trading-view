@@ -5,8 +5,8 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using PairTradingView.Data.Csv;
 using PairTradingView.Data.DataProviders;
+using PairTradingView.Data.DataProviders.Csv;
 using PairTradingView.Forms;
 using PairTradingView.Helpers;
 

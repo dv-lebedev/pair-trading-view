@@ -5,8 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using PairTradingView.Data;
-using PairTradingView.Data.Csv;
 using PairTradingView.Data.DataProviders;
+using PairTradingView.Data.DataProviders.Csv;
 using PairTradingView.Logic.RiskManagement;
 using PairTradingView.Logic.Synthetics;
 using PairTradingView.Logic.Synthetics.DeltaCalculation;
@@ -50,21 +50,6 @@ namespace PairTradingView.Tests.Logic.RiskManagement
                 Assert.AreEqual(typeof(ArgumentNullException), ex.GetType());
             }
 
-
-
-            try
-            {
-                rc.Calculate(-150790.5569);
-
-                Assert.Fail();
-            }
-            catch (Exception ex)
-            {
-                Assert.AreEqual(typeof(ArgumentException), ex.GetType());
-            }
-
-
-
             try
             {
                 new RiskCalculation(testPairs, - 7);
@@ -90,7 +75,9 @@ namespace PairTradingView.Tests.Logic.RiskManagement
             stockValues.Add("TATN", storage.GetValues("TATN", 10).ToList());
             stockValues.Add("SBER", storage.GetValues("SBER", 10).ToList());
 
-            return FinancialPairCreator.CreatePairs(stockValues, new SpreadDelta()).ToList();
+            PairsContainer pairs = new PairsContainer(stockValues, new SpreadDelta());
+            
+            return pairs.Items;
         }
 
     }

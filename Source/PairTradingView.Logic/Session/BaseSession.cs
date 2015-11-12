@@ -112,16 +112,18 @@ namespace PairTradingView.Logic.Session
         {           
             try
             {
+                var db = Cfg.GetMarketDataProvider();
+
+                var marketStocks = db.GetStocks();
+
                 foreach (var pair in PairsContainer.Items)
                 {
-                    var db = Cfg.GetMarketDataProvider();
-
-                    var xStock = db.GetStock(pair.Name.X);
-                    var yStock = db.GetStock(pair.Name.Y);
+                    var xStock = marketStocks.First(i => i.Code == pair.Name.X);
+                    var yStock = marketStocks.First(i => i.Code == pair.Name.Y);
 
                     if (xStock != null && yStock != null)
                     {
-                        var delta = pair.GetCurrentDelta(
+                        var delta = pair.CalculateCurrentDelta(
                             (double)xStock.Price * xStock.Lot,
                             (double)yStock.Price * yStock.Lot);
 
@@ -136,7 +138,7 @@ namespace PairTradingView.Logic.Session
             }
             catch (Exception ex)
             {
-                Debug.WriteLine("DataUpdateTask" + ex.Message);
+                throw new Exception(string.Format("DataUpdateTask : {0}", ex.Message));
             }
         }
 

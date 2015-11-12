@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 
 
-namespace PairTradingView.Data.Csv
+namespace PairTradingView.Data.DataProviders.Csv
 {
     [Serializable]
     public class CsvFormat

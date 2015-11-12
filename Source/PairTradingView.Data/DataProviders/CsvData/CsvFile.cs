@@ -4,7 +4,7 @@ using System.Globalization;
 using System.IO;
 
 
-namespace PairTradingView.Data.Csv
+namespace PairTradingView.Data.DataProviders.Csv
 {
     public static class CsvFile
     {

@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using PairTradingView.Data;
-using PairTradingView.Data.Csv;
+using PairTradingView.Data.DataProviders.Csv;
 
 namespace PairTradingView.Tests.Data.Csv
 {
