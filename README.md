@@ -1,6 +1,6 @@
 # PairTradingView
 
-![Screenshot](https://github.com/dv-lebedev/PairTradingView/blob/master/Screenshots/main_page.png)
+![Screenshot](https://github.com/dv-lebedev/PairTradingView/blob/master/main_page.png)
 
 
 **Pair Trading View** - application for the visual analysis of synthetic financial instruments based on econometrics models. 
