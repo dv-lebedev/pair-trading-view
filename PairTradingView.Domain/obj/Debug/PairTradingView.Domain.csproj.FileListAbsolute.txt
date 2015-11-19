@@ -1,0 +1,10 @@
+C:\Users\Denis_Lebedev\Documents\MyProjects\pair-trading-view-master\Source\PairTradingView.Domain\obj\Debug\PairTradingView.Domain.csprojResolveAssemblyReference.cache
+C:\Users\Denis_Lebedev\Documents\MyProjects\pair-trading-view-master\Source\PairTradingView.Domain\bin\Debug\PairTradingView.Domain.dll
+C:\Users\Denis_Lebedev\Documents\MyProjects\pair-trading-view-master\Source\PairTradingView.Domain\bin\Debug\PairTradingView.Domain.pdb
+C:\Users\Denis_Lebedev\Documents\MyProjects\pair-trading-view-master\Source\PairTradingView.Domain\obj\Debug\PairTradingView.Domain.dll
+C:\Users\Denis_Lebedev\Documents\MyProjects\pair-trading-view-master\Source\PairTradingView.Domain\obj\Debug\PairTradingView.Domain.pdb
+C:\GitHub\PairTradingView\Source\PairTradingView.Domain\bin\Debug\PairTradingView.Domain.dll
+C:\GitHub\PairTradingView\Source\PairTradingView.Domain\bin\Debug\PairTradingView.Domain.pdb
+C:\GitHub\PairTradingView\Source\PairTradingView.Domain\obj\Debug\PairTradingView.Domain.csprojResolveAssemblyReference.cache
+C:\GitHub\PairTradingView\Source\PairTradingView.Domain\obj\Debug\PairTradingView.Domain.dll
+C:\GitHub\PairTradingView\Source\PairTradingView.Domain\obj\Debug\PairTradingView.Domain.pdb

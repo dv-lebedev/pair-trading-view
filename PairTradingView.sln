@@ -1,0 +1,32 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PairTradingView.WinFormsApp", "PairTradingView.WinFormsApp\PairTradingView.WinFormsApp.csproj", "{C08ECBC5-7CEB-4250-A2ED-B95869A4E787}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PairTradingView.Tests", "PairTradingView.Tests\PairTradingView.Tests.csproj", "{3F9D13DB-B5EB-4826-9290-AC80E7070459}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PairTradingView.Domain", "PairTradingView.Domain\PairTradingView.Domain.csproj", "{2F61E80C-88B0-492C-8C25-1E6F54825262}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{C08ECBC5-7CEB-4250-A2ED-B95869A4E787}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C08ECBC5-7CEB-4250-A2ED-B95869A4E787}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C08ECBC5-7CEB-4250-A2ED-B95869A4E787}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C08ECBC5-7CEB-4250-A2ED-B95869A4E787}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3F9D13DB-B5EB-4826-9290-AC80E7070459}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3F9D13DB-B5EB-4826-9290-AC80E7070459}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3F9D13DB-B5EB-4826-9290-AC80E7070459}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3F9D13DB-B5EB-4826-9290-AC80E7070459}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2F61E80C-88B0-492C-8C25-1E6F54825262}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2F61E80C-88B0-492C-8C25-1E6F54825262}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2F61E80C-88B0-492C-8C25-1E6F54825262}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2F61E80C-88B0-492C-8C25-1E6F54825262}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
