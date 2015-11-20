@@ -9,7 +9,7 @@ namespace PairTradingView.Synthetics
     {
         public SyntheticName Name { get; protected set; }
         public string Description { get; protected set; }
-        public DeltaType Delta { get; protected set; }
+        public Delta Delta { get; protected set; }
 
         public decimal XStdDev { get; protected set; }
         public decimal YStdDev { get; protected set; }
@@ -22,7 +22,7 @@ namespace PairTradingView.Synthetics
         public RiskParameters RiskParameters { get; set; }
 
 
-        public Synthetic(decimal[] x, decimal[] y, SyntheticName name, DeltaType delta)
+        public Synthetic(decimal[] x, decimal[] y, SyntheticName name, Delta delta)
         {
             this.Name = name;
             this.Delta = delta;
@@ -49,82 +49,15 @@ namespace PairTradingView.Synthetics
             }
         }
 
-        private decimal[] GetSpreadValues(decimal[] x, decimal[] y, decimal r_value)
-        {
-            if (Regression.RValue >= 0)
-            {
-                return x.Zip(y, (i, j) => j - i).ToArray();
-            }
-            else
-            {
-                return x.Zip(y, (i, j) => j + i).ToArray();
-            }
-        }
-
-        private decimal[] GetRatioValues(decimal[] x, decimal[] y, decimal r_value)
-        {
-            if (Regression.RValue>= 0)
-            {
-                return x.Zip(y, (i, j) => j / i).ToArray();
-            }
-            else
-            {
-                return x.Zip(y, (i, j) => (decimal)Math.Log10((double)j) * (decimal)Math.Log10((double)i)).ToArray();
-            }
-        }
-
         private void SetValues(decimal[] x, decimal[] y, decimal r_value)
         {
-            switch (Delta)
-            {
-                case DeltaType.SPREAD:
-                    DeltaValues = GetSpreadValues(x, y, r_value);
-                    break;
-
-                case DeltaType.RATIO:
-                    DeltaValues = GetRatioValues(x, y, r_value);
-                    break;
-            }
+            DeltaValues = Delta.GetValues(x, y, Regression.RValue);
         }
 
-
-        private decimal GetSpread(decimal x, decimal y)
-        {
-            if (Regression.RValue >= 0)
-            {
-                return y - x;
-            }
-            else
-            {
-                return y + x;
-            }
-        }
-
-        private decimal GetRatio(decimal x, decimal y)
-        {
-            if (Regression.RValue >= 0)
-            {
-                return y / x;
-            }
-            else
-            {
-                return (decimal)(Math.Log10((double)y) * Math.Log10((double)x));
-            }
-        }
 
         public decimal GetValue(decimal x, decimal y)
         {
-            switch (Delta)
-            {
-                case DeltaType.SPREAD:
-                    return GetSpread(x, y);
-
-                case DeltaType.RATIO:
-                    return GetRatio(x, y);
-
-                default:
-                    throw new Exception();
-            }
+            return Delta.GetValue(x, y, Regression.RValue);
         }
     }
 }

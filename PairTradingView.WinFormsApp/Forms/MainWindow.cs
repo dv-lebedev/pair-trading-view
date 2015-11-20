@@ -189,6 +189,11 @@ namespace PairTradingView.Forms
             }
         }
 
+        public void ClearListView()
+        {
+            listView1.Items.Clear();
+        }
+
         private void csvFiles_Click(object sender, EventArgs e)
         {
             CsvFiles files = new CsvFiles(this);

@@ -20,7 +20,7 @@ namespace PairTradingView.Tests.Logic.Synthetics
             stockValues.Add("MSFT", CsvFile.Read("csv-files/MSFT.txt", 4, false));
 
 
-            var pairs = new SyntheticsFactory(stockValues).CreateSynthetics(DeltaType.SPREAD);
+            var pairs = new SyntheticsFactory(stockValues).CreateSynthetics(new SpreadDelta());
 
 
             Assert.AreEqual(6, pairs.Count());
@@ -34,7 +34,7 @@ namespace PairTradingView.Tests.Logic.Synthetics
             }
 
 
-            pairs = new SyntheticsFactory(stockValues).CreateSynthetics(DeltaType.RATIO);
+            pairs = new SyntheticsFactory(stockValues).CreateSynthetics(new RatioDelta());
 
 
             Assert.AreEqual(6, pairs.Count());

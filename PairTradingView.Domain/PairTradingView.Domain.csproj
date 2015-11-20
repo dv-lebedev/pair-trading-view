@@ -47,7 +47,9 @@
     <Compile Include="Statistics\DifferentLengthException.cs" />
     <Compile Include="Statistics\LinearRegression.cs" />
     <Compile Include="Statistics\MovingAverages.cs" />
-    <Compile Include="Synthetics\DeltaType.cs" />
+    <Compile Include="Synthetics\Delta\Delta.cs" />
+    <Compile Include="Synthetics\Delta\RatioDelta.cs" />
+    <Compile Include="Synthetics\Delta\SpreadDelta.cs" />
     <Compile Include="Synthetics\Synthetic.cs" />
     <Compile Include="Synthetics\SyntheticName.cs" />
     <Compile Include="Synthetics\SyntheticsFactory.cs" />

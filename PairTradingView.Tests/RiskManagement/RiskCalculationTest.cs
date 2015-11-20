@@ -67,7 +67,7 @@ namespace PairTradingView.Tests.Logic.RiskManagement
 
             SyntheticsFactory factory = new SyntheticsFactory(stockValues);
 
-            return factory.CreateSynthetics(DeltaType.SPREAD).ToList();
+            return factory.CreateSynthetics(new SpreadDelta()).ToList();
         }
 
     }

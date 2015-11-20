@@ -30,7 +30,7 @@ namespace PairTradingView.Synthetics
         }
 
 
-        public IEnumerable<Synthetic> CreateSynthetics(DeltaType delta)
+        public IEnumerable<Synthetic> CreateSynthetics(Delta delta)
         {
             ICollection<Synthetic> synthetics = new List<Synthetic>();
 

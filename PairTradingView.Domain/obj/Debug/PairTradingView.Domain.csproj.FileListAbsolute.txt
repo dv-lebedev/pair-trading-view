@@ -8,3 +8,8 @@ C:\GitHub\PairTradingView\Source\PairTradingView.Domain\bin\Debug\PairTradingVie
 C:\GitHub\PairTradingView\Source\PairTradingView.Domain\obj\Debug\PairTradingView.Domain.csprojResolveAssemblyReference.cache
 C:\GitHub\PairTradingView\Source\PairTradingView.Domain\obj\Debug\PairTradingView.Domain.dll
 C:\GitHub\PairTradingView\Source\PairTradingView.Domain\obj\Debug\PairTradingView.Domain.pdb
+C:\GitHub\pair-trading-view\PairTradingView.Domain\obj\Debug\PairTradingView.Domain.csprojResolveAssemblyReference.cache
+C:\GitHub\pair-trading-view\PairTradingView.Domain\obj\Debug\PairTradingView.Domain.dll
+C:\GitHub\pair-trading-view\PairTradingView.Domain\obj\Debug\PairTradingView.Domain.pdb
+C:\GitHub\pair-trading-view\PairTradingView.Domain\bin\Debug\PairTradingView.Domain.dll
+C:\GitHub\pair-trading-view\PairTradingView.Domain\bin\Debug\PairTradingView.Domain.pdb

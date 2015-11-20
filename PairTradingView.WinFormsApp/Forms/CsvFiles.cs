@@ -39,7 +39,13 @@ namespace PairTradingView.WinFormsApp.Forms
 
                 var factory = new SyntheticsFactory(quotes);
 
-                mWindow.Synthetics = factory.CreateSynthetics(DeltaType.SPREAD).ToList();
+                Delta delta = null;
+
+                if (deltaTypeBox.Text == "SPREAD") delta = new SpreadDelta();
+                if (deltaTypeBox.Text == "RATIO") delta = new RatioDelta();
+
+                mWindow.Synthetics = factory.CreateSynthetics(delta).ToList();
+                mWindow.ClearListView();
                 mWindow.UpdateListView();
 
                 this.Close();
