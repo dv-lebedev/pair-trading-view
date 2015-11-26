@@ -1,4 +1,4 @@
-﻿namespace PairTradingView.Forms
+﻿namespace PairTradingView
 {
     partial class Downloader
     {
@@ -415,7 +415,6 @@
             this.Name = "Downloader";
             this.ShowIcon = false;
             this.Text = "Quote Downloader";
-            this.Load += new System.EventHandler(this.Downloader_Load);
             ((System.ComponentModel.ISupportInitialize)(this.toYear)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.fromYear)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.toDay)).EndInit();

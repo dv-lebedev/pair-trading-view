@@ -7,11 +7,26 @@
     <ProjectGuid>{C08ECBC5-7CEB-4250-A2ED-B95869A4E787}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>PairTradingView.WinFormsApp</RootNamespace>
-    <AssemblyName>PairTradingView.WinFormsApp</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <RootNamespace>PairTradingView</RootNamespace>
+    <AssemblyName>PairTradingView</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
+    <PublishUrl>опубликовать\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -34,9 +49,18 @@
     <WarningLevel>4</WarningLevel>
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>main.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
-    <Reference Include="PairTradingView.Domain">
-      <HintPath>..\PairTradingView.Domain\bin\Debug\PairTradingView.Domain.dll</HintPath>
+    <Reference Include="NSynthetics.Data">
+      <HintPath>..\..\..\Users\Denis_Lebedev\Documents\MyProjects\NSynthetics\NSynthetics.Data\bin\Debug\NSynthetics.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="NSynthetics.Logic">
+      <HintPath>..\..\..\Users\Denis_Lebedev\Documents\MyProjects\NSynthetics\NSynthetics.Logic\bin\Debug\NSynthetics.Logic.dll</HintPath>
+    </Reference>
+    <Reference Include="NSynthetics.Statistics">
+      <HintPath>..\..\..\Users\Denis_Lebedev\Documents\MyProjects\NSynthetics\NSynthetics.Statistics\bin\Debug\NSynthetics.Statistics.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
@@ -57,14 +81,21 @@
     <Compile Include="Controls\ListViewNF.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Controls\NumericBox.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\NumericBox.Designer.cs">
+      <DependentUpon>NumericBox.cs</DependentUpon>
+    </Compile>
     <Compile Include="Controls\ZedgraphControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Forms\CsvFiles.cs">
+    <Compile Include="CsvHelper.cs" />
+    <Compile Include="Forms\AppStartWindow.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\CsvFiles.Designer.cs">
-      <DependentUpon>CsvFiles.cs</DependentUpon>
+    <Compile Include="Forms\AppStartWindow.Designer.cs">
+      <DependentUpon>AppStartWindow.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\Downloader.cs">
       <SubType>Form</SubType>
@@ -81,8 +112,11 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="WinFormHelpers.cs" />
-    <EmbeddedResource Include="Forms\CsvFiles.resx">
-      <DependentUpon>CsvFiles.cs</DependentUpon>
+    <EmbeddedResource Include="Controls\NumericBox.resx">
+      <DependentUpon>NumericBox.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\AppStartWindow.resx">
+      <DependentUpon>AppStartWindow.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Downloader.resx">
       <DependentUpon>Downloader.cs</DependentUpon>
@@ -116,7 +150,18 @@
   <ItemGroup>
     <Content Include="main.ico" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>Клиентский профиль .NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

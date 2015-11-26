@@ -1,9 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
+﻿/*
+Copyright 2015 Denis Lebedev
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+*/
+
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using ZedGraph;
 
 namespace PairTradingView.Controls
@@ -11,8 +22,15 @@ namespace PairTradingView.Controls
     public class MyZedgraphControl : ZedGraphControl
     {
 
-        PointPairList deltas, deltaSMA, deltaWMA, deltaCurrent;
-        LineItem deltasCurve, deltaSMACurve, deltaWMACurve, deltaCurrentCurve;
+        private PointPairList deltas;
+        private PointPairList deltaSMA;
+        private PointPairList deltaWMA;
+        private PointPairList deltaCurrent;
+
+        private LineItem deltasCurve;
+        private LineItem deltaSMACurve;
+        private LineItem deltaWMACurve;
+        private LineItem deltaCurrentCurve;
 
         public MyZedgraphControl()
         {
@@ -20,7 +38,12 @@ namespace PairTradingView.Controls
             mp.Border.IsVisible = true;
             mp.Border.Color = Color.Yellow;
 
-            Init();
+            ZedGraph.GraphPane pane = GraphPane;
+            pane.Title.Text = "/";
+            pane.Title.FontSpec.FontColor = Color.Gray;
+            pane.IsFontsScaled = false;
+            pane.XAxis.Title.Text = "t ";
+            pane.YAxis.Title.Text = "Δ";
 
             deltas = new PointPairList();
             deltaSMA = new PointPairList();
@@ -32,8 +55,7 @@ namespace PairTradingView.Controls
             deltaWMACurve = GraphPane.AddCurve("wma", deltaWMA, Color.Yellow, SymbolType.None);
             deltaCurrentCurve = GraphPane.AddCurve("now", deltaCurrent, Color.Gray, SymbolType.None);
 
-            BlackTheme();
-
+            SetTheme();
         }
 
 
@@ -77,6 +99,14 @@ namespace PairTradingView.Controls
             Invalidate();
         }
 
+        public void ClearSMA()
+        {
+            deltaSMA.Clear();
+
+            AxisChange();
+            Invalidate();
+        }
+
         public void SetWMA(decimal[] values, int interval)
         {
             deltaWMA.Clear();
@@ -90,35 +120,15 @@ namespace PairTradingView.Controls
             Invalidate();
         }
 
-
-        private void Init()
+        public void ClearWMA()
         {
-            ZedGraph.GraphPane pane = GraphPane;
+            deltaWMA.Clear();
 
-            pane.Title.Text = "/";
-            pane.Title.FontSpec.FontColor = Color.Gray;
-            pane.IsFontsScaled = false;
-            pane.XAxis.Title.Text = "t ";
-            pane.YAxis.Title.Text = "Δ";
-
-
-            //pane.XAxis.Scale.Min = 0;
-            ////pane.XAxis.Type = AxisType.DateAsOrdinal;
-            //IsShowHScrollBar = true;
-            //ScrollMinX = 0;
-            //IsAutoScrollRange = false;
-            //IsEnableHPan = true;
-            //IsEnableHZoom = true;
-            //IsEnableVPan = false;
-            //IsEnableVZoom = false;
-            //AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
-            //GraphPane.XAxis.Scale.Min = 0;
-            //GraphPane.YAxis.Scale.MaxAuto = true;
-            //GraphPane.YAxis.Scale.MinAuto = true;
-            //GraphPane.IsBoundedRanges = true;
+            AxisChange();
+            Invalidate();
         }
 
-        public void BlackTheme()
+        private void SetTheme()
         {
             GraphPane pane = GraphPane;
             pane.Legend.Fill.Type = FillType.Solid;
@@ -143,8 +153,8 @@ namespace PairTradingView.Controls
             pane.XAxis.MajorGrid.IsVisible = true;
             pane.YAxis.MajorGrid.IsVisible = true;
 
-            pane.XAxis.MajorGrid.Color = Color.FromArgb(35, 35, 35);
-            pane.YAxis.MajorGrid.Color = Color.FromArgb(35, 35, 35);
+            pane.XAxis.MajorGrid.Color = Color.FromArgb(50, 50, 50);
+            pane.YAxis.MajorGrid.Color = Color.FromArgb(45, 45, 45);
 
             pane.XAxis.Title.FontSpec.FontColor = Color.Gray;
             pane.YAxis.Title.FontSpec.FontColor = Color.Gray;

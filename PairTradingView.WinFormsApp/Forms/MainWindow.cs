@@ -1,72 +1,162 @@
-﻿using System;
+﻿/*
+Copyright 2015 Denis Lebedev
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+*/
+
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
-using PairTradingView.Statistics;
-using PairTradingView.Synthetics;
-using PairTradingView.WinFormsApp.Forms;
+using NSynthetics.Data;
+using NSynthetics.Logic.Synthetics;
+using NSynthetics.Logic.Synthetics.RiskManagement;
+using NSynthetics.Logic.Synthetics.Spread;
+using NSynthetics.Statistics;
+using NSynthetics.Statistics.Models;
 
-namespace PairTradingView.Forms
+namespace PairTradingView
 {
     public partial class MainWindow : Form
     {
-        private Synthetic SyntheticSelected { get; set; }
-
-        public List<Synthetic> Synthetics { get; set; }
+        private Synthetic syntheticSelected;
+        private List<SpreadSynthetic> synthetics;
+        
+        public  InputData[] InputData { get; set; }
 
         public MainWindow()
         {
             InitializeComponent();
+
+            this.listView1.Click += listView1_Click;
+            this.SizeChanged += MainWindow_SizeChanged;
+            this.SMAPeriod.ValueChanged += SMAPeriod_ValueChanged;
+            this.WMAPeriod.ValueChanged += WMAPeriod_ValueChanged;
         }
 
         private void MainWindow_Load(object sender, EventArgs e)
         {
-            listView1.Click += listView1_Click;
+            AppStartWindow startWin = new AppStartWindow(this);
+            startWin.ShowDialog();
 
-            SMAperiodNUD.Maximum = decimal.MaxValue;
-            WMAperiodNUD.Maximum = decimal.MaxValue;
+            if (InputData == null)
+            {
+                MessageBox.Show("No input data. App will be closed.");
 
-            tradeBalanceNUD.Maximum = decimal.MaxValue;
-            tradeBalanceNUD.DecimalPlaces = 2;
-            tradeBalanceNUD.Value = 100000.00M;
+                this.Close();
+            }
+            try
+            {
+                var factory = new SpreadSyntheticsFactory(InputData);
 
-            tradeRiskNUD.DecimalPlaces = 2;
-            tradeRiskNUD.Value = 0.5M;
+                synthetics = factory.CreateSynthetics().Cast<SpreadSynthetic>().ToList();
+                ClearListView();
+                UpdateListView();
+
+                CenterToScreen();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Load => " + ex.Message);
+            }
+        }
+
+        private void WMAPeriod_ValueChanged(object sender, EventArgs e)
+        {
+            if (WMAPeriod.Value == 0)
+                zedGraphControl.ClearWMA();
+
+            if (WMAPeriod.Value > 0)
+            {
+                if (syntheticSelected == null)
+                {
+                    MessageBox.Show("Pair is not selected.");
+                }
+                else if (WMAPeriod.Value > syntheticSelected.Values.Count())
+                {
+                    MessageBox.Show("maximum value = " + syntheticSelected.Values.Count());
+                }
+                else
+                {
+                    zedGraphControl.SetWMA(
+                        MovingAverages.WMA(syntheticSelected.Values.ToArray(), (int)WMAPeriod.Value),
+                        (int)WMAPeriod.Value);
+                }
+            }
+        }
+
+        private void SMAPeriod_ValueChanged(object sender, EventArgs e)
+        {
+            if (SMAPeriod.Value == 0)
+                zedGraphControl.ClearSMA();
+
+            if (SMAPeriod.Value > 0)
+            { 
+                if (syntheticSelected == null)
+                {
+                    MessageBox.Show("Pair is not selected.");
+                }
+                else if (SMAPeriod.Value > syntheticSelected.Values.Count())
+                {
+                    MessageBox.Show("maximum value = " + syntheticSelected.Values.Count());
+                }
+                else
+                {
+                    zedGraphControl.SetSMA(
+                        MovingAverages.SMA(syntheticSelected.Values.ToArray(), (int)SMAPeriod.Value),
+                        (int)SMAPeriod.Value);
+                }
+            }
+        }
+
+        private void MainWindow_SizeChanged(object sender, EventArgs e)
+        {
+            buttomPanel.Height = this.Height / 3;
+            chartPanel.Width = (int)(this.Width * 0.73 + 1);
+            zedGraphControl.Width = (int)( this.Width * 0.73);
         }
 
         private void listView1_Click(object sender, EventArgs e)
         {
             try
-            {
+            {       
                 ListViewItem item = listView1.SelectedItems[0];
-                var xSymbol = item.SubItems[0].Text;
-                var ySymbol = item.SubItems[1].Text;
+                var name = item.SubItems[0].Name;
 
-                zedGraphControl.GraphPane.Title.Text = ySymbol + " | " + xSymbol;
+                zedGraphControl.GraphPane.Title.Text = name;
 
-                SyntheticSelected = Synthetics
-                     .First(i => i.Name.X == xSymbol && i.Name.Y == ySymbol);
+                syntheticSelected = synthetics
+                     .First(i => i.Name == name);
 
-                var deltas = SyntheticSelected.DeltaValues.ToArray();
+                var deltas = syntheticSelected.Values;
 
                 zedGraphControl.SetDeltas(deltas);
                 zedGraphControl.SetDeltaCurrent(deltas.Last());
 
-                if (SyntheticSelected.RiskParameters != null)
+                if (syntheticSelected.RiskParameters != null)
                 {
-                    pairName.Text = SyntheticSelected.Name.ToString() + " => ";
-                    xName.Text = SyntheticSelected.Name.X + " => ";
-                    yName.Text = SyntheticSelected.Name.Y + " => ";
+                    pairName.Text = syntheticSelected.Name.ToString() + " => ";
+                    xName.Text = syntheticSelected.Symbols[0] + " => ";
+                    yName.Text = syntheticSelected.Symbols[1] + " => ";
 
-                    pairsTradeBalance.Text = Math.Round(SyntheticSelected.RiskParameters.TradeBalance, 4).ToString();
-                    yTradeVolume.Text = Math.Round(SyntheticSelected.RiskParameters.YTradeBalance, 4).ToString();
-                    xTradeVolume.Text = Math.Round(SyntheticSelected.RiskParameters.XTradeBalanace, 4).ToString();
-                    riskLimit.Text = Math.Round((SyntheticSelected.RiskParameters.TradeBalance * (tradeRiskNUD.Value) / 100.0M), 4).ToString();
+                    pairsTradeBalance.Text = Math.Round(syntheticSelected.RiskParameters.Balance, 4).ToString();
+                    yTradeVolume.Text = Math.Round(syntheticSelected.RiskParameters.SymbolsBalances.Values.ElementAt(1), 4).ToString();
+                    xTradeVolume.Text = Math.Round(syntheticSelected.RiskParameters.SymbolsBalances.Values.ElementAt(0), 4).ToString();
+                    riskLimit.Text = Math.Round((syntheticSelected.RiskParameters.Balance * (risk.Value) / 100.0M), 4).ToString();
                 }
                 else
                 {
-
                     pairName.Text = "-";
                     xName.Text = "-";
                     yName.Text = "-";
@@ -76,55 +166,13 @@ namespace PairTradingView.Forms
                     riskLimit.Text = "0";
                 }
 
-                SMAperiodNUD_ValueChanged(null, null);
-                WMAperiodNUD_ValueChanged(null, null);
+                SMAPeriod_ValueChanged(null, null);
+                WMAPeriod_ValueChanged(null, null);
 
             }
             catch (Exception ex)
             {
                 Console.WriteLine("listView1_Click(s,e) " + ex.Message);
-            }
-        }
-
-        private void SMAperiodNUD_ValueChanged(object sender, EventArgs e)
-        {
-            if (SMAperiodNUD.Value > 0)
-            {
-                if (SyntheticSelected == null)
-                {
-                    MessageBox.Show("Pair is not selected.");
-                }
-                else if (SMAperiodNUD.Value > SyntheticSelected.DeltaValues.Count())
-                {
-                    MessageBox.Show("maximum value = " + SyntheticSelected.DeltaValues.Count());
-                }
-                else
-                {
-                    zedGraphControl.SetSMA(
-                        MovingAverages.SMA(SyntheticSelected.DeltaValues.ToArray(), (int)SMAperiodNUD.Value),
-                        (int)SMAperiodNUD.Value);
-                }
-            }
-        }
-
-        private void WMAperiodNUD_ValueChanged(object sender, EventArgs e)
-        {
-            if (WMAperiodNUD.Value > 0)
-            {
-                if (SyntheticSelected == null)
-                {
-                    MessageBox.Show("Pair is not selected.");
-                }
-                else if (WMAperiodNUD.Value > SyntheticSelected.DeltaValues.Count())
-                {
-                    MessageBox.Show("maximum value = " + SyntheticSelected.DeltaValues.Count());
-                }
-                else
-                {
-                    zedGraphControl.SetWMA(
-                        MovingAverages.WMA(SyntheticSelected.DeltaValues.ToArray(), (int)WMAperiodNUD.Value),
-                        (int)WMAperiodNUD.Value);
-                }
             }
         }
 
@@ -134,16 +182,14 @@ namespace PairTradingView.Forms
             {
                 if (listView1.CheckedItems.Count > 0)
                 {
-                    Synthetics.ForEach(i => i.RiskParameters = null);
-
                     var checkedSynths = new List<Synthetic>();
 
                     foreach (var code in listView1.CheckedItems.OfType<ListViewItem>().Select(i => i.Name).ToArray())
                     {
-                        checkedSynths.Add(Synthetics.First(i => i.Name.ToString() == code));
+                        checkedSynths.Add(synthetics.First(i => i.Name.ToString() == code));
                     }
 
-                    var rc = new RiskManagement.RiskCalculation(checkedSynths, tradeBalanceNUD.Value);
+                    var rc = new RiskManager(checkedSynths.ToArray(), balance.Value);
                     rc.Calculate();
 
                     listView1_Click(this, null);
@@ -159,51 +205,52 @@ namespace PairTradingView.Forms
             }
         }
 
-        public void UpdateListView()
+        private void UpdateListView()
         {
-            foreach (var item in Synthetics)
+            foreach (var item in synthetics)
             {
-                int index = listView1.Items.Add(item.Name.ToString(), item.Name.X, 0).Index;
 
-                listView1.Items[index].SubItems.Add(item.Name.Y);
-                listView1.Items[index].SubItems.Add(Math.Round(item.XStdDev, 6).ToString());
-                listView1.Items[index].SubItems.Add(Math.Round(item.YStdDev, 6).ToString());
-                listView1.Items[index].SubItems.Add(Math.Round(item.Regression.Alpha, 6).ToString());
-                listView1.Items[index].SubItems.Add(Math.Round(item.Regression.Beta, 6).ToString());
-                listView1.Items[index].SubItems.Add(Math.Round(item.Regression.RValue, 6).ToString());
-                listView1.Items[index].SubItems.Add(Math.Round(item.Regression.RSquared, 6).ToString());
-                listView1.Items[index].SubItems.Add(Math.Round(item.DeltaValues.Average(), 6).ToString());
-                listView1.Items[index].SubItems.Add(Math.Round(item.DeltaValues.Min(), 6).ToString());
-                listView1.Items[index].SubItems.Add(Math.Round(item.DeltaValues.Max(), 6).ToString());
-                listView1.Items[index].SubItems.Add(Math.Round(item.DeltaStdDev, 6).ToString());
+                var xSymbol = item.Symbols[0];
+                var ySymbol = item.Symbols[1];
 
-                if (item.Regression.RValue >= 0.7M && item.Regression.RValue <= 1)
+                int index = listView1.Items.Add(item.Name.ToString(), xSymbol, 0).Index;
+
+                listView1.Items[index].SubItems.Add(ySymbol);
+
+                var regression = item.Regression as LinearRegression;
+
+                listView1.Items[index].SubItems.Add(Math.Round(item.XStdDeviation, 6).ToString());
+                listView1.Items[index].SubItems.Add(Math.Round(item.YStdDeviation, 6).ToString());
+                listView1.Items[index].SubItems.Add(Math.Round(regression.Alpha, 6).ToString());
+                listView1.Items[index].SubItems.Add(Math.Round(regression.Beta, 6).ToString());
+                listView1.Items[index].SubItems.Add(Math.Round(regression.RValue, 6).ToString());
+                listView1.Items[index].SubItems.Add(Math.Round(regression.RSquared, 6).ToString());
+
+                var deltaAverage = item.Values.Average();
+                var deltaSD = BasicFuncs.GetStandardDeviation(item.Values);
+
+                listView1.Items[index].SubItems.Add(Math.Round(deltaAverage, 6).ToString());
+                listView1.Items[index].SubItems.Add(Math.Round(item.Values.Min(), 6).ToString());
+                listView1.Items[index].SubItems.Add(Math.Round(item.Values.Max(), 6).ToString());
+                listView1.Items[index].SubItems.Add(Math.Round(deltaSD, 6).ToString());
+                listView1.Items[index].SubItems.Add(Math.Round(deltaAverage - (3 * deltaSD), 6).ToString());
+                listView1.Items[index].SubItems.Add(Math.Round(deltaAverage + (3 * deltaSD), 6).ToString());
+
+                if (regression.RValue >= 0.7M && regression.RValue <= 1)
                 {
                     listView1.Items[index].BackColor = Color.FromArgb(38, 153, 38);
                 }
 
-                if (item.Regression.RValue <= -0.7M && item.Regression.RValue >= -1)
+                if (regression.RValue <= -0.7M && regression.RValue >= -1)
                 {
                     listView1.Items[index].BackColor = Color.FromArgb(191, 48, 48);
                 }
             }
         }
 
-        public void ClearListView()
+        private void ClearListView()
         {
             listView1.Items.Clear();
-        }
-
-        private void csvFiles_Click(object sender, EventArgs e)
-        {
-            CsvFiles files = new CsvFiles(this);
-            files.ShowDialog();
-        }
-
-        private void downloadQuotes_Click(object sender, EventArgs e)
-        {
-            Downloader downloader = new Downloader();
-            downloader.ShowDialog();
         }
 
     }
