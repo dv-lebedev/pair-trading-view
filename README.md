@@ -1,4 +1,4 @@
-# PairTradingView
+# Pair Trading View
 
 
 **Pair Trading View** - application for the visual analysis of synthetic financial instruments based on statistical models. 
