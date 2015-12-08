@@ -19,12 +19,12 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
-using NSynthetics.Data;
-using NSynthetics.Logic.Synthetics;
-using NSynthetics.Logic.Synthetics.RiskManagement;
-using NSynthetics.Logic.Synthetics.Spread;
-using NSynthetics.Statistics;
-using NSynthetics.Statistics.Models;
+using TradingTools.Data;
+using TradingTools.Logic.Synthetics;
+using TradingTools.Logic.Synthetics.RiskManagement;
+using TradingTools.Logic.Synthetics.Spread;
+using Statistics;
+using Statistics.Models;
 
 namespace PairTradingView
 {
@@ -219,8 +219,8 @@ namespace PairTradingView
 
                 var regression = item.Regression as LinearRegression;
 
-                listView1.Items[index].SubItems.Add(Math.Round(item.XStdDeviation, 6).ToString());
-                listView1.Items[index].SubItems.Add(Math.Round(item.YStdDeviation, 6).ToString());
+                listView1.Items[index].SubItems.Add(Math.Round(item.XStdDev, 6).ToString());
+                listView1.Items[index].SubItems.Add(Math.Round(item.YStdDev, 6).ToString());
                 listView1.Items[index].SubItems.Add(Math.Round(regression.Alpha, 6).ToString());
                 listView1.Items[index].SubItems.Add(Math.Round(regression.Beta, 6).ToString());
                 listView1.Items[index].SubItems.Add(Math.Round(regression.RValue, 6).ToString());

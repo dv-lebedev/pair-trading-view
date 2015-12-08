@@ -53,14 +53,8 @@
     <ApplicationIcon>main.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="NSynthetics.Data">
-      <HintPath>..\..\..\Users\Denis_Lebedev\Documents\MyProjects\NSynthetics\NSynthetics.Data\bin\Debug\NSynthetics.Data.dll</HintPath>
-    </Reference>
-    <Reference Include="NSynthetics.Logic">
-      <HintPath>..\..\..\Users\Denis_Lebedev\Documents\MyProjects\NSynthetics\NSynthetics.Logic\bin\Debug\NSynthetics.Logic.dll</HintPath>
-    </Reference>
-    <Reference Include="NSynthetics.Statistics">
-      <HintPath>..\..\..\Users\Denis_Lebedev\Documents\MyProjects\NSynthetics\NSynthetics.Statistics\bin\Debug\NSynthetics.Statistics.dll</HintPath>
+    <Reference Include="Statistics">
+      <HintPath>..\..\statistics\Statistics\bin\Debug\Statistics.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
@@ -73,6 +67,12 @@
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
+    <Reference Include="TradingTools.Data">
+      <HintPath>..\..\trading-tools\TradingTools.Data\bin\Debug\TradingTools.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="TradingTools.Logic">
+      <HintPath>..\..\trading-tools\TradingTools.Logic\bin\Debug\TradingTools.Logic.dll</HintPath>
+    </Reference>
     <Reference Include="ZedGraph">
       <HintPath>..\PairTradingView.Logic\bin\Debug\ZedGraph.dll</HintPath>
     </Reference>
