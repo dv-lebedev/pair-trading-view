@@ -28,9 +28,9 @@ Press start.
 
 
 ##Dependencies
-- NSynthetics.Data https://github.com/dv-lebedev/trading-tools
-- NSynthetics.Logic https://github.com/dv-lebedev/trading-tools
-- NSynthetics.Statistics https://github.com/dv-lebedev/statistics
+- TradingTools.Data https://github.com/dv-lebedev/trading-tools
+- TradingTools.Logic https://github.com/dv-lebedev/trading-tools
+- TradingTools.Statistics https://github.com/dv-lebedev/statistics
 - YahooFinanceQuoteDownloader https://github.com/ovnisoftware/YahooFinanceQuoteDownloader
 - ZedGraph
 
