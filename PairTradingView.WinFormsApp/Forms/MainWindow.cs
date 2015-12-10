@@ -31,8 +31,9 @@ namespace PairTradingView
     public partial class MainWindow : Form
     {
         private Synthetic syntheticSelected;
-        private List<SpreadSynthetic> synthetics;
-        
+        private List<Synthetic> synthetics;
+
+        public string DeltaTypeName { get; set; }    
         public  InputData[] InputData { get; set; }
 
         public MainWindow()
@@ -56,20 +57,15 @@ namespace PairTradingView
 
                 this.Close();
             }
-            try
-            {
-                var factory = new SpreadSyntheticsFactory(InputData);
-
-                synthetics = factory.CreateSynthetics().Cast<SpreadSynthetic>().ToList();
+           
+                var factory = SyntheticsFactory.LoadByName(DeltaTypeName, InputData);
+ 
+                synthetics = factory.CreateSynthetics().ToList();
                 ClearListView();
                 UpdateListView();
 
                 CenterToScreen();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Load => " + ex.Message);
-            }
+           
         }
 
         private void WMAPeriod_ValueChanged(object sender, EventArgs e)
@@ -207,9 +203,8 @@ namespace PairTradingView
 
         private void UpdateListView()
         {
-            foreach (var item in synthetics)
+            foreach (Synthetic item in synthetics)
             {
-
                 var xSymbol = item.Symbols[0];
                 var ySymbol = item.Symbols[1];
 
@@ -219,8 +214,8 @@ namespace PairTradingView
 
                 var regression = item.Regression as LinearRegression;
 
-                listView1.Items[index].SubItems.Add(Math.Round(item.XStdDev, 6).ToString());
-                listView1.Items[index].SubItems.Add(Math.Round(item.YStdDev, 6).ToString());
+                listView1.Items[index].SubItems.Add(Math.Round(item.StdDevs[0], 6).ToString());
+                listView1.Items[index].SubItems.Add(Math.Round(item.StdDevs[1], 6).ToString());
                 listView1.Items[index].SubItems.Add(Math.Round(regression.Alpha, 6).ToString());
                 listView1.Items[index].SubItems.Add(Math.Round(regression.Beta, 6).ToString());
                 listView1.Items[index].SubItems.Add(Math.Round(regression.RValue, 6).ToString());

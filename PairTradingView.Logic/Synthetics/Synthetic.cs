@@ -36,6 +36,8 @@ namespace PairTradingView.Logic.Synthetics
 
         public string[] Symbols { get; protected set; }
 
+        public decimal[] StdDevs { get; protected set; }
+
         public Synthetic(InputData[] values)
         {
             if (values == null)

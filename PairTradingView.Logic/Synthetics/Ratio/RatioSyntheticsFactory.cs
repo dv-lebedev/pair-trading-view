@@ -20,10 +20,10 @@ using PairTradingView.Data;
 
 namespace PairTradingView.Logic.Synthetics.Ratio
 {
-    public class RatioSyntheticFactory : SyntheticsFactory
+    public class RatioSyntheticsFactory : SyntheticsFactory
     {
 
-        public RatioSyntheticFactory(InputData[] values)
+        public RatioSyntheticsFactory(InputData[] values)
             : base(values)
         {
 

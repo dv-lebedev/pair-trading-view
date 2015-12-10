@@ -19,7 +19,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Windows.Forms;
 using PairTradingView.Data;
-
+using PairTradingView.Logic.Synthetics;
 
 namespace PairTradingView
 {
@@ -42,6 +42,15 @@ namespace PairTradingView
             };
 
             InitializeComponent();
+
+            var deltaTypes = SyntheticsFactory.GetFactoriesNames();
+
+            foreach(var item in deltaTypes)
+            {
+                deltaTypeBox.Items.Add(item);
+            }
+
+            deltaTypeBox.Text = deltaTypeBox.Items[0].ToString();
         }
 
         private void quoteDownloaderToolStripMenuItem_Click(object sender, EventArgs e)
@@ -60,6 +69,7 @@ namespace PairTradingView
                 csvFmt.PriceIndex = (int)priceCol.Value - 1;
 
                 this.mWind.InputData = GetInputData();
+                this.mWind.DeltaTypeName = deltaTypeBox.Text;
 
                 this.Close();
             }

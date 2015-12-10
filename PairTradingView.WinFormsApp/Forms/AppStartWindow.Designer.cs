@@ -39,6 +39,10 @@
             this.dtFmt = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.header = new System.Windows.Forms.CheckBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
+            this.deltaTypeBox = new System.Windows.Forms.ComboBox();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dtCol)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.priceCol)).BeginInit();
@@ -50,7 +54,7 @@
             this.quoteDownloaderToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(425, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(288, 24);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -63,7 +67,7 @@
             // 
             // StartBtn
             // 
-            this.StartBtn.Location = new System.Drawing.Point(156, 185);
+            this.StartBtn.Location = new System.Drawing.Point(88, 263);
             this.StartBtn.Name = "StartBtn";
             this.StartBtn.Size = new System.Drawing.Size(120, 23);
             this.StartBtn.TabIndex = 1;
@@ -73,7 +77,7 @@
             // 
             // dtCol
             // 
-            this.dtCol.Location = new System.Drawing.Point(203, 42);
+            this.dtCol.Location = new System.Drawing.Point(135, 61);
             this.dtCol.Minimum = new decimal(new int[] {
             1,
             0,
@@ -91,7 +95,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(98, 44);
+            this.label1.Location = new System.Drawing.Point(30, 63);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(99, 13);
             this.label1.TabIndex = 3;
@@ -100,7 +104,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(98, 111);
+            this.label2.Location = new System.Drawing.Point(30, 130);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(77, 13);
             this.label2.TabIndex = 5;
@@ -108,7 +112,7 @@
             // 
             // priceCol
             // 
-            this.priceCol.Location = new System.Drawing.Point(203, 109);
+            this.priceCol.Location = new System.Drawing.Point(135, 128);
             this.priceCol.Minimum = new decimal(new int[] {
             1,
             0,
@@ -125,7 +129,7 @@
             // 
             // dtFmt
             // 
-            this.dtFmt.Location = new System.Drawing.Point(203, 68);
+            this.dtFmt.Location = new System.Drawing.Point(135, 87);
             this.dtFmt.Name = "dtFmt";
             this.dtFmt.Size = new System.Drawing.Size(120, 20);
             this.dtFmt.TabIndex = 6;
@@ -134,7 +138,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(98, 71);
+            this.label3.Location = new System.Drawing.Point(30, 90);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(94, 13);
             this.label3.TabIndex = 7;
@@ -143,18 +147,59 @@
             // header
             // 
             this.header.AutoSize = true;
-            this.header.Location = new System.Drawing.Point(101, 144);
+            this.header.Location = new System.Drawing.Point(33, 163);
             this.header.Name = "header";
             this.header.Size = new System.Drawing.Size(103, 17);
             this.header.TabIndex = 8;
             this.header.Text = "Contains header";
             this.header.UseVisualStyleBackColor = true;
             // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label4.Location = new System.Drawing.Point(85, 35);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(124, 13);
+            this.label4.TabIndex = 9;
+            this.label4.Text = "CSV FILES FORMAT";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label5.Location = new System.Drawing.Point(116, 197);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(47, 13);
+            this.label5.TabIndex = 10;
+            this.label5.Text = "DELTA";
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(67, 220);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(40, 13);
+            this.label6.TabIndex = 11;
+            this.label6.Text = "Type : ";
+            // 
+            // deltaTypeBox
+            // 
+            this.deltaTypeBox.FormattingEnabled = true;
+            this.deltaTypeBox.Location = new System.Drawing.Point(134, 217);
+            this.deltaTypeBox.Name = "deltaTypeBox";
+            this.deltaTypeBox.Size = new System.Drawing.Size(121, 21);
+            this.deltaTypeBox.TabIndex = 12;
+            // 
             // AppStartWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(425, 220);
+            this.ClientSize = new System.Drawing.Size(288, 298);
+            this.Controls.Add(this.deltaTypeBox);
+            this.Controls.Add(this.label6);
+            this.Controls.Add(this.label5);
+            this.Controls.Add(this.label4);
             this.Controls.Add(this.header);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.dtFmt);
@@ -190,5 +235,9 @@
         private System.Windows.Forms.TextBox dtFmt;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.CheckBox header;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.ComboBox deltaTypeBox;
     }
 }

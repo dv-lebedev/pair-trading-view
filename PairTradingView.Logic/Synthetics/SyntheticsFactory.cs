@@ -17,6 +17,8 @@ limitations under the License.
 using PairTradingView.Data;
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Reflection;
 
 namespace PairTradingView.Logic.Synthetics
 {
@@ -32,5 +34,25 @@ namespace PairTradingView.Logic.Synthetics
         }
 
         public abstract IEnumerable<Synthetic> CreateSynthetics();
+
+        public static SyntheticsFactory LoadByName(string shortName, InputData[] values)
+        {
+            var type = Assembly.GetAssembly(typeof(SyntheticsFactory))
+                .GetTypes()
+                .Where(i=> i.BaseType == (typeof(SyntheticsFactory)) && 
+                i.Name.StartsWith(shortName)).First();
+
+            return (SyntheticsFactory)Activator.CreateInstance(type, new object[] { values });
+        }
+
+        public static string[] GetFactoriesNames()
+        {
+            var type = Assembly.GetAssembly(typeof(SyntheticsFactory)).GetTypes().Where(i => !i.IsAbstract);
+
+            return type
+                .Select(i => i.Name)
+                .Where(j => j.EndsWith("SyntheticsFactory"))
+                .Select(k => k.Replace("SyntheticsFactory", "")).ToArray();
+        }
     }
 }

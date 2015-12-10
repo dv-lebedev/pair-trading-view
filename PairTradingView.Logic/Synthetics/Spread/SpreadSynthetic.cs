@@ -26,9 +26,6 @@ namespace PairTradingView.Logic.Synthetics.Spread
 {
     public class SpreadSynthetic : Synthetic
     {
-        public decimal XStdDev { get; private set; }
-        public decimal YStdDev { get; private set; }
-
         public SpreadSynthetic(InputData[] values)
             : base(values)
         {
@@ -47,8 +44,11 @@ namespace PairTradingView.Logic.Synthetics.Spread
 
             SetValues(xValues, yValues, ((LinearRegression)Regression).RValue);
 
-            XStdDev = BasicFuncs.GetStandardDeviation(xValues);
-            YStdDev = BasicFuncs.GetStandardDeviation(yValues);
+            StdDevs = new decimal[2] 
+            {
+                BasicFuncs.GetStandardDeviation(xValues),
+                BasicFuncs.GetStandardDeviation(yValues)
+            };
         }
 
 

@@ -26,9 +26,6 @@ namespace PairTradingView.Logic.Synthetics.Ratio
 {
     public class RatioSynthetic : Synthetic
     {
-        public decimal XStdDev { get; private set; }
-        public decimal YStdDev { get; private set; }
-
         public RatioSynthetic(InputData[] values)
             : base(values)
         {
@@ -46,8 +43,11 @@ namespace PairTradingView.Logic.Synthetics.Ratio
 
             SetValues(xValues, yValues, ((LinearRegression)Regression).RValue);
 
-            XStdDev = BasicFuncs.GetStandardDeviation(xValues);
-            YStdDev = BasicFuncs.GetStandardDeviation(yValues);
+            StdDevs = new decimal[2]
+            {
+                BasicFuncs.GetStandardDeviation(xValues),
+                BasicFuncs.GetStandardDeviation(yValues)
+            };
         }
 
 

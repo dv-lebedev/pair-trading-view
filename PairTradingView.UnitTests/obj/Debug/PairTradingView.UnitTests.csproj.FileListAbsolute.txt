@@ -1,3 +1,4 @@
+C:\GitHub\pair-trading-view\PairTradingView.UnitTests\obj\Debug\PairTradingView.UnitTests.csprojResolveAssemblyReference.cache
 C:\GitHub\pair-trading-view\PairTradingView.UnitTests\bin\Debug\PairTradingView.UnitTests.dll
 C:\GitHub\pair-trading-view\PairTradingView.UnitTests\bin\Debug\PairTradingView.UnitTests.pdb
 C:\GitHub\pair-trading-view\PairTradingView.UnitTests\bin\Debug\Microsoft.VisualStudio.QualityTools.UnitTestFramework.dll
@@ -7,6 +8,5 @@ C:\GitHub\pair-trading-view\PairTradingView.UnitTests\bin\Debug\Statistics.dll
 C:\GitHub\pair-trading-view\PairTradingView.UnitTests\bin\Debug\PairTradingView.Data.pdb
 C:\GitHub\pair-trading-view\PairTradingView.UnitTests\bin\Debug\PairTradingView.Logic.pdb
 C:\GitHub\pair-trading-view\PairTradingView.UnitTests\bin\Debug\Statistics.pdb
-C:\GitHub\pair-trading-view\PairTradingView.UnitTests\obj\Debug\PairTradingView.UnitTests.csprojResolveAssemblyReference.cache
 C:\GitHub\pair-trading-view\PairTradingView.UnitTests\obj\Debug\PairTradingView.UnitTests.dll
 C:\GitHub\pair-trading-view\PairTradingView.UnitTests\obj\Debug\PairTradingView.UnitTests.pdb
