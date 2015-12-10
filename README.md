@@ -18,7 +18,7 @@
 Execute PairTradingView.exe in 'pair-trading-view\PairTradingView.WinFormsApp\bin\Debug\'.
 
 <p align="left">
-  <img width="300" alt="pic" src="https://github.com/dv-lebedev/PairTradingView/blob/master/appstart.png">
+  <img width="270" alt="pic" src="https://github.com/dv-lebedev/PairTradingView/blob/master/appstart.png">
 </p>
 
 Set DateTime & Price columns and DateTime format. Put csv files with a historical data into
