@@ -53,6 +53,12 @@
     <ApplicationIcon>main.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="PairTradingView.Data">
+      <HintPath>..\PairTradingView.Data\bin\Debug\PairTradingView.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="PairTradingView.Logic">
+      <HintPath>..\PairTradingView.Logic\bin\Debug\PairTradingView.Logic.dll</HintPath>
+    </Reference>
     <Reference Include="Statistics">
       <HintPath>..\..\statistics\Statistics\bin\Debug\Statistics.dll</HintPath>
     </Reference>
@@ -67,12 +73,6 @@
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
-    <Reference Include="TradingTools.Data">
-      <HintPath>..\..\trading-tools\TradingTools.Data\bin\Debug\TradingTools.Data.dll</HintPath>
-    </Reference>
-    <Reference Include="TradingTools.Logic">
-      <HintPath>..\..\trading-tools\TradingTools.Logic\bin\Debug\TradingTools.Logic.dll</HintPath>
-    </Reference>
     <Reference Include="ZedGraph">
       <HintPath>..\PairTradingView.Logic\bin\Debug\ZedGraph.dll</HintPath>
     </Reference>

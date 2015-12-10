@@ -19,10 +19,10 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
-using TradingTools.Data;
-using TradingTools.Logic.Synthetics;
-using TradingTools.Logic.Synthetics.RiskManagement;
-using TradingTools.Logic.Synthetics.Spread;
+using PairTradingView.Data;
+using PairTradingView.Logic.Synthetics;
+using PairTradingView.Logic.Synthetics.RiskManagement;
+using PairTradingView.Logic.Synthetics.Spread;
 using Statistics;
 using Statistics.Models;
 
