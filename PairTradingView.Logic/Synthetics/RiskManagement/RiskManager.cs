@@ -1,5 +1,8 @@
-﻿/*
-Copyright 2015 Denis Lebedev
+﻿
+#region LICENSE
+
+/*
+Copyright(c) 2015-2016 Denis Lebedev
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -14,6 +17,9 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
+#endregion
+
+
 using Statistics.Models;
 using System;
 using System.Collections.Generic;
@@ -23,33 +29,33 @@ namespace PairTradingView.Logic.Synthetics.RiskManagement
 {
     public class RiskManager
     {
-        private Synthetic[] synthetics;
-        private decimal[] synthIndex;
+        private Synthetic[] _synthetics;
+        private decimal[] _synthIndex;
 
-        public decimal Balance { get; protected set; }
+        public decimal Balance { get; }
 
         public RiskManager(Synthetic[] synthetics, decimal balance)
         {
-            this.synthetics = synthetics;
-            this.Balance = balance;
+            _synthetics = synthetics;
+            Balance = balance;
 
             SetSynthIndex();
         }
 
         private void SetSynthIndex()
         {
-            synthIndex = new decimal[synthetics.First().Values.Length];
+            _synthIndex = new decimal[_synthetics.First().Values.Length];
 
-            for (int i = 0; i < synthetics.First().Values.Length; i++)
+            for (int i = 0; i < _synthetics.First().Values.Length; i++)
             {
                 decimal value = 0;
 
-                for (int j = 0; j < synthetics.Length; j++)
+                for (int j = 0; j < _synthetics.Length; j++)
                 {
-                    value += synthetics[j].Values[i];
+                    value += _synthetics[j].Values[i];
                 }
 
-                synthIndex[i] += (value / synthetics.Length);
+                _synthIndex[i] += (value / _synthetics.Length);
             }
         }
 
@@ -59,9 +65,9 @@ namespace PairTradingView.Logic.Synthetics.RiskManagement
 
             decimal summary = 0;
 
-            foreach (var synthetic in synthetics)
+            foreach (var synthetic in _synthetics)
             {
-                var regression = new LinearRegression(synthIndex, synthetic.Values);
+                var regression = new LinearRegression(_synthIndex, synthetic.Values);
 
                 RiskParameters p = new RiskParameters(0, 1 / (1 + Math.Abs(regression.Beta)));
 
@@ -73,10 +79,10 @@ namespace PairTradingView.Logic.Synthetics.RiskManagement
             foreach (var item in result.Values)
             {
                 item.Weight = item.Weight / summary;
-                item.Balance = this.Balance * item.Weight;
+                item.Balance = Balance * item.Weight;
             }
 
-            foreach (var item in synthetics)
+            foreach (var item in _synthetics)
             {
                 var riskParam = result[item.Name];
 

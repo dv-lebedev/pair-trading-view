@@ -1,5 +1,8 @@
-﻿/*
-Copyright 2015 Denis Lebedev
+﻿
+#region LICENSE
+
+/*
+Copyright(c) 2015-2016 Denis Lebedev
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -14,6 +17,9 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
+#endregion
+
+
 using PairTradingView.Data;
 using System;
 using System.Collections.Generic;
@@ -24,13 +30,13 @@ namespace PairTradingView.Logic.Synthetics
 {
     public abstract class SyntheticsFactory
     {
-        protected InputData[] values;
+        protected InputData[] _values;
 
         public SyntheticsFactory(InputData[] values)
         {
             if (values == null) throw new ArgumentNullException("values");
 
-            this.values = values;
+            _values = values;
         }
 
         public abstract IEnumerable<Synthetic> CreateSynthetics();

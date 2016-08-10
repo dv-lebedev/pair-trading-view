@@ -1,5 +1,8 @@
-﻿/*
-Copyright 2015 Denis Lebedev
+﻿
+#region LICENSE
+
+/*
+Copyright(c) 2015-2016 Denis Lebedev
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -14,22 +17,24 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
+#endregion
+
+
 using System;
 
 namespace PairTradingView.Data
 {
     public class StockValue
     {
-        private string symbol;
-        private DateTime dateTime;
-        private decimal price;
-        private long volume;
+        private string _symbol;
+        private decimal _price;
+        private long _volume;
 
         public string Symbol
         {
             get
             {
-                return symbol;
+                return _symbol;
             }
             private set
             {
@@ -39,34 +44,24 @@ namespace PairTradingView.Data
                 if (value == string.Empty)
                     throw new ArgumentException("Symbol can't be equals emply string.", "Symbol");
 
-                symbol = value;
+                _symbol = value;
             }
         }
 
-        public DateTime DateTime
-        {
-            get
-            {
-                return dateTime;
-            }
-            private set
-            {
-                dateTime = value;
-            }
-        }
+        public DateTime DateTime { get; private set; }
 
         public decimal Price
         {
             get
             {
-                return price;
+                return _price;
             }
             private set
             {
                 if (value <= 0)
                     throw new ArgumentException("Stocks price can't be less or equals zero.", "Price");
 
-                price = value;
+                _price = value;
             }
         }
 
@@ -74,14 +69,14 @@ namespace PairTradingView.Data
         {
             get
             {
-                return volume;
+                return _volume;
             }
             private set
             {
                 if (value < 0)
                     throw new ArgumentException("Stocks volume can't be less than zero.", "Volume");
 
-                volume = value;
+                _volume = value;
             }
         }
 

@@ -1,5 +1,8 @@
-﻿/*
-Copyright 2015 Denis Lebedev
+﻿
+#region LICENSE
+
+/*
+Copyright(c) 2015-2016 Denis Lebedev
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -14,6 +17,8 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
+#endregion
+
 using System;
 using System.Collections.Generic;
 
@@ -21,10 +26,7 @@ namespace PairTradingView.Data
 {
     public abstract class DataProvider : IDisposable, PairTradingView.Data.IHistoricalDataProvider, PairTradingView.Data.IMarketDataProvider
     {
-        private bool disposedValue = false;
-
-        public Dictionary<string, DataChannel> DataChannels { get; protected set; }
-
+        public Dictionary<string, DataChannel> DataChannels { get;  }
 
         public DataProvider()
         {
@@ -59,12 +61,9 @@ namespace PairTradingView.Data
 
         public abstract bool IsHistoricalValuesExists(string symbol);
 
-
         protected abstract void OnLoad();
 
-
         protected abstract void OnDispose();
-
 
         protected virtual void OnStockInfoUpdated(IEnumerable<StockInfo> stockInfo)
         {
@@ -74,23 +73,9 @@ namespace PairTradingView.Data
             }
         }
 
-        protected virtual void Dispose(bool disposing)
+        public virtual void Dispose()
         {
-            if (!disposedValue)
-            {
-                if (disposing)
-                {
-                    OnDispose();
-                }
-
-                disposedValue = true;
-            }
+            OnDispose();
         }
-
-        public void Dispose()
-        {
-            Dispose(true);
-        }
-
     }
 }

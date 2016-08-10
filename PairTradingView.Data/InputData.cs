@@ -1,5 +1,8 @@
-﻿/*
-Copyright 2015 Denis Lebedev
+﻿
+#region LICENSE
+
+/*
+Copyright(c) 2015-2016 Denis Lebedev
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -14,24 +17,26 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
+#endregion
+
+
 using System;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace PairTradingView.Data
 {
     public class InputData
     {
-        public StockInfo StockInfo { get; private set; }
-        public List<StockValue> Values { get; private set; }
+        public StockInfo StockInfo { get; }
+        public IEnumerable<StockValue> Values { get; }
 
         public InputData(StockInfo stockInfo, IEnumerable<StockValue> values)
         {
             if (stockInfo == null) throw new ArgumentNullException("stockInfo");
             if (values == null) throw new ArgumentNullException("values");
 
-            this.StockInfo = stockInfo;
-            this.Values = values.ToList();
+            StockInfo = stockInfo;
+            Values = values;
         }
     }
 }

@@ -1,5 +1,8 @@
-﻿/*
-Copyright 2015 Denis Lebedev
+﻿
+#region LICENSE
+
+/*
+Copyright(c) 2015-2016 Denis Lebedev
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -14,25 +17,27 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
+#endregion
+
+
 using System;
 
 namespace PairTradingView.Data
 {
     public class StockInfo
     {
-        private string symbol;
-        private string name;
-        private string type;
-        private int lot;
-        private decimal price;
-        private long volume;
-
+        private string _symbol;
+        private string _name;
+        private string _type;
+        private int _lot;
+        private decimal _price;
+        private long _volume;
 
         public string Symbol
         {
             get
             {
-                return symbol;
+                return _symbol;
             }
             private set
             {
@@ -42,7 +47,7 @@ namespace PairTradingView.Data
                 if (value == string.Empty)
                     throw new ArgumentException("Symbol can't be equals emply string.", "Symbol");
 
-                symbol = value;
+                _symbol = value;
             }
         }
 
@@ -50,7 +55,7 @@ namespace PairTradingView.Data
         {
             get
             {
-                return name;
+                return _name;
             }
             private set
             {
@@ -60,7 +65,7 @@ namespace PairTradingView.Data
                 if (value == string.Empty)
                     throw new ArgumentException("Name can't be equals emply string.", "Name");
 
-                name = value;
+                _name = value;
             }
         }
 
@@ -68,7 +73,7 @@ namespace PairTradingView.Data
         {
             get
             {
-                return type;
+                return _type;
             }
             private set
             {
@@ -78,7 +83,7 @@ namespace PairTradingView.Data
                 if (value == string.Empty)
                     throw new ArgumentException("Type can't be equals emply string.", "Type");
 
-                type = value;
+                _type = value;
             }
         }
 
@@ -86,14 +91,14 @@ namespace PairTradingView.Data
         {
             get
             {
-                return lot;
+                return _lot;
             }
             private set
             {
                 if (value <= 0)
                     throw new ArgumentException("Stocks lot can't be less or equals zero.", "Lot");
 
-                lot = value;
+                _lot = value;
             }
         }
 
@@ -101,14 +106,14 @@ namespace PairTradingView.Data
         {
             get
             {
-                return price;
+                return _price;
             }
             private set
             {
                 if (value <= 0)
                     throw new ArgumentException("Stocks price can't be less or equals zero.", "Price");
 
-                price = value;
+                _price = value;
             }
         }
 
@@ -116,17 +121,16 @@ namespace PairTradingView.Data
         {
             get
             {
-                return volume;
+                return _volume;
             }
             private set
             {
                 if (value < 0)
                     throw new ArgumentException("Stocks volume can't be less than zero.", "Volume");
 
-                volume = value;
+                _volume = value;
             }
         }
-
 
         public StockInfo(string symbol, string name, string type,
             int lot, decimal price, long volume)

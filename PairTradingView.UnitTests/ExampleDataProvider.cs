@@ -1,5 +1,8 @@
-﻿/*
-Copyright 2015 Denis Lebedev
+﻿
+#region LICENSE
+
+/*
+Copyright(c) 2015-2016 Denis Lebedev
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -14,6 +17,9 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
+#endregion
+
+
 using PairTradingView.Data;
 using System;
 using System.Linq;
@@ -24,15 +30,14 @@ namespace PairTradingView.UnitTests
 {
     public class ExampleDataProvider : DataProvider
     {
+        private Random _randomInfo;
 
         public Dictionary<string, List<StockValue>> StockValues { get; private set; }
-
-        private Random randomInfo;
 
         public ExampleDataProvider()
             : base()
         {
-            randomInfo = new Random();
+            _randomInfo = new Random();
 
             StockValues = new Dictionary<string, List<StockValue>>();
 
@@ -44,15 +49,13 @@ namespace PairTradingView.UnitTests
             }
         }
 
-
-
         public override IEnumerable<StockInfo> GetAllStocksInfo()
         {
             var result = new List<StockInfo>();
 
             foreach (var item in StockValues)
             {
-                var randomStockValue = item.Value[randomInfo.Next(item.Value.Count - 1)];
+                var randomStockValue = item.Value[_randomInfo.Next(item.Value.Count - 1)];
 
                 var stockInfo = new StockInfo(item.Key, item.Key, "Shares", 1, randomStockValue.Price, randomStockValue.Volume);
 
@@ -71,14 +74,12 @@ namespace PairTradingView.UnitTests
         {
             var stockValues = StockValues[symbol];
 
-            var randomStockValue = stockValues[randomInfo.Next(stockValues.Count - 1)];
+            var randomStockValue = stockValues[_randomInfo.Next(stockValues.Count - 1)];
 
             var stockInfo = new StockInfo(symbol, symbol, "Shares", 1, randomStockValue.Price, randomStockValue.Volume);
 
             return stockInfo;
         }
-
-
 
         public override IEnumerable<StockValue> GetValues(string symbol)
         {

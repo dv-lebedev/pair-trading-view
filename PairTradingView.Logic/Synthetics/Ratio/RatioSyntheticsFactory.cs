@@ -1,5 +1,8 @@
-﻿/*
-Copyright 2015 Denis Lebedev
+﻿
+#region LICENSE
+
+/*
+Copyright(c) 2015-2016 Denis Lebedev
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -13,6 +16,9 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 */
+
+#endregion
+
 
 using System.Linq;
 using System.Collections.Generic;
@@ -31,16 +37,16 @@ namespace PairTradingView.Logic.Synthetics.Ratio
 
         public override IEnumerable<Synthetic> CreateSynthetics()
         {
-            List<Synthetic> synthetics = new List<Synthetic>();
+            var synthetics = new List<Synthetic>();
 
-            for (int i = 0; i < values.Count(); i++)
+            for (int i = 0; i < _values.Count(); i++)
             {
-                for (int j = i + 1; j < values.Count(); j++)
+                for (int j = i + 1; j < _values.Count(); j++)
                 {
-                    var x = values[i];
-                    var y = values[j];
+                    var x = _values[i];
+                    var y = _values[j];
 
-                    Synthetic synthetic = new RatioSynthetic(new[] { x, y });
+                    var synthetic = new RatioSynthetic(new[] { x, y });
 
                     synthetics.Add(synthetic);
                 }

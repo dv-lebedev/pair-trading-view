@@ -24,6 +24,13 @@ C:\Users\Denis_Lebedev\Documents\MyProjects\pair-trading-view-master\Source\Pair
 C:\GitHub\PairTradingView\Source\PairTradingView.WinFormsApp\obj\Debug\PairTradingView.WinFormsApp.Forms.CsvFiles.resources
 C:\GitHub\PairTradingView\Source\PairTradingView.WinFormsApp\bin\Debug\PairTradingView.Domain.dll
 C:\GitHub\PairTradingView\Source\PairTradingView.WinFormsApp\bin\Debug\PairTradingView.Domain.pdb
+C:\GitHub\pair-trading-view\PairTradingView.WinFormsApp\obj\Debug\PairTradingView.WinFormsApp.csprojResolveAssemblyReference.cache
+C:\GitHub\pair-trading-view\PairTradingView.WinFormsApp\obj\Debug\PairTradingView.Controls.NumericBox.resources
+C:\GitHub\pair-trading-view\PairTradingView.WinFormsApp\obj\Debug\PairTradingView.AppStartWindow.resources
+C:\GitHub\pair-trading-view\PairTradingView.WinFormsApp\obj\Debug\PairTradingView.Downloader.resources
+C:\GitHub\pair-trading-view\PairTradingView.WinFormsApp\obj\Debug\PairTradingView.MainWindow.resources
+C:\GitHub\pair-trading-view\PairTradingView.WinFormsApp\obj\Debug\PairTradingView.Properties.Resources.resources
+C:\GitHub\pair-trading-view\PairTradingView.WinFormsApp\obj\Debug\PairTradingView.WinFormsApp.csproj.GenerateResource.Cache
 C:\GitHub\pair-trading-view\PairTradingView.WinFormsApp\bin\Debug\PairTradingView.exe.config
 C:\GitHub\pair-trading-view\PairTradingView.WinFormsApp\bin\Debug\PairTradingView.exe
 C:\GitHub\pair-trading-view\PairTradingView.WinFormsApp\bin\Debug\PairTradingView.pdb
@@ -33,12 +40,5 @@ C:\GitHub\pair-trading-view\PairTradingView.WinFormsApp\bin\Debug\Statistics.dll
 C:\GitHub\pair-trading-view\PairTradingView.WinFormsApp\bin\Debug\PairTradingView.Data.pdb
 C:\GitHub\pair-trading-view\PairTradingView.WinFormsApp\bin\Debug\PairTradingView.Logic.pdb
 C:\GitHub\pair-trading-view\PairTradingView.WinFormsApp\bin\Debug\Statistics.pdb
-C:\GitHub\pair-trading-view\PairTradingView.WinFormsApp\obj\Debug\PairTradingView.WinFormsApp.csprojResolveAssemblyReference.cache
-C:\GitHub\pair-trading-view\PairTradingView.WinFormsApp\obj\Debug\PairTradingView.Controls.NumericBox.resources
-C:\GitHub\pair-trading-view\PairTradingView.WinFormsApp\obj\Debug\PairTradingView.AppStartWindow.resources
-C:\GitHub\pair-trading-view\PairTradingView.WinFormsApp\obj\Debug\PairTradingView.Downloader.resources
-C:\GitHub\pair-trading-view\PairTradingView.WinFormsApp\obj\Debug\PairTradingView.MainWindow.resources
-C:\GitHub\pair-trading-view\PairTradingView.WinFormsApp\obj\Debug\PairTradingView.Properties.Resources.resources
-C:\GitHub\pair-trading-view\PairTradingView.WinFormsApp\obj\Debug\PairTradingView.WinFormsApp.csproj.GenerateResource.Cache
 C:\GitHub\pair-trading-view\PairTradingView.WinFormsApp\obj\Debug\PairTradingView.exe
 C:\GitHub\pair-trading-view\PairTradingView.WinFormsApp\obj\Debug\PairTradingView.pdb

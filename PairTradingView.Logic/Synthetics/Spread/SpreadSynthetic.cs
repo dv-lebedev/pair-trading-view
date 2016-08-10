@@ -1,5 +1,8 @@
-﻿/*
-Copyright 2015 Denis Lebedev
+﻿
+#region LICENSE
+
+/*
+Copyright(c) 2015-2016 Denis Lebedev
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -13,6 +16,9 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 */
+
+#endregion
+
 
 using PairTradingView.Data;
 using PairTradingView.Logic.Synthetics.RiskManagement;
@@ -29,7 +35,6 @@ namespace PairTradingView.Logic.Synthetics.Spread
         public SpreadSynthetic(InputData[] values)
             : base(values)
         {
-
             InputData x = values[0];
             InputData y = values[1];
 
@@ -50,7 +55,6 @@ namespace PairTradingView.Logic.Synthetics.Spread
                 BasicFuncs.GetStandardDeviation(yValues)
             };
         }
-
 
         private void SetName(InputData x, InputData y)
         {

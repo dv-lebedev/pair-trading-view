@@ -1,5 +1,8 @@
-﻿/*
-Copyright 2015 Denis Lebedev
+﻿
+#region LICENSE
+
+/*
+Copyright(c) 2015-2016 Denis Lebedev
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -14,6 +17,9 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
+#endregion
+
+
 using PairTradingView.Data;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,7 +28,6 @@ namespace PairTradingView.Logic.Synthetics.Spread
 {
     public class SpreadSyntheticsFactory : SyntheticsFactory
     {
-
         public SpreadSyntheticsFactory(InputData[] values)
             : base(values)
         {
@@ -31,16 +36,16 @@ namespace PairTradingView.Logic.Synthetics.Spread
 
         public override IEnumerable<Synthetic> CreateSynthetics()
         {
-            List<Synthetic> synthetics = new List<Synthetic>();
+            var synthetics = new List<Synthetic>();
 
-            for (int i = 0; i < values.Count(); i++)
+            for (int i = 0; i < _values.Count(); i++)
             {
-                for (int j = i + 1; j < values.Count(); j++)
+                for (int j = i + 1; j < _values.Count(); j++)
                 {
-                    var x = values[i];
-                    var y = values[j];
+                    var x = _values[i];
+                    var y = _values[j];
 
-                    Synthetic synthetic = new SpreadSynthetic(new[] { x, y });
+                    var synthetic = new SpreadSynthetic(new[] { x, y });
 
                     synthetics.Add(synthetic);
                 }
