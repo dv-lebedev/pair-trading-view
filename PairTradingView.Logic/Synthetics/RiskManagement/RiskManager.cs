@@ -44,15 +44,15 @@ namespace PairTradingView.Logic.Synthetics.RiskManagement
 
         private void SetSynthIndex()
         {
-            _synthIndex = new decimal[_synthetics.First().Values.Length];
+            _synthIndex = new decimal[_synthetics.First().DeltaValues.Length];
 
-            for (int i = 0; i < _synthetics.First().Values.Length; i++)
+            for (int i = 0; i < _synthetics.First().DeltaValues.Length; i++)
             {
                 decimal value = 0;
 
                 for (int j = 0; j < _synthetics.Length; j++)
                 {
-                    value += _synthetics[j].Values[i];
+                    value += _synthetics[j].DeltaValues[i];
                 }
 
                 _synthIndex[i] += (value / _synthetics.Length);
@@ -67,7 +67,8 @@ namespace PairTradingView.Logic.Synthetics.RiskManagement
 
             foreach (var synthetic in _synthetics)
             {
-                var regression = new LinearRegression(_synthIndex, synthetic.Values);
+                var regression = new LinearRegression();
+                regression.Compute(_synthIndex, synthetic.DeltaValues);
 
                 RiskParameters p = new RiskParameters(0, 1 / (1 + Math.Abs(regression.Beta)));
 

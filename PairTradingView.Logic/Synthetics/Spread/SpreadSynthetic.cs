@@ -32,11 +32,15 @@ namespace PairTradingView.Logic.Synthetics.Spread
 {
     public class SpreadSynthetic : Synthetic
     {
-        public SpreadSynthetic(InputData[] values)
-            : base(values)
+        public SpreadSynthetic(InputData[] inputData)
+            : base(inputData)
         {
-            InputData x = values[0];
-            InputData y = values[1];
+        }
+
+        protected override void Initialize(InputData[] inputData)
+        {
+            InputData x = inputData[0];
+            InputData y = inputData[1];
 
             SetName(x, y);
 
@@ -49,10 +53,10 @@ namespace PairTradingView.Logic.Synthetics.Spread
 
             SetValues(xValues, yValues, ((LinearRegression)Regression).RValue);
 
-            StdDevs = new decimal[2] 
+            StdDevs = new decimal[2]
             {
-                BasicFuncs.GetStandardDeviation(xValues),
-                BasicFuncs.GetStandardDeviation(yValues)
+                MathUtils.GetStandardDeviation(xValues),
+                MathUtils.GetStandardDeviation(yValues)
             };
         }
 
@@ -63,18 +67,19 @@ namespace PairTradingView.Logic.Synthetics.Spread
 
         private void SetRegression(decimal[] x, decimal[] y)
         {
-            Regression = new LinearRegression(x, y);
+            Regression = new LinearRegression();
+            Regression.RegressionMethod.Compute(y, x);
         }
 
         private void SetValues(decimal[] x, decimal[] y, decimal r)
         {
             if (r >= 0)
             {
-                Values = x.Zip(y, (i, j) => j - i).ToArray();
+                DeltaValues = x.Zip(y, (i, j) => j - i).ToArray();
             }
             else
             {
-                Values = x.Zip(y, (i, j) => j + i).ToArray();
+                DeltaValues = x.Zip(y, (i, j) => j + i).ToArray();
             }
         }
 
@@ -99,11 +104,11 @@ namespace PairTradingView.Logic.Synthetics.Spread
 
             if (((LinearRegression)Regression).RValue >= 0)
             {
-                Value = (y.Price * y.Lot) - (x.Price * x.Lot);
+                DeltaValue = (y.Price * y.Lot) - (x.Price * x.Lot);
             }
             else
             {
-                Value = (y.Price * y.Lot) + (x.Price * x.Lot);
+                DeltaValue = (y.Price * y.Lot) + (x.Price * x.Lot);
             }
         }
     }

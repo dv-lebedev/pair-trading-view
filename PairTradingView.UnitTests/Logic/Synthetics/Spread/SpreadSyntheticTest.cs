@@ -41,7 +41,7 @@ namespace PairTradingView.UnitTests.Logic.Synthetics.Spread
             }
             catch (ArgumentNullException ex)
             {
-                Assert.AreEqual("values", ex.ParamName);
+                Assert.AreEqual("inputData", ex.ParamName);
             }
 
             var provider = new ExampleDataProvider();
@@ -58,8 +58,8 @@ namespace PairTradingView.UnitTests.Logic.Synthetics.Spread
 
             Assert.AreNotEqual(null, synth2.Regression);
 
-            Assert.AreEqual(658.88M, synth2.Values.First());
-            Assert.AreEqual(634.11M, synth2.Values.Last());
+            Assert.AreEqual(658.88M, synth2.DeltaValues.First());
+            Assert.AreEqual(634.11M, synth2.DeltaValues.Last());
 
             for (int i = 0; i < 1000; i++)
             {
@@ -70,7 +70,7 @@ namespace PairTradingView.UnitTests.Logic.Synthetics.Spread
 
                 var spread = (googInfo.Price * googInfo.Lot) + (aaplInfo.Price * aaplInfo.Lot);
 
-                Assert.AreEqual(spread, synth2.Value);
+                Assert.AreEqual(spread, synth2.DeltaValue);
             }
 
             try

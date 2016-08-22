@@ -36,19 +36,22 @@ namespace PairTradingView.Logic.Synthetics
 
         public RiskParameters RiskParameters { get; protected set; }
 
-        public decimal[] Values { get; protected set; }
+        public decimal[] DeltaValues { get; protected set; }
 
-        public virtual decimal Value { get; protected set; }
+        public virtual decimal DeltaValue { get; protected set; }
 
         public string[] Symbols { get; protected set; }
 
         public decimal[] StdDevs { get; protected set; }
 
-        public Synthetic(InputData[] values)
+        public Synthetic(InputData[] inputData)
         {
-            if (values == null)
-                throw new ArgumentNullException("values");
+            if (inputData == null) throw new ArgumentNullException("inputData");
+
+            Initialize(inputData);
         }
+
+        protected abstract void Initialize(InputData[] inputData);
 
         public abstract void SetRiskParameters(RiskParameters riskParameters);
 

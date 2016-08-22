@@ -191,7 +191,7 @@ namespace PairTradingView.UnitTests
 
                 provider.UpdateChannels(new[] { xInfo, yInfo });
                 Assert.AreEqual(true, 0 > ((LinearRegression)synthetic.Regression).RValue);
-                Assert.AreEqual(yInfo.Price + xInfo.Price, synthetic.Value);
+                Assert.AreEqual(yInfo.Price + xInfo.Price, synthetic.DeltaValue);
 
                 provider.RemoveChannel(synthetic.Name);
                 Assert.AreEqual(false, provider.DataChannels.ContainsKey(synthetic.Name));

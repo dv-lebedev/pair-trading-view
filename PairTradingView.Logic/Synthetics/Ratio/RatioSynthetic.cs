@@ -32,11 +32,15 @@ namespace PairTradingView.Logic.Synthetics.Ratio
 {
     public class RatioSynthetic : Synthetic
     {
-        public RatioSynthetic(InputData[] values)
-            : base(values)
+        public RatioSynthetic(InputData[] inputData)
+            : base(inputData)
         {
-            InputData x = values[0];
-            InputData y = values[1];
+        }
+
+        protected override void Initialize(InputData[] inputData)
+        {
+            InputData x = inputData[0];
+            InputData y = inputData[1];
 
             SetName(x, y);
 
@@ -51,8 +55,8 @@ namespace PairTradingView.Logic.Synthetics.Ratio
 
             StdDevs = new decimal[2]
             {
-                BasicFuncs.GetStandardDeviation(xValues),
-                BasicFuncs.GetStandardDeviation(yValues)
+                MathUtils.GetStandardDeviation(xValues),
+                MathUtils.GetStandardDeviation(yValues)
             };
         }
 
@@ -64,18 +68,19 @@ namespace PairTradingView.Logic.Synthetics.Ratio
 
         private void SetRegression(decimal[] x, decimal[] y)
         {
-            Regression = new LinearRegression(x, y);
+            Regression = new LinearRegression();
+            Regression.RegressionMethod.Compute(y, x);
         }
 
         private void SetValues(decimal[] x, decimal[] y, decimal r)
         {
             if (r >= 0)
             {
-                Values = x.Zip(y, (i, j) => j / i).ToArray();
+                DeltaValues = x.Zip(y, (i, j) => j / i).ToArray();
             }
             else
             {
-                Values = x.Zip(y, (i, j) =>
+                DeltaValues = x.Zip(y, (i, j) =>
                 (decimal)(Math.Log((double)j) * Math.Log((double)i)))
                 .ToArray();
             }
@@ -102,11 +107,14 @@ namespace PairTradingView.Logic.Synthetics.Ratio
 
             if (((LinearRegression)Regression).RValue >= 0)
             {
-                Value = (y.Price * y.Lot) / (x.Price * x.Lot);
+                DeltaValue = (y.Price * y.Lot) / (x.Price * x.Lot);
             }
             else
             {
-                Value = (decimal)(Math.Log((double)(y.Price * y.Lot)) * Math.Log((double)(x.Price * x.Lot)));
+                DeltaValue = (
+                    Math.Log((y.Price * y.Lot).ToDouble()) * 
+                    Math.Log((x.Price * x.Lot).ToDouble()))
+                    .ToDecimal();
             }
         }
     }

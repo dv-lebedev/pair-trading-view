@@ -84,14 +84,14 @@ namespace PairTradingView
                 {
                     MessageBox.Show("Pair is not selected.");
                 }
-                else if (WMAPeriod.Value > _syntheticSelected.Values.Count())
+                else if (WMAPeriod.Value > _syntheticSelected.DeltaValues.Count())
                 {
-                    MessageBox.Show("maximum value = " + _syntheticSelected.Values.Count());
+                    MessageBox.Show("maximum value = " + _syntheticSelected.DeltaValues.Count());
                 }
                 else
                 {
                     zedGraphControl.SetWMA(
-                        MovingAverages.WMA(_syntheticSelected.Values.ToArray(), (int)WMAPeriod.Value),
+                        MovingAverages.WMA(_syntheticSelected.DeltaValues.ToArray(), (int)WMAPeriod.Value),
                         (int)WMAPeriod.Value);
                 }
             }
@@ -108,14 +108,14 @@ namespace PairTradingView
                 {
                     MessageBox.Show("Pair is not selected.");
                 }
-                else if (SMAPeriod.Value > _syntheticSelected.Values.Count())
+                else if (SMAPeriod.Value > _syntheticSelected.DeltaValues.Count())
                 {
-                    MessageBox.Show("maximum value = " + _syntheticSelected.Values.Count());
+                    MessageBox.Show("maximum value = " + _syntheticSelected.DeltaValues.Count());
                 }
                 else
                 {
                     zedGraphControl.SetSMA(
-                        MovingAverages.SMA(_syntheticSelected.Values.ToArray(), (int)SMAPeriod.Value),
+                        MovingAverages.SMA(_syntheticSelected.DeltaValues.ToArray(), (int)SMAPeriod.Value),
                         (int)SMAPeriod.Value);
                 }
             }
@@ -140,7 +140,7 @@ namespace PairTradingView
                 _syntheticSelected = _synthetics
                      .First(i => i.Name == name);
 
-                var deltas = _syntheticSelected.Values;
+                var deltas = _syntheticSelected.DeltaValues;
 
                 zedGraphControl.SetDeltas(deltas);
                 zedGraphControl.SetDeltaCurrent(deltas.Last());
@@ -226,12 +226,12 @@ namespace PairTradingView
                 listView1.Items[index].SubItems.Add(Math.Round(regression.RValue, 6).ToString());
                 listView1.Items[index].SubItems.Add(Math.Round(regression.RSquared, 6).ToString());
 
-                var deltaAverage = item.Values.Average();
-                var deltaSD = BasicFuncs.GetStandardDeviation(item.Values);
+                var deltaAverage = item.DeltaValues.Average();
+                var deltaSD = MathUtils.GetStandardDeviation(item.DeltaValues);
 
                 listView1.Items[index].SubItems.Add(Math.Round(deltaAverage, 6).ToString());
-                listView1.Items[index].SubItems.Add(Math.Round(item.Values.Min(), 6).ToString());
-                listView1.Items[index].SubItems.Add(Math.Round(item.Values.Max(), 6).ToString());
+                listView1.Items[index].SubItems.Add(Math.Round(item.DeltaValues.Min(), 6).ToString());
+                listView1.Items[index].SubItems.Add(Math.Round(item.DeltaValues.Max(), 6).ToString());
                 listView1.Items[index].SubItems.Add(Math.Round(deltaSD, 6).ToString());
                 listView1.Items[index].SubItems.Add(Math.Round(deltaAverage - (3 * deltaSD), 6).ToString());
                 listView1.Items[index].SubItems.Add(Math.Round(deltaAverage + (3 * deltaSD), 6).ToString());
