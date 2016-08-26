@@ -54,7 +54,7 @@ namespace PairTradingView
                     throw new FormatException("Check csv files format.");
 
                 var value = new StockValue(
-                    symbol: path,
+                    symbol: new Symbol(path),
                     dateTime: DateTime.ParseExact(cuts[fmt.DateTimeIndex], fmt.DateTimeFormat, CultureInfo.InvariantCulture),
                     price: decimal.Parse(cuts[fmt.PriceIndex], CultureInfo.InvariantCulture),
                     volume: 1);

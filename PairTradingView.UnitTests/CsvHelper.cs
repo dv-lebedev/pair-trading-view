@@ -44,7 +44,7 @@ namespace PairTradingView.UnitTests
                     throw new FormatException();
 
                 var stockValue = new StockValue(
-                    symbol: path,
+                    symbol: new Symbol(path),
                     dateTime: DateTime.ParseExact(cuts[0] + cuts[1], "yyyyMMddHHmmss", CultureInfo.InvariantCulture),
                     price: decimal.Parse(cuts[5], CultureInfo.InvariantCulture),
                     volume: int.Parse(cuts[6], CultureInfo.InvariantCulture));

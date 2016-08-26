@@ -26,25 +26,25 @@ namespace PairTradingView.Data
 {
     public class StockValue
     {
-        private string _symbol;
-        private decimal _price;
-        private long _volume;
+        private Symbol symbol;
+        private decimal price;
+        private long volume;
 
-        public string Symbol
+        public Symbol Symbol
         {
             get
             {
-                return _symbol;
+                return symbol;
             }
             private set
             {
                 if (value == null)
                     throw new ArgumentNullException("Symbol");
 
-                if (value == string.Empty)
+                if (value.Name == string.Empty)
                     throw new ArgumentException("Symbol can't be equals emply string.", "Symbol");
 
-                _symbol = value;
+                symbol = value;
             }
         }
 
@@ -54,14 +54,14 @@ namespace PairTradingView.Data
         {
             get
             {
-                return _price;
+                return price;
             }
             private set
             {
                 if (value <= 0)
                     throw new ArgumentException("Stocks price can't be less or equals zero.", "Price");
 
-                _price = value;
+                price = value;
             }
         }
 
@@ -69,18 +69,18 @@ namespace PairTradingView.Data
         {
             get
             {
-                return _volume;
+                return volume;
             }
             private set
             {
                 if (value < 0)
                     throw new ArgumentException("Stocks volume can't be less than zero.", "Volume");
 
-                _volume = value;
+                volume = value;
             }
         }
 
-        public StockValue(string symbol, DateTime dateTime, decimal price, long volume)
+        public StockValue(Symbol symbol, DateTime dateTime, decimal price, long volume)
         {
             Symbol = symbol;
             DateTime = dateTime;
