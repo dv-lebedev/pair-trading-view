@@ -39,12 +39,12 @@ namespace PairTradingView.Logic.Synthetics.Ratio
         {
             var synthetics = new List<Synthetic>();
 
-            for (int i = 0; i < _values.Count(); i++)
+            for (int i = 0; i < values.Count(); i++)
             {
-                for (int j = i + 1; j < _values.Count(); j++)
+                for (int j = i + 1; j < values.Count(); j++)
                 {
-                    var x = _values[i];
-                    var y = _values[j];
+                    var x = values[i];
+                    var y = values[j];
 
                     var synthetic = new RatioSynthetic(new[] { x, y });
 

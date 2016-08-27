@@ -30,14 +30,14 @@ namespace PairTradingView.UnitTests
 {
     public class ExampleDataProvider : DataProvider
     {
-        private Random _randomInfo;
+        private Random randomInfo;
 
         public Dictionary<string, List<StockValue>> StockValues { get; private set; }
 
         public ExampleDataProvider()
             : base()
         {
-            _randomInfo = new Random();
+            randomInfo = new Random();
 
             StockValues = new Dictionary<string, List<StockValue>>();
 
@@ -55,7 +55,7 @@ namespace PairTradingView.UnitTests
 
             foreach (var item in StockValues)
             {
-                var randomStockValue = item.Value[_randomInfo.Next(item.Value.Count - 1)];
+                var randomStockValue = item.Value[randomInfo.Next(item.Value.Count - 1)];
 
                 var stockInfo = new StockInfo(item.Key, item.Key, "Shares", 1, randomStockValue.Price, randomStockValue.Volume);
 
@@ -74,7 +74,7 @@ namespace PairTradingView.UnitTests
         {
             var stockValues = StockValues[symbol];
 
-            var randomStockValue = stockValues[_randomInfo.Next(stockValues.Count - 1)];
+            var randomStockValue = stockValues[randomInfo.Next(stockValues.Count - 1)];
 
             var stockInfo = new StockInfo(symbol, symbol, "Shares", 1, randomStockValue.Price, randomStockValue.Volume);
 

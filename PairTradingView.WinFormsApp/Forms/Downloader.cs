@@ -247,5 +247,10 @@ namespace PairTradingView
 
             textBoxTicker.Text += webPageInfo;
         }
+
+        private void Downloader_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

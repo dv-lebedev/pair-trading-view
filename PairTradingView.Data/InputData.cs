@@ -28,15 +28,15 @@ namespace PairTradingView.Data
     public class InputData
     {
         public StockInfo StockInfo { get; }
-        public IEnumerable<StockValue> Values { get; }
+        public IEnumerable<StockValue> History { get; }
 
-        public InputData(StockInfo stockInfo, IEnumerable<StockValue> values)
+        public InputData(StockInfo stockInfo, IEnumerable<StockValue> history)
         {
             if (stockInfo == null) throw new ArgumentNullException("stockInfo");
-            if (values == null) throw new ArgumentNullException("values");
+            if (history == null) throw new ArgumentNullException("history");
 
             StockInfo = stockInfo;
-            Values = values;
+            History = history;
         }
     }
 }

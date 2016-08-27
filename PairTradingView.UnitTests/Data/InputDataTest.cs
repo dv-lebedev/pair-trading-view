@@ -74,7 +74,7 @@ namespace PairTradingView.UnitTests.Logic.Synthetics
             }
             catch (ArgumentNullException ex)
             {
-                Assert.AreEqual("values", ex.ParamName);
+                Assert.AreEqual("history", ex.ParamName);
             }
         }
     }

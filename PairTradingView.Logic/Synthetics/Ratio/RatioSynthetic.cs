@@ -46,8 +46,8 @@ namespace PairTradingView.Logic.Synthetics.Ratio
 
             Symbols = new[] { x.StockInfo.Symbol, y.StockInfo.Symbol };
 
-            var xValues = x.Values.Select(i => i.Price * x.StockInfo.Lot).ToArray();
-            var yValues = y.Values.Select(i => i.Price * y.StockInfo.Lot).ToArray();
+            var xValues = x.History.Select(i => i.Price * x.StockInfo.Lot).ToArray();
+            var yValues = y.History.Select(i => i.Price * y.StockInfo.Lot).ToArray();
 
             SetRegression(xValues, yValues);
 

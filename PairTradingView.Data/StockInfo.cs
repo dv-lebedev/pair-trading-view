@@ -26,18 +26,18 @@ namespace PairTradingView.Data
 {
     public class StockInfo
     {
-        private string _symbol;
-        private string _name;
-        private string _type;
-        private int _lot;
-        private decimal _price;
-        private long _volume;
+        private string symbol;
+        private string name;
+        private string type;
+        private int lot;
+        private decimal price;
+        private long volume;
 
         public string Symbol
         {
             get
             {
-                return _symbol;
+                return symbol;
             }
             private set
             {
@@ -47,7 +47,7 @@ namespace PairTradingView.Data
                 if (value == string.Empty)
                     throw new ArgumentException("Symbol can't be equals emply string.", "Symbol");
 
-                _symbol = value;
+                symbol = value;
             }
         }
 
@@ -55,7 +55,7 @@ namespace PairTradingView.Data
         {
             get
             {
-                return _name;
+                return name;
             }
             private set
             {
@@ -65,7 +65,7 @@ namespace PairTradingView.Data
                 if (value == string.Empty)
                     throw new ArgumentException("Name can't be equals emply string.", "Name");
 
-                _name = value;
+                name = value;
             }
         }
 
@@ -73,7 +73,7 @@ namespace PairTradingView.Data
         {
             get
             {
-                return _type;
+                return type;
             }
             private set
             {
@@ -83,7 +83,7 @@ namespace PairTradingView.Data
                 if (value == string.Empty)
                     throw new ArgumentException("Type can't be equals emply string.", "Type");
 
-                _type = value;
+                type = value;
             }
         }
 
@@ -91,14 +91,14 @@ namespace PairTradingView.Data
         {
             get
             {
-                return _lot;
+                return lot;
             }
             private set
             {
                 if (value <= 0)
                     throw new ArgumentException("Stocks lot can't be less or equals zero.", "Lot");
 
-                _lot = value;
+                lot = value;
             }
         }
 
@@ -106,14 +106,14 @@ namespace PairTradingView.Data
         {
             get
             {
-                return _price;
+                return price;
             }
             private set
             {
                 if (value <= 0)
                     throw new ArgumentException("Stocks price can't be less or equals zero.", "Price");
 
-                _price = value;
+                price = value;
             }
         }
 
@@ -121,14 +121,14 @@ namespace PairTradingView.Data
         {
             get
             {
-                return _volume;
+                return volume;
             }
             private set
             {
                 if (value < 0)
                     throw new ArgumentException("Stocks volume can't be less than zero.", "Volume");
 
-                _volume = value;
+                volume = value;
             }
         }
 

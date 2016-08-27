@@ -30,13 +30,13 @@ namespace PairTradingView.Logic.Synthetics
 {
     public abstract class SyntheticsFactory
     {
-        protected InputData[] _values;
+        protected InputData[] values;
 
         public SyntheticsFactory(InputData[] values)
         {
             if (values == null) throw new ArgumentNullException("values");
 
-            _values = values;
+            this.values = values;
         }
 
         public abstract IEnumerable<Synthetic> CreateSynthetics();

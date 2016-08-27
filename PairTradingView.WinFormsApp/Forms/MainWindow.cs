@@ -36,8 +36,8 @@ namespace PairTradingView
 {
     public partial class MainWindow : Form
     {
-        private Synthetic _syntheticSelected;
-        private List<Synthetic> _synthetics;
+        private Synthetic syntheticSelected;
+        private List<Synthetic> synthetics;
 
         public string DeltaTypeName { get; set; }    
         public InputData[] InputData { get; set; }
@@ -66,7 +66,7 @@ namespace PairTradingView
 
             var factory = SyntheticsFactory.LoadByName(DeltaTypeName, InputData);
 
-            _synthetics = factory.CreateSynthetics().ToList();
+            synthetics = factory.CreateSynthetics().ToList();
             ClearListView();
             UpdateListView();
 
@@ -80,18 +80,18 @@ namespace PairTradingView
 
             if (WMAPeriod.Value > 0)
             {
-                if (_syntheticSelected == null)
+                if (syntheticSelected == null)
                 {
                     MessageBox.Show("Pair is not selected.");
                 }
-                else if (WMAPeriod.Value > _syntheticSelected.DeltaValues.Count())
+                else if (WMAPeriod.Value > syntheticSelected.DeltaValues.Count())
                 {
-                    MessageBox.Show("maximum value = " + _syntheticSelected.DeltaValues.Count());
+                    MessageBox.Show("maximum value = " + syntheticSelected.DeltaValues.Count());
                 }
                 else
                 {
                     zedGraphControl.SetWMA(
-                        MovingAverages.WMA(_syntheticSelected.DeltaValues.ToArray(), (int)WMAPeriod.Value),
+                        MovingAverages.WMA(syntheticSelected.DeltaValues.ToArray(), (int)WMAPeriod.Value),
                         (int)WMAPeriod.Value);
                 }
             }
@@ -104,18 +104,18 @@ namespace PairTradingView
 
             if (SMAPeriod.Value > 0)
             { 
-                if (_syntheticSelected == null)
+                if (syntheticSelected == null)
                 {
                     MessageBox.Show("Pair is not selected.");
                 }
-                else if (SMAPeriod.Value > _syntheticSelected.DeltaValues.Count())
+                else if (SMAPeriod.Value > syntheticSelected.DeltaValues.Count())
                 {
-                    MessageBox.Show("maximum value = " + _syntheticSelected.DeltaValues.Count());
+                    MessageBox.Show("maximum value = " + syntheticSelected.DeltaValues.Count());
                 }
                 else
                 {
                     zedGraphControl.SetSMA(
-                        MovingAverages.SMA(_syntheticSelected.DeltaValues.ToArray(), (int)SMAPeriod.Value),
+                        MovingAverages.SMA(syntheticSelected.DeltaValues.ToArray(), (int)SMAPeriod.Value),
                         (int)SMAPeriod.Value);
                 }
             }
@@ -137,24 +137,24 @@ namespace PairTradingView
 
                 zedGraphControl.GraphPane.Title.Text = name;
 
-                _syntheticSelected = _synthetics
+                syntheticSelected = synthetics
                      .First(i => i.Name == name);
 
-                var deltas = _syntheticSelected.DeltaValues;
+                var deltas = syntheticSelected.DeltaValues;
 
                 zedGraphControl.SetDeltas(deltas);
                 zedGraphControl.SetDeltaCurrent(deltas.Last());
 
-                if (_syntheticSelected.RiskParameters != null)
+                if (syntheticSelected.RiskParameters != null)
                 {
-                    pairName.Text = _syntheticSelected.Name.ToString() + " => ";
-                    xName.Text = _syntheticSelected.Symbols[0] + " => ";
-                    yName.Text = _syntheticSelected.Symbols[1] + " => ";
+                    pairName.Text = syntheticSelected.Name.ToString() + " => ";
+                    xName.Text = syntheticSelected.Symbols[0] + " => ";
+                    yName.Text = syntheticSelected.Symbols[1] + " => ";
 
-                    pairsTradeBalance.Text = Math.Round(_syntheticSelected.RiskParameters.Balance, 4).ToString();
-                    yTradeVolume.Text = Math.Round(_syntheticSelected.RiskParameters.SymbolsBalances.Values.ElementAt(1), 4).ToString();
-                    xTradeVolume.Text = Math.Round(_syntheticSelected.RiskParameters.SymbolsBalances.Values.ElementAt(0), 4).ToString();
-                    riskLimit.Text = Math.Round((_syntheticSelected.RiskParameters.Balance * (risk.Value) / 100.0M), 4).ToString();
+                    pairsTradeBalance.Text = Math.Round(syntheticSelected.RiskParameters.Balance, 4).ToString();
+                    yTradeVolume.Text = Math.Round(syntheticSelected.RiskParameters.SymbolsBalances.Values.ElementAt(1), 4).ToString();
+                    xTradeVolume.Text = Math.Round(syntheticSelected.RiskParameters.SymbolsBalances.Values.ElementAt(0), 4).ToString();
+                    riskLimit.Text = Math.Round((syntheticSelected.RiskParameters.Balance * (risk.Value) / 100.0M), 4).ToString();
                 }
                 else
                 {
@@ -187,7 +187,7 @@ namespace PairTradingView
 
                     foreach (var code in listView1.CheckedItems.OfType<ListViewItem>().Select(i => i.Name).ToArray())
                     {
-                        checkedSynths.Add(_synthetics.First(i => i.Name.ToString() == code));
+                        checkedSynths.Add(synthetics.First(i => i.Name.ToString() == code));
                     }
 
                     var rc = new RiskManager(checkedSynths.ToArray(), balance.Value);
@@ -208,7 +208,7 @@ namespace PairTradingView
 
         private void UpdateListView()
         {
-            foreach (Synthetic item in _synthetics)
+            foreach (Synthetic item in synthetics)
             {
                 var xSymbol = item.Symbols[0];
                 var ySymbol = item.Symbols[1];

@@ -29,14 +29,14 @@ namespace PairTradingView.Logic.Synthetics.RiskManagement
 {
     public class RiskManager
     {
-        private Synthetic[] _synthetics;
-        private decimal[] _synthIndex;
+        private Synthetic[] synthetics;
+        private decimal[] synthIndex;
 
         public decimal Balance { get; }
 
         public RiskManager(Synthetic[] synthetics, decimal balance)
         {
-            _synthetics = synthetics;
+            this.synthetics = synthetics;
             Balance = balance;
 
             SetSynthIndex();
@@ -44,18 +44,18 @@ namespace PairTradingView.Logic.Synthetics.RiskManagement
 
         private void SetSynthIndex()
         {
-            _synthIndex = new decimal[_synthetics.First().DeltaValues.Length];
+            synthIndex = new decimal[synthetics.First().DeltaValues.Length];
 
-            for (int i = 0; i < _synthetics.First().DeltaValues.Length; i++)
+            for (int i = 0; i < synthetics.First().DeltaValues.Length; i++)
             {
                 decimal value = 0;
 
-                for (int j = 0; j < _synthetics.Length; j++)
+                for (int j = 0; j < synthetics.Length; j++)
                 {
-                    value += _synthetics[j].DeltaValues[i];
+                    value += synthetics[j].DeltaValues[i];
                 }
 
-                _synthIndex[i] += (value / _synthetics.Length);
+                synthIndex[i] += (value / synthetics.Length);
             }
         }
 
@@ -65,10 +65,10 @@ namespace PairTradingView.Logic.Synthetics.RiskManagement
 
             decimal summary = 0;
 
-            foreach (var synthetic in _synthetics)
+            foreach (var synthetic in synthetics)
             {
                 var regression = new LinearRegression();
-                regression.Compute(_synthIndex, synthetic.DeltaValues);
+                regression.Compute(synthIndex, synthetic.DeltaValues);
 
                 RiskParameters p = new RiskParameters(0, 1 / (1 + Math.Abs(regression.Beta)));
 
@@ -83,7 +83,7 @@ namespace PairTradingView.Logic.Synthetics.RiskManagement
                 item.Balance = Balance * item.Weight;
             }
 
-            foreach (var item in _synthetics)
+            foreach (var item in synthetics)
             {
                 var riskParam = result[item.Name];
 
