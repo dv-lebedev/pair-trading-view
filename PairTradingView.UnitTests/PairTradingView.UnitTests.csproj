@@ -59,7 +59,7 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
-    <Compile Include="CsvHelper.cs" />
+    <Compile Include="CsvUtils.cs" />
     <Compile Include="Data\InputDataTest.cs" />
     <Compile Include="Data\StockInfoTest.cs" />
     <Compile Include="Data\StockValueTest.cs" />

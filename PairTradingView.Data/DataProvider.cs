@@ -24,7 +24,7 @@ using System.Collections.Generic;
 
 namespace PairTradingView.Data
 {
-    public abstract class DataProvider : IDisposable, PairTradingView.Data.IHistoricalDataProvider, PairTradingView.Data.IMarketDataProvider
+    public abstract class DataProvider : IDisposable
     {
         public Dictionary<string, DataChannel> DataChannels { get;  }
 
@@ -45,13 +45,11 @@ namespace PairTradingView.Data
             return DataChannels.Remove(key);
         }
 
-
         public abstract StockInfo GetStockInfo(string symbol);
 
         public abstract IEnumerable<StockInfo> GetAllStocksInfo();
 
         public abstract string[] GetMarketSymbols();
-
 
         public abstract IEnumerable<StockValue> GetValues(string symbol, int lastNRecords);
 
@@ -63,7 +61,7 @@ namespace PairTradingView.Data
 
         protected abstract void OnLoad();
 
-        protected abstract void OnDispose();
+        protected abstract void OnDisposed();
 
         protected virtual void OnStockInfoUpdated(IEnumerable<StockInfo> stockInfo)
         {
@@ -75,7 +73,7 @@ namespace PairTradingView.Data
 
         public virtual void Dispose()
         {
-            OnDispose();
+            OnDisposed();
         }
     }
 }

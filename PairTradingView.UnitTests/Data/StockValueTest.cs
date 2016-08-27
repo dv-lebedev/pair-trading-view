@@ -34,9 +34,9 @@ namespace PairTradingView.UnitTests.Data
         {
             var dt = DateTime.Now;
 
-            StockValue value = new StockValue(new Symbol("IBM"), dt, 100.00M, 13579);
+            StockValue value = new StockValue("IBM", dt, 100.00M, 13579);
 
-            Assert.AreEqual("IBM", value.Symbol.Name);
+            Assert.AreEqual("IBM", value.Symbol);
             Assert.AreEqual(dt, value.DateTime);
             Assert.AreEqual(100.00M, value.Price);
             Assert.AreEqual(13579, value.Volume);
@@ -60,8 +60,7 @@ namespace PairTradingView.UnitTests.Data
         public void DateTimeTest()
         {
             var dt = DateTime.Now;
-            Symbol symbol = new Symbol("IBM");
-            StockValue value = new StockValue(symbol, dt, 100.00M, 13579);
+            StockValue value = new StockValue("IBM", dt, 100.00M, 13579);
 
             Assert.AreEqual(dt, value.DateTime);
 
@@ -72,8 +71,7 @@ namespace PairTradingView.UnitTests.Data
         {
             try
             {
-                Symbol symbol = new Symbol("IBM");
-                StockValue value = new StockValue(symbol, DateTime.Now, 0, 13579);
+                StockValue value = new StockValue("IBM", DateTime.Now, 0, 13579);
             }
             catch (ArgumentException e)
             {
@@ -82,8 +80,7 @@ namespace PairTradingView.UnitTests.Data
 
             try
             {
-                Symbol symbol = new Symbol("IBM");
-                StockValue value = new StockValue(symbol, DateTime.Now, -1, 13579);
+                StockValue value = new StockValue("IBM", DateTime.Now, -1, 13579);
             }
             catch (ArgumentException e)
             {
@@ -96,8 +93,7 @@ namespace PairTradingView.UnitTests.Data
         {
             try
             {
-                Symbol symbol = new Symbol("IBM");
-                StockValue value = new StockValue(symbol, DateTime.Now, 150.00M, -1);
+                StockValue value = new StockValue("IBM", DateTime.Now, 150.00M, -1);
             }
             catch (ArgumentException e)
             {

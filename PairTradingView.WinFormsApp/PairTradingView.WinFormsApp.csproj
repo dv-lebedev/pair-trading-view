@@ -90,7 +90,7 @@
     <Compile Include="Controls\ZedgraphControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="CsvHelper.cs" />
+    <Compile Include="CsvUtils.cs" />
     <Compile Include="Forms\AppStartWindow.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -111,7 +111,7 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="WinFormHelpers.cs" />
+    <Compile Include="WinFormsUtils.cs" />
     <EmbeddedResource Include="Controls\NumericBox.resx">
       <DependentUpon>NumericBox.cs</DependentUpon>
     </EmbeddedResource>

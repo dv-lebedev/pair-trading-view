@@ -97,7 +97,7 @@ namespace PairTradingView
                     {
                         var name = Path.GetFileNameWithoutExtension(file);
 
-                        var stockValues = CsvHelper.Read(file, csvFmt);
+                        var stockValues = CsvUtils.Read(file, csvFmt);
 
                         var data = new InputData(new StockInfo(name, name, "Shares", 1, 1, 1), stockValues);
 

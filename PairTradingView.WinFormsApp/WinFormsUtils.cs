@@ -25,7 +25,7 @@ using System.Windows.Forms;
 
 namespace PairTradingView
 {
-    public static class WinFormHelpers
+    public static class WinFormsUtils
     {
         public static void DoInvoke(this Form form, Action func)
         {

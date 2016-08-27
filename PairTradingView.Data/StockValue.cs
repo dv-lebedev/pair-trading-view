@@ -26,11 +26,11 @@ namespace PairTradingView.Data
 {
     public class StockValue
     {
-        private Symbol symbol;
+        private string symbol;
         private decimal price;
         private long volume;
 
-        public Symbol Symbol
+        public string Symbol
         {
             get
             {
@@ -41,7 +41,7 @@ namespace PairTradingView.Data
                 if (value == null)
                     throw new ArgumentNullException("Symbol");
 
-                if (value.Name == string.Empty)
+                if (value == string.Empty)
                     throw new ArgumentException("Symbol can't be equals emply string.", "Symbol");
 
                 symbol = value;
@@ -80,7 +80,7 @@ namespace PairTradingView.Data
             }
         }
 
-        public StockValue(Symbol symbol, DateTime dateTime, decimal price, long volume)
+        public StockValue(string symbol, DateTime dateTime, decimal price, long volume)
         {
             Symbol = symbol;
             DateTime = dateTime;

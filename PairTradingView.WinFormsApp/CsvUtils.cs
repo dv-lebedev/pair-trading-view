@@ -26,30 +26,40 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 
-namespace PairTradingView.UnitTests
+namespace PairTradingView
 {
-    public class CsvHelper
+    public class CsvFormat
     {
-        public static List<StockValue> Read(string path)
+        public int PriceIndex { get; set; }
+        public int DateTimeIndex { get; set; }
+        public string DateTimeFormat { get; set; }
+        public bool ContainsHeader { get; set; }
+    }
+
+    public class CsvUtils
+    {
+        public static List<StockValue> Read(string path, CsvFormat fmt)
         {
             var lines = File.ReadAllLines(path);
 
             var result = new List<StockValue>();
 
-            for (int i = 0; i < lines.Length; i++)
+            int startlineCount = fmt.ContainsHeader ? 1 : 0;
+
+            for (int i = startlineCount; i < lines.Length; i++)
             {
                 string[] cuts = lines[i].Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
 
                 if (cuts.Length == 0)
-                    throw new FormatException();
+                    throw new FormatException("Check csv files format.");
 
-                var stockValue = new StockValue(
-                    symbol: new Symbol(path),
-                    dateTime: DateTime.ParseExact(cuts[0] + cuts[1], "yyyyMMddHHmmss", CultureInfo.InvariantCulture),
-                    price: decimal.Parse(cuts[5], CultureInfo.InvariantCulture),
-                    volume: int.Parse(cuts[6], CultureInfo.InvariantCulture));
+                var value = new StockValue(
+                    symbol: path,
+                    dateTime: DateTime.ParseExact(cuts[fmt.DateTimeIndex], fmt.DateTimeFormat, CultureInfo.InvariantCulture),
+                    price: decimal.Parse(cuts[fmt.PriceIndex], CultureInfo.InvariantCulture),
+                    volume: 1);
 
-                result.Add(stockValue);
+                result.Add(value);
             }
 
             return result;

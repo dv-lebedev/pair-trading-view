@@ -53,7 +53,7 @@ namespace PairTradingView.UnitTests
         [TestMethod]
         public void CsvHelperTest()
         {
-            List<StockValue> stockValues = CsvHelper.Read("csv-samples/XOM.txt");
+            List<StockValue> stockValues = CsvUtils.Read("csv-samples/XOM.txt");
 
             Assert.AreNotEqual(0, stockValues.Count);
         }

@@ -45,7 +45,7 @@ namespace PairTradingView.UnitTests
             {
                 var name = Path.GetFileNameWithoutExtension(file);
 
-                StockValues.Add(name, CsvHelper.Read(file));
+                StockValues.Add(name, CsvUtils.Read(file));
             }
         }
 
@@ -106,7 +106,7 @@ namespace PairTradingView.UnitTests
             //...
         }
 
-        protected override void OnDispose()
+        protected override void OnDisposed()
         {
             //...
         }
