@@ -56,7 +56,7 @@ namespace PairTradingView.UnitTests.Logic.Synthetics.Spread
 
             Assert.AreEqual("GOOG|AAPL", synth2.Name);
 
-            Assert.AreNotEqual(null, synth2.Regression);
+            Assert.IsNotNull(synth2.Regression);
 
             Assert.AreEqual(658.88M, synth2.DeltaValues.First());
             Assert.AreEqual(634.11M, synth2.DeltaValues.Last());

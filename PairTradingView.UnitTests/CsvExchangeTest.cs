@@ -33,7 +33,6 @@ namespace PairTradingView.UnitTests
     [TestClass]
     public class CsvExchangeTest
     {
-
         public static CsvExchange LoadExchange()
         {
             return new CsvExchange();
@@ -44,7 +43,7 @@ namespace PairTradingView.UnitTests
         {
             using (var exchange = LoadExchange())
             {
-                Assert.AreNotEqual(null, exchange);
+                Assert.IsNotNull(exchange);
 
                 Assert.AreEqual(4, exchange.StockValues.Count);
             }
@@ -67,7 +66,7 @@ namespace PairTradingView.UnitTests
             {
                 var stockInfo = exchange.GetStockInfo("AAPL");
 
-                Assert.AreNotEqual(null, stockInfo);
+                Assert.IsNotNull(stockInfo);
                 Assert.AreEqual("AAPL", stockInfo.Symbol);
             }
 
@@ -80,7 +79,7 @@ namespace PairTradingView.UnitTests
             {
                 var stocksInfo = exchange.GetAllStocksInfo();
 
-                Assert.AreNotEqual(null, stocksInfo);
+                Assert.IsNotNull(stocksInfo);
                 Assert.AreEqual(4, stocksInfo.Count());
             }
 
@@ -97,7 +96,7 @@ namespace PairTradingView.UnitTests
 
                 foreach (var item in symbols)
                 {
-                    Assert.AreEqual(true, availableSymbols.Contains(item));
+                    Assert.IsTrue(availableSymbols.Contains(item));
                 }
             }
         }
@@ -111,7 +110,7 @@ namespace PairTradingView.UnitTests
             {
                 var stockValues = exchange.GetValues("AAPL", 20);
 
-                Assert.AreNotEqual(null, stockValues);
+                Assert.IsNotNull(stockValues);
 
                 Assert.AreEqual(new DateTime(2014, 12, 4), stockValues.First().DateTime);
                 Assert.AreEqual(new DateTime(2015, 1, 2), stockValues.Last().DateTime);
@@ -126,7 +125,7 @@ namespace PairTradingView.UnitTests
             {
                 var stockValues = exchange.GetValues("XOM");
 
-                Assert.AreNotEqual(null, stockValues);
+                Assert.IsNotNull(stockValues);
 
                 Assert.AreEqual(253, stockValues.Count());
 
@@ -146,7 +145,7 @@ namespace PairTradingView.UnitTests
 
                 var stockValues = exchange.GetValues("KO", first, last);
 
-                Assert.AreNotEqual(null, stockValues);
+                Assert.IsNotNull(stockValues);
 
                 Assert.AreEqual(21, stockValues.Count());
 
@@ -160,10 +159,10 @@ namespace PairTradingView.UnitTests
         {
             using (var exchange = LoadExchange())
             {
-                Assert.AreEqual(true, exchange.IsHistoricalValuesExists("AAPL"));
-                Assert.AreEqual(true, exchange.IsHistoricalValuesExists("GOOG"));
-                Assert.AreEqual(true, exchange.IsHistoricalValuesExists("XOM"));
-                Assert.AreEqual(true, exchange.IsHistoricalValuesExists("KO"));
+                Assert.IsTrue(exchange.IsHistoricalValuesExists("AAPL"));
+                Assert.IsTrue(exchange.IsHistoricalValuesExists("GOOG"));
+                Assert.IsTrue(exchange.IsHistoricalValuesExists("XOM"));
+                Assert.IsTrue(exchange.IsHistoricalValuesExists("KO"));
             }
         }
 
@@ -183,18 +182,18 @@ namespace PairTradingView.UnitTests
 
 
                 exchange.DataChannels.Add(synthetic.Name, synthetic);
-                Assert.AreEqual(true, exchange.DataChannels.ContainsKey(synthetic.Name));
+                Assert.IsTrue(exchange.DataChannels.ContainsKey(synthetic.Name));
 
                 var yInfo = input[0].Info;
                 var xInfo = input[1].Info;
 
 
                 exchange.StockInfoUpdated(new[] { xInfo, yInfo });
-                Assert.AreEqual(true, 0 > ((LinearRegression)synthetic.Regression).RValue);
+                Assert.IsTrue(0 > ((LinearRegression)synthetic.Regression).RValue);
                 Assert.AreEqual(yInfo.Price + xInfo.Price, synthetic.DeltaValue);
 
                 exchange.DataChannels.Remove(synthetic.Name);
-                Assert.AreEqual(false, exchange.DataChannels.ContainsKey(synthetic.Name));
+                Assert.IsFalse(exchange.DataChannels.ContainsKey(synthetic.Name));
             }
         }
     }
