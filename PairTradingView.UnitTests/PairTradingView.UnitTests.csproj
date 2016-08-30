@@ -60,7 +60,7 @@
   </Choose>
   <ItemGroup>
     <Compile Include="CsvUtils.cs" />
-    <Compile Include="Data\InputDataTest.cs" />
+    <Compile Include="Data\StockTest.cs" />
     <Compile Include="Data\StockInfoTest.cs" />
     <Compile Include="Data\StockValueTest.cs" />
     <Compile Include="ExampleDataProvider.cs" />

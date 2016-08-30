@@ -40,7 +40,7 @@ namespace PairTradingView
         private List<Synthetic> synthetics;
 
         public string DeltaTypeName { get; set; }    
-        public InputData[] InputData { get; set; }
+        public Stock[] InputData { get; set; }
 
         public MainWindow()
         {

@@ -44,14 +44,14 @@ namespace PairTradingView.Logic.Synthetics
 
         public decimal[] StdDevs { get; protected set; }
 
-        public Synthetic(InputData[] inputData)
+        public Synthetic(Stock[] stocks)
         {
-            if (inputData == null) throw new ArgumentNullException("inputData");
+            if (stocks == null) throw new ArgumentNullException("stocks");
 
-            Initialize(inputData);
+            Initialize(stocks);
         }
 
-        protected abstract void Initialize(InputData[] inputData);
+        protected abstract void Initialize(Stock[] stocks);
 
         public abstract void SetRiskParameters(RiskParameters riskParameters);
 

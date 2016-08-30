@@ -39,7 +39,7 @@ namespace PairTradingView.UnitTests.Logic.Synthetics
 
             string[] codes = { "GOOG", "AAPL", "KO", "XOM" };
 
-            List<InputData> inputs = new List<InputData>();
+            List<Stock> inputs = new List<Stock>();
 
             foreach (var item in codes)
             {
@@ -48,7 +48,7 @@ namespace PairTradingView.UnitTests.Logic.Synthetics
 
                 Assert.AreEqual(20, values.Count());
 
-                InputData iv = new InputData(info, values);
+                Stock iv = new Stock(info, values);
 
                 inputs.Add(iv);
             }
@@ -58,7 +58,7 @@ namespace PairTradingView.UnitTests.Logic.Synthetics
 
             try
             {
-                new InputData(null, new List<StockValue>());
+                new Stock(null, new List<StockValue>());
             }
             catch (ArgumentNullException ex)
             {
@@ -70,7 +70,7 @@ namespace PairTradingView.UnitTests.Logic.Synthetics
             {
                 var stockInfo = new StockInfo("GOOG", "GOOG Inc.", "Shares", 1, 1000.00M, 123456789);
 
-                new InputData(stockInfo, null);
+                new Stock(stockInfo, null);
             }
             catch (ArgumentNullException ex)
             {

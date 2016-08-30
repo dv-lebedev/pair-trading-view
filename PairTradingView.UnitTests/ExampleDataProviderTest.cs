@@ -173,10 +173,10 @@ namespace PairTradingView.UnitTests
         {
             using (var provider = Load())
             {
-                InputData[] input =
+                Stock[] input =
                 {
-                    new InputData(provider.GetStockInfo("AAPL"), provider.GetValues("AAPL", 100)),
-                    new InputData(provider.GetStockInfo("GOOG"), provider.GetValues("GOOG", 100))
+                    new Stock(provider.GetStockInfo("AAPL"), provider.GetValues("AAPL", 100)),
+                    new Stock(provider.GetStockInfo("GOOG"), provider.GetValues("GOOG", 100))
                 };
 
                 var synthetic = new SpreadSynthetic(input);
@@ -185,8 +185,8 @@ namespace PairTradingView.UnitTests
                 provider.AddDataChannel(synthetic.Name, synthetic);
                 Assert.AreEqual(true, provider.DataChannels.ContainsKey(synthetic.Name));
 
-                var yInfo = input[0].StockInfo;
-                var xInfo = input[1].StockInfo;
+                var yInfo = input[0].Info;
+                var xInfo = input[1].Info;
 
 
                 provider.UpdateChannels(new[] { xInfo, yInfo });

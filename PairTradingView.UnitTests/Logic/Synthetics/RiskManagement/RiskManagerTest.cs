@@ -38,11 +38,11 @@ namespace PairTradingView.UnitTests.Logic.Synthetics.RiskManagement
         {
             var provider = new ExampleDataProvider();
 
-            InputData[] input =
+            Stock[] input =
                 {
-                    new InputData(provider.GetStockInfo("AAPL"), provider.GetValues("AAPL", 100)),
-                    new InputData(provider.GetStockInfo("GOOG"), provider.GetValues("GOOG", 100)),
-                    new InputData(provider.GetStockInfo("XOM"), provider.GetValues("XOM", 100))
+                    new Stock(provider.GetStockInfo("AAPL"), provider.GetValues("AAPL", 100)),
+                    new Stock(provider.GetStockInfo("GOOG"), provider.GetValues("GOOG", 100)),
+                    new Stock(provider.GetStockInfo("XOM"), provider.GetValues("XOM", 100))
                 };
 
             var factory = new SpreadSyntheticsFactory(input);

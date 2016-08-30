@@ -20,12 +20,23 @@ limitations under the License.
 #endregion
 
 
+using System;
 using System.Collections.Generic;
 
 namespace PairTradingView.Data
 {
-    public interface DataChannel
+    public class Stock
     {
-        void StockInfoUpdated(IEnumerable<StockInfo> stockInfo);
+        public StockInfo Info { get; }
+        public IEnumerable<StockValue> History { get; }
+
+        public Stock(StockInfo stockInfo, IEnumerable<StockValue> history)
+        {
+            if (stockInfo == null) throw new ArgumentNullException("stockInfo");
+            if (history == null) throw new ArgumentNullException("history");
+
+            Info = stockInfo;
+            History = history;
+        }
     }
 }

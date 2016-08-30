@@ -30,18 +30,18 @@ namespace PairTradingView.Logic.Synthetics
 {
     public abstract class SyntheticsFactory
     {
-        protected InputData[] values;
+        protected Stock[] stocks;
 
-        public SyntheticsFactory(InputData[] values)
+        public SyntheticsFactory(Stock[] stocks)
         {
-            if (values == null) throw new ArgumentNullException("values");
+            if (stocks == null) throw new ArgumentNullException("stocks");
 
-            this.values = values;
+            this.stocks = stocks;
         }
 
         public abstract IEnumerable<Synthetic> CreateSynthetics();
 
-        public static SyntheticsFactory LoadByName(string shortName, InputData[] values)
+        public static SyntheticsFactory LoadByName(string shortName, Stock[] values)
         {
             var type = Assembly.GetAssembly(typeof(SyntheticsFactory))
                 .GetTypes()

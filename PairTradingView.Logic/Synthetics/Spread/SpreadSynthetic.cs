@@ -32,22 +32,22 @@ namespace PairTradingView.Logic.Synthetics.Spread
 {
     public class SpreadSynthetic : Synthetic
     {
-        public SpreadSynthetic(InputData[] inputData)
+        public SpreadSynthetic(Stock[] inputData)
             : base(inputData)
         {
         }
 
-        protected override void Initialize(InputData[] inputData)
+        protected override void Initialize(Stock[] inputData)
         {
-            InputData x = inputData[0];
-            InputData y = inputData[1];
+            Stock x = inputData[0];
+            Stock y = inputData[1];
 
             SetName(x, y);
 
-            Symbols = new[] { x.StockInfo.Symbol, y.StockInfo.Symbol };
+            Symbols = new[] { x.Info.Symbol, y.Info.Symbol };
 
-            var xValues = x.History.Select(i => i.Price * x.StockInfo.Lot).ToArray();
-            var yValues = y.History.Select(i => i.Price * y.StockInfo.Lot).ToArray();
+            var xValues = x.History.Select(i => i.Price * x.Info.Lot).ToArray();
+            var yValues = y.History.Select(i => i.Price * y.Info.Lot).ToArray();
 
             SetRegression(xValues, yValues);
 
@@ -60,9 +60,9 @@ namespace PairTradingView.Logic.Synthetics.Spread
             };
         }
 
-        private void SetName(InputData x, InputData y)
+        private void SetName(Stock x, Stock y)
         {
-            Name = string.Format("{0}|{1}", y.StockInfo.Symbol, x.StockInfo.Symbol);
+            Name = string.Format("{0}|{1}", y.Info.Symbol, x.Info.Symbol);
         }
 
         private void SetRegression(decimal[] x, decimal[] y)

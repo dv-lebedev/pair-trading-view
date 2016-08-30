@@ -25,18 +25,11 @@ using System.Collections.Generic;
 
 namespace PairTradingView.Data
 {
-    public class InputData
+    public interface IHistoricalDataProvider
     {
-        public StockInfo StockInfo { get; }
-        public IEnumerable<StockValue> History { get; }
-
-        public InputData(StockInfo stockInfo, IEnumerable<StockValue> history)
-        {
-            if (stockInfo == null) throw new ArgumentNullException("stockInfo");
-            if (history == null) throw new ArgumentNullException("history");
-
-            StockInfo = stockInfo;
-            History = history;
-        }
+        IEnumerable<StockValue> GetValues(string symbol);
+        IEnumerable<StockValue> GetValues(string symbol, int lastNRecords);
+        IEnumerable<StockValue> GetValues(string symbol, DateTime first, DateTime last);
+        bool IsHistoricalValuesExists(string symbol);
     }
 }

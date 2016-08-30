@@ -24,8 +24,10 @@ using System.Collections.Generic;
 
 namespace PairTradingView.Data
 {
-    public interface DataChannel
+    public interface IMarketDataProvider
     {
-        void StockInfoUpdated(IEnumerable<StockInfo> stockInfo);
+        IEnumerable<StockInfo> GetAllStocksInfo();
+        string[] GetMarketSymbols();
+        StockInfo GetStockInfo(string symbol);
     }
 }

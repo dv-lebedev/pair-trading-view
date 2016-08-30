@@ -28,7 +28,7 @@ namespace PairTradingView.Logic.Synthetics.Spread
 {
     public class SpreadSyntheticsFactory : SyntheticsFactory
     {
-        public SpreadSyntheticsFactory(InputData[] values)
+        public SpreadSyntheticsFactory(Stock[] values)
             : base(values)
         {
 
@@ -38,12 +38,12 @@ namespace PairTradingView.Logic.Synthetics.Spread
         {
             var synthetics = new List<Synthetic>();
 
-            for (int i = 0; i < values.Count(); i++)
+            for (int i = 0; i < stocks.Count(); i++)
             {
-                for (int j = i + 1; j < values.Count(); j++)
+                for (int j = i + 1; j < stocks.Count(); j++)
                 {
-                    var x = values[i];
-                    var y = values[j];
+                    var x = stocks[i];
+                    var y = stocks[j];
 
                     var synthetic = new SpreadSynthetic(new[] { x, y });
 

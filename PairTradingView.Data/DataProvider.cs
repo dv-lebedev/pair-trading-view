@@ -19,12 +19,13 @@ limitations under the License.
 
 #endregion
 
+
 using System;
 using System.Collections.Generic;
 
 namespace PairTradingView.Data
 {
-    public abstract class DataProvider : IDisposable
+    public abstract class DataProvider : IDisposable, IMarketDataProvider, IHistoricalDataProvider
     {
         public Dictionary<string, DataChannel> DataChannels { get;  }
 
@@ -45,20 +46,6 @@ namespace PairTradingView.Data
             return DataChannels.Remove(key);
         }
 
-        public abstract StockInfo GetStockInfo(string symbol);
-
-        public abstract IEnumerable<StockInfo> GetAllStocksInfo();
-
-        public abstract string[] GetMarketSymbols();
-
-        public abstract IEnumerable<StockValue> GetValues(string symbol, int lastNRecords);
-
-        public abstract IEnumerable<StockValue> GetValues(string symbol, DateTime first, DateTime last);
-
-        public abstract IEnumerable<StockValue> GetValues(string symbol);
-
-        public abstract bool IsHistoricalValuesExists(string symbol);
-
         protected abstract void OnLoad();
 
         protected abstract void OnDisposed();
@@ -75,5 +62,13 @@ namespace PairTradingView.Data
         {
             OnDisposed();
         }
+
+        public abstract IEnumerable<StockInfo> GetAllStocksInfo();
+        public abstract string[] GetMarketSymbols();
+        public abstract StockInfo GetStockInfo(string symbol);
+        public abstract IEnumerable<StockValue> GetValues(string symbol);
+        public abstract IEnumerable<StockValue> GetValues(string symbol, int lastNRecords);
+        public abstract IEnumerable<StockValue> GetValues(string symbol, DateTime first, DateTime last);
+        public abstract bool IsHistoricalValuesExists(string symbol);
     }
 }

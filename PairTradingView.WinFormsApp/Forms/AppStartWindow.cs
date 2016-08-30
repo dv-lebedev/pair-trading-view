@@ -85,9 +85,9 @@ namespace PairTradingView
             }
         }
 
-        private InputData[] GetInputData()
+        private Stock[] GetInputData()
         {
-            var inputData = new List<InputData>();
+            var inputData = new List<Stock>();
 
             try
             {
@@ -99,7 +99,7 @@ namespace PairTradingView
 
                         var stockValues = CsvUtils.Read(file, csvFmt);
 
-                        var data = new InputData(new StockInfo(name, name, "Shares", 1, 1, 1), stockValues);
+                        var data = new Stock(new StockInfo(name, name, "Shares", 1, 1, 1), stockValues);
 
                         inputData.Add(data);
                     }

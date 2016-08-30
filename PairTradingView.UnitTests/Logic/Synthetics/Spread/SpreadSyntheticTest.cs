@@ -41,15 +41,15 @@ namespace PairTradingView.UnitTests.Logic.Synthetics.Spread
             }
             catch (ArgumentNullException ex)
             {
-                Assert.AreEqual("inputData", ex.ParamName);
+                Assert.AreEqual("stocks", ex.ParamName);
             }
 
             var provider = new ExampleDataProvider();
 
-            InputData[] input =
+            Stock[] input =
                 {
-                    new InputData(provider.GetStockInfo("AAPL"), provider.GetValues("AAPL", 100)),
-                    new InputData(provider.GetStockInfo("GOOG"), provider.GetValues("GOOG", 100))
+                    new Stock(provider.GetStockInfo("AAPL"), provider.GetValues("AAPL", 100)),
+                    new Stock(provider.GetStockInfo("GOOG"), provider.GetValues("GOOG", 100))
                 };
 
             var synth2 = new SpreadSynthetic(input);

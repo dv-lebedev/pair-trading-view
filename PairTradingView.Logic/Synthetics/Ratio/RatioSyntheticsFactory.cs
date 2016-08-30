@@ -29,7 +29,7 @@ namespace PairTradingView.Logic.Synthetics.Ratio
     public class RatioSyntheticsFactory : SyntheticsFactory
     {
 
-        public RatioSyntheticsFactory(InputData[] values)
+        public RatioSyntheticsFactory(Stock[] values)
             : base(values)
         {
 
@@ -39,12 +39,12 @@ namespace PairTradingView.Logic.Synthetics.Ratio
         {
             var synthetics = new List<Synthetic>();
 
-            for (int i = 0; i < values.Count(); i++)
+            for (int i = 0; i < stocks.Count(); i++)
             {
-                for (int j = i + 1; j < values.Count(); j++)
+                for (int j = i + 1; j < stocks.Count(); j++)
                 {
-                    var x = values[i];
-                    var y = values[j];
+                    var x = stocks[i];
+                    var y = stocks[j];
 
                     var synthetic = new RatioSynthetic(new[] { x, y });
 
