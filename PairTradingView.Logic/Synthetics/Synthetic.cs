@@ -23,8 +23,10 @@ limitations under the License.
 using PairTradingView.Data;
 using PairTradingView.Logic.Synthetics.RiskManagement;
 using Statistics;
+using Statistics.Models;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace PairTradingView.Logic.Synthetics
 {
@@ -51,8 +53,41 @@ namespace PairTradingView.Logic.Synthetics
             Initialize(stocks);
         }
 
-        protected abstract void Initialize(Stock[] stocks);
+        protected virtual void Initialize(Stock[] stocks)
+        {
+            Stock x = stocks[0];
+            Stock y = stocks[1];
 
+            SetName(x, y);
+
+            Symbols = new[] { x.Info.Symbol, y.Info.Symbol };
+
+            var xValues = x.History.Select(i => i.Price * x.Info.Lot).ToArray();
+            var yValues = y.History.Select(i => i.Price * y.Info.Lot).ToArray();
+
+            SetRegression(xValues, yValues);
+
+            SetValues(xValues, yValues);
+
+            StdDevs = new decimal[2]
+            {
+                MathUtils.GetStandardDeviation(xValues),
+                MathUtils.GetStandardDeviation(yValues)
+            };
+        }
+
+        protected virtual void SetName(Stock x, Stock y)
+        {
+            Name = string.Format("{0}|{1}", y.Info.Symbol, x.Info.Symbol);
+        }
+
+        protected virtual void SetRegression(decimal[] x, decimal[] y)
+        {
+            Regression = new LinearRegression();
+            Regression.RegressionMethod.Compute(y, x);
+        }
+
+        protected abstract void SetValues(decimal[] xValues, decimal[] yValues);
         public abstract void StockInfoUpdated(IEnumerable<StockInfo> stockInfo);
     }
 }

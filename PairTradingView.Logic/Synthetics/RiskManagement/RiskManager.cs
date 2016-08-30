@@ -87,6 +87,15 @@ namespace PairTradingView.Logic.Synthetics.RiskManagement
             {
                 var riskParam = result[item.Name];
 
+                decimal beta = ((LinearRegression)item.Regression).Beta;
+                decimal weight = 1.0M / (1.0M + Math.Abs(beta));
+
+                decimal xTradeLimit = riskParam.TradeLimit * (weight * Math.Abs(beta));
+                decimal yTradeLimit = riskParam.TradeLimit * weight;
+
+                riskParam.SymbolsTradeLimits.Add(item.Symbols[0], xTradeLimit);
+                riskParam.SymbolsTradeLimits.Add(item.Symbols[1], yTradeLimit);
+
                 item.RiskParameters = riskParam;
             }
         }

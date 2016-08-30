@@ -32,70 +32,12 @@ namespace PairTradingView.Logic.Synthetics.Spread
 {
     public class SpreadSynthetic : Synthetic
     {
-        public override RiskParameters RiskParameters
-        {
-            get
-            {
-                return base.RiskParameters;
-            }
-
-            set
-            {
-                if (value == null)
-                    throw new ArgumentNullException("RiskParameters");
-
-                base.RiskParameters = value;
-
-                decimal weight = 1.0M / (1.0M + Math.Abs(((LinearRegression)Regression).Beta));
-
-                decimal xTradeLimit = base.RiskParameters.TradeLimit * (weight * Math.Abs(((LinearRegression)Regression).Beta));
-                decimal yTradeLimit = base.RiskParameters.TradeLimit * weight;
-
-                base.RiskParameters.SymbolsTradeLimits.Add(Symbols[0], xTradeLimit);
-                base.RiskParameters.SymbolsTradeLimits.Add(Symbols[1], yTradeLimit);
-            }
-        }
-
         public SpreadSynthetic(Stock[] stocks)
             : base(stocks)
         {
         }
 
-        protected override void Initialize(Stock[] stocks)
-        {
-            Stock x = stocks[0];
-            Stock y = stocks[1];
-
-            SetName(x, y);
-
-            Symbols = new[] { x.Info.Symbol, y.Info.Symbol };
-
-            var xValues = x.History.Select(i => i.Price * x.Info.Lot).ToArray();
-            var yValues = y.History.Select(i => i.Price * y.Info.Lot).ToArray();
-
-            SetRegression(xValues, yValues);
-
-            SetValues(xValues, yValues);
-
-            StdDevs = new decimal[2]
-            {
-                MathUtils.GetStandardDeviation(xValues),
-                MathUtils.GetStandardDeviation(yValues)
-            };
-        }
-
-        private void SetName(Stock x, Stock y)
-        {
-            Name = string.Format("{0}|{1}", y.Info.Symbol, x.Info.Symbol);
-        }
-
-        private void SetRegression(decimal[] x, decimal[] y)
-        {
-            Regression = new LinearRegression();
-            Regression.RegressionMethod.Compute(y, x);
-        }
-
-        private void SetValues(decimal[] x, decimal[] y)
+        protected override void SetValues(decimal[] x, decimal[] y)
         {
             if (((LinearRegression)Regression).RValue >= 0)
             {
