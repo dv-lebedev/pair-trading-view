@@ -29,8 +29,9 @@ namespace PairTradingView
     public partial class AppStartWindow : Form
     {
         private CsvFormat csvFmt;
-        private const string CSV_FILES_DIRECTORY = "csv-files";
         private MainWindow mWind;
+
+        private const string CSV_FILES_DIRECTORY = "csv-files";
 
         public AppStartWindow(MainWindow mainWindow)
         {
@@ -54,6 +55,11 @@ namespace PairTradingView
             }
 
             deltaTypeBox.Text = deltaTypeBox.Items[0].ToString();
+        }
+
+        private void AppStartWindow_Load(object sender, EventArgs e)
+        {
+            CenterToScreen();
         }
 
         private void quoteDownloaderToolStripMenuItem_Click(object sender, EventArgs e)
@@ -80,11 +86,6 @@ namespace PairTradingView
             {
                 MessageBox.Show("Start() => " + ex.Message);
             }
-        }
-
-        private void AppStartWindow_Load(object sender, EventArgs e)
-        {
-            CenterToScreen();
         }
     }
 }

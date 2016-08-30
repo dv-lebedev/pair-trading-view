@@ -51,7 +51,7 @@ namespace PairTradingView
             this.buttomPanel = new System.Windows.Forms.Panel();
             this.chartPanel = new System.Windows.Forms.Panel();
             this.zedGraphControl = new PairTradingView.Controls.MyZedgraphControl();
-            this.listView1 = new PairTradingView.Controls.ListViewNF();
+            this.listView = new PairTradingView.Controls.ListViewNF();
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -271,7 +271,7 @@ namespace PairTradingView
             // buttomPanel
             // 
             this.buttomPanel.BackColor = System.Drawing.Color.Black;
-            this.buttomPanel.Controls.Add(this.listView1);
+            this.buttomPanel.Controls.Add(this.listView);
             this.buttomPanel.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.buttomPanel.Location = new System.Drawing.Point(0, 523);
             this.buttomPanel.Name = "buttomPanel";
@@ -307,11 +307,11 @@ namespace PairTradingView
             // 
             // listView1
             // 
-            this.listView1.Activation = System.Windows.Forms.ItemActivation.OneClick;
-            this.listView1.BackColor = System.Drawing.Color.Black;
-            this.listView1.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.listView1.CheckBoxes = true;
-            this.listView1.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.listView.Activation = System.Windows.Forms.ItemActivation.OneClick;
+            this.listView.BackColor = System.Drawing.Color.Black;
+            this.listView.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.listView.CheckBoxes = true;
+            this.listView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.columnHeader1,
             this.columnHeader2,
             this.columnHeader3,
@@ -326,19 +326,19 @@ namespace PairTradingView
             this.columnHeader12,
             this.columnHeader13,
             this.columnHeader14});
-            this.listView1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.listView1.Font = new System.Drawing.Font("Consolas", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.listView1.ForeColor = System.Drawing.Color.White;
-            this.listView1.FullRowSelect = true;
-            this.listView1.HideSelection = false;
-            this.listView1.Location = new System.Drawing.Point(0, 0);
-            this.listView1.MultiSelect = false;
-            this.listView1.Name = "listView1";
-            this.listView1.OwnerDraw = true;
-            this.listView1.Size = new System.Drawing.Size(1210, 289);
-            this.listView1.TabIndex = 1;
-            this.listView1.UseCompatibleStateImageBehavior = false;
-            this.listView1.View = System.Windows.Forms.View.Details;
+            this.listView.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.listView.Font = new System.Drawing.Font("Consolas", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.listView.ForeColor = System.Drawing.Color.White;
+            this.listView.FullRowSelect = true;
+            this.listView.HideSelection = false;
+            this.listView.Location = new System.Drawing.Point(0, 0);
+            this.listView.MultiSelect = false;
+            this.listView.Name = "listView1";
+            this.listView.OwnerDraw = true;
+            this.listView.Size = new System.Drawing.Size(1210, 289);
+            this.listView.TabIndex = 1;
+            this.listView.UseCompatibleStateImageBehavior = false;
+            this.listView.View = System.Windows.Forms.View.Details;
             // 
             // columnHeader1
             // 
@@ -495,7 +495,7 @@ namespace PairTradingView
         #endregion
 
         private MyZedgraphControl zedGraphControl;
-        private ListViewNF listView1;
+        private ListViewNF listView;
         private System.Windows.Forms.ColumnHeader columnHeader2;
         private System.Windows.Forms.ColumnHeader columnHeader3;
         private System.Windows.Forms.ColumnHeader columnHeader4;
