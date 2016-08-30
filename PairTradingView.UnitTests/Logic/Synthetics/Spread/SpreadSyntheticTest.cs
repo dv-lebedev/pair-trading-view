@@ -44,7 +44,7 @@ namespace PairTradingView.UnitTests.Logic.Synthetics.Spread
                 Assert.AreEqual("stocks", ex.ParamName);
             }
 
-            var provider = new ExampleDataProvider();
+            var provider = new CsvExchange();
 
             Stock[] input =
                 {

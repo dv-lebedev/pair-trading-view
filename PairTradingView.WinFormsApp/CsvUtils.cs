@@ -28,16 +28,36 @@ using System.IO;
 
 namespace PairTradingView
 {
-    public class CsvFormat
-    {
-        public int PriceIndex { get; set; }
-        public int DateTimeIndex { get; set; }
-        public string DateTimeFormat { get; set; }
-        public bool ContainsHeader { get; set; }
-    }
-
     public class CsvUtils
     {
+        public static Stock[] ReadAllDataFrom(string directory, CsvFormat csvFmt)
+        {
+            var inputData = new List<Stock>();
+
+            try
+            {
+                foreach (var file in Directory.EnumerateFiles(directory))
+                {
+                    if (file.EndsWith(".txt") || file.EndsWith(".csv"))
+                    {
+                        var name = Path.GetFileNameWithoutExtension(file);
+
+                        var stockValues = Read(file, csvFmt);
+
+                        var data = new Stock(new StockInfo(name, name, "No Type", 1, 0, 0), stockValues);
+
+                        inputData.Add(data);
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                throw new Exception("CsvUtils.ReadAllDataFrom => " + e.Message);
+            }
+
+            return inputData.ToArray();
+        }
+
         public static List<StockValue> Read(string path, CsvFormat fmt)
         {
             var lines = File.ReadAllLines(path);

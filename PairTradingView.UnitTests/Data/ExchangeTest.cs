@@ -20,10 +20,19 @@ limitations under the License.
 #endregion
 
 
-namespace PairTradingView.Data
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using PairTradingView.Data;
+
+namespace PairTradingView.UnitTests.Data
 {
-    public interface DataProvider
+    [TestClass]
+    public class ExchangeTest
     {
-        Exchange GetExchange(string name);
+        public void Test()
+        {
+            var dataProvider = new ExampleDataProvider();
+
+            Exchange exchange = dataProvider.GetExchange("CsvExchange");
+        }
     }
 }

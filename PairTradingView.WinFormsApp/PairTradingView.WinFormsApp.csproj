@@ -90,6 +90,7 @@
     <Compile Include="Controls\ZedgraphControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="CsvFormat.cs" />
     <Compile Include="CsvUtils.cs" />
     <Compile Include="Forms\AppStartWindow.cs">
       <SubType>Form</SubType>

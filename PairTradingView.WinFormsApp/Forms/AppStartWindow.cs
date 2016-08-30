@@ -20,12 +20,9 @@ limitations under the License.
 #endregion
 
 
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Windows.Forms;
-using PairTradingView.Data;
 using PairTradingView.Logic.Synthetics;
+using System;
+using System.Windows.Forms;
 
 namespace PairTradingView
 {
@@ -37,7 +34,7 @@ namespace PairTradingView
 
         public AppStartWindow(MainWindow mainWindow)
         {
-            this.mWind = mainWindow;
+            mWind = mainWindow;
 
             csvFmt = new CsvFormat()
             {
@@ -74,43 +71,15 @@ namespace PairTradingView
                 csvFmt.DateTimeIndex = (int)dtCol.Value - 1;
                 csvFmt.PriceIndex = (int)priceCol.Value - 1;
 
-                this.mWind.InputData = GetInputData();
-                this.mWind.DeltaTypeName = deltaTypeBox.Text;
+                mWind.InputData = CsvUtils.ReadAllDataFrom(CSV_FILES_DIRECTORY, csvFmt);
+                mWind.DeltaTypeName = deltaTypeBox.Text;
 
-                this.Close();
+                Close();
             }
             catch (Exception ex)
             {
                 MessageBox.Show("Start() => " + ex.Message);
             }
-        }
-
-        private Stock[] GetInputData()
-        {
-            var inputData = new List<Stock>();
-
-            try
-            {
-                foreach (var file in Directory.EnumerateFiles(CSV_FILES_DIRECTORY))
-                {
-                    if (file.EndsWith(".txt") || file.EndsWith(".csv"))
-                    {
-                        var name = Path.GetFileNameWithoutExtension(file);
-
-                        var stockValues = CsvUtils.Read(file, csvFmt);
-
-                        var data = new Stock(new StockInfo(name, name, "Shares", 1, 1, 1), stockValues);
-
-                        inputData.Add(data);
-                    }
-                }
-            }
-            catch (Exception e)
-            {
-                throw new Exception("GetQuotes() => " + e.Message);
-            }
-
-            return inputData.ToArray();
         }
 
         private void AppStartWindow_Load(object sender, EventArgs e)

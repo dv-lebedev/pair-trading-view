@@ -21,12 +21,9 @@ limitations under the License.
 
 
 using PairTradingView.Data;
-using PairTradingView.Logic.Synthetics.RiskManagement;
 using Statistics.Models;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using Statistics;
 
 namespace PairTradingView.Logic.Synthetics.Spread
 {

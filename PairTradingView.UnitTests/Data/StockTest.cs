@@ -35,7 +35,7 @@ namespace PairTradingView.UnitTests.Logic.Synthetics
         [TestMethod]
         public void Test()
         {
-            var provider = new ExampleDataProvider();
+            var provider = new CsvExchange();
 
             string[] codes = { "GOOG", "AAPL", "KO", "XOM" };
 

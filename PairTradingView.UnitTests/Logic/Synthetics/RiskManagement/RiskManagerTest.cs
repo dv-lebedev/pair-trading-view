@@ -36,7 +36,7 @@ namespace PairTradingView.UnitTests.Logic.Synthetics.RiskManagement
         [TestMethod]
         public void CalculateTest()
         {
-            var provider = new ExampleDataProvider();
+            var provider = new CsvExchange();
 
             Stock[] input =
                 {

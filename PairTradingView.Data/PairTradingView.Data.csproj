@@ -42,6 +42,7 @@
   <ItemGroup>
     <Compile Include="DataChannel.cs" />
     <Compile Include="DataProvider.cs" />
+    <Compile Include="Exchange.cs" />
     <Compile Include="IHistoricalDataProvider.cs" />
     <Compile Include="IMarketDataProvider.cs" />
     <Compile Include="Stock.cs" />

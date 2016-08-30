@@ -20,17 +20,16 @@ limitations under the License.
 #endregion
 
 
+using PairTradingView.Data;
+using PairTradingView.Logic.Synthetics;
+using PairTradingView.Logic.Synthetics.RiskManagement;
+using Statistics;
+using Statistics.Models;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
-using PairTradingView.Data;
-using PairTradingView.Logic.Synthetics;
-using PairTradingView.Logic.Synthetics.RiskManagement;
-using PairTradingView.Logic.Synthetics.Spread;
-using Statistics;
-using Statistics.Models;
 
 namespace PairTradingView
 {
@@ -46,10 +45,10 @@ namespace PairTradingView
         {
             InitializeComponent();
 
-            this.listView1.Click += listView1_Click;
-            this.SizeChanged += MainWindow_SizeChanged;
-            this.SMAPeriod.ValueChanged += SMAPeriod_ValueChanged;
-            this.WMAPeriod.ValueChanged += WMAPeriod_ValueChanged;
+            listView1.Click += listView1_Click;
+            SizeChanged += MainWindow_SizeChanged;
+            SMAPeriod.ValueChanged += SMAPeriod_ValueChanged;
+            WMAPeriod.ValueChanged += WMAPeriod_ValueChanged;
         }
 
         private void MainWindow_Load(object sender, EventArgs e)
@@ -252,6 +251,5 @@ namespace PairTradingView
         {
             listView1.Items.Clear();
         }
-
     }
 }

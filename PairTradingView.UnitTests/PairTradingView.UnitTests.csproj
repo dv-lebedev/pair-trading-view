@@ -59,12 +59,14 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="CsvExchange.cs" />
     <Compile Include="CsvUtils.cs" />
+    <Compile Include="Data\ExchangeTest.cs" />
     <Compile Include="Data\StockTest.cs" />
     <Compile Include="Data\StockInfoTest.cs" />
     <Compile Include="Data\StockValueTest.cs" />
     <Compile Include="ExampleDataProvider.cs" />
-    <Compile Include="ExampleDataProviderTest.cs" />
+    <Compile Include="CsvExchangeTest.cs" />
     <Compile Include="Logic\Synthetics\RiskManagement\RiskManagerTest.cs" />
     <Compile Include="Logic\Synthetics\Spread\SpreadSyntheticsFactoryTest.cs" />
     <Compile Include="Logic\Synthetics\Spread\SpreadSyntheticTest.cs" />

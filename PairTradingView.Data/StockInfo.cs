@@ -110,7 +110,7 @@ namespace PairTradingView.Data
             }
             private set
             {
-                if (value <= 0)
+                if (value < 0)
                     throw new ArgumentException("Stocks price can't be less or equals zero.", "Price");
 
                 price = value;

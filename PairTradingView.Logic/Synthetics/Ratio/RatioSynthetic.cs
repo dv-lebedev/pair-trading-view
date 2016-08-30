@@ -21,7 +21,6 @@ limitations under the License.
 
 
 using PairTradingView.Data;
-using PairTradingView.Logic.Synthetics.RiskManagement;
 using Statistics;
 using Statistics.Models;
 using System;

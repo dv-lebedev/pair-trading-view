@@ -22,98 +22,19 @@ limitations under the License.
 
 using PairTradingView.Data;
 using System;
-using System.Linq;
-using System.Collections.Generic;
-using System.IO;
 
 namespace PairTradingView.UnitTests
 {
     public class ExampleDataProvider : DataProvider
     {
-        private Random randomInfo;
-
-        public Dictionary<string, List<StockValue>> StockValues { get; private set; }
-
-        public ExampleDataProvider()
-            : base()
+        public Exchange GetExchange(string name)
         {
-            randomInfo = new Random();
-
-            StockValues = new Dictionary<string, List<StockValue>>();
-
-            foreach (var file in Directory.EnumerateFiles("csv-samples/"))
+            if(name.Equals("CsvExchange"))
             {
-                var name = Path.GetFileNameWithoutExtension(file);
-
-                StockValues.Add(name, CsvUtils.Read(file));
-            }
-        }
-
-        public override IEnumerable<StockInfo> GetAllStocksInfo()
-        {
-            var result = new List<StockInfo>();
-
-            foreach (var item in StockValues)
-            {
-                var randomStockValue = item.Value[randomInfo.Next(item.Value.Count - 1)];
-
-                var stockInfo = new StockInfo(item.Key, item.Key, "Shares", 1, randomStockValue.Price, randomStockValue.Volume);
-
-                result.Add(stockInfo);
+                return new CsvExchange();
             }
 
-            return result;
-        }
-
-        public override string[] GetMarketSymbols()
-        {
-            return StockValues.Keys.ToArray();
-        }
-
-        public override StockInfo GetStockInfo(string symbol)
-        {
-            var stockValues = StockValues[symbol];
-
-            var randomStockValue = stockValues[randomInfo.Next(stockValues.Count - 1)];
-
-            var stockInfo = new StockInfo(symbol, symbol, "Shares", 1, randomStockValue.Price, randomStockValue.Volume);
-
-            return stockInfo;
-        }
-
-        public override IEnumerable<StockValue> GetValues(string symbol)
-        {
-            return StockValues[symbol];
-        }
-
-        public override IEnumerable<StockValue> GetValues(string symbol, int lastNRecords)
-        {
-            return StockValues[symbol].Skip(Math.Max(0, StockValues[symbol].Count - lastNRecords));
-        }
-
-        public override IEnumerable<StockValue> GetValues(string symbol, DateTime first, DateTime last)
-        {
-            return StockValues[symbol].Where(i => i.DateTime >= first && i.DateTime <= last);
-        }
-
-        public override bool IsHistoricalValuesExists(string symbol)
-        {
-            return StockValues.ContainsKey(symbol);
-        }
-
-        protected override void OnLoad()
-        {
-            //...
-        }
-
-        protected override void OnDisposed()
-        {
-            //...
-        }
-
-        public void UpdateChannels(IEnumerable<StockInfo> values)
-        {
-            OnStockInfoUpdated(values);
+            throw new NotImplementedException();
         }
     }
 }

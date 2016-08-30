@@ -20,10 +20,13 @@ limitations under the License.
 #endregion
 
 
-namespace PairTradingView.Data
+namespace PairTradingView
 {
-    public interface DataProvider
+    public class CsvFormat
     {
-        Exchange GetExchange(string name);
+        public int PriceIndex { get; set; }
+        public int DateTimeIndex { get; set; }
+        public string DateTimeFormat { get; set; }
+        public bool ContainsHeader { get; set; }
     }
 }

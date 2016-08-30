@@ -23,20 +23,20 @@ limitations under the License.
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using PairTradingView.Data;
 using PairTradingView.Logic.Synthetics.Spread;
+using Statistics.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Statistics.Models;
 
 namespace PairTradingView.UnitTests
 {
     [TestClass]
-    public class ExampleDataProviderTest
+    public class CsvExchangeTest
     {
 
-        public static ExampleDataProvider Load()
+        public static CsvExchange Load()
         {
-            return new ExampleDataProvider();
+            return new CsvExchange();
         }
 
         [TestMethod]
@@ -182,18 +182,18 @@ namespace PairTradingView.UnitTests
                 var synthetic = new SpreadSynthetic(input);
 
 
-                provider.AddDataChannel(synthetic.Name, synthetic);
+                provider.DataChannels.Add(synthetic.Name, synthetic);
                 Assert.AreEqual(true, provider.DataChannels.ContainsKey(synthetic.Name));
 
                 var yInfo = input[0].Info;
                 var xInfo = input[1].Info;
 
 
-                provider.UpdateChannels(new[] { xInfo, yInfo });
+                provider.StockInfoUpdated(new[] { xInfo, yInfo });
                 Assert.AreEqual(true, 0 > ((LinearRegression)synthetic.Regression).RValue);
                 Assert.AreEqual(yInfo.Price + xInfo.Price, synthetic.DeltaValue);
 
-                provider.RemoveChannel(synthetic.Name);
+                provider.DataChannels.Remove(synthetic.Name);
                 Assert.AreEqual(false, provider.DataChannels.ContainsKey(synthetic.Name));
             }
         }
