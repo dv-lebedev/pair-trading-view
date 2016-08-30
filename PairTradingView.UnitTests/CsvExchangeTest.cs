@@ -34,19 +34,19 @@ namespace PairTradingView.UnitTests
     public class CsvExchangeTest
     {
 
-        public static CsvExchange Load()
+        public static CsvExchange LoadExchange()
         {
             return new CsvExchange();
         }
 
         [TestMethod]
-        public void LoadExampleProviderTest()
+        public void LoadExchangeTest()
         {
-            using (var provider = Load())
+            using (var exchange = LoadExchange())
             {
-                Assert.AreNotEqual(null, provider);
+                Assert.AreNotEqual(null, exchange);
 
-                Assert.AreEqual(4, provider.StockValues.Count);
+                Assert.AreEqual(4, exchange.StockValues.Count);
             }
         }
 
@@ -63,9 +63,9 @@ namespace PairTradingView.UnitTests
         [TestMethod]
         public void GetStockInfoTest()
         {
-            using (var provider = Load())
+            using (var exchange = LoadExchange())
             {
-                var stockInfo = provider.GetStockInfo("AAPL");
+                var stockInfo = exchange.GetStockInfo("AAPL");
 
                 Assert.AreNotEqual(null, stockInfo);
                 Assert.AreEqual("AAPL", stockInfo.Symbol);
@@ -76,9 +76,9 @@ namespace PairTradingView.UnitTests
         [TestMethod]
         public void GetAllStocksInfoTest()
         {
-            using (var provider = Load())
+            using (var exchange = LoadExchange())
             {
-                var stocksInfo = provider.GetAllStocksInfo();
+                var stocksInfo = exchange.GetAllStocksInfo();
 
                 Assert.AreNotEqual(null, stocksInfo);
                 Assert.AreEqual(4, stocksInfo.Count());
@@ -89,9 +89,9 @@ namespace PairTradingView.UnitTests
         [TestMethod]
         public void GetMarketSymbolsTest()
         {
-            using (var provider = Load())
+            using (var exchange = LoadExchange())
             {
-                var availableSymbols = provider.GetMarketSymbols();
+                var availableSymbols = exchange.GetMarketSymbols();
 
                 var symbols = new[] { "AAPL", "GOOG", "KO", "XOM" };
 
@@ -107,9 +107,9 @@ namespace PairTradingView.UnitTests
         [TestMethod]
         public void GetLastNValuesTest()
         {
-            using (var provider = Load())
+            using (var exchange = LoadExchange())
             {
-                var stockValues = provider.GetValues("AAPL", 20);
+                var stockValues = exchange.GetValues("AAPL", 20);
 
                 Assert.AreNotEqual(null, stockValues);
 
@@ -122,9 +122,9 @@ namespace PairTradingView.UnitTests
         [TestMethod]
         public void GetValuesTest()
         {
-            using (var provider = Load())
+            using (var exchange = LoadExchange())
             {
-                var stockValues = provider.GetValues("XOM");
+                var stockValues = exchange.GetValues("XOM");
 
                 Assert.AreNotEqual(null, stockValues);
 
@@ -138,13 +138,13 @@ namespace PairTradingView.UnitTests
         [TestMethod]
         public void GetValuesByDateTimeTest()
         {
-            using (var provider = Load())
+            using (var exchange = LoadExchange())
             {
 
                 DateTime first = new DateTime(2014, 5, 27);
                 DateTime last = new DateTime(2014, 6, 24);
 
-                var stockValues = provider.GetValues("KO", first, last);
+                var stockValues = exchange.GetValues("KO", first, last);
 
                 Assert.AreNotEqual(null, stockValues);
 
@@ -158,12 +158,12 @@ namespace PairTradingView.UnitTests
         [TestMethod]
         public void IsHistoricalValuesExists()
         {
-            using (var provider = Load())
+            using (var exchange = LoadExchange())
             {
-                Assert.AreEqual(true, provider.IsHistoricalValuesExists("AAPL"));
-                Assert.AreEqual(true, provider.IsHistoricalValuesExists("GOOG"));
-                Assert.AreEqual(true, provider.IsHistoricalValuesExists("XOM"));
-                Assert.AreEqual(true, provider.IsHistoricalValuesExists("KO"));
+                Assert.AreEqual(true, exchange.IsHistoricalValuesExists("AAPL"));
+                Assert.AreEqual(true, exchange.IsHistoricalValuesExists("GOOG"));
+                Assert.AreEqual(true, exchange.IsHistoricalValuesExists("XOM"));
+                Assert.AreEqual(true, exchange.IsHistoricalValuesExists("KO"));
             }
         }
 
@@ -171,30 +171,30 @@ namespace PairTradingView.UnitTests
         [TestMethod]
         public void AddRemoveUpdateChannelTest()
         {
-            using (var provider = Load())
+            using (var exchange = LoadExchange())
             {
                 Stock[] input =
                 {
-                    new Stock(provider.GetStockInfo("AAPL"), provider.GetValues("AAPL", 100)),
-                    new Stock(provider.GetStockInfo("GOOG"), provider.GetValues("GOOG", 100))
+                    new Stock(exchange.GetStockInfo("AAPL"), exchange.GetValues("AAPL", 100)),
+                    new Stock(exchange.GetStockInfo("GOOG"), exchange.GetValues("GOOG", 100))
                 };
 
                 var synthetic = new SpreadSynthetic(input);
 
 
-                provider.DataChannels.Add(synthetic.Name, synthetic);
-                Assert.AreEqual(true, provider.DataChannels.ContainsKey(synthetic.Name));
+                exchange.DataChannels.Add(synthetic.Name, synthetic);
+                Assert.AreEqual(true, exchange.DataChannels.ContainsKey(synthetic.Name));
 
                 var yInfo = input[0].Info;
                 var xInfo = input[1].Info;
 
 
-                provider.StockInfoUpdated(new[] { xInfo, yInfo });
+                exchange.StockInfoUpdated(new[] { xInfo, yInfo });
                 Assert.AreEqual(true, 0 > ((LinearRegression)synthetic.Regression).RValue);
                 Assert.AreEqual(yInfo.Price + xInfo.Price, synthetic.DeltaValue);
 
-                provider.DataChannels.Remove(synthetic.Name);
-                Assert.AreEqual(false, provider.DataChannels.ContainsKey(synthetic.Name));
+                exchange.DataChannels.Remove(synthetic.Name);
+                Assert.AreEqual(false, exchange.DataChannels.ContainsKey(synthetic.Name));
             }
         }
     }
