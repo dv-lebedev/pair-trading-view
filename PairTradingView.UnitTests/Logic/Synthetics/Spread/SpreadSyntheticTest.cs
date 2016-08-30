@@ -75,11 +75,11 @@ namespace PairTradingView.UnitTests.Logic.Synthetics.Spread
 
             try
             {
-                synth2.SetRiskParameters(null);
+                synth2.RiskParameters = null;
             }
             catch (ArgumentNullException ex)
             {
-                Assert.AreEqual("riskParameters", ex.ParamName);
+                Assert.AreEqual("RiskParameters", ex.ParamName);
             }
 
         }

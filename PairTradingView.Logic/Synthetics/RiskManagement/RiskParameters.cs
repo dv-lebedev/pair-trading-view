@@ -25,15 +25,15 @@ namespace PairTradingView.Logic.Synthetics.RiskManagement
 {
     public class RiskParameters
     {
-        public decimal Balance { get; set; }
+        public decimal TradeLimit { get; set; }
         public decimal Weight { get; set; }
-        public Dictionary<string, decimal> SymbolsBalances { get; private set; }
+        public Dictionary<string, decimal> SymbolsTradeLimits { get; private set; }
 
-        public RiskParameters(decimal balance, decimal weight)
+        public RiskParameters(decimal tradeLimit, decimal weight)
         {
-            Balance = balance;
+            TradeLimit = tradeLimit;
             Weight = weight;
-            SymbolsBalances = new Dictionary<string, decimal>();
+            SymbolsTradeLimits = new Dictionary<string, decimal>();
         }
     }
 }

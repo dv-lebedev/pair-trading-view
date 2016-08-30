@@ -28,11 +28,9 @@ namespace PairTradingView.Logic.Synthetics.Ratio
 {
     public class RatioSyntheticsFactory : SyntheticsFactory
     {
-
-        public RatioSyntheticsFactory(Stock[] values)
-            : base(values)
+        public RatioSyntheticsFactory(Stock[] stocks)
+            : base(stocks)
         {
-
         }
 
         public override IEnumerable<Synthetic> CreateSynthetics()

@@ -20,27 +20,51 @@ limitations under the License.
 #endregion
 
 
+using PairTradingView.Data;
+using PairTradingView.Logic.Synthetics.RiskManagement;
 using Statistics;
 using Statistics.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using PairTradingView.Data;
-using PairTradingView.Logic.Synthetics.RiskManagement;
 
 namespace PairTradingView.Logic.Synthetics.Ratio
 {
     public class RatioSynthetic : Synthetic
     {
-        public RatioSynthetic(Stock[] inputData)
-            : base(inputData)
+        public override RiskParameters RiskParameters
+        {
+            get
+            {
+                return base.RiskParameters;
+            }
+
+            set
+            {
+                if (value == null)
+                    throw new ArgumentNullException("RiskParameters");
+
+                base.RiskParameters = value;
+
+                decimal weight = 1.0M / (1.0M + Math.Abs(((LinearRegression)Regression).Beta));
+
+                decimal xTradeLimit = base.RiskParameters.TradeLimit * (weight * Math.Abs(((LinearRegression)Regression).Beta));
+                decimal yTradeLimit = base.RiskParameters.TradeLimit * weight;
+
+                base.RiskParameters.SymbolsTradeLimits.Add(Symbols[0], xTradeLimit);
+                base.RiskParameters.SymbolsTradeLimits.Add(Symbols[1], yTradeLimit);
+            }
+        }
+
+        public RatioSynthetic(Stock[] stocks)
+            : base(stocks)
         {
         }
 
-        protected override void Initialize(Stock[] inputData)
+        protected override void Initialize(Stock[] stocks)
         {
-            Stock x = inputData[0];
-            Stock y = inputData[1];
+            Stock x = stocks[0];
+            Stock y = stocks[1];
 
             SetName(x, y);
 
@@ -51,7 +75,7 @@ namespace PairTradingView.Logic.Synthetics.Ratio
 
             SetRegression(xValues, yValues);
 
-            SetValues(xValues, yValues, ((LinearRegression)Regression).RValue);
+            SetValues(xValues, yValues);
 
             StdDevs = new decimal[2]
             {
@@ -72,9 +96,9 @@ namespace PairTradingView.Logic.Synthetics.Ratio
             Regression.RegressionMethod.Compute(y, x);
         }
 
-        private void SetValues(decimal[] x, decimal[] y, decimal r)
+        private void SetValues(decimal[] x, decimal[] y)
         {
-            if (r >= 0)
+            if (((LinearRegression)Regression).RValue >= 0)
             {
                 DeltaValues = x.Zip(y, (i, j) => j / i).ToArray();
             }
@@ -84,20 +108,6 @@ namespace PairTradingView.Logic.Synthetics.Ratio
                 (decimal)(Math.Log((double)j) * Math.Log((double)i)))
                 .ToArray();
             }
-        }
-
-        public override void SetRiskParameters(RiskParameters riskParameters)
-        {
-            if (riskParameters == null)
-                throw new ArgumentNullException("riskParameters");
-
-            RiskParameters = riskParameters;
-
-            decimal weight = 1.0M / (1.0M + Math.Abs(((LinearRegression)Regression).Beta));
-
-            RiskParameters.SymbolsBalances.Add(Symbols[0], RiskParameters.Balance * (weight * Math.Abs(((LinearRegression)Regression).Beta)));
-            RiskParameters.SymbolsBalances.Add(Symbols[1], RiskParameters.Balance * weight);
-
         }
 
         public override void StockInfoUpdated(IEnumerable<StockInfo> stockInfo)

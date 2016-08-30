@@ -58,7 +58,7 @@ namespace PairTradingView.UnitTests.Logic.Synthetics.RiskManagement
             foreach (var item in synthetics)
             {
                 Assert.AreNotEqual(null, item.RiskParameters);
-                balances += item.RiskParameters.Balance;
+                balances += item.RiskParameters.TradeLimit;
                 weights += item.RiskParameters.Weight;
                 System.Diagnostics.Debug.WriteLine(item.Name);
             }
@@ -69,14 +69,14 @@ namespace PairTradingView.UnitTests.Logic.Synthetics.RiskManagement
 
             var GOOG_AAPL = synthetics.First(i => i.Name == "GOOG|AAPL").RiskParameters;
             Assert.AreEqual(
-                (double)GOOG_AAPL.Balance,
-                (double)(GOOG_AAPL.SymbolsBalances["GOOG"] + GOOG_AAPL.SymbolsBalances["AAPL"]),
+                (double)GOOG_AAPL.TradeLimit,
+                (double)(GOOG_AAPL.SymbolsTradeLimits["GOOG"] + GOOG_AAPL.SymbolsTradeLimits["AAPL"]),
                 0.0001);
 
             var XOM_AAPL = synthetics.First(i => i.Name == "XOM|AAPL").RiskParameters;
             Assert.AreEqual(
-                (double)XOM_AAPL.Balance,
-                (double)(XOM_AAPL.SymbolsBalances["XOM"] + XOM_AAPL.SymbolsBalances["AAPL"]),
+                (double)XOM_AAPL.TradeLimit,
+                (double)(XOM_AAPL.SymbolsTradeLimits["XOM"] + XOM_AAPL.SymbolsTradeLimits["AAPL"]),
                 0.0001);
         }
     }

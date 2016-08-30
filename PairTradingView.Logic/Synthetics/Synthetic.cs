@@ -32,9 +32,9 @@ namespace PairTradingView.Logic.Synthetics
     {
         public string Name { get; protected set; }
 
-        public IRegression Regression { get; protected set; }
+        public IRegression Regression { get; set; }
 
-        public RiskParameters RiskParameters { get; protected set; }
+        public virtual RiskParameters RiskParameters { get; set; }
 
         public decimal[] DeltaValues { get; protected set; }
 
@@ -52,8 +52,6 @@ namespace PairTradingView.Logic.Synthetics
         }
 
         protected abstract void Initialize(Stock[] stocks);
-
-        public abstract void SetRiskParameters(RiskParameters riskParameters);
 
         public abstract void StockInfoUpdated(IEnumerable<StockInfo> stockInfo);
     }

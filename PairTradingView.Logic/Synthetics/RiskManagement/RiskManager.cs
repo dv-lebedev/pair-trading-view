@@ -80,14 +80,14 @@ namespace PairTradingView.Logic.Synthetics.RiskManagement
             foreach (var item in result.Values)
             {
                 item.Weight = item.Weight / summary;
-                item.Balance = Balance * item.Weight;
+                item.TradeLimit = Balance * item.Weight;
             }
 
             foreach (var item in synthetics)
             {
                 var riskParam = result[item.Name];
 
-                item.SetRiskParameters(riskParam);
+                item.RiskParameters = riskParam;
             }
         }
     }

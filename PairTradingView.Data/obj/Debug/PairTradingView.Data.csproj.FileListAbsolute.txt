@@ -2,4 +2,3 @@ C:\GitHub\pair-trading-view\PairTradingView.Data\bin\Debug\PairTradingView.Data.
 C:\GitHub\pair-trading-view\PairTradingView.Data\bin\Debug\PairTradingView.Data.pdb
 C:\GitHub\pair-trading-view\PairTradingView.Data\obj\Debug\PairTradingView.Data.dll
 C:\GitHub\pair-trading-view\PairTradingView.Data\obj\Debug\PairTradingView.Data.pdb
-C:\GitHub\pair-trading-view\PairTradingView.Data\obj\Debug\PairTradingView.Data.csprojResolveAssemblyReference.cache

@@ -151,10 +151,10 @@ namespace PairTradingView
                     xName.Text = syntheticSelected.Symbols[0] + " => ";
                     yName.Text = syntheticSelected.Symbols[1] + " => ";
 
-                    pairsTradeBalance.Text = Math.Round(syntheticSelected.RiskParameters.Balance, 4).ToString();
-                    yTradeVolume.Text = Math.Round(syntheticSelected.RiskParameters.SymbolsBalances.Values.ElementAt(1), 4).ToString();
-                    xTradeVolume.Text = Math.Round(syntheticSelected.RiskParameters.SymbolsBalances.Values.ElementAt(0), 4).ToString();
-                    riskLimit.Text = Math.Round((syntheticSelected.RiskParameters.Balance * (risk.Value) / 100.0M), 4).ToString();
+                    pairsTradeBalance.Text = Math.Round(syntheticSelected.RiskParameters.TradeLimit, 4).ToString();
+                    yTradeVolume.Text = Math.Round(syntheticSelected.RiskParameters.SymbolsTradeLimits.Values.ElementAt(1), 4).ToString();
+                    xTradeVolume.Text = Math.Round(syntheticSelected.RiskParameters.SymbolsTradeLimits.Values.ElementAt(0), 4).ToString();
+                    riskLimit.Text = Math.Round((syntheticSelected.RiskParameters.TradeLimit * (risk.Value) / 100.0M), 4).ToString();
                 }
                 else
                 {

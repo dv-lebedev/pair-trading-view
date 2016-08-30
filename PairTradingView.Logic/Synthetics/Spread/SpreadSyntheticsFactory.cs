@@ -28,10 +28,9 @@ namespace PairTradingView.Logic.Synthetics.Spread
 {
     public class SpreadSyntheticsFactory : SyntheticsFactory
     {
-        public SpreadSyntheticsFactory(Stock[] values)
-            : base(values)
+        public SpreadSyntheticsFactory(Stock[] stocks)
+            : base(stocks)
         {
-
         }
 
         public override IEnumerable<Synthetic> CreateSynthetics()
