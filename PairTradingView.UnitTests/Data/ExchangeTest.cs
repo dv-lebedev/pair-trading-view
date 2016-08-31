@@ -33,6 +33,8 @@ namespace PairTradingView.UnitTests.Data
             var dataProvider = new ExampleDataProvider();
 
             Exchange exchange = dataProvider.GetExchange("CsvExchange");
+
+            Assert.AreEqual(typeof(CsvExchange), exchange.GetType());
         }
     }
 }
