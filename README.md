@@ -8,7 +8,7 @@
 ![.Net version](https://img.shields.io/badge/.NET%20Framework-v4.5.2-red.svg)
 
 <p align="left">
-  <img width="700" alt="pic" src="https://github.com/dv-lebedev/PairTradingView/blob/master/screenshot.png">
+  <img width="700" alt="pic" src="https://github.com/dv-lebedev/PairTradingView/blob/master/screenshots/mainwindow.png">
 </p>
 
 
@@ -18,7 +18,7 @@
 Execute PairTradingView.exe in 'pair-trading-view\PairTradingView.WinFormsApp\bin\Debug\'.
 
 <p align="left">
-  <img width="270" alt="pic" src="https://github.com/dv-lebedev/PairTradingView/blob/master/appstart.png">
+  <img width="270" alt="pic" src="https://github.com/dv-lebedev/PairTradingView/blob/master/screenshots/appstart.png">
 </p>
 
 Set DateTime & Price columns and DateTime format. Put csv files with a historical data into
