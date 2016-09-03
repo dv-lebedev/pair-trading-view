@@ -1,6 +1,4 @@
 ﻿
-#region LICENSE
-
 /*
 Copyright(c) 2015-2016 Denis Lebedev
 
@@ -17,10 +15,7 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-#endregion
-
-
-using PairTradingView.Logic.Synthetics;
+using PairTradingView.Infrastructure;
 using System;
 using System.Windows.Forms;
 
@@ -28,28 +23,20 @@ namespace PairTradingView
 {
     public partial class AppStartWindow : Form
     {
-        private CsvFormat csvFmt;
-        private MainWindow mWind;
-
-        private const string CSV_FILES_DIRECTORY = "csv-files";
+        private MainWindow mainWindow;
+        private string csvFilesDirectory = "csv-files";
 
         public AppStartWindow(MainWindow mainWindow)
         {
-            mWind = mainWindow;
-
-            csvFmt = new CsvFormat()
-            {
-                ContainsHeader = false,
-                DateTimeFormat = "yyyyMMdd",
-                DateTimeIndex = 1,
-                PriceIndex = 5
-            };
-
+            this.mainWindow = mainWindow;
             InitializeComponent();
+            InitDeltaTypeBox();
+            CenterToScreen();
+        }
 
-            var deltaTypes = SyntheticsFactory.GetFactoriesNames();
-
-            foreach(var item in deltaTypes)
+        private void InitDeltaTypeBox()
+        {
+            foreach (var item in Enum.GetNames(typeof(DeltaType)))
             {
                 deltaTypeBox.Items.Add(item);
             }
@@ -57,12 +44,7 @@ namespace PairTradingView
             deltaTypeBox.Text = deltaTypeBox.Items[0].ToString();
         }
 
-        private void AppStartWindow_Load(object sender, EventArgs e)
-        {
-            CenterToScreen();
-        }
-
-        private void quoteDownloaderToolStripMenuItem_Click(object sender, EventArgs e)
+        private void ShowDownloader_Click(object sender, EventArgs e)
         {
             Downloader dowloader = new Downloader();
             dowloader.ShowDialog();
@@ -72,19 +54,17 @@ namespace PairTradingView
         {
             try
             {
-                csvFmt.ContainsHeader = header.Checked;
-                csvFmt.DateTimeFormat = dtFmt.Text;
-                csvFmt.DateTimeIndex = (int)dtCol.Value - 1;
-                csvFmt.PriceIndex = (int)priceCol.Value - 1;
+                int priceIndex = (int)priceCol.Value - 1;
+                bool containsHeader = header.Checked;
 
-                mWind.InputData = CsvUtils.ReadAllDataFrom(CSV_FILES_DIRECTORY, csvFmt);
-                mWind.DeltaTypeName = deltaTypeBox.Text;
+                mainWindow.InputData = CsvUtils.ReadAllDataFrom(csvFilesDirectory, priceIndex, containsHeader);
+                mainWindow.DeltaTypeName = deltaTypeBox.Text;
 
                 Close();
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Start() => " + ex.Message);
+                MessageBox.Show($"Start => {ex.Message}");
             }
         }
     }

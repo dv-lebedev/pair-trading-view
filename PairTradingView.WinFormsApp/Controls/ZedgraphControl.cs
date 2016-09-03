@@ -1,6 +1,4 @@
 ﻿
-#region LICENSE
-
 /*
 Copyright(c) 2015-2016 Denis Lebedev
 
@@ -16,9 +14,6 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 */
-
-#endregion
-
 
 using System.Drawing;
 using ZedGraph;
@@ -65,40 +60,40 @@ namespace PairTradingView.Controls
         }
 
 
-        public void SetDeltas(decimal[] values)
+        public void SetDeltas(double[] values)
         {
             deltas.Clear();
             GraphPane.XAxis.Scale.Max = values.Length - 1;
 
             for (int i = 0; i < values.Length; i++)
             {
-                deltas.Add(i, (double)values[i]);
+                deltas.Add(i, values[i]);
             }
 
             AxisChange();
             Invalidate();
         }
 
-        public void SetDeltaCurrent(decimal currentDelta)
+        public void SetDeltaCurrent(double currentDelta)
         {
             deltaCurrent.Clear();
 
             for (int i = 0; i < deltas.Count; i++)
             {
-                deltaCurrent.Add(i, (double)currentDelta);
+                deltaCurrent.Add(i, currentDelta);
             }
 
             AxisChange();
             Invalidate();
         }
 
-        public void SetSMA(decimal[] values, int interval)
+        public void SetSMA(double[] values, int interval)
         {
             deltaSMA.Clear();
 
             for (int i = 0; i < values.Length; i++)
             {
-                deltaSMA.Add(i + interval, (double)values[i]);
+                deltaSMA.Add(i + interval, values[i]);
             }
 
             AxisChange();
@@ -113,13 +108,13 @@ namespace PairTradingView.Controls
             Invalidate();
         }
 
-        public void SetWMA(decimal[] values, int interval)
+        public void SetWMA(double[] values, int interval)
         {
             deltaWMA.Clear();
 
             for (int i = 0; i < values.Length; i++)
             {
-                deltaWMA.Add(i + interval, (double)values[i]);
+                deltaWMA.Add(i + interval, values[i]);
             }
 
             AxisChange();

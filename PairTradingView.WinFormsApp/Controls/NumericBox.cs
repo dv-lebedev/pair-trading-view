@@ -1,6 +1,4 @@
 ﻿
-#region LICENSE
-
 /*
 Copyright(c) 2015-2016 Denis Lebedev
 
@@ -16,9 +14,6 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 */
-
-#endregion
-
 
 using System;
 using System.Drawing;

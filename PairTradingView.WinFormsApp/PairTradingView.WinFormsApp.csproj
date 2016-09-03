@@ -9,7 +9,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>PairTradingView</RootNamespace>
     <AssemblyName>PairTradingView</AssemblyName>
-    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
     <PublishUrl>опубликовать\</PublishUrl>
@@ -53,13 +53,11 @@
     <ApplicationIcon>main.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="PairTradingView.Data">
-      <HintPath>..\PairTradingView.Data\bin\Debug\PairTradingView.Data.dll</HintPath>
+    <Reference Include="PairTradingView.Infrastructure">
+      <HintPath>..\PairTradingView.Infrastructure\bin\Debug\PairTradingView.Infrastructure.dll</HintPath>
     </Reference>
-    <Reference Include="PairTradingView.Logic">
-      <HintPath>..\PairTradingView.Logic\bin\Debug\PairTradingView.Logic.dll</HintPath>
-    </Reference>
-    <Reference Include="Statistics">
+    <Reference Include="Statistics, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\statistics\Statistics\bin\Debug\Statistics.dll</HintPath>
     </Reference>
     <Reference Include="System" />
@@ -90,8 +88,6 @@
     <Compile Include="Controls\ZedgraphControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="CsvFormat.cs" />
-    <Compile Include="CsvUtils.cs" />
     <Compile Include="Forms\AppStartWindow.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -112,7 +108,6 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="WinFormsUtils.cs" />
     <EmbeddedResource Include="Controls\NumericBox.resx">
       <DependentUpon>NumericBox.cs</DependentUpon>
     </EmbeddedResource>

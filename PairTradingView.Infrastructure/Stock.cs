@@ -15,19 +15,14 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-using System;
-using System.Windows.Forms;
-
-namespace PairTradingView
+namespace PairTradingView.Infrastructure
 {
-    static class Program
+    public class Stock
     {
-        [STAThread]
-        static void Main()
-        {
-            Application.EnableVisualStyles();
-            Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new MainWindow());
-        }
+        public string Name { get; set; }
+        public double[] Prices { get; set; }
+        public double Deviation { get; set; }
+        public double TradeVolume { get; set; }
+        public double Weight { get; set; }
     }
 }

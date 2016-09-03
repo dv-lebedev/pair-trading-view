@@ -8,7 +8,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>PairTradingView.UnitTests</RootNamespace>
     <AssemblyName>PairTradingView.UnitTests</AssemblyName>
-    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
@@ -16,6 +16,7 @@
     <ReferencePath>$(ProgramFiles)\Common Files\microsoft shared\VSTT\$(VisualStudioVersion)\UITestExtensionPackages</ReferencePath>
     <IsCodedUITest>False</IsCodedUITest>
     <TestProjectType>UnitTest</TestProjectType>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -35,11 +36,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="PairTradingView.Data">
-      <HintPath>..\PairTradingView.Data\bin\Debug\PairTradingView.Data.dll</HintPath>
-    </Reference>
-    <Reference Include="PairTradingView.Logic">
-      <HintPath>..\PairTradingView.Logic\bin\Debug\PairTradingView.Logic.dll</HintPath>
+    <Reference Include="PairTradingView.Infrastructure">
+      <HintPath>..\PairTradingView.Infrastructure\bin\Debug\PairTradingView.Infrastructure.dll</HintPath>
     </Reference>
     <Reference Include="Statistics">
       <HintPath>..\..\statistics\Statistics\bin\Debug\Statistics.dll</HintPath>
@@ -59,18 +57,10 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
-    <Compile Include="CsvExchange.cs" />
-    <Compile Include="CsvUtils.cs" />
-    <Compile Include="Data\ExchangeTest.cs" />
-    <Compile Include="Data\StockTest.cs" />
-    <Compile Include="Data\StockInfoTest.cs" />
-    <Compile Include="Data\StockValueTest.cs" />
-    <Compile Include="ExampleDataProvider.cs" />
-    <Compile Include="CsvExchangeTest.cs" />
-    <Compile Include="Logic\Synthetics\RiskManagement\RiskManagerTest.cs" />
-    <Compile Include="Logic\Synthetics\Spread\SpreadSyntheticsFactoryTest.cs" />
-    <Compile Include="Logic\Synthetics\Spread\SpreadSyntheticTest.cs" />
+    <Compile Include="CsvUtilsTests.cs" />
+    <Compile Include="FinancialPairTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RiskManagerTests.cs" />
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">

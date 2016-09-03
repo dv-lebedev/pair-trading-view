@@ -1,0 +1,7 @@
+C:\GitHub\pair-trading-view — копия\PairTradingView.Infrastructure\bin\Debug\PairTradingView.Infrastructure.dll
+C:\GitHub\pair-trading-view — копия\PairTradingView.Infrastructure\bin\Debug\PairTradingView.Infrastructure.pdb
+C:\GitHub\pair-trading-view — копия\PairTradingView.Infrastructure\obj\Debug\PairTradingView.Infrastructure.csprojResolveAssemblyReference.cache
+C:\GitHub\pair-trading-view — копия\PairTradingView.Infrastructure\obj\Debug\PairTradingView.Infrastructure.dll
+C:\GitHub\pair-trading-view — копия\PairTradingView.Infrastructure\obj\Debug\PairTradingView.Infrastructure.pdb
+C:\GitHub\pair-trading-view — копия\PairTradingView.Infrastructure\bin\Debug\Statistics.dll
+C:\GitHub\pair-trading-view — копия\PairTradingView.Infrastructure\bin\Debug\Statistics.pdb
