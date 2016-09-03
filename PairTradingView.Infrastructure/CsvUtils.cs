@@ -26,26 +26,24 @@ namespace PairTradingView.Infrastructure
     {
         public static Stock[] ReadAllDataFrom(string directory, int priceIndex, bool containsHeader)
         {
-            List<Stock> inputData = new List<Stock>();
+            List<Stock> stocks = new List<Stock>();
 
             foreach (string file in Directory.EnumerateFiles(directory))
             {
                 if (file.EndsWith(".txt") || file.EndsWith(".csv"))
                 {
-                    string name = Path.GetFileNameWithoutExtension(file);
+                    Stock stock = Read(file, priceIndex, containsHeader);
 
-                    Stock stockValues = Read(file, priceIndex, containsHeader);
-
-                    inputData.Add(stockValues);
+                    stocks.Add(stock);
                 }
             }
 
-            if(inputData.Count == 0)
+            if(stocks.Count == 0)
             {
                 throw new Exception("Files are not found.");
             }
 
-            return inputData.ToArray();
+            return stocks.ToArray();
         }
 
         public static Stock Read(string path, int priceIndex, bool containsHeader)
