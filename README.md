@@ -21,7 +21,7 @@ Execute PairTradingView.exe in 'pair-trading-view\PairTradingView.WinFormsApp\bi
   <img width="270" alt="pic" src="https://github.com/dv-lebedev/PairTradingView/blob/master/screenshots/appstart.png">
 </p>
 
-Set DateTime & Price columns and DateTime format. Put csv files with a historical data into
+Set 'Price' column. Put csv files with a historical data into
 'pair-trading-view\PairTradingView.WinFormsApp\bin\Debug\csv-files' folder. Download csv files if you need by QuoteDownloader.
 Press start.
 
