@@ -42,6 +42,8 @@ namespace PairTradingView.Infrastructure
 
         public FinancialPair(Stock x, Stock y, DeltaType deltaType)
         {
+            Check.NotNull(x, y, deltaType);
+
             X = x;
             Y = y;
             DeltaType = deltaType;
@@ -100,11 +102,8 @@ namespace PairTradingView.Infrastructure
             {
                 for (int j = i + 1; j < stocks.Count(); j++)
                 {
-                    Stock xStock = stocks[i];
-                    Stock yStock = stocks[j];
-
-                    Stock x = new Stock { Name = xStock.Name, Prices = xStock.Prices.ToArray() };
-                    Stock y = new Stock { Name = yStock.Name, Prices = yStock.Prices.ToArray() };
+                    Stock x = stocks[i].Copy();
+                    Stock y = stocks[j].Copy();
 
                     pairs.Add(new FinancialPair(x, y, deltaType));
                 }

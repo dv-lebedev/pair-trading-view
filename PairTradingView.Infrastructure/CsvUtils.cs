@@ -26,6 +26,10 @@ namespace PairTradingView.Infrastructure
     {
         public static Stock[] ReadAllDataFrom(string directory, int priceIndex, bool containsHeader)
         {
+            Check.NotNull(directory);
+
+            if (priceIndex < 0) throw new ArgumentException("[priceIndex] can't be less than 0.");
+
             List<Stock> stocks = new List<Stock>();
 
             foreach (string file in Directory.EnumerateFiles(directory))

@@ -16,23 +16,20 @@ limitations under the License.
 */
 
 using System;
-using System.Linq;
 
 namespace PairTradingView.Infrastructure
 {
-    public class Stock
+    public static class Check
     {
-        public string Name { get; set; }
-        public double[] Prices { get; set; }
-        public double Deviation { get; set; }
-        public double TradeVolume { get; set; }
-        public double Weight { get; set; }
-
-        public Stock Copy()
+        public static void NotNull(params object[] items)
         {
-            Stock stock = MemberwiseClone() as Stock;
-            stock.Prices = Prices.ToArray();
-            return stock;
+            foreach(var item in items)
+            {
+                if (item == null)
+                {
+                    throw new ArgumentNullException();
+                }
+            }
         }
     }
 }

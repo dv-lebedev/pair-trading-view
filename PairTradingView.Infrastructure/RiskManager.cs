@@ -31,6 +31,11 @@ namespace PairTradingView.Infrastructure
 
         public RiskManager(FinancialPair[] pairs, double balance)
         {
+            Check.NotNull(pairs);
+
+            if (balance < 0)
+                throw new ArgumentException("[balance] can't have negative value.");
+
             this.pairs = pairs;
             Balance = balance;
 
