@@ -34,11 +34,7 @@ C:\GitHub\pair-trading-view\PairTradingView.WinFormsApp\obj\Debug\PairTradingVie
 C:\GitHub\pair-trading-view\PairTradingView.WinFormsApp\bin\Debug\PairTradingView.exe.config
 C:\GitHub\pair-trading-view\PairTradingView.WinFormsApp\bin\Debug\PairTradingView.exe
 C:\GitHub\pair-trading-view\PairTradingView.WinFormsApp\bin\Debug\PairTradingView.pdb
-C:\GitHub\pair-trading-view\PairTradingView.WinFormsApp\bin\Debug\PairTradingView.Data.dll
-C:\GitHub\pair-trading-view\PairTradingView.WinFormsApp\bin\Debug\PairTradingView.Logic.dll
 C:\GitHub\pair-trading-view\PairTradingView.WinFormsApp\bin\Debug\Statistics.dll
-C:\GitHub\pair-trading-view\PairTradingView.WinFormsApp\bin\Debug\PairTradingView.Data.pdb
-C:\GitHub\pair-trading-view\PairTradingView.WinFormsApp\bin\Debug\PairTradingView.Logic.pdb
 C:\GitHub\pair-trading-view\PairTradingView.WinFormsApp\bin\Debug\Statistics.pdb
 C:\GitHub\pair-trading-view\PairTradingView.WinFormsApp\obj\Debug\PairTradingView.exe
 C:\GitHub\pair-trading-view\PairTradingView.WinFormsApp\obj\Debug\PairTradingView.pdb
@@ -58,3 +54,5 @@ C:\GitHub\pair-trading-view — копия\PairTradingView.WinFormsApp\bin\Debug
 C:\GitHub\pair-trading-view — копия\PairTradingView.WinFormsApp\bin\Debug\Statistics.dll
 C:\GitHub\pair-trading-view — копия\PairTradingView.WinFormsApp\bin\Debug\PairTradingView.Infrastructure.pdb
 C:\GitHub\pair-trading-view — копия\PairTradingView.WinFormsApp\bin\Debug\Statistics.pdb
+C:\GitHub\pair-trading-view\PairTradingView.WinFormsApp\bin\Debug\PairTradingView.Infrastructure.dll
+C:\GitHub\pair-trading-view\PairTradingView.WinFormsApp\bin\Debug\PairTradingView.Infrastructure.pdb
