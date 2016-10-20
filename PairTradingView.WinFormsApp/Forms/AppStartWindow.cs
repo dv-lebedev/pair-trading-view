@@ -23,12 +23,11 @@ namespace PairTradingView
 {
     public partial class AppStartWindow : Form
     {
-        private MainWindow mainWindow;
         private string csvFilesDirectory = "csv-files";
+        public AppData AppData { get; private set; }
 
-        public AppStartWindow(MainWindow mainWindow)
+        public AppStartWindow()
         {
-            this.mainWindow = mainWindow;
             InitializeComponent();
             InitDeltaTypeBox();
             CenterToScreen();
@@ -57,8 +56,10 @@ namespace PairTradingView
                 int priceIndex = (int)priceCol.Value - 1;
                 bool containsHeader = header.Checked;
 
-                mainWindow.InputData = CsvUtils.ReadAllDataFrom(csvFilesDirectory, priceIndex, containsHeader);
-                mainWindow.DeltaTypeName = deltaTypeBox.Text;
+                AppData = new AppData();
+
+                AppData.InputData = CsvUtils.ReadAllDataFrom(csvFilesDirectory, priceIndex, containsHeader);
+                AppData.DeltaTypeName = deltaTypeBox.Text;
 
                 Close();
             }

@@ -89,6 +89,7 @@
     <Compile Include="Controls\ZedGraphChart.cs">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="Forms\AppData.cs" />
     <Compile Include="Forms\AppStartWindow.cs">
       <SubType>Form</SubType>
     </Compile>

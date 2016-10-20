@@ -31,8 +31,7 @@ namespace PairTradingView
         private FinancialPair selectedPair;
         private List<FinancialPair> pairs;
 
-        public string DeltaTypeName { get; set; }
-        public Stock[] InputData { get; set; }
+        private AppData appData;
 
         public MainWindow()
         {
@@ -48,18 +47,20 @@ namespace PairTradingView
 
         private void MainWindow_Load(object sender, EventArgs e)
         {
-            AppStartWindow startWin = new AppStartWindow(this);
+            AppStartWindow startWin = new AppStartWindow();
             startWin.ShowDialog();
 
-            if (InputData == null)
+            appData = startWin.AppData;
+
+            if (appData.InputData == null)
             {
                 MessageBox.Show("No input data. App will be closed.");
                 Close();
             }
 
-            DeltaType deltaType = (DeltaType)Enum.Parse(typeof(DeltaType), DeltaTypeName);
+            DeltaType deltaType = (DeltaType)Enum.Parse(typeof(DeltaType), appData.DeltaTypeName);
 
-            pairs = FinancialPair.CreateMany(InputData, deltaType);
+            pairs = FinancialPair.CreateMany(appData.InputData, deltaType);
 
             ClearListView();
             UpdateListView();
