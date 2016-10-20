@@ -76,6 +76,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controls\ILineChart.cs" />
     <Compile Include="Controls\ListViewNF.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -85,7 +86,7 @@
     <Compile Include="Controls\NumericBox.Designer.cs">
       <DependentUpon>NumericBox.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controls\ZedgraphControl.cs">
+    <Compile Include="Controls\ZedGraphChart.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Forms\AppStartWindow.cs">

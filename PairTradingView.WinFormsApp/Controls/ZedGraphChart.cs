@@ -20,9 +20,8 @@ using ZedGraph;
 
 namespace PairTradingView.Controls
 {
-    public class MyZedgraphControl : ZedGraphControl
+    public class ZedGraphChart : ZedGraphControl, ILineChart
     {
-
         private PointPairList deltas;
         private PointPairList deltaSMA;
         private PointPairList deltaWMA;
@@ -33,7 +32,7 @@ namespace PairTradingView.Controls
         private LineItem deltaWMACurve;
         private LineItem deltaCurrentCurve;
 
-        public MyZedgraphControl()
+        public ZedGraphChart()
         {
             MasterPane mp = MasterPane;
             mp.Border.IsVisible = true;
@@ -59,8 +58,7 @@ namespace PairTradingView.Controls
             SetTheme();
         }
 
-
-        public void SetDeltas(double[] values)
+        public void SetDeltaValues(double[] values)
         {
             deltas.Clear();
             GraphPane.XAxis.Scale.Max = values.Length - 1;
@@ -74,7 +72,7 @@ namespace PairTradingView.Controls
             Invalidate();
         }
 
-        public void SetDeltaCurrent(double currentDelta)
+        public void SetCurrentDeltaValue(double currentDelta)
         {
             deltaCurrent.Clear();
 

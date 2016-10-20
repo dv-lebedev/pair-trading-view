@@ -50,7 +50,7 @@ namespace PairTradingView
             this.label13 = new System.Windows.Forms.Label();
             this.buttomPanel = new System.Windows.Forms.Panel();
             this.chartPanel = new System.Windows.Forms.Panel();
-            this.zedGraphControl = new PairTradingView.Controls.MyZedgraphControl();
+            this.chart = new PairTradingView.Controls.ZedGraphChart();
             this.listView = new PairTradingView.Controls.ListViewNF();
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -281,7 +281,7 @@ namespace PairTradingView
             // chartPanel
             // 
             this.chartPanel.BackColor = System.Drawing.Color.Lime;
-            this.chartPanel.Controls.Add(this.zedGraphControl);
+            this.chartPanel.Controls.Add(this.chart);
             this.chartPanel.Dock = System.Windows.Forms.DockStyle.Right;
             this.chartPanel.Location = new System.Drawing.Point(331, 0);
             this.chartPanel.Name = "chartPanel";
@@ -290,20 +290,20 @@ namespace PairTradingView
             // 
             // zedGraphControl
             // 
-            this.zedGraphControl.Dock = System.Windows.Forms.DockStyle.Right;
-            this.zedGraphControl.IsEnableVPan = false;
-            this.zedGraphControl.IsEnableVZoom = false;
-            this.zedGraphControl.Location = new System.Drawing.Point(2, 0);
-            this.zedGraphControl.Name = "zedGraphControl";
-            this.zedGraphControl.ScrollGrace = 0D;
-            this.zedGraphControl.ScrollMaxX = 0D;
-            this.zedGraphControl.ScrollMaxY = 0D;
-            this.zedGraphControl.ScrollMaxY2 = 0D;
-            this.zedGraphControl.ScrollMinX = 0D;
-            this.zedGraphControl.ScrollMinY = 0D;
-            this.zedGraphControl.ScrollMinY2 = 0D;
-            this.zedGraphControl.Size = new System.Drawing.Size(877, 523);
-            this.zedGraphControl.TabIndex = 0;
+            this.chart.Dock = System.Windows.Forms.DockStyle.Right;
+            this.chart.IsEnableVPan = false;
+            this.chart.IsEnableVZoom = false;
+            this.chart.Location = new System.Drawing.Point(2, 0);
+            this.chart.Name = "zedGraphControl";
+            this.chart.ScrollGrace = 0D;
+            this.chart.ScrollMaxX = 0D;
+            this.chart.ScrollMaxY = 0D;
+            this.chart.ScrollMaxY2 = 0D;
+            this.chart.ScrollMinX = 0D;
+            this.chart.ScrollMinY = 0D;
+            this.chart.ScrollMinY2 = 0D;
+            this.chart.Size = new System.Drawing.Size(877, 523);
+            this.chart.TabIndex = 0;
             // 
             // listView1
             // 
@@ -494,7 +494,7 @@ namespace PairTradingView
 
         #endregion
 
-        private MyZedgraphControl zedGraphControl;
+        private ZedGraphChart chart;
         private ListViewNF listView;
         private System.Windows.Forms.ColumnHeader columnHeader2;
         private System.Windows.Forms.ColumnHeader columnHeader3;

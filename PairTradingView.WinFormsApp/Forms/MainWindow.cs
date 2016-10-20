@@ -69,7 +69,7 @@ namespace PairTradingView
         private void WMAPeriod_ValueChanged(object sender, EventArgs e)
         {
             if (WMAPeriod.Value == 0)
-                zedGraphControl.ClearWMA();
+                chart.ClearWMA();
 
             if (WMAPeriod.Value > 0)
             {
@@ -84,7 +84,7 @@ namespace PairTradingView
                 else
                 {
                     double[] sma = MovingAverages.WMA(selectedPair.DeltaValues.ToArray(), (int)WMAPeriod.Value);
-                    zedGraphControl.SetWMA(sma, (int)WMAPeriod.Value);
+                    chart.SetWMA(sma, (int)WMAPeriod.Value);
                 }
             }
         }
@@ -92,7 +92,7 @@ namespace PairTradingView
         private void SMAPeriod_ValueChanged(object sender, EventArgs e)
         {
             if (SMAPeriod.Value == 0)
-                zedGraphControl.ClearSMA();
+                chart.ClearSMA();
 
             if (SMAPeriod.Value > 0)
             {
@@ -106,7 +106,7 @@ namespace PairTradingView
                 }
                 else
                 {
-                    zedGraphControl.SetSMA(
+                    chart.SetSMA(
                         MovingAverages.SMA(selectedPair.DeltaValues.ToArray(), (int)SMAPeriod.Value),
                         (int)SMAPeriod.Value);
                 }
@@ -117,7 +117,7 @@ namespace PairTradingView
         {
             buttomPanel.Height = this.Height / 3;
             chartPanel.Width = (int)(this.Width * 0.73 + 1);
-            zedGraphControl.Width = (int)(this.Width * 0.73);
+            chart.Width = (int)(this.Width * 0.73);
         }
 
         private void listView_Click(object sender, EventArgs e)
@@ -127,14 +127,14 @@ namespace PairTradingView
                 ListViewItem item = listView.SelectedItems[0];
                 var name = item.SubItems[0].Name;
 
-                zedGraphControl.GraphPane.Title.Text = name;
+                chart.GraphPane.Title.Text = name;
 
                 selectedPair = pairs.First(i => i.Name == name);
 
                 var deltas = selectedPair.DeltaValues;
 
-                zedGraphControl.SetDeltas(deltas);
-                zedGraphControl.SetDeltaCurrent(deltas.Last());
+                chart.SetDeltaValues(deltas);
+                chart.SetCurrentDeltaValue(deltas.Last());
 
                 ShowValuesForPairInfo();
 
