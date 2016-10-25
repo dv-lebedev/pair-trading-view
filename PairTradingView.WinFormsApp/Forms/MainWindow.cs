@@ -43,8 +43,6 @@ namespace PairTradingView
             WMAPeriod.ValueChanged += WMAPeriod_ValueChanged;
         }
 
-        private void ClearListView() => listView.Items.Clear();
-
         private void MainWindow_Load(object sender, EventArgs e)
         {
             AppStartWindow startWin = new AppStartWindow();
@@ -62,8 +60,8 @@ namespace PairTradingView
 
             pairs = FinancialPair.CreateMany(appData.InputData, deltaType);
 
-            ClearListView();
-            UpdateListView();
+            listView.Items.Clear();
+            listView.Update(pairs);
             CenterToScreen();
         }
 
@@ -210,48 +208,6 @@ namespace PairTradingView
                 pair.TradeVolume = 0;
                 pair.X.TradeVolume = 0;
                 pair.Y.TradeVolume = 0;
-            }
-        }
-
-        private void UpdateListView()
-        {
-            foreach (var pair in pairs)
-            {
-                var xSymbol = pair.X.Name;
-                var ySymbol = pair.Y.Name;
-
-                int index = listView.Items.Add(pair.Name.ToString(), xSymbol, 0).Index;
-
-                listView.Items[index].SubItems.Add(ySymbol);
-
-                var regression = pair.Regression as LinearRegression;
-
-                listView.Items[index].SubItems.Add(Math.Round(pair.X.Deviation, 6).ToString());
-                listView.Items[index].SubItems.Add(Math.Round(pair.Y.Deviation, 6).ToString());
-                listView.Items[index].SubItems.Add(Math.Round(regression.Alpha, 6).ToString());
-                listView.Items[index].SubItems.Add(Math.Round(regression.Beta, 6).ToString());
-                listView.Items[index].SubItems.Add(Math.Round(regression.RValue, 6).ToString());
-                listView.Items[index].SubItems.Add(Math.Round(regression.RSquared, 6).ToString());
-
-                var deltaAverage = pair.DeltaValues.Average();
-                var deltaSD = MathUtils.GetStandardDeviation(pair.DeltaValues);
-
-                listView.Items[index].SubItems.Add(Math.Round(deltaAverage, 6).ToString());
-                listView.Items[index].SubItems.Add(Math.Round(pair.DeltaValues.Min(), 6).ToString());
-                listView.Items[index].SubItems.Add(Math.Round(pair.DeltaValues.Max(), 6).ToString());
-                listView.Items[index].SubItems.Add(Math.Round(deltaSD, 6).ToString());
-                listView.Items[index].SubItems.Add(Math.Round(deltaAverage - (3 * deltaSD), 6).ToString());
-                listView.Items[index].SubItems.Add(Math.Round(deltaAverage + (3 * deltaSD), 6).ToString());
-
-                if (regression.RValue >= 0.7M && regression.RValue <= 1)
-                {
-                    listView.Items[index].BackColor = Color.FromArgb(38, 153, 38);
-                }
-
-                if (regression.RValue <= -0.7M && regression.RValue >= -1)
-                {
-                    listView.Items[index].BackColor = Color.FromArgb(191, 48, 48);
-                }
             }
         }
     }
