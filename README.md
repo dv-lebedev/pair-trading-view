@@ -3,7 +3,7 @@
 
 **Pair Trading View** - application for visual analysis of synthetic financial instruments based on statistical models. 
 
-**License : Apache 2.0  |  .Net Framework 4.5**
+**License : Apache 2.0  |  .Net Framework 4.5.2**
 
 <p align="left">
   <img width="700" alt="pic" src="https://github.com/dv-lebedev/PairTradingView/blob/master/screenshots/mainwindow.png">
