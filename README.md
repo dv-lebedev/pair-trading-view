@@ -24,12 +24,11 @@ Press start.
 
 
 ##Model
-
-SI -> synthetic index
-s -> share
-fp -> financial pair
-fp_tv -> financial pair's trade volume
-fp_w -> weight of financial pair
+- SI -> synthetic index
+- s -> share
+- fp -> financial pair
+- fp_tv -> financial pair's trade volume
+- fp_w -> weight of financial pair
 
 SI_t = ( s1_t + s2_t + s3_t + ... + sn_t ) / n
 
