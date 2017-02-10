@@ -48,6 +48,8 @@
   <ItemGroup>
     <Compile Include="Check.cs" />
     <Compile Include="FinancialPair.cs" />
+    <Compile Include="MathUtils.cs" />
+    <Compile Include="MovingAverages.cs" />
     <Compile Include="RiskManager.cs" />
     <Compile Include="Stock.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

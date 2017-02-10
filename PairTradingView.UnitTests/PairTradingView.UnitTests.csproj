@@ -59,6 +59,8 @@
   <ItemGroup>
     <Compile Include="CsvUtilsTests.cs" />
     <Compile Include="FinancialPairTests.cs" />
+    <Compile Include="MathUtilsTests.cs" />
+    <Compile Include="MovingAveragesTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RiskManagerTests.cs" />
   </ItemGroup>

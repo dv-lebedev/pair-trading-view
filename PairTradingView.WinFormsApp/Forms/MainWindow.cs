@@ -1,6 +1,6 @@
 ﻿
 /*
-Copyright(c) 2015-2016 Denis Lebedev
+Copyright(c) 2015-2017 Denis Lebedev
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -16,11 +16,8 @@ limitations under the License.
 */
 
 using PairTradingView.Infrastructure;
-using Statistics;
-using Statistics.Models;
 using System;
 using System.Collections.Generic;
-using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
 
@@ -156,7 +153,7 @@ namespace PairTradingView
             pairsTradeBalance.Text = Math.Round(selectedPair.TradeVolume, 4).ToString();
             yTradeVolume.Text = Math.Round(selectedPair.Y.TradeVolume, 4).ToString();
             xTradeVolume.Text = Math.Round(selectedPair.X.TradeVolume, 4).ToString();
-            riskLimit.Text = Math.Round((selectedPair.TradeVolume * risk.Value.ToDouble() / 100.0), 4).ToString();
+            riskLimit.Text = Math.Round((selectedPair.TradeVolume * (double)risk.Value/ 100.0), 4).ToString();
         }
 
         private void ShowDefaultValuesForPairInfo()
@@ -185,7 +182,7 @@ namespace PairTradingView
                         checkedSynths.Add(pairs.First(i => i.Name.ToString() == code));
                     }
 
-                    var rc = new RiskManager(checkedSynths.ToArray(), balance.Value.ToDouble());
+                    var rc = new RiskManager(checkedSynths.ToArray(), (double)balance.Value);
                     rc.Calculate();
 
                     listView_Click(this, null);
