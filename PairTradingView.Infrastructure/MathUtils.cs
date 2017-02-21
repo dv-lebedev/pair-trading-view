@@ -26,17 +26,15 @@ namespace PairTradingView.Infrastructure
         {
             if (values == null) throw new ArgumentNullException("values");
 
-            double[] arr = values.Select(i => i).ToArray();
-
             double result = 0;
 
-            double average = arr.Average();
+            double average = values.Average();
 
-            for (int i = 0; i < arr.Length; i++)
+            for (int i = 0; i < values.Length; i++)
             {
-                result += Math.Pow(arr[i] - average, 2);
+                result += Math.Pow(values[i] - average, 2);
             }
-            return Math.Sqrt(result /= (arr.Length - 1));
+            return Math.Sqrt(result /= (values.Length - 1));
         }
     }
 }

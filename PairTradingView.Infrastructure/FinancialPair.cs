@@ -58,7 +58,7 @@ namespace PairTradingView.Infrastructure
         protected void SetRegression(double[] x, double[] y)
         {
             Regression = new LinearRegression();
-            Regression.Compute(x.ToDecimal(), y.ToDecimal());
+            Regression.Compute(y.ToDecimal(), x.ToDecimal());
         }
 
         protected void SetValues(double[] x, double[] y)

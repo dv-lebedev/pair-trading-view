@@ -33,8 +33,7 @@ namespace PairTradingView.Infrastructure
         {
             Check.NotNull(pairs);
 
-            if (balance < 0)
-                throw new ArgumentException("[balance] can't have negative value.");
+            if (balance < 0) throw new ArgumentException("[balance] can't have negative value.");
 
             this.pairs = pairs;
             Balance = balance;
@@ -66,7 +65,7 @@ namespace PairTradingView.Infrastructure
             foreach (var pair in pairs)
             {
                 var regression = new LinearRegression();
-                regression.Compute(synthIndex.ToDecimal(), pair.DeltaValues.ToDecimal());
+                regression.Compute(pair.DeltaValues.ToDecimal(), synthIndex.ToDecimal());
 
                 pair.Weight = 1 / (1 + Math.Abs(regression.Beta.ToDouble()));
 
