@@ -37,10 +37,6 @@ namespace PairTradingView
             this.label11 = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.WMAPeriod = new PairTradingView.Controls.NumericBox();
-            this.SMAPeriod = new PairTradingView.Controls.NumericBox();
-            this.risk = new PairTradingView.Controls.NumericBox();
-            this.balance = new PairTradingView.Controls.NumericBox();
             this.yName = new System.Windows.Forms.Label();
             this.xName = new System.Windows.Forms.Label();
             this.pairName = new System.Windows.Forms.Label();
@@ -53,6 +49,8 @@ namespace PairTradingView
             this.yTradeVolume = new System.Windows.Forms.Label();
             this.label13 = new System.Windows.Forms.Label();
             this.buttomPanel = new System.Windows.Forms.Panel();
+            this.chartPanel = new System.Windows.Forms.Panel();
+            this.chart = new PairTradingView.Controls.ZedGraphChart();
             this.listView = new PairTradingView.Controls.ListViewNF();
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -68,8 +66,10 @@ namespace PairTradingView
             this.columnHeader12 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader13 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader14 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.chartPanel = new System.Windows.Forms.Panel();
-            this.chart = new PairTradingView.Controls.ZedGraphChart();
+            this.WMAPeriod = new PairTradingView.Controls.NumericBox();
+            this.SMAPeriod = new PairTradingView.Controls.NumericBox();
+            this.risk = new PairTradingView.Controls.NumericBox();
+            this.balance = new PairTradingView.Controls.NumericBox();
             this.panel2.SuspendLayout();
             this.buttomPanel.SuspendLayout();
             this.chartPanel.SuspendLayout();
@@ -140,72 +140,11 @@ namespace PairTradingView
             this.panel2.Controls.Add(this.label12);
             this.panel2.Controls.Add(this.label1);
             this.panel2.Controls.Add(this.label2);
-            this.panel2.Location = new System.Drawing.Point(12, 12);
+            this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel2.Location = new System.Drawing.Point(0, 0);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(296, 491);
+            this.panel2.Size = new System.Drawing.Size(1210, 812);
             this.panel2.TabIndex = 29;
-            // 
-            // WMAPeriod
-            // 
-            this.WMAPeriod.BackColor = System.Drawing.Color.Black;
-            this.WMAPeriod.ForeColor = System.Drawing.Color.White;
-            this.WMAPeriod.Location = new System.Drawing.Point(126, 392);
-            this.WMAPeriod.MinimumSize = new System.Drawing.Size(151, 22);
-            this.WMAPeriod.Name = "WMAPeriod";
-            this.WMAPeriod.Size = new System.Drawing.Size(151, 22);
-            this.WMAPeriod.TabIndex = 48;
-            this.WMAPeriod.Value = new decimal(new int[] {
-            0,
-            0,
-            0,
-            0});
-            // 
-            // SMAPeriod
-            // 
-            this.SMAPeriod.BackColor = System.Drawing.Color.Black;
-            this.SMAPeriod.ForeColor = System.Drawing.Color.White;
-            this.SMAPeriod.Location = new System.Drawing.Point(126, 366);
-            this.SMAPeriod.MinimumSize = new System.Drawing.Size(151, 22);
-            this.SMAPeriod.Name = "SMAPeriod";
-            this.SMAPeriod.Size = new System.Drawing.Size(151, 22);
-            this.SMAPeriod.TabIndex = 47;
-            this.SMAPeriod.Value = new decimal(new int[] {
-            0,
-            0,
-            0,
-            0});
-            // 
-            // risk
-            // 
-            this.risk.BackColor = System.Drawing.Color.Black;
-            this.risk.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.risk.ForeColor = System.Drawing.Color.White;
-            this.risk.Location = new System.Drawing.Point(126, 60);
-            this.risk.MinimumSize = new System.Drawing.Size(151, 22);
-            this.risk.Name = "risk";
-            this.risk.Size = new System.Drawing.Size(151, 22);
-            this.risk.TabIndex = 46;
-            this.risk.Value = new decimal(new int[] {
-            25,
-            0,
-            0,
-            131072});
-            // 
-            // balance
-            // 
-            this.balance.BackColor = System.Drawing.Color.Black;
-            this.balance.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.balance.ForeColor = System.Drawing.Color.White;
-            this.balance.Location = new System.Drawing.Point(126, 32);
-            this.balance.MinimumSize = new System.Drawing.Size(151, 22);
-            this.balance.Name = "balance";
-            this.balance.Size = new System.Drawing.Size(151, 22);
-            this.balance.TabIndex = 45;
-            this.balance.Value = new decimal(new int[] {
-            10000000,
-            0,
-            0,
-            131072});
             // 
             // yName
             // 
@@ -340,6 +279,35 @@ namespace PairTradingView
             this.buttomPanel.Size = new System.Drawing.Size(1210, 289);
             this.buttomPanel.TabIndex = 30;
             // 
+            // chartPanel
+            // 
+            this.chartPanel.BackColor = System.Drawing.Color.Lime;
+            this.chartPanel.Controls.Add(this.chart);
+            this.chartPanel.Dock = System.Windows.Forms.DockStyle.Right;
+            this.chartPanel.Location = new System.Drawing.Point(331, 0);
+            this.chartPanel.Margin = new System.Windows.Forms.Padding(331, 3, 3, 3);
+            this.chartPanel.Name = "chartPanel";
+            this.chartPanel.Size = new System.Drawing.Size(879, 523);
+            this.chartPanel.TabIndex = 31;
+            // 
+            // chart
+            // 
+            this.chart.Dock = System.Windows.Forms.DockStyle.Right;
+            this.chart.IsEnableVPan = false;
+            this.chart.IsEnableVZoom = false;
+            this.chart.Location = new System.Drawing.Point(2, 0);
+            this.chart.Margin = new System.Windows.Forms.Padding(331, 3, 3, 3);
+            this.chart.Name = "chart";
+            this.chart.ScrollGrace = 0D;
+            this.chart.ScrollMaxX = 0D;
+            this.chart.ScrollMaxY = 0D;
+            this.chart.ScrollMaxY2 = 0D;
+            this.chart.ScrollMinX = 0D;
+            this.chart.ScrollMinY = 0D;
+            this.chart.ScrollMinY2 = 0D;
+            this.chart.Size = new System.Drawing.Size(877, 523);
+            this.chart.TabIndex = 0;
+            // 
             // listView
             // 
             this.listView.Activation = System.Windows.Forms.ItemActivation.OneClick;
@@ -445,32 +413,67 @@ namespace PairTradingView
             this.columnHeader14.Text = "Δ +3Q";
             this.columnHeader14.Width = 106;
             // 
-            // chartPanel
+            // WMAPeriod
             // 
-            this.chartPanel.BackColor = System.Drawing.Color.Lime;
-            this.chartPanel.Controls.Add(this.chart);
-            this.chartPanel.Dock = System.Windows.Forms.DockStyle.Right;
-            this.chartPanel.Location = new System.Drawing.Point(331, 0);
-            this.chartPanel.Name = "chartPanel";
-            this.chartPanel.Size = new System.Drawing.Size(879, 523);
-            this.chartPanel.TabIndex = 31;
+            this.WMAPeriod.BackColor = System.Drawing.Color.Black;
+            this.WMAPeriod.ForeColor = System.Drawing.Color.White;
+            this.WMAPeriod.Location = new System.Drawing.Point(126, 392);
+            this.WMAPeriod.MinimumSize = new System.Drawing.Size(151, 22);
+            this.WMAPeriod.Name = "WMAPeriod";
+            this.WMAPeriod.Size = new System.Drawing.Size(151, 22);
+            this.WMAPeriod.TabIndex = 48;
+            this.WMAPeriod.Value = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
             // 
-            // chart
+            // SMAPeriod
             // 
-            this.chart.Dock = System.Windows.Forms.DockStyle.Right;
-            this.chart.IsEnableVPan = false;
-            this.chart.IsEnableVZoom = false;
-            this.chart.Location = new System.Drawing.Point(2, 0);
-            this.chart.Name = "chart";
-            this.chart.ScrollGrace = 0D;
-            this.chart.ScrollMaxX = 0D;
-            this.chart.ScrollMaxY = 0D;
-            this.chart.ScrollMaxY2 = 0D;
-            this.chart.ScrollMinX = 0D;
-            this.chart.ScrollMinY = 0D;
-            this.chart.ScrollMinY2 = 0D;
-            this.chart.Size = new System.Drawing.Size(877, 523);
-            this.chart.TabIndex = 0;
+            this.SMAPeriod.BackColor = System.Drawing.Color.Black;
+            this.SMAPeriod.ForeColor = System.Drawing.Color.White;
+            this.SMAPeriod.Location = new System.Drawing.Point(126, 366);
+            this.SMAPeriod.MinimumSize = new System.Drawing.Size(151, 22);
+            this.SMAPeriod.Name = "SMAPeriod";
+            this.SMAPeriod.Size = new System.Drawing.Size(151, 22);
+            this.SMAPeriod.TabIndex = 47;
+            this.SMAPeriod.Value = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+            // 
+            // risk
+            // 
+            this.risk.BackColor = System.Drawing.Color.Black;
+            this.risk.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.risk.ForeColor = System.Drawing.Color.White;
+            this.risk.Location = new System.Drawing.Point(126, 60);
+            this.risk.MinimumSize = new System.Drawing.Size(151, 22);
+            this.risk.Name = "risk";
+            this.risk.Size = new System.Drawing.Size(151, 22);
+            this.risk.TabIndex = 46;
+            this.risk.Value = new decimal(new int[] {
+            25,
+            0,
+            0,
+            131072});
+            // 
+            // balance
+            // 
+            this.balance.BackColor = System.Drawing.Color.Black;
+            this.balance.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.balance.ForeColor = System.Drawing.Color.White;
+            this.balance.Location = new System.Drawing.Point(126, 32);
+            this.balance.MinimumSize = new System.Drawing.Size(151, 22);
+            this.balance.Name = "balance";
+            this.balance.Size = new System.Drawing.Size(151, 22);
+            this.balance.TabIndex = 45;
+            this.balance.Value = new decimal(new int[] {
+            10000000,
+            0,
+            0,
+            131072});
             // 
             // MainWindow
             // 

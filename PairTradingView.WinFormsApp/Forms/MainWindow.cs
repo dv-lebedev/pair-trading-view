@@ -47,19 +47,25 @@ namespace PairTradingView
 
             appData = startWin.AppData;
 
-            if (appData.InputData == null)
+            if (appData == null)
+            {
+                Close();
+            }
+            else if (appData.InputData == null)
             {
                 MessageBox.Show("No input data. App will be closed.");
                 Close();
             }
+            else
+            {
+                DeltaType deltaType = (DeltaType)Enum.Parse(typeof(DeltaType), appData.DeltaTypeName);
 
-            DeltaType deltaType = (DeltaType)Enum.Parse(typeof(DeltaType), appData.DeltaTypeName);
+                pairs = FinancialPair.CreateMany(appData.InputData, deltaType);
 
-            pairs = FinancialPair.CreateMany(appData.InputData, deltaType);
-
-            listView.Items.Clear();
-            listView.Update(pairs);
-            CenterToScreen();
+                listView.Items.Clear();
+                listView.Update(pairs);
+                CenterToScreen();
+            }
         }
 
         private void WMAPeriod_ValueChanged(object sender, EventArgs e)
