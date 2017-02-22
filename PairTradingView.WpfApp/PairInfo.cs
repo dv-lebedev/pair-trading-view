@@ -17,22 +17,20 @@ limitations under the License.
 
 public class PairInfo
 {
-    public bool Select { get; set; }
+    public string Name { get; set; }
+    public bool Selected { get; set; }
     public string X { get; set; }
     public string Y { get; set; }
-
-    
     public decimal SD_X { get; set; }
     public decimal SD_Y { get; set; }
     public decimal Alpha { get; set; }
     public decimal Beta { get; set; }
     public decimal R { get; set; }
-    public decimal R_Squared { get; set; }
+    public decimal RSquared { get; set; }
     public decimal DeltaAverage { get; set; }
     public decimal DeltaMin { get; set; }
     public decimal DeltaMax { get; set; }
     public decimal DeltaSD { get; set; }
     public decimal DeltaSDMinus3Q { get; set; }
-    public decimal DeltaSDPlus3Q { get; set; }
-    
+    public decimal DeltaSDPlus3Q { get; set; }  
 }

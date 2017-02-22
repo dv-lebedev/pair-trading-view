@@ -1,4 +1,21 @@
-﻿using PairTradingView.Infrastructure;
+﻿
+/*
+Copyright(c) 2015-2017 Denis Lebedev
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+*/
+
+using PairTradingView.Infrastructure;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -8,16 +25,14 @@ using System.Windows.Input;
 
 namespace PairTradingView.WpfApp
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
     public partial class MainWindow : Window
     {
         private FinancialPair selectedPair;
         private List<FinancialPair> pairs;
         private MainWindowModel viewModel;
-        public ObservableCollection<PairInfo> pairsInfo { get; set; }
         private AppData appData;
+
+        public ObservableCollection<PairInfo> pairsInfo { get; set; }
 
         public MainWindow()
         {
@@ -42,12 +57,10 @@ namespace PairTradingView.WpfApp
                 pairs = FinancialPair.CreateMany(appData.InputData, deltaType);            
 
                 InitializeComponent();
-
                 Title = "Pair Trading View";
+                WindowStartupLocation = WindowStartupLocation.CenterScreen;
 
                 FillDataGrid();
-
-                WindowStartupLocation = WindowStartupLocation.CenterScreen;
 
                 viewModel = new MainWindowModel();
                 DataContext = viewModel;
@@ -60,20 +73,27 @@ namespace PairTradingView.WpfApp
 
         private void OnMouseLeftDown(object sender, MouseButtonEventArgs e)
         {
-            PairInfo info = dataGrid.SelectedItem as PairInfo;
-
-            if (info != null)
+            try
             {
-                selectedPair = pairs.Find(i => i.X.Name == info.X && i.Y.Name == info.Y);
+                var info = dataGrid.SelectedItem as PairInfo;
 
-                if (selectedPair != null)
+                if (info != null)
                 {
-                    viewModel.Update(selectedPair.DeltaValues, selectedPair.Name);
-                    Plot1.InvalidatePlot();
-                }
-            }
+                    selectedPair = pairs.Find(i => i.Name == info.Name);
 
-            ShowValuesForPairInfo();
+                    if (selectedPair != null)
+                    {
+                        viewModel.Update(selectedPair.DeltaValues, selectedPair.Name);
+                        Plot1.InvalidatePlot();
+                    }
+                }
+
+                ShowValuesForPairInfo();
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
         private void FillDataGrid()
@@ -87,12 +107,13 @@ namespace PairTradingView.WpfApp
 
                 pairsInfo.Add(new PairInfo
                 {
-                    Alpha = item.Regression.Alpha,
-                    Beta = item.Regression.Beta,
+                    Name = item.Name,
                     X = item.X.Name,
                     Y = item.Y.Name,
+                    Alpha = item.Regression.Alpha,
+                    Beta = item.Regression.Beta,
                     R = item.Regression.RValue,
-                    R_Squared = item.Regression.RSquared,
+                    RSquared = item.Regression.RSquared,
                     DeltaAverage = (decimal)deltaAverage,
                     DeltaMax = (decimal)item.DeltaValues.Max(),
                     DeltaMin = (decimal)item.DeltaValues.Min(),
@@ -137,9 +158,9 @@ namespace PairTradingView.WpfApp
 
                 foreach (var info in pairsInfo)
                 {
-                    if (info.Select)
+                    if (info.Selected)
                     {
-                        var synth = pairs.Find(i => i.X.Name == info.X && i.Y.Name == info.Y);
+                        var synth = pairs.Find(i => i.Name  == info.Name);
 
                         if (synth != null)
                         {

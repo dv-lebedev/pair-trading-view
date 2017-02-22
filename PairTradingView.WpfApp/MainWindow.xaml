@@ -35,12 +35,12 @@
 
             <TextBlock Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" Margin="151,10,151,0" Text="INFO" HorizontalAlignment="Center" FontWeight="Bold" Width="29"></TextBlock>
 
-            <TextBlock Grid.Column="0" Grid.Row="1" Margin="0,13,9.5,7"  Width="50" HorizontalAlignment="Right" VerticalAlignment="Center" Height="16">Balance $</TextBlock>
-            <TextBlock Grid.Column="0" Grid.Row="2" Margin="0,12,9.5,12"  Width="50" HorizontalAlignment="Right" VerticalAlignment="Center" Height="16">Risk %</TextBlock>
-            <TextBlock Grid.Column="0" Grid.Row="3" Name="pairName" Margin="0,13,9.5,12"  Width="50" HorizontalAlignment="Right" VerticalAlignment="Center" Height="16">-</TextBlock>
-            <TextBlock Grid.Column="0" Grid.Row="4" Name="xName" Margin="0,12,9.5,12"  Width="50" HorizontalAlignment="Right" VerticalAlignment="Center" Height="16">-</TextBlock>
-            <TextBlock Grid.Column="0" Grid.Row="5" Name="yName" Margin="0,12,9.5,13"  Width="50" HorizontalAlignment="Right" VerticalAlignment="Center" Height="16">-</TextBlock>
-            <TextBlock Grid.Column="0" Grid.Row="6" Margin="0,12,9.5,12"  Width="50" HorizontalAlignment="Right" VerticalAlignment="Center" Height="16">Risk Limit</TextBlock>
+            <TextBlock Grid.Column="0" Grid.Row="1" Margin="0,13,9.5,7"  Width="80" HorizontalAlignment="Right" VerticalAlignment="Center" Height="16">Balance $</TextBlock>
+            <TextBlock Grid.Column="0" Grid.Row="2" Margin="0,12,9.5,12"  Width="80" HorizontalAlignment="Right" VerticalAlignment="Center" Height="16">Risk %</TextBlock>
+            <TextBlock Grid.Column="0" Grid.Row="3" Name="pairName" Margin="0,13,9.5,12"  Width="80" HorizontalAlignment="Right" VerticalAlignment="Center" Height="16">-</TextBlock>
+            <TextBlock Grid.Column="0" Grid.Row="4" Name="xName" Margin="0,12,9.5,12"  Width="80" HorizontalAlignment="Right" VerticalAlignment="Center" Height="16">-</TextBlock>
+            <TextBlock Grid.Column="0" Grid.Row="5" Name="yName" Margin="0,12,9.5,13"  Width="80" HorizontalAlignment="Right" VerticalAlignment="Center" Height="16">-</TextBlock>
+            <TextBlock Grid.Column="0" Grid.Row="6" Margin="0,12,9.5,12"  Width="80" HorizontalAlignment="Right" VerticalAlignment="Center" Height="16">Risk Limit</TextBlock>
 
             <TextBox Grid.Column="1" Grid.Row="1" Margin="10,10,10,10" Height="20" Width="100" HorizontalAlignment="Left" Text="100000.00" Name="balance"/>
             <TextBox Grid.Column="1" Grid.Row="2" Margin="10,10,10,10" Height="20" Width="100" HorizontalAlignment="Left" Text="0.25" Name="risk"/>
@@ -60,7 +60,7 @@
 
         <DataGrid AutoGenerateColumns="False" Grid.Row="1" Grid.ColumnSpan="2" x:Name="dataGrid" ItemsSource="{Binding pairsInfo}">
             <DataGrid.Columns>
-                <DataGridCheckBoxColumn Binding="{Binding Select}" />
+                <DataGridCheckBoxColumn Binding="{Binding Selected}" />
                 <DataGridTextColumn Header="X" Binding="{Binding X}" />
                 <DataGridTextColumn Header="Y" Binding="{Binding Y}" />
                 <DataGridTextColumn Header="SD_X" Binding="{Binding SD_X, StringFormat=F4}" />
@@ -68,7 +68,7 @@
                 <DataGridTextColumn Header="Alpha" Binding="{Binding Alpha, StringFormat=F4}" />
                 <DataGridTextColumn Header="Beta" Binding="{Binding Beta, StringFormat=F4}" />
                 <DataGridTextColumn Header="R" Binding="{Binding R, StringFormat=F4}" />
-                <DataGridTextColumn Header="R_Squared" Binding="{Binding R_Squared, StringFormat=F4}" />
+                <DataGridTextColumn Header="RSquared" Binding="{Binding RSquared, StringFormat=F4}" />
 
                 <DataGridTextColumn Header="DeltaAverage" Binding="{Binding DeltaAverage, StringFormat=F4}" />
                 <DataGridTextColumn Header="DeltaMin" Binding="{Binding DeltaMin, StringFormat=F4}" />

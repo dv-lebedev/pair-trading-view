@@ -15,7 +15,6 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-
 using System;
 using System.Globalization;
 using System.Windows.Controls;
@@ -24,7 +23,7 @@ namespace PairTradingView.WpfApp
 {
     public static class Utils
     {
-        public static int TextBoxValueToInt32(TextBox textBox)
+        public static int GetInt32(this TextBox textBox)
         {
             int result;
 
