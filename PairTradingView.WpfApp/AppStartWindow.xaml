@@ -17,6 +17,5 @@
             <TextBlock x:Name="textBlock2" Canvas.Left="122" TextWrapping="Wrap" Text="DELTA" Canvas.Top="124" FontWeight="Bold" RenderTransformOrigin="2.329,0.439"/>
         </Canvas>
         <TextBox x:Name="priceCol" HorizontalAlignment="Left" Height="23" Margin="135,58,0,0" TextWrapping="Wrap" Text="5" VerticalAlignment="Top" Width="120"/>
-
     </Grid>
 </Window>

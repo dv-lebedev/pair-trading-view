@@ -6,7 +6,7 @@
         xmlns:oxy="http://oxyplot.org/wpf"
         xmlns:local="clr-namespace:PairTradingView.WpfApp"
         mc:Ignorable="d"
-        Title="MainWindow" Height="642" Width="998">
+        Title="MainWindow" Height="812" Width="1210">
     <Grid RenderTransformOrigin="0.493,0.505">
         <Grid.RowDefinitions>
             <RowDefinition Height="186*"/>
@@ -57,9 +57,9 @@
             <Button Name="Calculate" Grid.Row="7" Grid.Column="1" Click="Calculate_Click" Margin="10.5,10,21,8" Height="20" RenderTransformOrigin="0.25,0.6">Get Risk Info</Button>
         </Grid>
 
-        <oxy:PlotView x:Name="plot"  Model="{Binding PlotModel}" Margin="10" Grid.Row="0" Grid.Column="1"></oxy:PlotView>
+        <oxy:PlotView x:Name="plot"  Model="{Binding PlotModel}" Margin="10" Grid.Row="0" Grid.Column="1" UseLayoutRounding="False" BorderThickness="0"></oxy:PlotView>
 
-        <DataGrid CanUserSortColumns="True" AutoGenerateColumns="False" Grid.Row="1" Grid.ColumnSpan="2" x:Name="dataGrid">
+        <DataGrid CanUserSortColumns="True" GridLinesVisibility="None" AutoGenerateColumns="False" Grid.Row="1" Grid.ColumnSpan="2" x:Name="dataGrid">
             <DataGrid.Columns>
                 <DataGridCheckBoxColumn Binding="{Binding Selected}">
                     <DataGridCheckBoxColumn.CellStyle>

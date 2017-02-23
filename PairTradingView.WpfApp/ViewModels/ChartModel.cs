@@ -54,9 +54,11 @@ namespace PairTradingView.WpfApp
 
         public void Update(double[] values, string title, int SMAPeriod = 0)
         {
+            PlotModel.Title = title;
+
             PlotModel.Series.Clear();
 
-            AddLineSerie(title, OxyColor.Parse("#00A3A3"), values, 0);
+            AddLineSerie("Δ", OxyColor.Parse("#00A3A3"), values, 0);
 
             if (SMAPeriod > 0)
             {
@@ -86,7 +88,6 @@ namespace PairTradingView.WpfApp
 
             PlotModel.Series.Add(lineSerie);
         }
-
 
         public event PropertyChangedEventHandler PropertyChanged;
 

@@ -21,7 +21,9 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
+using System.Windows.Media;
 
 namespace PairTradingView.WpfApp
 {
@@ -32,7 +34,7 @@ namespace PairTradingView.WpfApp
         private List<FinancialPair> pairs;
         private ChartModel chartModel;
 
-        public ObservableCollection<PairInfo> pairsInfo { get; set; }
+        public ObservableCollection<PairInfo> pairsInfo { get; private set; }
 
         public MainWindow()
         {
@@ -52,70 +54,37 @@ namespace PairTradingView.WpfApp
             }
             else
             {
-                DeltaType deltaType = (DeltaType)Enum.Parse(typeof(DeltaType), appData.DeltaTypeName);
-
-                pairs = FinancialPair.CreateMany(appData.InputData, deltaType);            
-
+                InitPairs();
                 InitializeComponent();
-                Title = "Pair Trading View";
-                WindowStartupLocation = WindowStartupLocation.CenterScreen;
-
-                chartModel = new ChartModel();
-                DataContext = chartModel;
-
-                dataGrid.AddHandler(MouseLeftButtonDownEvent, new MouseButtonEventHandler(OnMouseLeftDown), true);
-
+                SetWindowParams();
+                InitChart();
+                InitDataGridView();
                 FillDataGrid();
-
                 ShowDefaultValuesForPairInfo();
             }
         }
 
-        private void OnChecked(object sender, RoutedEventArgs e)
+        private void InitDataGridView()
         {
-            try
-            {
-                var info = dataGrid.SelectedItem as PairInfo;
-
-                if (info != null)
-                {
-
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"OnChecked => {ex.Message}");
-            }
+            dataGrid.AddHandler(MouseLeftButtonDownEvent, new MouseButtonEventHandler(OnMouseLeftDown), true);        
         }
 
-        private void OnMouseLeftDown(object sender, MouseButtonEventArgs e)
+        private void InitChart()
         {
-            try
-            {
-                var info = dataGrid.SelectedItem as PairInfo;
+            chartModel = new ChartModel();
+            DataContext = chartModel;
+        }
 
-                if (info != null)
-                {
-                    selectedPair = pairs.Find(i => i.Name == info.Name);
+        private void SetWindowParams()
+        {
+            Title = "Pair Trading View";
+            WindowStartupLocation = WindowStartupLocation.CenterScreen;
+        }
 
-                    if (selectedPair != null)
-                    {
-                        var smaValue = sma.GetInt32();
-
-                        if (smaValue < 0)
-                            throw new Exception("SMA should be more or equal 0.");
-
-                        chartModel.Update(selectedPair.DeltaValues, selectedPair.Name, smaValue);
-                        plot.InvalidatePlot();
-
-                        ShowValuesForPairInfo();
-                    }
-                }
-            }
-            catch(Exception ex)
-            {
-                MessageBox.Show($"OnMouseLeftDown => {ex.Message}");
-            }
+        private void InitPairs()
+        {
+            DeltaType deltaType = (DeltaType)Enum.Parse(typeof(DeltaType), appData.DeltaTypeName);
+            pairs = FinancialPair.CreateMany(appData.InputData, deltaType);
         }
 
         private void FillDataGrid()
@@ -172,30 +141,40 @@ namespace PairTradingView.WpfApp
             riskLimit.Text = Math.Round((selectedPair.TradeVolume * risk.GetDouble() / 100.0), 4).ToString();
         }
 
+        private void SetTradeVolumeToDefault()
+        {
+            foreach (var pair in pairs)
+            {
+                pair.TradeVolume = 0;
+                pair.X.TradeVolume = 0;
+                pair.Y.TradeVolume = 0;
+            }
+        }
+
         private void Calculate_Click(object sender, RoutedEventArgs e)
         {
             try
             {
-                var checkedSynths = new List<FinancialPair>();
+                var checkedPairs = new List<FinancialPair>();
 
-                foreach (var info in pairsInfo)
+                foreach (var item in pairsInfo)
                 {
-                    if (info.Selected)
+                    if (item.Selected)
                     {
-                        var synth = pairs.Find(i => i.Name  == info.Name);
+                        var pair = pairs.Find(i => i.Name == item.Name);
 
-                        if (synth != null)
+                        if (pair != null)
                         {
-                            checkedSynths.Add(synth);
+                            checkedPairs.Add(pair);
                         }
                     }
                 }
 
-                if (checkedSynths.Count > 0)
+                if (checkedPairs.Count > 0)
                 {
-                    SetTradeVolumeToDefault();         
+                    SetTradeVolumeToDefault();
 
-                    var rc = new RiskManager(checkedSynths.ToArray(), balance.GetDouble());
+                    var rc = new RiskManager(checkedPairs.ToArray(), balance.GetDouble());
                     rc.Calculate();
 
                     ShowValuesForPairInfo();
@@ -211,13 +190,61 @@ namespace PairTradingView.WpfApp
             }
         }
 
-        private void SetTradeVolumeToDefault()
+        private void OnChecked(object sender, RoutedEventArgs e)
         {
-            foreach (var pair in pairs)
+            try
             {
-                pair.TradeVolume = 0;
-                pair.X.TradeVolume = 0;
-                pair.Y.TradeVolume = 0;
+                var info = dataGrid.SelectedItem as PairInfo;
+
+                if (info != null)
+                {
+                    var selectedPairs = pairsInfo.Where(i => i.Selected && i.Name != info.Name);
+
+                    foreach (var item in selectedPairs)
+                    {
+                        if (item.X == info.X || item.X == info.Y ||
+                            item.Y == info.X || item.Y == info.Y)
+                        {
+                            (e.Source as CheckBox).IsChecked = false;
+
+                            MessageBox.Show("You can't choose pairs with identical symbols!");
+                        }
+                    }
+                }
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"OnChecked => {ex.Message}");
+            }
+        }
+
+        private void OnMouseLeftDown(object sender, MouseButtonEventArgs e)
+        {
+            try
+            {
+                var info = dataGrid.SelectedItem as PairInfo;
+
+                if (info != null)
+                {
+                    selectedPair = pairs.Find(i => i.Name == info.Name);
+
+                    if (selectedPair != null)
+                    {
+                        var SMAValue = sma.GetInt32();
+
+                        if (SMAValue < 0) throw new Exception("SMA should be more or equal 0.");
+
+                        chartModel.Update(selectedPair.DeltaValues, selectedPair.Name, SMAValue);
+                        plot.InvalidatePlot();
+
+                        ShowValuesForPairInfo();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"OnMouseLeftDown => {ex.Message}");
             }
         }
     }

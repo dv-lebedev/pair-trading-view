@@ -47,15 +47,11 @@ namespace PairTradingView.WpfApp
         {
             try
             {
-                int priceIndex = priceCol.GetInt32() - 1;
-
+                int priceColumn = priceCol.GetInt32();
                 bool header = containsHeader.IsChecked.Value;
-
                 AppData = new AppData();
-
-                AppData.InputData = CsvUtils.ReadAllDataFrom(csvFilesDirectory, priceIndex, header);
+                AppData.InputData = CsvUtils.ReadAllDataFrom(csvFilesDirectory, priceColumn - 1, header);
                 AppData.DeltaTypeName = deltaTypeBox.Text;
-
                 Close();
             }
             catch (Exception ex)
