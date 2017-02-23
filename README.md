@@ -10,7 +10,7 @@
 </p>
 
 
-##How To
+##How To (WinFormsApp)
 
 Execute PairTradingView.exe in 'pair-trading-view\PairTradingView.WinFormsApp\bin\Debug\'.
 
