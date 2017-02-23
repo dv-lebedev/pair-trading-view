@@ -73,7 +73,19 @@ namespace PairTradingView.WpfApp
 
         private void OnChecked(object sender, RoutedEventArgs e)
         {
-            //MessageBox.Show("DDD");
+            try
+            {
+                var info = dataGrid.SelectedItem as PairInfo;
+
+                if (info != null)
+                {
+
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"OnChecked => {ex.Message}");
+            }
         }
 
         private void OnMouseLeftDown(object sender, MouseButtonEventArgs e)

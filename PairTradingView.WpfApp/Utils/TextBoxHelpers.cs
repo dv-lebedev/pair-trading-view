@@ -21,7 +21,7 @@ using System.Windows.Controls;
 
 namespace PairTradingView.WpfApp
 {
-    public static class Utils
+    public static class TextBoxHelpers
     {
         public static int GetInt32(this TextBox textBox)
         {

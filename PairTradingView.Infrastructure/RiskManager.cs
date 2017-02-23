@@ -38,7 +38,18 @@ namespace PairTradingView.Infrastructure
             this.pairs = pairs;
             Balance = balance;
 
+            SetTradeVolumeToDefault();
             SetSynthIndex();
+        }
+
+        private void SetTradeVolumeToDefault()
+        {
+            foreach (var pair in pairs)
+            {
+                pair.TradeVolume = 0;
+                pair.X.TradeVolume = 0;
+                pair.Y.TradeVolume = 0;
+            }
         }
 
         private void SetSynthIndex()

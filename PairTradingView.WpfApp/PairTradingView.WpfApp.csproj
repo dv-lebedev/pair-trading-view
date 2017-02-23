@@ -64,10 +64,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Annotations.cs" />
+    <Compile Include="Properties\Annotations.cs" />
     <Compile Include="ViewModels\ChartModel.cs" />
-    <Compile Include="PairInfo.cs" />
-    <Compile Include="Utils.cs" />
+    <Compile Include="Data\PairInfo.cs" />
+    <Compile Include="Utils\TextBoxHelpers.cs" />
     <Page Include="AppStartWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -80,7 +80,7 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="AppData.cs" />
+    <Compile Include="Data\AppData.cs" />
     <Compile Include="AppStartWindow.xaml.cs">
       <DependentUpon>AppStartWindow.xaml</DependentUpon>
     </Compile>

@@ -59,7 +59,7 @@
 
         <oxy:PlotView x:Name="plot"  Model="{Binding PlotModel}" Margin="10" Grid.Row="0" Grid.Column="1"></oxy:PlotView>
 
-        <DataGrid CanUserSortColumns="True" AutoGenerateColumns="False" Grid.Row="1" Grid.ColumnSpan="2" x:Name="dataGrid" ItemsSource="{Binding pairsInfo}">
+        <DataGrid CanUserSortColumns="True" AutoGenerateColumns="False" Grid.Row="1" Grid.ColumnSpan="2" x:Name="dataGrid">
             <DataGrid.Columns>
                 <DataGridCheckBoxColumn Binding="{Binding Selected}">
                     <DataGridCheckBoxColumn.CellStyle>
