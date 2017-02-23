@@ -6,7 +6,7 @@
         xmlns:oxy="http://oxyplot.org/wpf"
         xmlns:local="clr-namespace:PairTradingView.WpfApp"
         mc:Ignorable="d"
-        Title="MainWindow" Height="812" Width="1210">
+        Title="MainWindow" Height="746" Width="918">
     <Grid RenderTransformOrigin="0.493,0.505">
         <Grid.RowDefinitions>
             <RowDefinition Height="186*"/>
