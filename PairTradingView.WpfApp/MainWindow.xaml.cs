@@ -27,10 +27,10 @@ namespace PairTradingView.WpfApp
 {
     public partial class MainWindow : Window
     {
+        private AppData appData;
         private FinancialPair selectedPair;
         private List<FinancialPair> pairs;
-        private MainWindowModel viewModel;
-        private AppData appData;
+        private ChartModel chartModel;
 
         public ObservableCollection<PairInfo> pairsInfo { get; set; }
 
@@ -60,15 +60,20 @@ namespace PairTradingView.WpfApp
                 Title = "Pair Trading View";
                 WindowStartupLocation = WindowStartupLocation.CenterScreen;
 
-                FillDataGrid();
-
-                viewModel = new MainWindowModel();
-                DataContext = viewModel;
+                chartModel = new ChartModel();
+                DataContext = chartModel;
 
                 dataGrid.AddHandler(MouseLeftButtonDownEvent, new MouseButtonEventHandler(OnMouseLeftDown), true);
 
+                FillDataGrid();
+
                 ShowDefaultValuesForPairInfo();
             }
+        }
+
+        private void OnChecked(object sender, RoutedEventArgs e)
+        {
+            //MessageBox.Show("DDD");
         }
 
         private void OnMouseLeftDown(object sender, MouseButtonEventArgs e)
@@ -83,16 +88,21 @@ namespace PairTradingView.WpfApp
 
                     if (selectedPair != null)
                     {
-                        viewModel.Update(selectedPair.DeltaValues, selectedPair.Name);
-                        Plot1.InvalidatePlot();
+                        var smaValue = sma.GetInt32();
+
+                        if (smaValue < 0)
+                            throw new Exception("SMA should be more or equal 0.");
+
+                        chartModel.Update(selectedPair.DeltaValues, selectedPair.Name, smaValue);
+                        plot.InvalidatePlot();
+
+                        ShowValuesForPairInfo();
                     }
                 }
-
-                ShowValuesForPairInfo();
             }
             catch(Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                MessageBox.Show($"OnMouseLeftDown => {ex.Message}");
             }
         }
 
@@ -100,7 +110,7 @@ namespace PairTradingView.WpfApp
         {
             pairsInfo = new ObservableCollection<PairInfo>();
 
-            foreach(var item in pairs)
+            foreach (var item in pairs)
             {
                 var deltaAverage = item.DeltaValues.Average();
                 var deltaSD = MathUtils.GetStandardDeviation(item.DeltaValues);

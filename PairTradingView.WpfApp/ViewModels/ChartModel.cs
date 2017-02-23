@@ -19,11 +19,12 @@ using OxyPlot;
 using OxyPlot.Axes;
 using OxyPlot.Series;
 using OxyPlotDemo.Annotations;
+using PairTradingView.Infrastructure;
 using System.ComponentModel;
 
 namespace PairTradingView.WpfApp
 {
-    public class MainWindowModel : INotifyPropertyChanged
+    public class ChartModel : INotifyPropertyChanged
     {
         private PlotModel plotModel;
         public PlotModel PlotModel
@@ -32,7 +33,7 @@ namespace PairTradingView.WpfApp
             set { plotModel = value; OnPropertyChanged("PlotModel"); }
         }
 
-        public MainWindowModel()
+        public ChartModel()
         {
             PlotModel = new PlotModel();
             SetUpModel();
@@ -40,28 +41,32 @@ namespace PairTradingView.WpfApp
 
         private void SetUpModel()
         {
-            PlotModel.LegendTitle = "Legend";
+            PlotModel.LegendTitle = "";
             PlotModel.LegendOrientation = LegendOrientation.Horizontal;
             PlotModel.LegendPlacement = LegendPlacement.Outside;
-            PlotModel.LegendPosition = LegendPosition.TopRight;
+            PlotModel.LegendPosition = LegendPosition.TopLeft;
             PlotModel.LegendBackground = OxyColor.FromAColor(200, OxyColors.White);
             PlotModel.LegendBorder = OxyColors.White;
 
-            var dateAxis = new DateTimeAxis()
-            {  
-                MajorGridlineStyle = LineStyle.Solid, MinorGridlineStyle = LineStyle.Dot, IntervalLength = 80
-            };
-            //PlotModel.Axes.Add(dateAxis);
-
-            var valueAxis = new LinearAxis() { MajorGridlineStyle = LineStyle.Solid, MinorGridlineStyle = LineStyle.Dot, Title = "Value" };
+            var valueAxis = new LinearAxis() { MajorGridlineStyle = LineStyle.Solid, MinorGridlineStyle = LineStyle.Dot, Title = "Δ" };
             PlotModel.Axes.Add(valueAxis);
-
         }
 
-        public void Update(double[] data, string title)
+        public void Update(double[] values, string title, int SMAPeriod = 0)
         {
             PlotModel.Series.Clear();
 
+            AddLineSerie(title, OxyColor.Parse("#00A3A3"), values, 0);
+
+            if (SMAPeriod > 0)
+            {
+                var SMAValues = MovingAverages.SMA(values, SMAPeriod);
+                AddLineSerie("SMA", OxyColor.Parse("#FF0000"), SMAValues, SMAPeriod);
+            }
+        }
+
+        public void AddLineSerie(string title, OxyColor color, double[] values, int offset = 0)
+        {
             var lineSerie = new LineSeries
             {
                 StrokeThickness = 2,
@@ -69,14 +74,14 @@ namespace PairTradingView.WpfApp
                 MarkerStroke = OxyColors.Red,
                 MarkerType = MarkerType.None,
                 CanTrackerInterpolatePoints = false,
-                Color = OxyColor.Parse("#00A3A3"),
+                Color = color,
                 Title = title,
                 Smooth = false
             };
 
-            for (int i = 0; i < data.Length; i++)
+            for (int i = 0; i < values.Length; i++)
             {
-                lineSerie.Points.Add(new DataPoint(Axis.ToDouble(i), data[i]));
+                lineSerie.Points.Add(new DataPoint(Axis.ToDouble(i + offset), values[i]));
             }
 
             PlotModel.Series.Add(lineSerie);
