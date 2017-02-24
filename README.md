@@ -7,14 +7,14 @@
 ![.Net version](https://img.shields.io/badge/framework-.Net Framework 4.5.2-red.svg)
 
 
-##[ PairTradingView.WinFormsApp ]
+**[ PairTradingView.WinFormsApp ]**
 
 <p align="left">
   <img width="700" alt="pic" src="https://github.com/dv-lebedev/PairTradingView/blob/master/screenshots/mainwindow.png">
 </p>
 
 
-##[ PairTradingView.WpfApp ]
+**[ PairTradingView.WpfApp ]**
 
 <p align="left">
   <img width="700" alt="pic" src="https://github.com/dv-lebedev/PairTradingView/blob/master/screenshots/ptv-wpf.png">
