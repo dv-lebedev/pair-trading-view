@@ -186,7 +186,10 @@ namespace PairTradingView.WpfApp
             }
             catch (Exception ex)
             {
-                MessageBox.Show("CalculateRisk => " + ex.Message);
+                Dispatcher.BeginInvoke((Action)(() =>
+                {
+                    MessageBox.Show("CalculateRisk => " + ex.Message);
+                }));
             }
         }
 
@@ -207,7 +210,7 @@ namespace PairTradingView.WpfApp
                         {
                             (e.Source as CheckBox).IsChecked = false;
 
-                            MessageBox.Show("You can't choose pairs with identical symbols!");
+                            MessageBox.Show($"You can't choose pairs with identical symbols! {info.Name} & {item.Name}");
                         }
                     }
                 }
@@ -215,7 +218,10 @@ namespace PairTradingView.WpfApp
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"OnChecked => {ex.Message}");
+                Dispatcher.BeginInvoke((Action)(() => 
+                {
+                    MessageBox.Show($"OnChecked => {ex.Message}");
+                }));
             }
         }
 

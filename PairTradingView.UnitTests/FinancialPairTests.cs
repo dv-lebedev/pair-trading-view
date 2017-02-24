@@ -53,8 +53,8 @@ namespace PairTradingView.UnitTests
         private void CheckDeltaValues(FinancialPair pair)
         {
             Assert.AreEqual(473, pair.DeltaValues.Length);
-            Assert.AreEqual(-453.3799, pair.DeltaValues.First(), 0.001);
-            Assert.AreEqual(-33.2799, pair.DeltaValues.Last(), 0.001);
+            Assert.AreEqual(89.2855, pair.DeltaValues.First(), 0.001);
+            Assert.AreEqual(78.7398, pair.DeltaValues.Last(), 0.001);
         }
 
         private void CheckDeviations(FinancialPair pair)
