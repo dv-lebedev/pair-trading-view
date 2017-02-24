@@ -14,13 +14,6 @@
 </p>
 
 
-**[ PairTradingView.WpfApp ]**
-
-<p align="left">
-  <img width="700" alt="pic" src="https://github.com/dv-lebedev/PairTradingView/blob/master/screenshots/ptv-wpf.png">
-</p>
-
-
 ##How To
 
 Execute PairTradingView.exe in 'pair-trading-view\PairTradingView.WinFormsApp\bin\Debug\'.
