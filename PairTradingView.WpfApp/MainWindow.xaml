@@ -34,27 +34,27 @@
                 <RowDefinition />
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition />
-                <ColumnDefinition />
+                <ColumnDefinition Width="124*" />
+                <ColumnDefinition Width="181*" />
             </Grid.ColumnDefinitions>
 
-            <TextBlock Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" Margin="0,10,0,0" Text="INFO" HorizontalAlignment="Center" FontWeight="Bold" Width="29"></TextBlock>
-            <TextBlock Grid.Column="0" Grid.Row="1" Margin="0,13,9.5,7"  Width="80" HorizontalAlignment="Right" VerticalAlignment="Center" Height="16">Balance $</TextBlock>
-            <TextBlock Grid.Column="0" Grid.Row="2" Margin="0,12,9.5,12"  Width="80" HorizontalAlignment="Right" VerticalAlignment="Center" Height="16">Risk %</TextBlock>
-            <TextBlock Grid.Column="0" Grid.Row="3" Name="pairName" Margin="0,13,9.5,12"  Width="80" HorizontalAlignment="Right" VerticalAlignment="Center" Height="16">-</TextBlock>
-            <TextBlock Grid.Column="0" Grid.Row="4" Name="xName" Margin="0,12,9.5,12"  Width="80" HorizontalAlignment="Right" VerticalAlignment="Center" Height="16">-</TextBlock>
-            <TextBlock Grid.Column="0" Grid.Row="5" Name="yName" Margin="0,12,9.5,13"  Width="80" HorizontalAlignment="Right" VerticalAlignment="Center" Height="16">-</TextBlock>
-            <TextBlock Grid.Column="0" Grid.Row="6" Margin="0,12,9.5,12"  Width="80" HorizontalAlignment="Right" VerticalAlignment="Center" Height="16">Risk Limit</TextBlock>
-            <TextBlock Grid.Column="0" Grid.Row="8" Margin="0,13,9.5,7"  Width="80" HorizontalAlignment="Right" VerticalAlignment="Center" Height="16">SMA</TextBlock>
+            <TextBlock Grid.Column="1" Grid.Row="0" Margin="7,10,145,0" Text="INFO" HorizontalAlignment="Center" FontWeight="Bold" Width="29"/>
+            <TextBlock Grid.Column="0" Grid.Row="1" Margin="0,18,10,12"  Width="80" HorizontalAlignment="Right" VerticalAlignment="Center" Height="16">Balance $</TextBlock>
+            <TextBlock Grid.Column="0" Grid.Row="2" Margin="0,15,10,15"  Width="80" HorizontalAlignment="Right" VerticalAlignment="Center" Height="16">Risk %</TextBlock>
+            <TextBlock Grid.Column="0" Grid.Row="3" Name="pairName" Margin="0,16,10,14"  Width="80" HorizontalAlignment="Right" VerticalAlignment="Center" Height="16">-</TextBlock>
+            <TextBlock Grid.Column="0" Grid.Row="4" Name="xName" Margin="0,16,10,15"  Width="80" HorizontalAlignment="Right" VerticalAlignment="Center" Height="16">-</TextBlock>
+            <TextBlock Grid.Column="0" Grid.Row="5" Name="yName" Margin="0,15,10,15"  Width="80" HorizontalAlignment="Right" VerticalAlignment="Center" Height="16">-</TextBlock>
+            <TextBlock Grid.Column="0" Grid.Row="6" Margin="0,15,10,16"  Width="80" HorizontalAlignment="Right" VerticalAlignment="Center" Height="16">Risk Limit</TextBlock>
+            <TextBlock Grid.Column="0" Grid.Row="8" Margin="0,18,10,13"  Width="80" HorizontalAlignment="Right" VerticalAlignment="Center" Height="16">SMA</TextBlock>
 
-            <TextBox Grid.Column="1" Grid.Row="1" Margin="10,0,0,0" Height="20" Width="100" HorizontalAlignment="Left" Text="100000.00" Name="balance"/>
-            <TextBox Grid.Column="1" Grid.Row="2" Margin="10,0,0,0" Height="20" Width="100" HorizontalAlignment="Left" Text="0.25" Name="risk"/>
-            <TextBlock Grid.Column="1" Grid.Row="3" Name="pairsTradeBalance" Margin="10.5,13,0,12" HorizontalAlignment="Left" VerticalAlignment="Center" Height="16" Width="100">-</TextBlock>
-            <TextBlock Grid.Column="1" Grid.Row="4" Name="yTradeVolume" Margin="10.5,12,0,12" HorizontalAlignment="Left" VerticalAlignment="Center" Height="16" Width="100">-</TextBlock>
-            <TextBlock Grid.Column="1" Grid.Row="5" Name="xTradeVolume" Margin="10.5,12,0,13" HorizontalAlignment="Left" VerticalAlignment="Center" Height="16" Width="100">-</TextBlock>
-            <TextBlock Grid.Column="1" Grid.Row="6" Name="riskLimit" Margin="10.5,12,0,12" HorizontalAlignment="Left" VerticalAlignment="Center" Height="16" Width="100">-</TextBlock>
-            <TextBox Grid.Column="1" Grid.Row="8" Name="sma" Margin="10,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Center" Height="20" Width="100">0</TextBox>
-            <Button Name="Calculate" Grid.Row="7" Grid.Column="1" Click="Calculate_Click" Margin="10.5,10,21,8" Height="20" RenderTransformOrigin="0.25,0.6">Get Risk Info</Button>
+            <TextBox Grid.Column="1" Grid.Row="1" Margin="10,13,0,13" Width="100" HorizontalAlignment="Left" Text="100000.00" Name="balance"/>
+            <TextBox Grid.Column="1" Grid.Row="2" Margin="10,13,0,13" Width="100" HorizontalAlignment="Left" Text="0.25" Name="risk"/>
+            <TextBlock Grid.Column="1" Grid.Row="3" Name="pairsTradeBalance" Margin="10,16,0,14" HorizontalAlignment="Left" VerticalAlignment="Center" Height="16" Width="100">-</TextBlock>
+            <TextBlock Grid.Column="1" Grid.Row="4" Name="yTradeVolume" Margin="10,16,0,15" HorizontalAlignment="Left" VerticalAlignment="Center" Height="16" Width="100">-</TextBlock>
+            <TextBlock Grid.Column="1" Grid.Row="5" Name="xTradeVolume" Margin="10,15,0,15" HorizontalAlignment="Left" VerticalAlignment="Center" Height="16" Width="100">-</TextBlock>
+            <TextBlock Grid.Column="1" Grid.Row="6" Name="riskLimit" Margin="10,15,0,16" HorizontalAlignment="Left" VerticalAlignment="Center" Height="16" Width="100">-</TextBlock>
+            <TextBox Grid.Column="1" Grid.Row="8" Name="sma" Margin="10,14,0,13" HorizontalAlignment="Left" VerticalAlignment="Center" Height="20" Width="100">0</TextBox>
+            <Button Name="Calculate" Grid.Row="7" Grid.Column="1" Click="Calculate_Click" Margin="10,14,21,12" RenderTransformOrigin="0.25,0.6">Get Risk Info</Button>
         </Grid>
 
         <oxy:PlotView x:Name="plot"  Model="{Binding PlotModel}" Margin="10" Grid.Row="0" Grid.Column="1" UseLayoutRounding="False" BorderThickness="0"></oxy:PlotView>
