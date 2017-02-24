@@ -4,17 +4,17 @@
 **Pair Trading View** - application for visual analysis of synthetic financial instruments based on statistical models. 
 
 ![License](https://img.shields.io/badge/license-Apache 2.0-brightgreen.svg)
-![.Net version](https://img.shields.io/badge/.Net Framework 4.5.2-red.svg)
+![.Net version](https://img.shields.io/badge/framework-.Net Framework 4.5.2-red.svg)
 
 
-#PairTradingView.WinFormsApp
+##[ PairTradingView.WinFormsApp ]
 
 <p align="left">
   <img width="700" alt="pic" src="https://github.com/dv-lebedev/PairTradingView/blob/master/screenshots/mainwindow.png">
 </p>
 
 
-#PairTradingView.WpfApp
+##[ PairTradingView.WpfApp ]
 
 <p align="left">
   <img width="700" alt="pic" src="https://github.com/dv-lebedev/PairTradingView/blob/master/screenshots/ptv-wpf.png">
