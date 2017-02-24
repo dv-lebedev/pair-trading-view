@@ -81,7 +81,6 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Data\AppData.cs" />
     <Compile Include="AppStartWindow.xaml.cs">
       <DependentUpon>AppStartWindow.xaml</DependentUpon>
     </Compile>

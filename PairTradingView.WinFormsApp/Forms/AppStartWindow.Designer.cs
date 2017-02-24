@@ -36,9 +36,6 @@
             this.priceCol = new System.Windows.Forms.NumericUpDown();
             this.header = new System.Windows.Forms.CheckBox();
             this.label4 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
-            this.deltaTypeBox = new System.Windows.Forms.ComboBox();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.priceCol)).BeginInit();
             this.SuspendLayout();
@@ -49,7 +46,7 @@
             this.showDownloaderButton});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(369, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(325, 24);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -62,7 +59,7 @@
             // 
             // StartBtn
             // 
-            this.StartBtn.Location = new System.Drawing.Point(124, 205);
+            this.StartBtn.Location = new System.Drawing.Point(102, 144);
             this.StartBtn.Name = "StartBtn";
             this.StartBtn.Size = new System.Drawing.Size(120, 23);
             this.StartBtn.TabIndex = 1;
@@ -73,7 +70,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(66, 72);
+            this.label2.Location = new System.Drawing.Point(44, 72);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(77, 13);
             this.label2.TabIndex = 5;
@@ -81,7 +78,7 @@
             // 
             // priceCol
             // 
-            this.priceCol.Location = new System.Drawing.Point(171, 70);
+            this.priceCol.Location = new System.Drawing.Point(149, 70);
             this.priceCol.Minimum = new decimal(new int[] {
             1,
             0,
@@ -99,7 +96,7 @@
             // header
             // 
             this.header.AutoSize = true;
-            this.header.Location = new System.Drawing.Point(69, 96);
+            this.header.Location = new System.Drawing.Point(47, 96);
             this.header.Name = "header";
             this.header.Size = new System.Drawing.Size(103, 17);
             this.header.TabIndex = 8;
@@ -110,47 +107,17 @@
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label4.Location = new System.Drawing.Point(120, 41);
+            this.label4.Location = new System.Drawing.Point(98, 41);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(124, 13);
             this.label4.TabIndex = 9;
             this.label4.Text = "CSV FILES FORMAT";
             // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label5.Location = new System.Drawing.Point(152, 139);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(47, 13);
-            this.label5.TabIndex = 10;
-            this.label5.Text = "DELTA";
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(103, 162);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(40, 13);
-            this.label6.TabIndex = 11;
-            this.label6.Text = "Type : ";
-            // 
-            // deltaTypeBox
-            // 
-            this.deltaTypeBox.FormattingEnabled = true;
-            this.deltaTypeBox.Location = new System.Drawing.Point(170, 159);
-            this.deltaTypeBox.Name = "deltaTypeBox";
-            this.deltaTypeBox.Size = new System.Drawing.Size(121, 21);
-            this.deltaTypeBox.TabIndex = 12;
-            // 
             // AppStartWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(369, 240);
-            this.Controls.Add(this.deltaTypeBox);
-            this.Controls.Add(this.label6);
-            this.Controls.Add(this.label5);
+            this.ClientSize = new System.Drawing.Size(325, 186);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.header);
             this.Controls.Add(this.label2);
@@ -178,8 +145,5 @@
         private System.Windows.Forms.NumericUpDown priceCol;
         private System.Windows.Forms.CheckBox header;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.ComboBox deltaTypeBox;
     }
 }

@@ -29,7 +29,7 @@ namespace PairTradingView.Infrastructure.Tests
         {
             Stock[] stocks = CsvUtils.ReadAllDataFrom("csv-samples/", 4, false);
 
-            List<FinancialPair> pairs = FinancialPair.CreateMany(stocks, DeltaType.Spread);
+            List<FinancialPair> pairs = FinancialPair.CreateMany(stocks);
 
             RiskManager rm = new RiskManager(pairs.ToArray(), 100000.00);
             rm.Calculate();

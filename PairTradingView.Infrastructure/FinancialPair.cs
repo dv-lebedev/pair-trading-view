@@ -23,8 +23,6 @@ using System.Linq;
 
 namespace PairTradingView.Infrastructure
 {
-    public enum DeltaType { Spread, Ratio };
-
     public class FinancialPair
     {
         public string Name => $"{Y.Name}|{X.Name}";
@@ -34,19 +32,17 @@ namespace PairTradingView.Infrastructure
 
         public LinearRegression Regression { get; set; }
 
-        public DeltaType DeltaType { get; set; }
         public double[] DeltaValues { get; protected set; }
 
         public double TradeVolume { get; set; }
         public double Weight { get; set; }
 
-        public FinancialPair(Stock x, Stock y, DeltaType deltaType)
+        public FinancialPair(Stock x, Stock y)
         {
-            Check.NotNull(x, y, deltaType);
+            Check.NotNull(x, y);
 
             X = x;
             Y = y;
-            DeltaType = deltaType;
 
             SetRegression(x.Prices, y.Prices);
             SetValues(X.Prices, Y.Prices);
@@ -63,38 +59,17 @@ namespace PairTradingView.Infrastructure
 
         protected void SetValues(double[] x, double[] y)
         {
-            switch (DeltaType)
-            {
-                case DeltaType.Ratio: SetValuesAsRatios(x, y); break;
-                case DeltaType.Spread: SetValuesAsSpreads(x, y); break;
-            }
-        }
-
-        private void SetValuesAsRatios(double[] x, double[] y)
-        {
             if (Regression.RValue >= 0)
             {
-                DeltaValues = x.Zip(y, (i, j) => j / (i * (double)Regression.Beta)).ToArray();
+                DeltaValues = x.Zip(y, (i, j) => j - i * Regression.Beta.ToDouble()).ToArray();
             }
             else
             {
-                DeltaValues = x.Zip(y, (i, j) => Math.Log(j) * Math.Log(i * (double)Regression.Beta)).ToArray();
+                DeltaValues = x.Zip(y, (i, j) => j + i * Regression.Beta.ToDouble()).ToArray();
             }
         }
 
-        private void SetValuesAsSpreads(double[] x, double[] y)
-        {
-            if (Regression.RValue >= 0)
-            {
-                DeltaValues = x.Zip(y, (i, j) => j - i * (double)Regression.Beta).ToArray();
-            }
-            else
-            {
-                DeltaValues = x.Zip(y, (i, j) => j + i * (double)Regression.Beta).ToArray();
-            }
-        }
-
-        public static List<FinancialPair> CreateMany(Stock[] stocks, DeltaType deltaType)
+        public static List<FinancialPair> CreateMany(Stock[] stocks)
         {
             var pairs = new List<FinancialPair>();
 
@@ -105,7 +80,7 @@ namespace PairTradingView.Infrastructure
                     Stock x = stocks[i].Copy();
                     Stock y = stocks[j].Copy();
 
-                    pairs.Add(new FinancialPair(x, y, deltaType));
+                    pairs.Add(new FinancialPair(x, y));
                 }
             }
             return pairs;

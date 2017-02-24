@@ -23,13 +23,12 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using System.Windows.Media;
 
 namespace PairTradingView.WpfApp
 {
     public partial class MainWindow : Window
     {
-        private AppData appData;
+        private Stock[] stocks;
         private FinancialPair selectedPair;
         private List<FinancialPair> pairs;
         private ChartModel chartModel;
@@ -41,13 +40,13 @@ namespace PairTradingView.WpfApp
             var appStart = new AppStartWindow();
             appStart.ShowDialog();
 
-            appData = appStart.AppData;
+            stocks = appStart.stocks;
 
-            if (appData == null)
+            if (stocks == null)
             {
                 Close();
             }
-            else if (appData.InputData == null)
+            else if (stocks.Length == 0)
             {
                 MessageBox.Show("No input data. App will be closed.");
                 Close();
@@ -83,8 +82,7 @@ namespace PairTradingView.WpfApp
 
         private void InitPairs()
         {
-            DeltaType deltaType = (DeltaType)Enum.Parse(typeof(DeltaType), appData.DeltaTypeName);
-            pairs = FinancialPair.CreateMany(appData.InputData, deltaType);
+            pairs = FinancialPair.CreateMany(stocks);
         }
 
         private void FillDataGrid()

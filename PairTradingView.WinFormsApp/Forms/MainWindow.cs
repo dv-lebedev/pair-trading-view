@@ -28,7 +28,7 @@ namespace PairTradingView
         private FinancialPair selectedPair;
         private List<FinancialPair> pairs;
 
-        private AppData appData;
+        private Stock[] stocks;
 
         public MainWindow()
         {
@@ -45,23 +45,20 @@ namespace PairTradingView
             AppStartWindow startWin = new AppStartWindow();
             startWin.ShowDialog();
 
-            appData = startWin.AppData;
+            stocks = startWin.Stocks;
 
-            if (appData == null)
+            if (stocks == null)
             {
                 Close();
             }
-            else if (appData.InputData == null)
+            else if (stocks.Length == 0)
             {
                 MessageBox.Show("No input data. App will be closed.");
                 Close();
             }
             else
             {
-                DeltaType deltaType = (DeltaType)Enum.Parse(typeof(DeltaType), appData.DeltaTypeName);
-
-                pairs = FinancialPair.CreateMany(appData.InputData, deltaType);
-
+                pairs = FinancialPair.CreateMany(stocks);
                 listView.Items.Clear();
                 listView.Update(pairs);
                 CenterToScreen();
@@ -117,9 +114,9 @@ namespace PairTradingView
 
         private void MainWindow_SizeChanged(object sender, EventArgs e)
         {
-            buttomPanel.Height = this.Height / 3;
-            chartPanel.Width = (int)(this.Width * 0.73 + 1);
-            chart.Width = (int)(this.Width * 0.73);
+            buttomPanel.Height = Height / 3;
+            chartPanel.Width = (int)(Width * 0.73 + 1);
+            chart.Width = (int)(Width * 0.73);
         }
 
         private void listView_Click(object sender, EventArgs e)

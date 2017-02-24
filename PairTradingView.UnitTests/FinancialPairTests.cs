@@ -32,7 +32,7 @@ namespace PairTradingView.UnitTests
             Stock aapl = CsvUtils.Read("csv-samples/AAPL.txt", 4, false);
             Stock xom = CsvUtils.Read("csv-samples/XOM.txt", 4, false);
 
-            FinancialPair pair = new FinancialPair(aapl, xom, DeltaType.Spread);
+            FinancialPair pair = new FinancialPair(aapl, xom);
 
             CheckStocks(pair);
             CheckName(pair);
