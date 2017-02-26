@@ -16,6 +16,7 @@ limitations under the License.
 */
 
 using PairTradingView.Infrastructure;
+using PairTradingView.WpfApp.Utils;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -48,7 +49,7 @@ namespace PairTradingView.WpfApp
             }
             else if (stocks.Length == 0)
             {
-                MessageBox.Show("No input data. App will be closed.");
+                this.Display("No input data. App will be closed.");
                 Close();
             }
             else
@@ -179,15 +180,12 @@ namespace PairTradingView.WpfApp
                 }
                 else
                 {
-                    MessageBox.Show("Pairs are not selected.");
+                    this.Display("Pairs are not selected.");
                 }
             }
             catch (Exception ex)
             {
-                Dispatcher.BeginInvoke((Action)(() =>
-                {
-                    MessageBox.Show("CalculateRisk => " + ex.Message);
-                }));
+                this.Display("CalculateRisk => " + ex.Message);
             }
         }
 
@@ -208,7 +206,7 @@ namespace PairTradingView.WpfApp
                         {
                             (e.Source as CheckBox).IsChecked = false;
 
-                            MessageBox.Show($"You can't choose pairs with identical symbols! {info.Name} & {item.Name}");
+                            this.Display($"You can't choose pairs with identical symbols! {info.Name} & {item.Name}");
                         }
                     }
                 }
@@ -216,10 +214,7 @@ namespace PairTradingView.WpfApp
             }
             catch (Exception ex)
             {
-                Dispatcher.BeginInvoke((Action)(() => 
-                {
-                    MessageBox.Show($"OnChecked => {ex.Message}");
-                }));
+                this.Display($"OnChecked => {ex.Message}");
             }
         }
 
@@ -248,7 +243,7 @@ namespace PairTradingView.WpfApp
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"OnMouseLeftDown => {ex.Message}");
+                this.Display($"OnMouseLeftDown => {ex.Message}");
             }
         }
     }

@@ -66,6 +66,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Properties\Annotations.cs" />
+    <Compile Include="Utils\WindowHelpers.cs" />
     <Compile Include="ViewModels\ChartModel.cs" />
     <Compile Include="Data\PairInfo.cs" />
     <Compile Include="Utils\TextBoxHelpers.cs" />
