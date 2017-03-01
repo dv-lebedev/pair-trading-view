@@ -7,7 +7,7 @@
         xmlns:local="clr-namespace:PairTradingView.WpfApp"
         mc:Ignorable="d"
         Title="MainWindow" Height="746" Width="918">
-    <Grid RenderTransformOrigin="0.493,0.505">
+    <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="186*"/>
             <RowDefinition Height="133*"/>
