@@ -29,7 +29,7 @@ namespace PairTradingView.ConsoleApp
 
         static void Main(string[] args)
         {
-            var marketData = CsvUtils.ReadAllDataFrom(MarketDataDirectory, 5, false);
+            var marketData = CsvUtils.ReadAllDataFrom(MarketDataDirectory, 4, false);
 
             var selectedShares = from i in marketData
                                  where i.Name == "GOOG" || i.Name == "IBM" || i.Name == "XOM"
