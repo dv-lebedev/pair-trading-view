@@ -3,10 +3,6 @@
 
 **Pair Trading View** - application for visual analysis of synthetic financial instruments based on statistical models. 
 
-![License](https://img.shields.io/badge/license-Apache 2.0-brightgreen.svg)
-![.Net version](https://img.shields.io/badge/framework-.Net Framework 4.5.2-red.svg)
-
-
 **[ PairTradingView.WinFormsApp ]**
 
 <p align="left">
@@ -14,7 +10,7 @@
 </p>
 
 
-##How To
+## How To
 
 Execute PairTradingView.exe in 'pair-trading-view\PairTradingView.WinFormsApp\bin\Debug\'.
 
@@ -27,7 +23,7 @@ Set 'Price' column. Put csv files with a historical data into
 Press start.
 
 
-##Model
+## Model
 - SI -> synthetic index
 - s -> share
 - fp -> financial pair
@@ -58,7 +54,7 @@ x_tv = fp_tv * w * abs(β)
 y_tv = fp_tv * w
 
 
-##Dependencies
+## Dependencies
 - Statistics https://github.com/dv-lebedev/statistics
 - YahooFinanceQuoteDownloader https://github.com/ovnisoftware/YahooFinanceQuoteDownloader
 - ZedGraph
