@@ -60,7 +60,7 @@ namespace PairTradingView.ConsoleApp
             {
                 var result = $"[{pair.Name}]\n";
                 result += $"Weight={pair.Weight} TradeVolume={pair.TradeVolume}\n";
-                result += $"{pair.X.Name}={pair.X.TradeVolume} {pair.Y.Name}={pair.Y.TradeVolume}\n";
+                result += $"{pair.X.Name}={pair.X.TradeVolume} {pair.Y.Name}={pair.Y.TradeVolume}\n\n";
                 Console.WriteLine(result);
             }
         }
