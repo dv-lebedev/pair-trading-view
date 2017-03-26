@@ -27,13 +27,21 @@ namespace PairTradingView.ConsoleApp
         private const string MarketDataDirectory = "";
         private const double Balance = 100000.00;
 
+        private static string[] Symbols = { "GOOG", "IBM", "XOM" };
+
         static void Main(string[] args)
         {
-            var marketData = CsvUtils.ReadAllDataFrom(MarketDataDirectory, 5, false);
+            var marketData = CsvUtils.ReadAllDataFrom(MarketDataDirectory, 4, false);
 
-            var selectedShares = from i in marketData
-                                 where i.Name == "GOOG" || i.Name == "IBM" || i.Name == "XOM"
-                                 select i;
+            var selectedShares = marketData.ToList().FindAll((i) =>
+            {
+                foreach (var symbol in Symbols)
+                {
+                    if (i.Name == symbol)
+                        return true;
+                }
+                return false;
+            });
 
             var financialPairs = FinancialPair.CreateMany(selectedShares.ToArray());
 
