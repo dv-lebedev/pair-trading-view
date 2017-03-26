@@ -18,6 +18,7 @@ limitations under the License.
 using Statistics;
 using Statistics.Models;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace PairTradingView.Infrastructure
@@ -29,13 +30,13 @@ namespace PairTradingView.Infrastructure
 
         public double Balance { get; }
 
-        public RiskManager(FinancialPair[] pairs, double balance)
+        public RiskManager(IEnumerable<FinancialPair> pairs, double balance)
         {
             Check.NotNull(pairs);
 
             if (balance < 0) throw new ArgumentException("[balance] can't have negative value.");
 
-            this.pairs = pairs;
+            this.pairs = pairs.ToArray();
             Balance = balance;
 
             SetTradeVolumeToDefault();

@@ -43,9 +43,9 @@ namespace PairTradingView.ConsoleApp
                 return false;
             });
 
-            var financialPairs = FinancialPair.CreateMany(selectedShares.ToArray());
+            var financialPairs = FinancialPair.CreateMany(selectedShares);
 
-            var riskManager = new RiskManager(financialPairs.ToArray(), Balance);
+            var riskManager = new RiskManager(financialPairs, Balance);
             riskManager.Calculate();
 
             DisplayResults(financialPairs);
