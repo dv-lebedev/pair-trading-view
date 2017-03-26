@@ -33,15 +33,7 @@ namespace PairTradingView.ConsoleApp
         {
             var marketData = CsvUtils.ReadAllDataFrom(MarketDataDirectory, 4, false);
 
-            var selectedShares = marketData.ToList().FindAll((i) =>
-            {
-                foreach (var symbol in Symbols)
-                {
-                    if (i.Name == symbol)
-                        return true;
-                }
-                return false;
-            });
+            var selectedShares = marketData.ToList().FindAll(i => Symbols.Contains(i.Name));
 
             var financialPairs = FinancialPair.CreateMany(selectedShares);
 
