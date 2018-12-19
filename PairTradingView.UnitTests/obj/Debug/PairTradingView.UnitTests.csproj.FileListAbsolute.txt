@@ -3,7 +3,6 @@ C:\GitHub\pair-trading-view\PairTradingView.UnitTests\bin\Debug\PairTradingView.
 C:\GitHub\pair-trading-view\PairTradingView.UnitTests\bin\Debug\Microsoft.VisualStudio.QualityTools.UnitTestFramework.dll
 C:\GitHub\pair-trading-view\PairTradingView.UnitTests\bin\Debug\Statistics.dll
 C:\GitHub\pair-trading-view\PairTradingView.UnitTests\bin\Debug\Statistics.pdb
-C:\GitHub\pair-trading-view\PairTradingView.UnitTests\obj\Debug\PairTradingView.UnitTests.csprojResolveAssemblyReference.cache
 C:\GitHub\pair-trading-view\PairTradingView.UnitTests\obj\Debug\PairTradingView.UnitTests.dll
 C:\GitHub\pair-trading-view\PairTradingView.UnitTests\obj\Debug\PairTradingView.UnitTests.pdb
 C:\GitHub\pair-trading-view — копия\PairTradingView.UnitTests\bin\Debug\PairTradingView.UnitTests.dll
@@ -19,3 +18,7 @@ C:\GitHub\pair-trading-view — копия\PairTradingView.UnitTests\bin\Debug\P
 C:\GitHub\pair-trading-view — копия\PairTradingView.UnitTests\bin\Debug\PairTradingView.Infrastructure.pdb
 C:\GitHub\pair-trading-view\PairTradingView.UnitTests\bin\Debug\PairTradingView.Infrastructure.dll
 C:\GitHub\pair-trading-view\PairTradingView.UnitTests\bin\Debug\PairTradingView.Infrastructure.pdb
+C:\GitHub\pair-trading-view\PairTradingView.UnitTests\bin\Debug\ru\Microsoft.VisualStudio.QualityTools.UnitTestFramework.resources.dll
+C:\GitHub\pair-trading-view\PairTradingView.UnitTests\obj\Debug\PairTradingView.UnitTests.csprojAssemblyReference.cache
+C:\GitHub\pair-trading-view\PairTradingView.UnitTests\obj\Debug\PairTradingView.UnitTests.csproj.CoreCompileInputs.cache
+C:\GitHub\pair-trading-view\PairTradingView.UnitTests\obj\Debug\PairTradingView.UnitTests.csproj.CopyComplete

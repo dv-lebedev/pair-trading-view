@@ -1,6 +1,6 @@
 ﻿
 /*
-Copyright(c) 2015-2017 Denis Lebedev
+Copyright(c) 2015-2018 Denis Lebedev
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -29,73 +29,53 @@ namespace PairTradingView.WpfApp
 {
     public partial class MainWindow : Window
     {
-        private Stock[] stocks;
-        private FinancialPair selectedPair;
-        private List<FinancialPair> pairs;
-        private ChartModel chartModel;
+        public Stock[] Stocks { get; set; }
+        public FinancialPair SelectedPair { get; set; }
+        public List<FinancialPair> Pairs { get; set; }
+        public ObservableCollection<PairInfo> PairsInfo { get; set; }
 
-        public ObservableCollection<PairInfo> pairsInfo { get; private set; }
-
-        public MainWindow()
+        public MainWindow(Stock[] stocks)
         {
-            var appStart = new AppStartWindow();
-            appStart.ShowDialog();
+            InitializeComponent();
+            Stocks = stocks ?? throw new ArgumentNullException(nameof(stocks));
+            InitPairs();
+            InitDataGridView();
+            FillDataGrid();
+            controlPanel.ShowDefaultValuesForPairInfo();
+            controlPanel.Calculate.Click += Calculate_Click;
+            controlPanel.SMA.TextChanged += (s, e) => { UpdateInfoAndCharts(); };
 
-            stocks = appStart.stocks;
-
-            if (stocks == null)
-            {
-                Close();
-            }
-            else if (stocks.Length == 0)
-            {
-                this.Display("No input data. App will be closed.");
-                Close();
-            }
-            else
-            {
-                InitPairs();
-                InitializeComponent();
-                SetWindowParams();
-                InitChart();
-                InitDataGridView();
-                FillDataGrid();
-                ShowDefaultValuesForPairInfo();
-            }
+            dataGridControl.dataGrid.SelectedIndex = 0;
+            UpdateInfoAndCharts();
         }
 
         private void InitDataGridView()
         {
-            dataGrid.AddHandler(MouseLeftButtonDownEvent, new MouseButtonEventHandler(OnMouseLeftDown), true);        
-        }
+            dataGridControl.dataGrid.AddHandler(
+                MouseLeftButtonDownEvent, 
+                new MouseButtonEventHandler((e, c) => { UpdateInfoAndCharts(); }), 
+                true);
 
-        private void InitChart()
-        {
-            chartModel = new ChartModel();
-            DataContext = chartModel;
-        }
-
-        private void SetWindowParams()
-        {
-            Title = "Pair Trading View";
-            WindowStartupLocation = WindowStartupLocation.CenterScreen;
+            dataGridControl.dataGrid.PreviewKeyDown += (s, e) => { UpdateInfoAndCharts(); };
+            dataGridControl.dataGrid.PreviewKeyUp += (s, e) => { UpdateInfoAndCharts(); };
+            dataGridControl.PairChecked += OnChecked;
         }
 
         private void InitPairs()
         {
-            pairs = FinancialPair.CreateMany(stocks);
+            Pairs = FinancialPair.CreateMany(Stocks);
         }
 
         private void FillDataGrid()
         {
-            pairsInfo = new ObservableCollection<PairInfo>();
+            PairsInfo = new ObservableCollection<PairInfo>();
 
-            foreach (var item in pairs)
+            foreach (var item in Pairs)
             {
                 var deltaAverage = item.DeltaValues.Average();
                 var deltaSD = MathUtils.GetStandardDeviation(item.DeltaValues);
 
-                pairsInfo.Add(new PairInfo
+                PairsInfo.Add(new PairInfo
                 {
                     Name = item.Name,
                     X = item.X.Name,
@@ -114,35 +94,12 @@ namespace PairTradingView.WpfApp
                     DeltaSDPlus3Q = (decimal)(deltaAverage + (3 * deltaSD))
                 });
             }
-            dataGrid.ItemsSource = pairsInfo;
-        }
-
-        private void ShowDefaultValuesForPairInfo()
-        {
-            pairName.Text = "-";
-            xName.Text = "-";
-            yName.Text = "-";
-            pairsTradeBalance.Text = "0";
-            yTradeVolume.Text = "0";
-            xTradeVolume.Text = "0";
-            riskLimit.Text = "0";
-        }
-
-        private void ShowValuesForPairInfo()
-        {
-            pairName.Text = selectedPair.Name.ToString() + " => ";
-            xName.Text = selectedPair.X.Name + " => ";
-            yName.Text = selectedPair.Y.Name + " => ";
-
-            pairsTradeBalance.Text = Math.Round(selectedPair.TradeVolume, 4).ToString();
-            yTradeVolume.Text = Math.Round(selectedPair.Y.TradeVolume, 4).ToString();
-            xTradeVolume.Text = Math.Round(selectedPair.X.TradeVolume, 4).ToString();
-            riskLimit.Text = Math.Round((selectedPair.TradeVolume * risk.GetDouble() / 100.0), 4).ToString();
+            dataGridControl.dataGrid.ItemsSource = PairsInfo;
         }
 
         private void SetTradeVolumeToDefault()
         {
-            foreach (var pair in pairs)
+            foreach (var pair in Pairs)
             {
                 pair.TradeVolume = 0;
                 pair.X.TradeVolume = 0;
@@ -156,11 +113,11 @@ namespace PairTradingView.WpfApp
             {
                 var checkedPairs = new List<FinancialPair>();
 
-                foreach (var item in pairsInfo)
+                foreach (var item in PairsInfo)
                 {
                     if (item.Selected)
                     {
-                        var pair = pairs.Find(i => i.Name == item.Name);
+                        var pair = Pairs.Find(i => i.Name == item.Name);
 
                         if (pair != null)
                         {
@@ -173,10 +130,10 @@ namespace PairTradingView.WpfApp
                 {
                     SetTradeVolumeToDefault();
 
-                    var rc = new RiskManager(checkedPairs.ToArray(), balance.GetDouble());
+                    var rc = new RiskManager(checkedPairs.ToArray(), controlPanel.balance.GetDouble());
                     rc.Calculate();
 
-                    ShowValuesForPairInfo();
+                    controlPanel.ShowValuesForPairInfo(SelectedPair);
                 }
                 else
                 {
@@ -193,11 +150,9 @@ namespace PairTradingView.WpfApp
         {
             try
             {
-                var info = dataGrid.SelectedItem as PairInfo;
-
-                if (info != null)
+                if (dataGridControl.dataGrid.SelectedItem is PairInfo info)
                 {
-                    var selectedPairs = pairsInfo.Where(i => i.Selected && i.Name != info.Name);
+                    var selectedPairs = PairsInfo.Where(i => i.Selected && i.Name != info.Name);
 
                     foreach (var item in selectedPairs)
                     {
@@ -218,26 +173,24 @@ namespace PairTradingView.WpfApp
             }
         }
 
-        private void OnMouseLeftDown(object sender, MouseButtonEventArgs e)
+        private void UpdateInfoAndCharts()
         {
             try
             {
-                var info = dataGrid.SelectedItem as PairInfo;
-
-                if (info != null)
+                if (dataGridControl.dataGrid.SelectedItem is PairInfo info)
                 {
-                    selectedPair = pairs.Find(i => i.Name == info.Name);
+                    SelectedPair = Pairs.Find(i => i.Name == info.Name);
 
-                    if (selectedPair != null)
+                    if (SelectedPair != null)
                     {
-                        var SMAValue = sma.GetInt32();
+                        var SMAValue = controlPanel.SMA.GetInt32();
 
                         if (SMAValue < 0) throw new Exception("SMA should be more or equal 0.");
 
-                        chartModel.Update(selectedPair.DeltaValues, selectedPair.Name, SMAValue);
-                        plot.InvalidatePlot();
+                        chartControl.chartModel.Update(SelectedPair.DeltaValues, SelectedPair.Name, SMAValue);
+                        chartControl.plot.InvalidatePlot();
 
-                        ShowValuesForPairInfo();
+                        controlPanel.ShowValuesForPairInfo(SelectedPair);
                     }
                 }
             }

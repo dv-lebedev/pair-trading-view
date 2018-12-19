@@ -1,6 +1,6 @@
 ﻿
 /*
-Copyright(c) 2015-2017 Denis Lebedev
+Copyright(c) 2015-2018 Denis Lebedev
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -24,7 +24,7 @@ using System.ComponentModel;
 
 namespace PairTradingView.WpfApp
 {
-    public class ChartModel : INotifyPropertyChanged
+    public class ChartViewModel : INotifyPropertyChanged
     {
         private PlotModel plotModel;
         public PlotModel PlotModel
@@ -33,7 +33,7 @@ namespace PairTradingView.WpfApp
             set { plotModel = value; OnPropertyChanged("PlotModel"); }
         }
 
-        public ChartModel()
+        public ChartViewModel()
         {
             PlotModel = new PlotModel();
             SetUpModel();
@@ -48,7 +48,15 @@ namespace PairTradingView.WpfApp
             PlotModel.LegendBackground = OxyColor.FromAColor(200, OxyColors.White);
             PlotModel.LegendBorder = OxyColors.White;
 
-            var valueAxis = new LinearAxis() { MajorGridlineStyle = LineStyle.Solid, MinorGridlineStyle = LineStyle.Dot, Title = "Δ" };
+            var valueAxis = new LinearAxis()
+            {
+                IsZoomEnabled = false,
+                IsPanEnabled = false,
+                MajorGridlineStyle = LineStyle.Solid,
+                MinorGridlineStyle = LineStyle.Dot,
+                Title = "Δ"
+            };
+            
             PlotModel.Axes.Add(valueAxis);
         }
 
@@ -58,7 +66,7 @@ namespace PairTradingView.WpfApp
 
             PlotModel.Series.Clear();
 
-            AddLineSerie("Δ", OxyColor.Parse("#00A3A3"), values, 0);
+            AddLineSerie("Δ", OxyColor.Parse("#3399ff"), values, 0);
 
             if (SMAPeriod > 0)
             {

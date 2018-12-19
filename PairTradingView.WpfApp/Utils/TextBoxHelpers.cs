@@ -1,6 +1,6 @@
 ﻿
 /*
-Copyright(c) 2015-2017 Denis Lebedev
+Copyright(c) 2015-2018 Denis Lebedev
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -25,25 +25,19 @@ namespace PairTradingView.WpfApp
     {
         public static int GetInt32(this TextBox textBox)
         {
-            int result;
-
-            if(!int.TryParse(textBox.Text, out result))
+            if (!int.TryParse(textBox.Text, out int result))
             {
                 throw new Exception($"{textBox.Name} has incorrect value.");
             }
-
             return result;
         }
 
         public static double GetDouble(this TextBox textBox)
         {
-            double result;
-
-            if (!double.TryParse(textBox.Text, NumberStyles.AllowDecimalPoint, CultureInfo.InvariantCulture, out result))
+            if (!double.TryParse(textBox.Text, NumberStyles.AllowDecimalPoint, CultureInfo.InvariantCulture, out double result))
             {
                 throw new Exception($"{textBox.Name} has incorrect value.");
             }
-
             return result;
         }
     }

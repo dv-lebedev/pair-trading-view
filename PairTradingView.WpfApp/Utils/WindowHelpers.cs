@@ -1,6 +1,6 @@
 ﻿
 /*
-Copyright(c) 2015-2017 Denis Lebedev
+Copyright(c) 2015-2018 Denis Lebedev
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -17,14 +17,20 @@ limitations under the License.
 
 using System;
 using System.Windows;
+using System.Windows.Controls;
 
 namespace PairTradingView.WpfApp.Utils
 {
     public static class WindowHelpers
     {
-        public static void Display(this Window window, string message)
+        public static void Display(this UserControl control, string message)
         {
-            window.Dispatcher.BeginInvoke((Action)(() => { MessageBox.Show(message); }));
+            control.Dispatcher.BeginInvoke((Action)(() => { MessageBox.Show(message); }));
+        }
+
+        public static void Display(this Window control, string message)
+        {
+            control.Dispatcher.BeginInvoke((Action)(() => { MessageBox.Show(message); }));
         }
     }
 }
