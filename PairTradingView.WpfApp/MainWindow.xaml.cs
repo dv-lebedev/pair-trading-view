@@ -44,7 +44,6 @@ namespace PairTradingView.WpfApp
             controlPanel.ShowDefaultValuesForPairInfo();
             controlPanel.Calculate.Click += Calculate_Click;
             controlPanel.SMA.TextChanged += (s, e) => { UpdateInfoAndCharts(); };
-
             dataGridControl.dataGrid.SelectedIndex = 0;
             UpdateInfoAndCharts();
         }
@@ -130,8 +129,7 @@ namespace PairTradingView.WpfApp
                 {
                     SetTradeVolumeToDefault();
 
-                    var rc = new RiskManager(checkedPairs.ToArray(), controlPanel.balance.GetDouble());
-                    rc.Calculate();
+                    new RiskManager(checkedPairs.ToArray(), controlPanel.balance.GetDouble()).Calculate();
 
                     controlPanel.ShowValuesForPairInfo(SelectedPair);
                 }

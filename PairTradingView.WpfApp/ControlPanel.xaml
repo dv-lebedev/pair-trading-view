@@ -25,6 +25,11 @@
             <ColumnDefinition Width="181*" />
         </Grid.ColumnDefinitions>
 
+        <Border BorderThickness="1" 
+                BorderBrush="LightGray" 
+                Grid.ColumnSpan="2" 
+                Grid.RowSpan="10"/>
+
         <TextBlock Grid.Column="1" 
                    Grid.Row="0"  
                    Text="INFO" 
@@ -164,6 +169,7 @@
                 Grid.Row="8" 
                 Grid.Column="1" 
                 MaxHeight="25"
-                Margin="0,0,10,0">Get Risk Info</Button>
+                Width="140"
+                HorizontalAlignment="Left">Get Risk Info</Button>
     </Grid>
 </UserControl>
