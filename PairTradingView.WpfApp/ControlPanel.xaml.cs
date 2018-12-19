@@ -20,7 +20,6 @@ using System;
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.Globalization;
-using System.Text;
 
 namespace PairTradingView.WpfApp
 {

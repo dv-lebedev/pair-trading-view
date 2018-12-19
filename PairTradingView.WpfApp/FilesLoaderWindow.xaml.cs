@@ -56,7 +56,11 @@ namespace PairTradingView.WpfApp
         {
             if (stocks == null || stocks.Length == 0)
             {
-                MessageBox.Show("No input data.");
+                this.Display("No input data.");
+            }
+            else if(stocks.Length == 1)
+            {
+                this.Display("You should have 2 stocks minimum.");
             }
             else
             {
