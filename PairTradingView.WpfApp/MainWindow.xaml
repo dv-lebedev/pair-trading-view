@@ -8,7 +8,7 @@
         Title="Pair Trading View" 
         Height="746" 
         Width="918"
-        Background="#eeeeee"
+        Background="#dddddd"
         WindowStartupLocation="CenterScreen">
     <Grid>
         <Grid.RowDefinitions>

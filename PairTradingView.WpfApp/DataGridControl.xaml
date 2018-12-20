@@ -15,14 +15,14 @@
                         </Style>
                     </DataGridCheckBoxColumn.CellStyle>
                 </DataGridCheckBoxColumn>
-                <DataGridTextColumn Header="X" Binding="{Binding X}" />
-                <DataGridTextColumn Header="Y" Binding="{Binding Y}" />
+                <DataGridTextColumn Header="X" Binding="{Binding X.Name}" />
+                <DataGridTextColumn Header="Y" Binding="{Binding Y.Name}" />
                 <DataGridTextColumn Header="SD_X" Binding="{Binding SD_X, StringFormat=F4}" />
                 <DataGridTextColumn Header="SD_Y" Binding="{Binding SD_Y, StringFormat=F4}" />
-                <DataGridTextColumn Header="Alpha" Binding="{Binding Alpha, StringFormat=F4}" />
-                <DataGridTextColumn Header="Beta" Binding="{Binding Beta, StringFormat=F4}" />
-                <DataGridTextColumn Header="R" Binding="{Binding R, StringFormat=F4}" />
-                <DataGridTextColumn Header="RSquared" Binding="{Binding RSquared, StringFormat=F4}" />
+                <DataGridTextColumn Header="Alpha" Binding="{Binding Regression.Alpha, StringFormat=F4}" />
+                <DataGridTextColumn Header="Beta" Binding="{Binding Regression.Beta, StringFormat=F4}" />
+                <DataGridTextColumn Header="R" Binding="{Binding Regression.RValue, StringFormat=F4}" />
+                <DataGridTextColumn Header="RSquared" Binding="{Binding Regression.RSquared, StringFormat=F4}" />
                 <DataGridTextColumn Header="DeltaAverage" Binding="{Binding DeltaAverage, StringFormat=F4}" />
                 <DataGridTextColumn Header="DeltaMin" Binding="{Binding DeltaMin, StringFormat=F4}" />
                 <DataGridTextColumn Header="DeltaMax" Binding="{Binding DeltaMax, StringFormat=F4}" />

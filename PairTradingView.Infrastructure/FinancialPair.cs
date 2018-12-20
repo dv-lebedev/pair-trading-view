@@ -69,9 +69,9 @@ namespace PairTradingView.Infrastructure
             }
         }
 
-        public static List<FinancialPair> CreateMany(IEnumerable<Stock> stocks)
+        public static List<T> CreateMany<T>(IEnumerable<Stock> stocks) where T: FinancialPair
         {
-            var pairs = new List<FinancialPair>();
+            var pairs = new List<T>();
 
             for (int i = 0; i < stocks.Count(); i++)
             {
@@ -80,10 +80,15 @@ namespace PairTradingView.Infrastructure
                     Stock x = stocks.ElementAt(i).Copy();
                     Stock y = stocks.ElementAt(j).Copy();
 
-                    pairs.Add(new FinancialPair(x, y));
+                    pairs.Add((T)Activator.CreateInstance(typeof(T), new[] { x, y }));
                 }
             }
             return pairs;
+        }
+
+        public static List<FinancialPair> CreateMany(IEnumerable<Stock> stocks) 
+        {
+            return CreateMany<FinancialPair>(stocks);
         }
     }
 }

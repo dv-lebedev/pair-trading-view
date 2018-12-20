@@ -24,26 +24,28 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using PairTradingView.WpfApp.Data;
 
 namespace PairTradingView.WpfApp
 {
     public partial class MainWindow : Window
     {
-        public Stock[] Stocks { get; set; }
         public FinancialPair SelectedPair { get; set; }
-        public List<FinancialPair> Pairs { get; set; }
-        public ObservableCollection<PairInfo> PairsInfo { get; set; }
+        public ObservableCollection<ExtFinancialPair> Pairs { get; set; }
 
         public MainWindow(Stock[] stocks)
         {
             InitializeComponent();
-            Stocks = stocks ?? throw new ArgumentNullException(nameof(stocks));
-            InitPairs();
+
+            Pairs = new ObservableCollection<ExtFinancialPair>(
+                FinancialPair.CreateMany<ExtFinancialPair>(
+                    stocks ?? throw new ArgumentNullException(nameof(stocks))
+                    ));
+
             InitDataGridView();
-            FillDataGrid();
-            controlPanel.ShowDefaultValuesForPairInfo();
-            controlPanel.Calculate.Click += Calculate_Click;
-            controlPanel.SMA.TextChanged += (s, e) => { UpdateInfoAndCharts(); };
+            InitControlPanel();
+          
+            //select first pair to show
             dataGridControl.dataGrid.SelectedIndex = 0;
             UpdateInfoAndCharts();
         }
@@ -58,42 +60,15 @@ namespace PairTradingView.WpfApp
             dataGridControl.dataGrid.PreviewKeyDown += (s, e) => { UpdateInfoAndCharts(); };
             dataGridControl.dataGrid.PreviewKeyUp += (s, e) => { UpdateInfoAndCharts(); };
             dataGridControl.PairChecked += OnChecked;
+
+            dataGridControl.dataGrid.ItemsSource = Pairs;
         }
 
-        private void InitPairs()
+        private void InitControlPanel()
         {
-            Pairs = FinancialPair.CreateMany(Stocks);
-        }
-
-        private void FillDataGrid()
-        {
-            PairsInfo = new ObservableCollection<PairInfo>();
-
-            foreach (var item in Pairs)
-            {
-                var deltaAverage = item.DeltaValues.Average();
-                var deltaSD = MathUtils.GetStandardDeviation(item.DeltaValues);
-
-                PairsInfo.Add(new PairInfo
-                {
-                    Name = item.Name,
-                    X = item.X.Name,
-                    Y = item.Y.Name,
-                    Alpha = item.Regression.Alpha,
-                    Beta = item.Regression.Beta,
-                    R = item.Regression.RValue,
-                    RSquared = item.Regression.RSquared,
-                    DeltaAverage = (decimal)deltaAverage,
-                    DeltaMax = (decimal)item.DeltaValues.Max(),
-                    DeltaMin = (decimal)item.DeltaValues.Min(),
-                    DeltaSD = (decimal)deltaSD,
-                    SD_X = (decimal)item.X.Deviation,
-                    SD_Y = (decimal)item.Y.Deviation,
-                    DeltaSDMinus3Q = (decimal)(deltaAverage - (3 * deltaSD)),
-                    DeltaSDPlus3Q = (decimal)(deltaAverage + (3 * deltaSD))
-                });
-            }
-            dataGridControl.dataGrid.ItemsSource = PairsInfo;
+            controlPanel.ShowDefaultValuesForPairInfo();
+            controlPanel.Calculate.Click += Calculate_Click;
+            controlPanel.SMA.TextChanged += (s, e) => { UpdateInfoAndCharts(); };
         }
 
         private void SetTradeVolumeToDefault()
@@ -110,13 +85,13 @@ namespace PairTradingView.WpfApp
         {
             try
             {
-                var checkedPairs = new List<FinancialPair>();
+                var checkedPairs = new List<ExtFinancialPair>();
 
-                foreach (var item in PairsInfo)
+                foreach (var item in Pairs)
                 {
                     if (item.Selected)
                     {
-                        var pair = Pairs.Find(i => i.Name == item.Name);
+                        var pair = Pairs.FirstOrDefault(i => i.Name == item.Name);
 
                         if (pair != null)
                         {
@@ -148,18 +123,18 @@ namespace PairTradingView.WpfApp
         {
             try
             {
-                if (dataGridControl.dataGrid.SelectedItem is PairInfo info)
+                if (dataGridControl.dataGrid.SelectedItem is ExtFinancialPair ext)
                 {
-                    var selectedPairs = PairsInfo.Where(i => i.Selected && i.Name != info.Name);
+                    var selectedPairs = Pairs.Where(i => i.Selected && i.Name != ext.Name);
 
                     foreach (var item in selectedPairs)
                     {
-                        if (item.X == info.X || item.X == info.Y ||
-                            item.Y == info.X || item.Y == info.Y)
+                        if (item.X == ext.X || item.X == ext.Y ||
+                            item.Y == ext.X || item.Y == ext.Y)
                         {
                             (e.Source as CheckBox).IsChecked = false;
 
-                            this.Display($"You can't choose pairs with identical symbols! {info.Name} & {item.Name}");
+                            this.Display($"You can't choose pairs with identical symbols! {ext.Name} & {item.Name}");
                         }
                     }
                 }
@@ -175,9 +150,9 @@ namespace PairTradingView.WpfApp
         {
             try
             {
-                if (dataGridControl.dataGrid.SelectedItem is PairInfo info)
+                if (dataGridControl.dataGrid.SelectedItem is ExtFinancialPair ext)
                 {
-                    SelectedPair = Pairs.Find(i => i.Name == info.Name);
+                    SelectedPair = Pairs.FirstOrDefault(i => i.Name == ext.Name);
 
                     if (SelectedPair != null)
                     {
@@ -194,7 +169,7 @@ namespace PairTradingView.WpfApp
             }
             catch (Exception ex)
             {
-                this.Display($"OnMouseLeftDown => {ex.Message}");
+                this.Display($"UpdateInfoAndCharts => {ex.Message}");
             }
         }
     }

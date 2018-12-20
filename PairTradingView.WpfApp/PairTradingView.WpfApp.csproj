@@ -74,6 +74,7 @@
     <Compile Include="DataGridControl.xaml.cs">
       <DependentUpon>DataGridControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Data\ExtFinancialPair.cs" />
     <Compile Include="FilesLoaderWindow.xaml.cs">
       <DependentUpon>FilesLoaderWindow.xaml</DependentUpon>
     </Compile>
@@ -83,7 +84,6 @@
     <Compile Include="Properties\Annotations.cs" />
     <Compile Include="Utils\WindowHelpers.cs" />
     <Compile Include="ViewModels\ChartViewModel.cs" />
-    <Compile Include="Data\PairInfo.cs" />
     <Compile Include="Utils\TextBoxHelpers.cs" />
     <Page Include="ControlPanel.xaml">
       <SubType>Designer</SubType>

@@ -21,8 +21,8 @@
             <RowDefinition Height="5*"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="124*" />
-            <ColumnDefinition Width="181*" />
+            <ColumnDefinition Width="123*" />
+            <ColumnDefinition Width="157*" />
         </Grid.ColumnDefinitions>
 
         <Border BorderThickness="1" 
@@ -34,59 +34,59 @@
                    Grid.Row="0"  
                    Text="INFO" 
                    HorizontalAlignment="Left" 
-                   FontWeight="Bold"/>
-        
+                   FontWeight="Bold" Width="29"/>
+
         <TextBlock Grid.Column="0" 
                    Grid.Row="1"  
-                   Width="80"
+                   Width="100"
                    HorizontalAlignment="Right" 
                    VerticalAlignment="Center" 
-                   Height="16">Balance $</TextBlock>
-        
+                   Height="16" Margin="0,2">Balance $</TextBlock>
+
         <TextBlock Grid.Column="0" 
                    Grid.Row="2"  
-                   Width="80" 
+                   Width="100" 
                    HorizontalAlignment="Right" 
                    VerticalAlignment="Center" 
-                   Height="16">Risk %</TextBlock>
-        
+                   Height="16" Margin="0,2">Risk %</TextBlock>
+
         <TextBlock Grid.Column="0" 
                    Grid.Row="3" 
                    Name="pairName"  
-                   Width="80" 
+                   Width="100" 
                    HorizontalAlignment="Right" 
                    VerticalAlignment="Center" 
-                   Height="16">-</TextBlock>
-        
+                   Height="16" Margin="0,2">-</TextBlock>
+
         <TextBlock Grid.Column="0" 
                    Grid.Row="4" 
                    Name="xName" 
-                   Width="80" 
+                   Width="100" 
                    HorizontalAlignment="Right" 
                    VerticalAlignment="Center" 
-                   Height="16">-</TextBlock>
-        
+                   Height="16" Margin="0,2">-</TextBlock>
+
         <TextBlock Grid.Column="0" 
                    Grid.Row="5" 
                    Name="yName" 
-                   Width="80" 
+                   Width="100" 
                    HorizontalAlignment="Right" 
                    VerticalAlignment="Center" 
-                   Height="16">-</TextBlock>
-        
+                   Height="16" Margin="0,2">-</TextBlock>
+
         <TextBlock Grid.Column="0" 
                    Grid.Row="6"   
-                   Width="80" 
+                   Width="100" 
                    HorizontalAlignment="Right" 
                    VerticalAlignment="Center"
-                   Height="16">Risk Limit</TextBlock>
-        
+                   Height="16" Margin="0,2">Risk Limit</TextBlock>
+
         <TextBlock Grid.Column="0"
                    Grid.Row="7" 
-                   Width="80" 
+                   Width="100" 
                    HorizontalAlignment="Right" 
                    VerticalAlignment="Center" 
-                   Height="16">SMA</TextBlock>
+                   Height="16" Margin="0,2">SMA</TextBlock>
 
         <TextBox Grid.Column="1" 
                  Grid.Row="1" 
@@ -117,38 +117,38 @@
                 </Style>
             </TextBox.Resources>
         </TextBox>
-        
+
         <TextBlock Grid.Column="1" 
                    Grid.Row="3" 
                    Name="pairsTradeBalance" 
                    HorizontalAlignment="Left" 
                    VerticalAlignment="Center" 
-                   Height="16" Width="100">-</TextBlock>
-        
+                   Height="16" Width="100" Margin="0,2">-</TextBlock>
+
         <TextBlock Grid.Column="1" 
                    Grid.Row="4" 
                    Name="yTradeVolume"  
                    HorizontalAlignment="Left" 
                    VerticalAlignment="Center" 
                    Height="16" 
-                   Width="100">-</TextBlock>
-        
+                   Width="100" Margin="0,2">-</TextBlock>
+
         <TextBlock Grid.Column="1" 
                    Grid.Row="5" 
                    Name="xTradeVolume"  
                    HorizontalAlignment="Left" 
                    VerticalAlignment="Center" 
                    Height="16"
-                   Width="100">-</TextBlock>
-        
+                   Width="100" Margin="0,2">-</TextBlock>
+
         <TextBlock 
             Grid.Column="1"
             Grid.Row="6" 
             Name="riskLimit" 
             HorizontalAlignment="Left" 
             VerticalAlignment="Center" 
-            Height="16" Width="100">-</TextBlock>
-        
+            Height="16" Width="100" Margin="0,2">-</TextBlock>
+
         <TextBox Grid.Column="1" 
                  Grid.Row="7" 
                  Name="SMA"  
@@ -164,7 +164,7 @@
                 </Style>
             </TextBox.Resources>
         </TextBox>
-        
+
         <Button Name="Calculate" 
                 Grid.Row="8" 
                 Grid.Column="1" 
