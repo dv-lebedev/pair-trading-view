@@ -68,7 +68,7 @@ namespace PairTradingView.WpfApp
 
             AddLineSerie("Δ", OxyColor.Parse("#3399ff"), values, 0);
 
-            if (SMAPeriod > 0)
+            if (SMAPeriod > 0 && SMAPeriod < values.Length)
             {
                 var SMAValues = MovingAverages.SMA(values, SMAPeriod);
                 AddLineSerie("SMA", OxyColor.Parse("#FF0000"), SMAValues, SMAPeriod);

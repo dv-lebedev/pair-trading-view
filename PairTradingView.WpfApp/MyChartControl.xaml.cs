@@ -15,6 +15,7 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
+using System;
 using System.Windows.Controls;
 
 namespace PairTradingView.WpfApp
@@ -28,6 +29,12 @@ namespace PairTradingView.WpfApp
             InitializeComponent();
             chartModel = new ChartViewModel();
             DataContext = chartModel;
+        }
+
+        public void Update(double[] deltaValues, string name, int SMAValue)
+        {
+            chartModel.Update(deltaValues, name, SMAValue);
+            plot.InvalidatePlot();
         }
     }
 }

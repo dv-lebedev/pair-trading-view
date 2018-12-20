@@ -4,6 +4,5 @@
              xmlns:local="clr-namespace:PairTradingView.WpfApp"
              StartupUri="FilesLoaderWindow.xaml">
     <Application.Resources>
-         
     </Application.Resources>
 </Application>

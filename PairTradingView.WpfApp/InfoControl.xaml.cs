@@ -23,14 +23,21 @@ using System.Globalization;
 
 namespace PairTradingView.WpfApp
 {
-    public partial class ControlPanel : UserControl
+    public partial class InfoControl : UserControl
     {
-        public ControlPanel()
+        public InfoControl()
         {
             InitializeComponent();
         }
 
-        public void ShowDefaultValuesForPairInfo()
+        public void InitInfoControl(Action calculateCallback, Action updateCallback)
+        {
+            ShowDefaultValues();
+            Calculate.Click += (s, e) => { calculateCallback(); };
+            SMA.TextChanged += (s, e) => { updateCallback(); };
+        }
+
+        public void ShowDefaultValues()
         {
             pairName.Text = "-";
             xName.Text = "-";
@@ -41,7 +48,7 @@ namespace PairTradingView.WpfApp
             riskLimit.Text = "0";
         }
 
-        public void ShowValuesForPairInfo(FinancialPair selectedPair)
+        public void Update(FinancialPair selectedPair)
         {
             pairName.Text = selectedPair.Name.ToString();
             xName.Text = selectedPair.X.Name;
@@ -59,6 +66,7 @@ namespace PairTradingView.WpfApp
             {
                 if (tb.Text == "") tb.Text = "0";
 
+                //handle values like '01234', '000', etc
                 if (tb.Text.StartsWith("0") && tb.Text.Length > 1 && tb.Text[1] != '.')
                 {
                     int i = 0;

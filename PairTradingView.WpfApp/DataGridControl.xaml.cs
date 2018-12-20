@@ -15,24 +15,36 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
+using PairTradingView.WpfApp.Data;
 using System;
-using System.Windows;
+using System.Collections.ObjectModel;
 using System.Windows.Controls;
+using System.Windows.Input;
 
 namespace PairTradingView.WpfApp
 {
     public partial class DataGridControl : UserControl
     {
-        public event EventHandler<RoutedEventArgs> PairChecked;
-
         public DataGridControl()
         {
-            InitializeComponent();
+            InitializeComponent();          
         }
 
-        private void OnChecked(object sender, RoutedEventArgs e)
+        public void InitDataGridControl(ObservableCollection<ExtFinancialPair> pairs, Action callback)
         {
-            PairChecked?.Invoke(sender, e);
+            dataGrid.AddHandler(
+                MouseLeftButtonDownEvent,
+                new MouseButtonEventHandler((e, c) => { callback(); }),
+                true);
+
+            dataGrid.PreviewKeyDown += (s, e) => { callback(); };
+            dataGrid.PreviewKeyUp += (s, e) => { callback(); };
+
+            dataGrid.ItemsSource = pairs;
+
+            //select first pair to show
+            dataGrid.SelectedIndex = 0;
+            callback();
         }
     }
 }

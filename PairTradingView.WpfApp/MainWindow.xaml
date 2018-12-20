@@ -24,7 +24,7 @@
                               Grid.Column="0"
                               Grid.Row="0"/>
 
-        <local:ControlPanel x:Name="controlPanel"
+        <local:InfoControl x:Name="infoControl"
                             Grid.Column="1"
                             Grid.Row="0"/>
 

@@ -8,27 +8,21 @@
     <Grid>
         <DataGrid CanUserSortColumns="True" GridLinesVisibility="None" AutoGenerateColumns="False" Grid.Row="1" Grid.ColumnSpan="2" x:Name="dataGrid">
             <DataGrid.Columns>
-                <DataGridCheckBoxColumn Binding="{Binding Selected}">
-                    <DataGridCheckBoxColumn.CellStyle>
-                        <Style>
-                            <EventSetter Event="CheckBox.Checked" Handler="OnChecked"/>
-                        </Style>
-                    </DataGridCheckBoxColumn.CellStyle>
-                </DataGridCheckBoxColumn>
-                <DataGridTextColumn Header="X" Binding="{Binding X.Name}" />
-                <DataGridTextColumn Header="Y" Binding="{Binding Y.Name}" />
-                <DataGridTextColumn Header="SD_X" Binding="{Binding SD_X, StringFormat=F4}" />
-                <DataGridTextColumn Header="SD_Y" Binding="{Binding SD_Y, StringFormat=F4}" />
-                <DataGridTextColumn Header="Alpha" Binding="{Binding Regression.Alpha, StringFormat=F4}" />
-                <DataGridTextColumn Header="Beta" Binding="{Binding Regression.Beta, StringFormat=F4}" />
-                <DataGridTextColumn Header="R" Binding="{Binding Regression.RValue, StringFormat=F4}" />
-                <DataGridTextColumn Header="RSquared" Binding="{Binding Regression.RSquared, StringFormat=F4}" />
-                <DataGridTextColumn Header="DeltaAverage" Binding="{Binding DeltaAverage, StringFormat=F4}" />
-                <DataGridTextColumn Header="DeltaMin" Binding="{Binding DeltaMin, StringFormat=F4}" />
-                <DataGridTextColumn Header="DeltaMax" Binding="{Binding DeltaMax, StringFormat=F4}" />
-                <DataGridTextColumn Header="DeltaSD" Binding="{Binding DeltaSD, StringFormat=F4}" />
-                <DataGridTextColumn Header="DeltaSDMinus3Q" Binding="{Binding DeltaSDMinus3Q, StringFormat=F4}" />
-                <DataGridTextColumn Header="DeltaSDPlus3Q" Binding="{Binding DeltaSDPlus3Q, StringFormat=F4}" />
+                <DataGridCheckBoxColumn Binding="{Binding Selected}"/>
+                <DataGridTextColumn Header="X" Binding="{Binding X.Name}" IsReadOnly="True"/>
+                <DataGridTextColumn Header="Y" Binding="{Binding Y.Name}" IsReadOnly="True"/>
+                <DataGridTextColumn Header="SD_X" Binding="{Binding SD_X, StringFormat=F4}" IsReadOnly="True"/>
+                <DataGridTextColumn Header="SD_Y" Binding="{Binding SD_Y, StringFormat=F4}" IsReadOnly="True"/>
+                <DataGridTextColumn Header="Alpha" Binding="{Binding Regression.Alpha, StringFormat=F4}" IsReadOnly="True"/>
+                <DataGridTextColumn Header="Beta" Binding="{Binding Regression.Beta, StringFormat=F4}" IsReadOnly="True"/>
+                <DataGridTextColumn Header="R" Binding="{Binding Regression.RValue, StringFormat=F4}" IsReadOnly="True"/>
+                <DataGridTextColumn Header="RSquared" Binding="{Binding Regression.RSquared, StringFormat=F4}" IsReadOnly="True"/>
+                <DataGridTextColumn Header="DeltaAverage" Binding="{Binding DeltaAverage, StringFormat=F4}" IsReadOnly="True"/>
+                <DataGridTextColumn Header="DeltaMin" Binding="{Binding DeltaMin, StringFormat=F4}" IsReadOnly="True"/>
+                <DataGridTextColumn Header="DeltaMax" Binding="{Binding DeltaMax, StringFormat=F4}" IsReadOnly="True"/>
+                <DataGridTextColumn Header="DeltaSD" Binding="{Binding DeltaSD, StringFormat=F4}" IsReadOnly="True"/>
+                <DataGridTextColumn Header="DeltaSDMinus3Q" Binding="{Binding DeltaSDMinus3Q, StringFormat=F4}" IsReadOnly="True"/>
+                <DataGridTextColumn Header="DeltaSDPlus3Q" Binding="{Binding DeltaSDPlus3Q, StringFormat=F4}" IsReadOnly="True"/>
             </DataGrid.Columns>
         </DataGrid>
     </Grid>

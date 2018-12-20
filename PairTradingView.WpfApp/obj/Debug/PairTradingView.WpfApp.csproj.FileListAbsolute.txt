@@ -19,11 +19,9 @@ C:\GitHub\pair-trading-view\PairTradingView.WpfApp\bin\Debug\OxyPlot.pdb
 C:\GitHub\pair-trading-view\PairTradingView.WpfApp\bin\Debug\OxyPlot.xml
 C:\GitHub\pair-trading-view\PairTradingView.WpfApp\bin\Debug\OxyPlot.Wpf.pdb
 C:\GitHub\pair-trading-view\PairTradingView.WpfApp\bin\Debug\OxyPlot.Wpf.xml
-C:\GitHub\pair-trading-view\PairTradingView.WpfApp\obj\Debug\ControlPanel.g.cs
 C:\GitHub\pair-trading-view\PairTradingView.WpfApp\obj\Debug\GeneratedInternalTypeHelper.g.cs
 C:\GitHub\pair-trading-view\PairTradingView.WpfApp\obj\Debug\DataGridControl.g.cs
 C:\GitHub\pair-trading-view\PairTradingView.WpfApp\obj\Debug\MyChartControl.g.cs
-C:\GitHub\pair-trading-view\PairTradingView.WpfApp\obj\Debug\ControlPanel.baml
 C:\GitHub\pair-trading-view\PairTradingView.WpfApp\obj\Debug\DataGridControl.baml
 C:\GitHub\pair-trading-view\PairTradingView.WpfApp\obj\Debug\MyChartControl.baml
 C:\GitHub\pair-trading-view\PairTradingView.WpfApp\obj\Debug\PairTradingView.WpfApp.csprojAssemblyReference.cache
@@ -31,3 +29,5 @@ C:\GitHub\pair-trading-view\PairTradingView.WpfApp\obj\Debug\PairTradingView.Wpf
 C:\GitHub\pair-trading-view\PairTradingView.WpfApp\obj\Debug\PairTradingView.WpfApp.csproj.CopyComplete
 C:\GitHub\pair-trading-view\PairTradingView.WpfApp\obj\Debug\FilesLoaderWindow.g.cs
 C:\GitHub\pair-trading-view\PairTradingView.WpfApp\obj\Debug\FilesLoaderWindow.baml
+C:\GitHub\pair-trading-view\PairTradingView.WpfApp\obj\Debug\InfoControl.baml
+C:\GitHub\pair-trading-view\PairTradingView.WpfApp\obj\Debug\InfoControl.g.cs

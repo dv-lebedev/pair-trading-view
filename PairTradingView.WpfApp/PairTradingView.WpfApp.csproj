@@ -68,8 +68,8 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="ControlPanel.xaml.cs">
-      <DependentUpon>ControlPanel.xaml</DependentUpon>
+    <Compile Include="InfoControl.xaml.cs">
+      <DependentUpon>InfoControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="DataGridControl.xaml.cs">
       <DependentUpon>DataGridControl.xaml</DependentUpon>
@@ -78,6 +78,7 @@
     <Compile Include="FilesLoaderWindow.xaml.cs">
       <DependentUpon>FilesLoaderWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Logic\LogicMediator.cs" />
     <Compile Include="MyChartControl.xaml.cs">
       <DependentUpon>MyChartControl.xaml</DependentUpon>
     </Compile>
@@ -85,7 +86,7 @@
     <Compile Include="Utils\WindowHelpers.cs" />
     <Compile Include="ViewModels\ChartViewModel.cs" />
     <Compile Include="Utils\TextBoxHelpers.cs" />
-    <Page Include="ControlPanel.xaml">
+    <Page Include="InfoControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

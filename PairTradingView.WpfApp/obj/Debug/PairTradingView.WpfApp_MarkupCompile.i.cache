@@ -10,11 +10,11 @@ none
 false
 DEBUG;TRACE
 C:\GitHub\pair-trading-view\PairTradingView.WpfApp\App.xaml
-5-1472715485
+5459979431
 
-18-380993219
+19253890926
 68411456715
-ControlPanel.xaml;DataGridControl.xaml;FilesLoaderWindow.xaml;MainWindow.xaml;MyChartControl.xaml;
+InfoControl.xaml;DataGridControl.xaml;FilesLoaderWindow.xaml;MainWindow.xaml;MyChartControl.xaml;
 
-False
+True
 
