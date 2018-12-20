@@ -7,7 +7,7 @@
              d:DesignHeight="300" d:DesignWidth="300">
     <Grid Name="grid" 
           Background="#eeeeee" 
-          Margin="10">
+          Margin="2,9,10,9">
         <Grid.RowDefinitions>
             <RowDefinition />
             <RowDefinition />

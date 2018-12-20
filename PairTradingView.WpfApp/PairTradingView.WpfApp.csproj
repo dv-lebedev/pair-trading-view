@@ -68,29 +68,29 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="InfoControl.xaml.cs">
+    <Compile Include="Controls\InfoControl.xaml.cs">
       <DependentUpon>InfoControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="DataGridControl.xaml.cs">
+    <Compile Include="Controls\DataGridControl.xaml.cs">
       <DependentUpon>DataGridControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Data\ExtFinancialPair.cs" />
+    <Compile Include="Entities\ExtFinancialPair.cs" />
     <Compile Include="FilesLoaderWindow.xaml.cs">
       <DependentUpon>FilesLoaderWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Logic\LogicMediator.cs" />
-    <Compile Include="MyChartControl.xaml.cs">
+    <Compile Include="Controls\MyChartControl.xaml.cs">
       <DependentUpon>MyChartControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\Annotations.cs" />
     <Compile Include="Utils\WindowHelpers.cs" />
     <Compile Include="ViewModels\ChartViewModel.cs" />
     <Compile Include="Utils\TextBoxHelpers.cs" />
-    <Page Include="InfoControl.xaml">
+    <Page Include="Controls\InfoControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="DataGridControl.xaml">
+    <Page Include="Controls\DataGridControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -110,7 +110,7 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="MyChartControl.xaml">
+    <Page Include="Controls\MyChartControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

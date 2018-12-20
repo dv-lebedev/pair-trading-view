@@ -18,7 +18,7 @@ limitations under the License.
 using PairTradingView.Infrastructure;
 using System.Linq;
 
-namespace PairTradingView.WpfApp.Data
+namespace PairTradingView.WpfApp.Entities
 {
     public class ExtFinancialPair : FinancialPair
     {

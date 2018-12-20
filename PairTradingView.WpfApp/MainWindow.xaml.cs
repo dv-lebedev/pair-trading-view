@@ -16,8 +16,8 @@ limitations under the License.
 */
 
 using PairTradingView.Infrastructure;
-using System.Windows;
 using PairTradingView.WpfApp.Logic;
+using System.Windows;
 
 namespace PairTradingView.WpfApp
 {

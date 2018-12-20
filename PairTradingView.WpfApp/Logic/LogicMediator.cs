@@ -16,7 +16,7 @@ limitations under the License.
 */
 
 using PairTradingView.Infrastructure;
-using PairTradingView.WpfApp.Data;
+using PairTradingView.WpfApp.Entities;
 using PairTradingView.WpfApp.Utils;
 using System;
 using System.Collections.ObjectModel;

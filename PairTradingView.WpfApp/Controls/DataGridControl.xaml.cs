@@ -15,7 +15,7 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-using PairTradingView.WpfApp.Data;
+using PairTradingView.WpfApp.Entities;
 using System;
 using System.Collections.ObjectModel;
 using System.Windows.Controls;
