@@ -75,7 +75,7 @@ namespace PairTradingView.WpfApp
             }
         }
 
-        public void AddLineSerie(string title, OxyColor color, double[] values, int offset = 0)
+        private void AddLineSerie(string title, OxyColor color, double[] values, int offset = 0)
         {
             var lineSerie = new LineSeries
             {

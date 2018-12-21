@@ -37,17 +37,6 @@ namespace PairTradingView.WpfApp
             SMA.TextChanged += (s, e) => { updateCallback(); };
         }
 
-        public void ShowDefaultValues()
-        {
-            pairName.Text = "-";
-            xName.Text = "-";
-            yName.Text = "-";
-            pairsTradeBalance.Text = "0";
-            yTradeVolume.Text = "0";
-            xTradeVolume.Text = "0";
-            riskLimit.Text = "0";
-        }
-
         public void Update(FinancialPair selectedPair)
         {
             pairName.Text = selectedPair.Name.ToString();
@@ -58,6 +47,17 @@ namespace PairTradingView.WpfApp
             yTradeVolume.Text = Math.Round(selectedPair.Y.TradeVolume, 4).ToString();
             xTradeVolume.Text = Math.Round(selectedPair.X.TradeVolume, 4).ToString();
             riskLimit.Text = Math.Round((selectedPair.TradeVolume * risk.GetDouble() / 100.0), 4).ToString();
+        }
+
+        private void ShowDefaultValues()
+        {
+            pairName.Text = "-";
+            xName.Text = "-";
+            yName.Text = "-";
+            pairsTradeBalance.Text = "0";
+            yTradeVolume.Text = "0";
+            xTradeVolume.Text = "0";
+            riskLimit.Text = "0";
         }
 
         private void TextChanged(object sender, TextChangedEventArgs e)

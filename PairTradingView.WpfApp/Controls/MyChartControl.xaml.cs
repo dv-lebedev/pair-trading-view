@@ -15,14 +15,13 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-using System;
 using System.Windows.Controls;
 
 namespace PairTradingView.WpfApp
 {
     public partial class MyChartControl : UserControl
     {
-        public ChartViewModel chartModel;
+        private ChartViewModel chartModel;
 
         public MyChartControl()
         {
