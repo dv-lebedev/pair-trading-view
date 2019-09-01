@@ -12,18 +12,19 @@
 
 ## How To
 
-Execute PairTradingView.exe in 'pair-trading-view\PairTradingView.WinFormsApp\bin\Debug\'.
+Execute PairTradingView.WpfApp.exe in 'pair-trading-view\PairTradingView.WpfApp\bin\Debug'.
 
 <p align="left">
   <img width="270" alt="pic" src="https://github.com/dv-lebedev/PairTradingView/blob/master/screenshots/appstart.png">
 </p>
 
 Set 'Price' column. Put csv files with a historical data into
-'pair-trading-view\PairTradingView.WinFormsApp\bin\Debug\csv-files' folder. Download csv files if you need by QuoteDownloader.
+'pair-trading-view\PairTradingView.WpfApp\bin\Debug\csv-files' folder. Download csv files if you need by QuoteDownloader.
 Press start.
 
 
 ## Model
+- prices convert to percents
 - SI -> synthetic index
 - s -> share
 - fp -> financial pair

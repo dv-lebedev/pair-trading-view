@@ -14,3 +14,11 @@ C:\GitHub\pair-trading-view\PairTradingView.Infrastructure\obj\Debug\PairTrading
 C:\GitHub\pair-trading-view\PairTradingView.Infrastructure\obj\Debug\PairTradingView.Infrastructure.csprojAssemblyReference.cache
 C:\GitHub\pair-trading-view\PairTradingView.Infrastructure\obj\Debug\PairTradingView.Infrastructure.csproj.CoreCompileInputs.cache
 C:\GitHub\pair-trading-view\PairTradingView.Infrastructure\obj\Debug\PairTradingView.Infrastructure.csproj.CopyComplete
+C:\Users\dvleb\Desktop\pair-trading-view-master\PairTradingView.Infrastructure\bin\Debug\PairTradingView.Infrastructure.dll
+C:\Users\dvleb\Desktop\pair-trading-view-master\PairTradingView.Infrastructure\bin\Debug\PairTradingView.Infrastructure.pdb
+C:\Users\dvleb\Desktop\pair-trading-view-master\PairTradingView.Infrastructure\bin\Debug\Statistics.pdb
+C:\Users\dvleb\Desktop\pair-trading-view-master\PairTradingView.Infrastructure\obj\Debug\PairTradingView.Infrastructure.csprojAssemblyReference.cache
+C:\Users\dvleb\Desktop\pair-trading-view-master\PairTradingView.Infrastructure\obj\Debug\PairTradingView.Infrastructure.csproj.CoreCompileInputs.cache
+C:\Users\dvleb\Desktop\pair-trading-view-master\PairTradingView.Infrastructure\obj\Debug\PairTradingView.Infrastructure.csproj.CopyComplete
+C:\Users\dvleb\Desktop\pair-trading-view-master\PairTradingView.Infrastructure\obj\Debug\PairTradingView.Infrastructure.dll
+C:\Users\dvleb\Desktop\pair-trading-view-master\PairTradingView.Infrastructure\obj\Debug\PairTradingView.Infrastructure.pdb

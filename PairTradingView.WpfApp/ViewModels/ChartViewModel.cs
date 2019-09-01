@@ -1,6 +1,6 @@
 ﻿
 /*
-Copyright(c) 2015-2018 Denis Lebedev
+Copyright(c) 2015-2019 Denis Lebedev
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -47,22 +47,47 @@ namespace PairTradingView.WpfApp
             PlotModel.LegendPosition = LegendPosition.TopLeft;
             PlotModel.LegendBackground = OxyColor.FromAColor(200, OxyColors.White);
             PlotModel.LegendBorder = OxyColors.White;
+            PlotModel.PlotAreaBorderColor = OxyColors.Transparent;
 
-            var valueAxis = new LinearAxis()
+            var xAxis = new LinearAxis()
             {
+                Position = AxisPosition.Left,
+
                 IsZoomEnabled = false,
                 IsPanEnabled = false,
                 MajorGridlineStyle = LineStyle.Solid,
-                MinorGridlineStyle = LineStyle.Dot,
+                MinorGridlineStyle = LineStyle.Dot,          
+                TicklineColor = OxyColors.DimGray,
+                AxislineColor = OxyColors.DimGray,
+                ExtraGridlineColor = OxyColors.DimGray,
+                MajorGridlineColor = OxyColors.DimGray,
+                MinorGridlineColor = OxyColors.DimGray,
+                TickStyle = TickStyle.None,
+                TextColor = OxyColors.LightGray,
+                TitleColor = OxyColors.LightGray,
                 Title = "Δ"
+            };  
+            PlotModel.Axes.Add(xAxis);
+
+            var yAxis = new LinearAxis()
+            {
+                Position = AxisPosition.Bottom,
+                IsZoomEnabled = false,
+                IsPanEnabled = false,
+                MajorGridlineStyle = LineStyle.Solid,
+                MinorGridlineStyle = LineStyle.Dot,      
+                TickStyle = TickStyle.None,
+                TextColor = OxyColors.LightGray,
+                TitleColor = OxyColors.LightGray,
+                Title = "t"
             };
-            
-            PlotModel.Axes.Add(valueAxis);
+            PlotModel.Axes.Add(yAxis);
         }
 
         public void Update(double[] values, string title, int SMAPeriod = 0)
         {
             PlotModel.Title = title;
+            PlotModel.TitleColor = OxyColors.LightGray;
 
             PlotModel.Series.Clear();
 
@@ -86,6 +111,7 @@ namespace PairTradingView.WpfApp
                 CanTrackerInterpolatePoints = false,
                 Color = color,
                 Title = title,
+                
                 Smooth = false
             };
 

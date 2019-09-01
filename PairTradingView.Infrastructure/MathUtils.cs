@@ -1,6 +1,6 @@
 ﻿
 /*
-Copyright(c) 2015-2017 Denis Lebedev
+Copyright(c) 2015-2019 Denis Lebedev
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -35,6 +35,21 @@ namespace PairTradingView.Infrastructure
                 result += Math.Pow(values[i] - average, 2);
             }
             return Math.Sqrt(result /= (values.Length - 1));
+        }
+
+        public static double[] GetPercents(double[] prices)
+        {
+            if (prices == null) throw new ArgumentNullException(nameof(prices));
+            if (prices.Length == 0) throw new ArgumentException(nameof(prices));
+
+            double[] result = new double[prices.Length - 1];
+            double first = prices[0];
+
+            for (int i = 0; i < result.Length; i++)
+            {
+                result[i] = (prices[i + 1] / first - 1.0) * 100.0;
+            }
+            return result;
         }
     }
 }

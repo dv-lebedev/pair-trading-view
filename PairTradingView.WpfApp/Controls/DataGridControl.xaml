@@ -5,8 +5,30 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="800">
+    <UserControl.Resources>
+        <Style x:Key="DGHeaderStyle" TargetType="{x:Type DataGrid}">
+            <Setter Property="ColumnHeaderStyle" Value="{DynamicResource DGCHeaderStyle}"/>
+        </Style>
+        <Style x:Key="DGCHeaderStyle" TargetType="DataGridColumnHeader">
+            <Setter Property="Height" Value="30"/>
+            <Setter Property="Background" Value="#202020" />
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="FontSize" Value="12" />
+        </Style>
+    </UserControl.Resources>
     <Grid>
-        <DataGrid CanUserSortColumns="True" GridLinesVisibility="None" AutoGenerateColumns="False" Grid.Row="1" Grid.ColumnSpan="2" x:Name="dataGrid">
+        <DataGrid 
+            Background="#202020"
+            RowBackground="#202020"
+            AlternatingRowBackground="#353535"
+            Foreground="LightGray"
+            Style="{DynamicResource DGHeaderStyle}"
+            CanUserSortColumns="True" 
+            GridLinesVisibility="None" 
+            AutoGenerateColumns="False" 
+            Grid.Row="1" 
+            Grid.ColumnSpan="2" 
+            x:Name="dataGrid">
             <DataGrid.Columns>
                 <DataGridCheckBoxColumn Binding="{Binding Selected}"/>
                 <DataGridTextColumn Header="X" Binding="{Binding X.Name}" IsReadOnly="True"/>
@@ -16,13 +38,13 @@
                 <DataGridTextColumn Header="Alpha" Binding="{Binding Regression.Alpha, StringFormat=F4}" IsReadOnly="True"/>
                 <DataGridTextColumn Header="Beta" Binding="{Binding Regression.Beta, StringFormat=F4}" IsReadOnly="True"/>
                 <DataGridTextColumn Header="R" Binding="{Binding Regression.RValue, StringFormat=F4}" IsReadOnly="True"/>
-                <DataGridTextColumn Header="RSquared" Binding="{Binding Regression.RSquared, StringFormat=F4}" IsReadOnly="True"/>
-                <DataGridTextColumn Header="DeltaAverage" Binding="{Binding DeltaAverage, StringFormat=F4}" IsReadOnly="True"/>
-                <DataGridTextColumn Header="DeltaMin" Binding="{Binding DeltaMin, StringFormat=F4}" IsReadOnly="True"/>
-                <DataGridTextColumn Header="DeltaMax" Binding="{Binding DeltaMax, StringFormat=F4}" IsReadOnly="True"/>
-                <DataGridTextColumn Header="DeltaSD" Binding="{Binding DeltaSD, StringFormat=F4}" IsReadOnly="True"/>
-                <DataGridTextColumn Header="DeltaSDMinus3Q" Binding="{Binding DeltaSDMinus3Q, StringFormat=F4}" IsReadOnly="True"/>
-                <DataGridTextColumn Header="DeltaSDPlus3Q" Binding="{Binding DeltaSDPlus3Q, StringFormat=F4}" IsReadOnly="True"/>
+                <DataGridTextColumn Header="R^2" Binding="{Binding Regression.RSquared, StringFormat=F4}" IsReadOnly="True"/>
+                <DataGridTextColumn Header="Δ avg" Binding="{Binding DeltaAverage, StringFormat=F4}" IsReadOnly="True"/>
+                <DataGridTextColumn Header="Δ min" Binding="{Binding DeltaMin, StringFormat=F4}" IsReadOnly="True"/>
+                <DataGridTextColumn Header="Δ max" Binding="{Binding DeltaMax, StringFormat=F4}" IsReadOnly="True"/>
+                <DataGridTextColumn Header="Δ SD" Binding="{Binding DeltaSD, StringFormat=F4}" IsReadOnly="True"/>
+                <DataGridTextColumn Header="Δ SD -3Q" Binding="{Binding DeltaSDMinus3Q, StringFormat=F4}" IsReadOnly="True"/>
+                <DataGridTextColumn Header="Δ SD +3Q" Binding="{Binding DeltaSDPlus3Q, StringFormat=F4}" IsReadOnly="True"/>
             </DataGrid.Columns>
         </DataGrid>
     </Grid>

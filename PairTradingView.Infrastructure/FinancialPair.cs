@@ -1,6 +1,6 @@
 ﻿
 /*
-Copyright(c) 2015-2017 Denis Lebedev
+Copyright(c) 2015-2019 Denis Lebedev
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -25,7 +25,7 @@ namespace PairTradingView.Infrastructure
 {
     public class FinancialPair
     {
-        public string Name => $"{Y.Name}|{X.Name}";
+        public string Name => $"{Y.Name} | {X.Name}";
 
         public Stock X { get; }
         public Stock Y { get; }
@@ -45,7 +45,7 @@ namespace PairTradingView.Infrastructure
             Y = y;
 
             SetRegression(x.Prices, y.Prices);
-            SetValues(X.Prices, Y.Prices);
+            SetValues();
 
             X.Deviation = MathUtils.GetStandardDeviation(x.Prices);
             Y.Deviation = MathUtils.GetStandardDeviation(y.Prices);
@@ -57,15 +57,18 @@ namespace PairTradingView.Infrastructure
             Regression.Compute(y.ToDecimal(), x.ToDecimal());
         }
 
-        protected void SetValues(double[] x, double[] y)
-        {
+        protected void SetValues()
+        { 
+            double[] x = MathUtils.GetPercents(X.Prices);
+            double[] y = MathUtils.GetPercents(Y.Prices);
+
             if (Regression.RValue >= 0)
             {
-                DeltaValues = x.Zip(y, (i, j) => j - i * Regression.Beta.ToDouble()).ToArray();
+                DeltaValues = x.Zip(y, (i, j) => j  - i * Regression.Beta.ToDouble()).ToArray();
             }
             else
             {
-                DeltaValues = x.Zip(y, (i, j) => j + i * Regression.Beta.ToDouble()).ToArray();
+                DeltaValues = x.Zip(y, (i, j) => j  + i * Regression.Beta.ToDouble()).ToArray();
             }
         }
 

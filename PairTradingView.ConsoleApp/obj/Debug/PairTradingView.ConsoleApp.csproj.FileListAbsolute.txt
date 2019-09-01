@@ -10,3 +10,15 @@ C:\GitHub\pair-trading-view\PairTradingView.ConsoleApp\obj\Debug\PairTradingView
 C:\GitHub\pair-trading-view\PairTradingView.ConsoleApp\obj\Debug\PairTradingView.ConsoleApp.csprojAssemblyReference.cache
 C:\GitHub\pair-trading-view\PairTradingView.ConsoleApp\obj\Debug\PairTradingView.ConsoleApp.csproj.CoreCompileInputs.cache
 C:\GitHub\pair-trading-view\PairTradingView.ConsoleApp\obj\Debug\PairTradingView.ConsoleApp.csproj.CopyComplete
+C:\Users\dvleb\Desktop\pair-trading-view-master\PairTradingView.ConsoleApp\bin\Debug\PairTradingView.ConsoleApp.exe.config
+C:\Users\dvleb\Desktop\pair-trading-view-master\PairTradingView.ConsoleApp\bin\Debug\PairTradingView.ConsoleApp.exe
+C:\Users\dvleb\Desktop\pair-trading-view-master\PairTradingView.ConsoleApp\bin\Debug\PairTradingView.ConsoleApp.pdb
+C:\Users\dvleb\Desktop\pair-trading-view-master\PairTradingView.ConsoleApp\bin\Debug\PairTradingView.Infrastructure.dll
+C:\Users\dvleb\Desktop\pair-trading-view-master\PairTradingView.ConsoleApp\bin\Debug\Statistics.dll
+C:\Users\dvleb\Desktop\pair-trading-view-master\PairTradingView.ConsoleApp\bin\Debug\PairTradingView.Infrastructure.pdb
+C:\Users\dvleb\Desktop\pair-trading-view-master\PairTradingView.ConsoleApp\bin\Debug\Statistics.pdb
+C:\Users\dvleb\Desktop\pair-trading-view-master\PairTradingView.ConsoleApp\obj\Debug\PairTradingView.ConsoleApp.csprojAssemblyReference.cache
+C:\Users\dvleb\Desktop\pair-trading-view-master\PairTradingView.ConsoleApp\obj\Debug\PairTradingView.ConsoleApp.csproj.CoreCompileInputs.cache
+C:\Users\dvleb\Desktop\pair-trading-view-master\PairTradingView.ConsoleApp\obj\Debug\PairTradingView.ConsoleApp.csproj.CopyComplete
+C:\Users\dvleb\Desktop\pair-trading-view-master\PairTradingView.ConsoleApp\obj\Debug\PairTradingView.ConsoleApp.exe
+C:\Users\dvleb\Desktop\pair-trading-view-master\PairTradingView.ConsoleApp\obj\Debug\PairTradingView.ConsoleApp.pdb

@@ -8,7 +8,7 @@
         Title="Pair Trading View" 
         Height="746" 
         Width="918"
-        Background="#dddddd"
+        Background="#202020"
         WindowStartupLocation="CenterScreen">
     <Grid>
         <Grid.RowDefinitions>
@@ -29,6 +29,8 @@
                             Grid.Row="0"/>
 
         <local:DataGridControl x:Name="dataGridControl"
+                               Background="DimGray"
+                               Foreground="LightGray"
                                Grid.Column="0"
                                Grid.ColumnSpan="2"
                                Grid.Row="1"/>
