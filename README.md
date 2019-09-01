@@ -3,7 +3,7 @@
 
 **Pair Trading View** - application for visual analysis of synthetic financial instruments based on statistical models. 
 
-**[ PairTradingView.WinFormsApp ]**
+**[ PairTradingView.WpfApp ]**
 
 <p align="left">
   <img width="700" alt="pic" src="https://github.com/dv-lebedev/PairTradingView/blob/master/screenshots/mainwindow.png">
@@ -24,7 +24,7 @@ Press start.
 
 
 ## Model
-- prices convert to percents
+- prices converted to percents
 - SI -> synthetic index
 - s -> share
 - fp -> financial pair
