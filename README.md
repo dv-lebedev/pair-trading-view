@@ -12,7 +12,7 @@
 
 ## How To
 
-Execute PairTradingView.WpfApp.exe in 'pair-trading-view\PairTradingView.WpfApp\bin\Debug'.
+Execute PairTradingView.exe in 'pair-trading-view\PairTradingView.WpfApp\bin\Debug'.
 
 <p align="left">
   <img width="270" alt="pic" src="https://github.com/dv-lebedev/PairTradingView/blob/master/screenshots/appstart.png">
