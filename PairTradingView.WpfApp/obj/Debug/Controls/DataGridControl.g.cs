@@ -59,7 +59,7 @@ namespace PairTradingView.WpfApp {
                 return;
             }
             _contentLoaded = true;
-            System.Uri resourceLocater = new System.Uri("/PairTradingView.WpfApp;component/controls/datagridcontrol.xaml", System.UriKind.Relative);
+            System.Uri resourceLocater = new System.Uri("/PairTradingView;component/controls/datagridcontrol.xaml", System.UriKind.Relative);
             
             #line 1 "..\..\..\Controls\DataGridControl.xaml"
             System.Windows.Application.LoadComponent(this, resourceLocater);

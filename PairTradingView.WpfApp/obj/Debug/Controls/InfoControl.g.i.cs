@@ -147,7 +147,7 @@ namespace PairTradingView.WpfApp {
                 return;
             }
             _contentLoaded = true;
-            System.Uri resourceLocater = new System.Uri("/PairTradingView.WpfApp;component/controls/infocontrol.xaml", System.UriKind.Relative);
+            System.Uri resourceLocater = new System.Uri("/PairTradingView;component/controls/infocontrol.xaml", System.UriKind.Relative);
             
             #line 1 "..\..\..\Controls\InfoControl.xaml"
             System.Windows.Application.LoadComponent(this, resourceLocater);

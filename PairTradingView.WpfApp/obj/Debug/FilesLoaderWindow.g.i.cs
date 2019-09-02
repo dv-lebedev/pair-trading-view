@@ -99,7 +99,7 @@ namespace PairTradingView.WpfApp {
                 return;
             }
             _contentLoaded = true;
-            System.Uri resourceLocater = new System.Uri("/PairTradingView.WpfApp;component/filesloaderwindow.xaml", System.UriKind.Relative);
+            System.Uri resourceLocater = new System.Uri("/PairTradingView;component/filesloaderwindow.xaml", System.UriKind.Relative);
             
             #line 1 "..\..\FilesLoaderWindow.xaml"
             System.Windows.Application.LoadComponent(this, resourceLocater);
