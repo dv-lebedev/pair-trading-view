@@ -24,7 +24,7 @@ Press start.
 
 
 ## Model
-- prices converted to percents
+- prices are converted into percentages
 - SI -> synthetic index
 - s -> share
 - fp -> financial pair
