@@ -5,9 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PairTradingView.WpfApp"
         mc:Ignorable="d"
-        Title="Pair Trading View" 
-        Height="746" 
-        Width="918"
+        Title="Pair Trading View"
+        Height="750" 
+        Width="1000"
         Background="#202020"
         WindowStartupLocation="CenterScreen">
     <Grid>

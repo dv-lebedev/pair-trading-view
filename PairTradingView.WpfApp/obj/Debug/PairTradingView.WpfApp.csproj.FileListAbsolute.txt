@@ -96,3 +96,4 @@ D:\Programming\GitHub\pair-trading-view\PairTradingView.WpfApp\obj\Debug\PairTra
 D:\Programming\GitHub\pair-trading-view\PairTradingView.WpfApp\obj\Debug\PairTradingView.WpfApp.csproj.CopyComplete
 D:\Programming\GitHub\pair-trading-view\PairTradingView.WpfApp\obj\Debug\PairTradingView.exe
 D:\Programming\GitHub\pair-trading-view\PairTradingView.WpfApp\obj\Debug\PairTradingView.pdb
+D:\Programming\GitHub\pair-trading-view\PairTradingView.WpfApp\obj\Debug\PairTradingView.WpfApp.csprojAssemblyReference.cache

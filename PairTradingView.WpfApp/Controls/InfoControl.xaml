@@ -139,7 +139,7 @@
 
         <TextBlock Grid.Column="1" 
                    Grid.Row="4" 
-                   Name="yTradeVolume"  
+                   Name="xTradeVolume"  
                    Foreground="LightGray"
                    HorizontalAlignment="Left" 
                    VerticalAlignment="Center" 
@@ -148,7 +148,7 @@
 
         <TextBlock Grid.Column="1" 
                    Grid.Row="5" 
-                   Name="xTradeVolume"  
+                   Name="yTradeVolume"  
                    Foreground="LightGray"
                    HorizontalAlignment="Left" 
                    VerticalAlignment="Center" 

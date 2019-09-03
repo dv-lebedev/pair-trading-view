@@ -25,7 +25,7 @@ namespace PairTradingView.Infrastructure
 {
     public class FinancialPair
     {
-        public string Name => $"{Y.Name} | {X.Name}";
+        public string Name => $"{Y.Name}|{X.Name}";
 
         public Stock X { get; }
         public Stock Y { get; }
