@@ -47,3 +47,15 @@ D:\Programming\GitHub\pair-trading-view\PairTradingView.UnitTests\obj\Debug\Pair
 D:\Programming\GitHub\pair-trading-view\PairTradingView.UnitTests\obj\Debug\PairTradingView.UnitTests.csproj.CopyComplete
 D:\Programming\GitHub\pair-trading-view\PairTradingView.UnitTests\obj\Debug\PairTradingView.UnitTests.dll
 D:\Programming\GitHub\pair-trading-view\PairTradingView.UnitTests\obj\Debug\PairTradingView.UnitTests.pdb
+C:\Stuff\Programming\pair-trading-view\PairTradingView.UnitTests\bin\Debug\PairTradingView.UnitTests.dll
+C:\Stuff\Programming\pair-trading-view\PairTradingView.UnitTests\bin\Debug\PairTradingView.UnitTests.pdb
+C:\Stuff\Programming\pair-trading-view\PairTradingView.UnitTests\bin\Debug\Microsoft.VisualStudio.QualityTools.UnitTestFramework.dll
+C:\Stuff\Programming\pair-trading-view\PairTradingView.UnitTests\bin\Debug\PairTradingView.Infrastructure.dll
+C:\Stuff\Programming\pair-trading-view\PairTradingView.UnitTests\bin\Debug\PairTradingView.Infrastructure.pdb
+C:\Stuff\Programming\pair-trading-view\PairTradingView.UnitTests\bin\Debug\Statistics.pdb
+C:\Stuff\Programming\pair-trading-view\PairTradingView.UnitTests\bin\Debug\ru\Microsoft.VisualStudio.QualityTools.UnitTestFramework.resources.dll
+C:\Stuff\Programming\pair-trading-view\PairTradingView.UnitTests\obj\Debug\PairTradingView.UnitTests.csprojAssemblyReference.cache
+C:\Stuff\Programming\pair-trading-view\PairTradingView.UnitTests\obj\Debug\PairTradingView.UnitTests.csproj.CoreCompileInputs.cache
+C:\Stuff\Programming\pair-trading-view\PairTradingView.UnitTests\obj\Debug\PairTradingView.UnitTests.csproj.CopyComplete
+C:\Stuff\Programming\pair-trading-view\PairTradingView.UnitTests\obj\Debug\PairTradingView.UnitTests.dll
+C:\Stuff\Programming\pair-trading-view\PairTradingView.UnitTests\obj\Debug\PairTradingView.UnitTests.pdb

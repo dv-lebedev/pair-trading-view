@@ -31,3 +31,11 @@ D:\Programming\GitHub\pair-trading-view\PairTradingView.Infrastructure\obj\Debug
 D:\Programming\GitHub\pair-trading-view\PairTradingView.Infrastructure\obj\Debug\PairTradingView.Infrastructure.csproj.CopyComplete
 D:\Programming\GitHub\pair-trading-view\PairTradingView.Infrastructure\obj\Debug\PairTradingView.Infrastructure.dll
 D:\Programming\GitHub\pair-trading-view\PairTradingView.Infrastructure\obj\Debug\PairTradingView.Infrastructure.pdb
+C:\Stuff\Programming\pair-trading-view\PairTradingView.Infrastructure\bin\Debug\PairTradingView.Infrastructure.dll
+C:\Stuff\Programming\pair-trading-view\PairTradingView.Infrastructure\bin\Debug\PairTradingView.Infrastructure.pdb
+C:\Stuff\Programming\pair-trading-view\PairTradingView.Infrastructure\bin\Debug\Statistics.pdb
+C:\Stuff\Programming\pair-trading-view\PairTradingView.Infrastructure\obj\Debug\PairTradingView.Infrastructure.csprojAssemblyReference.cache
+C:\Stuff\Programming\pair-trading-view\PairTradingView.Infrastructure\obj\Debug\PairTradingView.Infrastructure.csproj.CoreCompileInputs.cache
+C:\Stuff\Programming\pair-trading-view\PairTradingView.Infrastructure\obj\Debug\PairTradingView.Infrastructure.csproj.CopyComplete
+C:\Stuff\Programming\pair-trading-view\PairTradingView.Infrastructure\obj\Debug\PairTradingView.Infrastructure.dll
+C:\Stuff\Programming\pair-trading-view\PairTradingView.Infrastructure\obj\Debug\PairTradingView.Infrastructure.pdb

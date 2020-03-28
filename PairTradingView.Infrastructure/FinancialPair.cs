@@ -59,8 +59,8 @@ namespace PairTradingView.Infrastructure
 
         protected void SetValues()
         { 
-            double[] x = MathUtils.GetPercents(X.Prices);
-            double[] y = MathUtils.GetPercents(Y.Prices);
+            double[] x = X.Prices;
+            double[] y = Y.Prices;
 
             if (Regression.RValue >= 0)
             {

@@ -4,16 +4,16 @@
 winexe
 C#
 .cs
-D:\Programming\GitHub\pair-trading-view\PairTradingView.WpfApp\obj\Debug\
+C:\Stuff\Programming\pair-trading-view\PairTradingView.WpfApp\obj\Debug\
 PairTradingView.WpfApp
 none
 false
 DEBUG;TRACE
-D:\Programming\GitHub\pair-trading-view\PairTradingView.WpfApp\App.xaml
+C:\Stuff\Programming\pair-trading-view\PairTradingView.WpfApp\App.xaml
 5-36934292
 
 151099546733
-121-874486996
+121-427616488
 Controls\InfoControl.xaml;Controls\DataGridControl.xaml;FilesLoaderWindow.xaml;MainWindow.xaml;Controls\MyChartControl.xaml;
 
 False
