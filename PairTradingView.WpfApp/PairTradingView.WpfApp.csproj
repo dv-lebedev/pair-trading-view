@@ -161,7 +161,33 @@
     <Folder Include="Converters\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\PairTradingView.Infrastructure\PairTradingView.Shared.csproj">
+    <Content Include="csv-files\AFLT.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="csv-files\BANE.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="csv-files\GAZP.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="csv-files\LKOH.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="csv-files\ROSN.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="csv-files\SBER.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="csv-files\SBERP.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="csv-files\TATN.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\PairTradingView.Shared\PairTradingView.Shared.csproj">
       <Project>{962071e7-bb5e-4b39-8811-db0edd9ba7f4}</Project>
       <Name>PairTradingView.Shared</Name>
     </ProjectReference>

@@ -5,7 +5,7 @@ VisualStudioVersion = 17.6.33712.159
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PairTradingView.UnitTests", "PairTradingView.UnitTests\PairTradingView.UnitTests.csproj", "{33999229-05C3-4D79-9A42-A9B8F09FFEF8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PairTradingView.Shared", "PairTradingView.Infrastructure\PairTradingView.Shared.csproj", "{962071E7-BB5E-4B39-8811-DB0EDD9BA7F4}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PairTradingView.Shared", "PairTradingView.Shared\PairTradingView.Shared.csproj", "{962071E7-BB5E-4B39-8811-DB0EDD9BA7F4}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PairTradingView.WpfApp", "PairTradingView.WpfApp\PairTradingView.WpfApp.csproj", "{E6803127-23A2-4B09-9667-262AE2D326BD}"
 EndProject
