@@ -1,0 +1,10 @@
+20230730_125031.723
+System.IndexOutOfRangeException: Index was outside the bounds of the array.
+   at PairTradingView.Infrastructure.CsvUtils.Read(String path, Int32 priceIndex, Boolean containsHeader) in C:\Users\TheLebedevs\Source\Repos\pair-trading-view\PairTradingView.Infrastructure\CsvUtils.cs:line 68
+   at PairTradingView.Infrastructure.CsvUtils.ReadAllDataFrom(String directory, Int32 priceIndex, Boolean containsHeader) in C:\Users\TheLebedevs\Source\Repos\pair-trading-view\PairTradingView.Infrastructure\CsvUtils.cs:line 39
+   at PairTradingView.WpfApp.ViewModels.FilesLoaderViewModel.LoadDataFromFilesAction() in C:\Users\TheLebedevs\Source\Repos\pair-trading-view\PairTradingView.WpfApp\ViewModels\FilesLoaderViewModel.cs:line 87
+
+
+20230730_125039.058
+System.FormatException:  price = 0 in csv-files\AFLT.txt
+   at PairTradingView.Infrastructure.CsvUtils.Read(String path, Int32 priceIndex, Boolean containsHeader) in C:\Users\TheLebedevs\Source\Repos\pair-trading-view\PairTradingView.Infrastructure\

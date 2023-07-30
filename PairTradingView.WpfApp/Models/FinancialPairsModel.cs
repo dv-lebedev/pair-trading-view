@@ -1,4 +1,20 @@
-﻿using PairTradingView.Infrastructure;
+﻿/*
+Copyright(c) 2015-2023 Denis Lebedev
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+*/
+
+using PairTradingView.Infrastructure;
 using PairTradingView.WpfApp.Entities;
 using PairTradingView.WpfApp.Utils;
 using System;
@@ -44,6 +60,7 @@ namespace PairTradingView.WpfApp.Models
 
         public event EventHandler SelectedPairChanged;
         public event EventHandler SmaValueChanged;
+        public event EventHandler LoadNewDataRequested;
 
         public ObservableCollection<ExtFinancialPair> Pairs { get; }
 
@@ -61,6 +78,11 @@ namespace PairTradingView.WpfApp.Models
             var pair = SelectedPair;
             SelectedPair = null;
             SelectedPair = pair;
+        }
+
+        public void LoadNewData()
+        {
+            LoadNewDataRequested?.Invoke(this, EventArgs.Empty);
         }
 
         public void UpdateStocks(Stock[] stocks)
@@ -84,6 +106,7 @@ namespace PairTradingView.WpfApp.Models
             catch (Exception ex)
             {
                 Logger.Log.Err(ex);
+                UserNotification.Display(ex.Message);
             }
         }
 
@@ -103,42 +126,18 @@ namespace PairTradingView.WpfApp.Models
                         pair.Y.TradeVolume = 0;
                     }
 
-                    new RiskManager(checkedPairs.ToArray(), balance).Calculate();
-
-                    //infoControl.Update(SelectedPair);
+                    new RiskManager(checkedPairs, balance).Calculate();
                 }
                 else
                 {
-                    WindowHelpers.Display("Pairs are not selected.");
+                    UserNotification.Display("Pairs are not selected.");
                 }
             }
             catch (Exception ex)
             {
-                WindowHelpers.Display("CalculateRisk => " + ex.Message);
+                UserNotification.Display("CalculateRisk => " + ex.Message);
                 Logger.Log.Err(ex);
             }
-        }
-
-        private void UpdateInfoAndCharts()
-        {
-          /*  try
-            {
-                if (dataGridControl.dataGrid.SelectedItem is ExtFinancialPair extFinancialPair)
-                {
-                    SelectedPair = extFinancialPair;
-
-                    var SMAValue = infoControl.SMA.GetInt32();
-
-                    if (SMAValue < 0) SMAValue = 0;
-
-                    chartControl.Update(SelectedPair.DeltaValues, SelectedPair.Name, SMAValue);
-                    infoControl.Update(SelectedPair);
-                }
-            }
-            catch (Exception ex)
-            {
-                WindowHelpers.Display($"UpdateInfoAndCharts => {ex.Message}");
-            }*/
         }
     }
 }

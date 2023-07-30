@@ -1,6 +1,5 @@
-﻿
-/*
-Copyright(c) 2015-2019 Denis Lebedev
+﻿/*
+Copyright(c) 2015-2023 Denis Lebedev
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -21,21 +20,36 @@ using System.Windows.Controls;
 
 namespace PairTradingView.WpfApp.Utils
 {
-    public static class WindowHelpers
+    public static class UserNotification
     {
         public static void Display(string message)
         {
-            MessageBox.Show(message);
+            MessageBox.Show(message, App.Current?.MainWindow?.Title ?? string.Empty);
+        }
+
+        public static void Display(Exception ex)
+        {
+            MessageBox.Show(
+                ex.Message,
+                App.Current?.MainWindow?.Title ?? string.Empty,
+                MessageBoxButton.OK, 
+                MessageBoxImage.Error);
         }
 
         public static void Display(this UserControl control, string message)
         {
-            control.Dispatcher.BeginInvoke((Action)(() => { MessageBox.Show(message); }));
+            control.Dispatcher.BeginInvoke((Action)(() =>
+            {
+                MessageBox.Show(message, App.Current?.MainWindow?.Title ?? string.Empty);
+            }));
         }
 
         public static void Display(this Window control, string message)
         {
-            control.Dispatcher.BeginInvoke((Action)(() => { MessageBox.Show(message); }));
+            control.Dispatcher.BeginInvoke((Action)(() =>
+            { 
+                MessageBox.Show(message, App.Current?.MainWindow?.Title ?? string.Empty); 
+            }));
         }
     }
 }

@@ -5,20 +5,23 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:PairTradingView.WpfApp.Views" 
              xmlns:viewmodels="clr-namespace:PairTradingView.WpfApp.ViewModels"
-             xmlns:converters="clr-namespace:PairTradingView.WpfApp.Converters"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <UserControl.DataContext>
         <viewmodels:SelectedPairInfoViewModel/>
     </UserControl.DataContext>
-    <UserControl.Resources>
-        <ResourceDictionary>
-            <converters:RiskLimitConverter x:Key="RiskLimitConverter"/>
-        </ResourceDictionary>
-    </UserControl.Resources>
-    <Grid Name="grid" 
-          Background="#202020" 
-          Margin="2,9,10,9">
+    
+    <GroupBox
+        Margin="2,9,10,9" 
+        BorderThickness="0.5" 
+        BorderBrush="LightGray">
+        <GroupBox.Header>
+            <TextBlock Text="INFO" Foreground="White" FontWeight="Medium"/>
+        </GroupBox.Header>
+        
+        <Grid Name="grid" 
+              Background="#202020">
+            
         <Grid.Resources>
             <Style TargetType="TextBlock">
                 <Setter Property="Foreground" Value="LightGray"/>
@@ -39,25 +42,12 @@
             <RowDefinition />
             <RowDefinition Height="5*"/>
         </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="123*" />
-            <ColumnDefinition Width="157*" />
-        </Grid.ColumnDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="123*" />
+                <ColumnDefinition Width="157*" />
+            </Grid.ColumnDefinitions>
 
-        <Border BorderThickness="1" 
-                CornerRadius="0.5"
-                BorderBrush="DimGray" 
-                Grid.ColumnSpan="2" 
-                Grid.RowSpan="10"/>
-
-        <TextBlock Grid.Column="1" 
-                   Grid.Row="0"  
-                   Foreground="LightGray"
-                   Text="INFO" 
-                   HorizontalAlignment="Left" 
-                   FontWeight="Bold" Width="29"/>
-
-        <TextBlock Grid.Column="0" 
+            <TextBlock Grid.Column="0" 
                    Grid.Row="1"  
                    Foreground="LightGray"
                    Width="100"
@@ -148,7 +138,7 @@
 
         <TextBlock Grid.Column="1" 
                    Grid.Row="3" 
-                   Text="{Binding PairsTradeBalance}"
+                   Text="{Binding PairsTradeVolume}"
                    Foreground="LightGray"
                    HorizontalAlignment="Left" 
                    VerticalAlignment="Center" 
@@ -185,7 +175,7 @@
         <TextBox Grid.Column="1" 
                  Grid.Row="7" 
                  Background="#202020" 
-                 Text="{Binding Model.SmaValue}"
+                 Text="{Binding Model.SmaValue, UpdateSourceTrigger=PropertyChanged}"
                  HorizontalAlignment="Left" 
                  VerticalAlignment="Center" 
                  Height="20" 
@@ -199,11 +189,21 @@
 
         <Button Name="Calculate" 
                 Grid.Row="8" 
-                Grid.Column="1" 
-                MaxHeight="25"
-                Width="140"
-                HorizontalAlignment="Left"
-                Content="Get Risk Info"
+                Grid.ColumnSpan="2"
+                Height="23"
+                Margin="5, 0"
+                Content="Calculate"
                 Command="{Binding CalulateCommand}"/>
-    </Grid>
+
+            <Button     
+                Grid.Row="9"
+                Grid.ColumnSpan="2"
+                Height="23"
+                Margin="5, 0"
+                VerticalAlignment="Bottom"
+                Content="Csv Files"
+                Command="{Binding LoadNewDataCommand}"/>
+
+        </Grid>
+    </GroupBox>
 </UserControl>

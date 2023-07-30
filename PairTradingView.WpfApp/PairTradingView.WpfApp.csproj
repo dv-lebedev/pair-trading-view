@@ -68,18 +68,12 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Converters\RiskLimitConverter.cs" />
     <Compile Include="Entities\ExtFinancialPair.cs" />
-    <Compile Include="FilesLoaderWindow.xaml.cs">
-      <DependentUpon>FilesLoaderWindow.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Infra\RelayCommand.cs" />
     <Compile Include="Models\FinancialPairsModel.cs" />
     <Compile Include="Properties\Annotations.cs" />
-    <Compile Include="Utils\WindowHelpers.cs" />
+    <Compile Include="Utils\UserNotification.cs" />
     <Compile Include="ViewModels\ChartViewModel.cs" />
-    <Compile Include="ViewModels\ChartViewModel_OLD.cs" />
-    <Compile Include="Utils\TextBoxHelpers.cs" />
     <Compile Include="ViewModels\FilesLoaderViewModel.cs" />
     <Compile Include="ViewModels\GeneralTableViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
@@ -100,10 +94,6 @@
     <Compile Include="Views\SelectedPairInfoView.xaml.cs">
       <DependentUpon>SelectedPairInfoView.xaml</DependentUpon>
     </Compile>
-    <Page Include="FilesLoaderWindow.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -173,6 +163,9 @@
       <Project>{962071e7-bb5e-4b39-8811-db0edd9ba7f4}</Project>
       <Name>PairTradingView.Infrastructure</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Converters\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

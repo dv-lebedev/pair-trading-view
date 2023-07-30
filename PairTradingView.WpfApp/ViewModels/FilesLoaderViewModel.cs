@@ -17,15 +17,17 @@ limitations under the License.
 using PairTradingView.Infrastructure;
 using PairTradingView.WpfApp.Infra;
 using PairTradingView.WpfApp.Models;
+using PairTradingView.WpfApp.Utils;
 using System;
 using System.Linq;
-using System.Windows;
 using System.Windows.Input;
 
 namespace PairTradingView.WpfApp.ViewModels
 {
     public class FilesLoaderViewModel : ObservableObject
     {
+        private readonly FinancialPairsModel Model = FinancialPairsModel.Instance;
+
         private const string csvFilesDirectory = "csv-files";
         private Stock[] _stocks;
 
@@ -87,6 +89,7 @@ namespace PairTradingView.WpfApp.ViewModels
             catch (Exception ex)
             {
                 Logger.Log.Err(ex);
+                UserNotification.Display(ex);
             }
         }
 
@@ -94,15 +97,15 @@ namespace PairTradingView.WpfApp.ViewModels
         {
             if (Stocks == null || Stocks.Length == 0)
             {
-                MessageBox.Show("No input data.");
+                UserNotification.Display("No input data.");
             }
             else if (Stocks.Length == 1)
             {
-                MessageBox.Show("You should have 2 stocks minimum.");
+                UserNotification.Display("You should have 2 stocks minimum.");
             }
             else
             {
-                FinancialPairsModel.Instance.UpdateStocks(Stocks);
+                Model.UpdateStocks(Stocks);
             }
         }
     }

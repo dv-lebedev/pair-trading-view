@@ -18,9 +18,6 @@ using System.Windows.Controls;
 
 namespace PairTradingView.WpfApp.Views
 {
-    /// <summary>
-    /// Interaction logic for SelectedPairInfoView.xaml
-    /// </summary>
     public partial class SelectedPairInfoView : UserControl
     {
         public SelectedPairInfoView()

@@ -135,27 +135,23 @@ namespace PairTradingView.WpfApp.ViewModels
             }
         }
 
-    /*    public double SMA
-        {
-            get => _sma;
-
-            set
-            {
-                _sma = value;
-                OnPropertyChanged();
-            }
-        }*/
-
         public FinancialPairsModel Model { get; } = FinancialPairsModel.Instance;
 
         public ICommand CalulateCommand { get; }
+        public ICommand LoadNewDataCommand { get; }
 
         public SelectedPairInfoViewModel() 
         {
             CalulateCommand = new RelayCommand(x => CalulateCommandAction());
+            LoadNewDataCommand = new RelayCommand(x => LoadNewDataCommandAction());
             Balance = 100_000.00;
 
             Model.SelectedPairChanged += Instance_SelectedPairChanged;
+        }
+
+        private void LoadNewDataCommandAction()
+        {   
+            Model.LoadNewData();
         }
 
         private void Instance_SelectedPairChanged(object sender, EventArgs e)

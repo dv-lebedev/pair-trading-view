@@ -8,11 +8,28 @@
              mc:Ignorable="d" 
              Height="350" Width="450"
              MaxHeight="350" MaxWidth="450"
-             Background="White">
+             Background="#202020">
     <UserControl.DataContext>
         <vms:FilesLoaderViewModel/>
     </UserControl.DataContext>
     <Grid>
+        <Grid.Resources>
+            <Style TargetType="TextBlock">
+                <Setter Property="Foreground" Value="LightGray"/>
+            </Style>
+            <Style TargetType="TextBox">
+                <Setter Property="Foreground" Value="LightGray"/>
+            </Style>
+            <Style TargetType="Label">
+                <Setter Property="Foreground" Value="LightGray"/>
+            </Style>
+            <Style TargetType="CheckBox">
+                <Setter Property="Foreground" Value="LightGray"/>
+            </Style>
+            <Style TargetType="ComboBox">
+                <Setter Property="Foreground" Value="Black"/>
+            </Style>
+        </Grid.Resources>
         <Grid.RowDefinitions>
             <RowDefinition Height="7*"/>
             <RowDefinition Height="10*"/>
@@ -33,7 +50,13 @@
             <Label>'PRICE' column number</Label>
             <ComboBox ItemsSource="{Binding PriceColumnNumbers}"
                       SelectedItem="{Binding SelectedPriceColumnNumber}"
-                      Height="25"/>
+                      Height="25">
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding}" />
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+            </ComboBox>
 
         </StackPanel>
 
@@ -51,10 +74,12 @@
                FontWeight="Bold">| Loaded Files |</Label>
 
         <ListView Grid.Row="6" 
+                  Background="#202020"
+                  BorderBrush="LightGray"
                   ItemsSource="{Binding Stocks}">
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <TextBlock Text="{Binding Name}"/>
+                    <TextBlock Text="{Binding Name}" Foreground="White"/>
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>

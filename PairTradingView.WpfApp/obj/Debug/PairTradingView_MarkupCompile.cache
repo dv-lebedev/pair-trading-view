@@ -10,11 +10,11 @@ none
 false
 DEBUG;TRACE
 C:\Users\TheLebedevs\Source\Repos\pair-trading-view\PairTradingView.WpfApp\App.xaml
-7-1938913530
+6-1784535880
 
-251989622036
+21-1923285347
 121506470878
-FilesLoaderWindow.xaml;MainWindow.xaml;Views\ChartView.xaml;Views\FilesLoaderView.xaml;Views\GeneralTableView.xaml;Views\MainView.xaml;Views\SelectedPairInfoView.xaml;
+MainWindow.xaml;Views\ChartView.xaml;Views\FilesLoaderView.xaml;Views\GeneralTableView.xaml;Views\MainView.xaml;Views\SelectedPairInfoView.xaml;
 
 False
 
