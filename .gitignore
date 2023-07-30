@@ -249,7 +249,6 @@ revision.txt
 *.dll
 *.ods#
 /.vs/PairTradingView/v17/.suo
-/PairTradingView.Infrastructure/
 /PairTradingView.Shared/bin/Debug/
 /PairTradingView.WpfApp/bin/Debug/
 /PairTradingView.UnitTests/obj/Debug/
