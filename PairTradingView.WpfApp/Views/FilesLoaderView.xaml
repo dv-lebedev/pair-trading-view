@@ -48,9 +48,9 @@
         </Grid.RowDefinitions>
 
         <GroupBox
-            Grid.Row="0"
-            BorderBrush="LightGray"
-            BorderThickness="0.5">
+              Grid.Row="0"
+              BorderBrush="LightGray"
+              BorderThickness="0.5">
             <GroupBox.Header>
                 <TextBlock Text="Csv Import" FontWeight="Bold"/>
             </GroupBox.Header>
