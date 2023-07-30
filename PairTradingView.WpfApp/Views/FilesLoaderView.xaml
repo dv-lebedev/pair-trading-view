@@ -6,8 +6,8 @@
              xmlns:local="clr-namespace:PairTradingView.WpfApp.Views" 
              xmlns:vms="clr-namespace:PairTradingView.WpfApp.ViewModels"
              mc:Ignorable="d" 
-             Height="350" Width="450"
-             MaxHeight="350" MaxWidth="450"
+             Height="550" Width="450"
+             MaxHeight="550" MaxWidth="450"
              Background="#202020">
     <UserControl.DataContext>
         <vms:FilesLoaderViewModel/>
@@ -16,69 +16,106 @@
         <Grid.Resources>
             <Style TargetType="TextBlock">
                 <Setter Property="Foreground" Value="LightGray"/>
+                <Setter Property="VerticalAlignment" Value="Center"/>
+                <Setter Property="Margin" Value="5"/>
             </Style>
             <Style TargetType="TextBox">
                 <Setter Property="Foreground" Value="LightGray"/>
+                <Setter Property="VerticalAlignment" Value="Center"/>
+                <Setter Property="Margin" Value="5"/>
             </Style>
             <Style TargetType="Label">
                 <Setter Property="Foreground" Value="LightGray"/>
+                <Setter Property="VerticalAlignment" Value="Center"/>
+                <Setter Property="Margin" Value="5"/>
             </Style>
             <Style TargetType="CheckBox">
                 <Setter Property="Foreground" Value="LightGray"/>
+                <Setter Property="VerticalAlignment" Value="Center"/>
+                <Setter Property="Margin" Value="5"/>
             </Style>
             <Style TargetType="ComboBox">
                 <Setter Property="Foreground" Value="Black"/>
+                <Setter Property="VerticalAlignment" Value="Center"/>
+                <Setter Property="Margin" Value="5"/>
             </Style>
         </Grid.Resources>
         <Grid.RowDefinitions>
-            <RowDefinition Height="7*"/>
-            <RowDefinition Height="10*"/>
-            <RowDefinition Height="10*"/>
-            <RowDefinition Height="10*"/>
-            <RowDefinition Height="5*"/>
-            <RowDefinition Height="10*"/>
-            <RowDefinition Height="50*"/>
-            <RowDefinition Height="10*"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition />
+            <RowDefinition Height="auto"/>
         </Grid.RowDefinitions>
 
-        <TextBlock Grid.Row="0" 
-                   Name="textBlock1" 
-                   FontWeight="Bold">| CSV Files |</TextBlock>
+        <GroupBox
+            Grid.Row="0"
+            BorderBrush="LightGray"
+            BorderThickness="0.5">
+            <GroupBox.Header>
+                <TextBlock Text="Csv Import" FontWeight="Bold"/>
+            </GroupBox.Header>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
 
-        <StackPanel Grid.Row="1"
-                    Orientation="Horizontal">
-            <Label>'PRICE' column number</Label>
-            <ComboBox ItemsSource="{Binding PriceColumnNumbers}"
+                <TextBlock Grid.Row="0" Text="'PRICE' column number"/>
+                <TextBlock Grid.Row="1" Text="Contains header"/>
+                <TextBlock Grid.Row="2" Text="Separator"/>
+
+                <ComboBox ItemsSource="{Binding PriceColumnNumbers}"
                       SelectedItem="{Binding SelectedPriceColumnNumber}"
-                      Height="25">
-                <ComboBox.ItemTemplate>
-                    <DataTemplate>
-                        <TextBlock Text="{Binding}" />
-                    </DataTemplate>
-                </ComboBox.ItemTemplate>
-            </ComboBox>
+                      Height="25"
+                      Grid.Row="0"
+                      Grid.Column="1">
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding}" />
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                </ComboBox>
 
-        </StackPanel>
+                <CheckBox
+                    Grid.Row="1"
+                    Grid.Column="1"
+                    IsChecked="{Binding ContainsHeader}"
+                    FlowDirection="RightToLeft"
+                    HorizontalAlignment="Left"/>
 
+                <ComboBox 
+                    Grid.Row="2"
+                    Grid.Column="1"
+                    Height="25"
+                    ItemsSource="{Binding Separators}"
+                    SelectedItem="{Binding SelectedSeparator}">
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding}" />
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                </ComboBox>
 
-        <CheckBox
-            Grid.Row="2"
-            IsChecked="{Binding ContainsHeader}"
-            FlowDirection="RightToLeft"
-            HorizontalAlignment="Left">
-            <TextBlock Text="contains header" VerticalAlignment="Center" />
-        </CheckBox>
+            </Grid>
+        </GroupBox>
 
-        <Button Grid.Row="3" 
+        <Button Grid.Row="1" 
                 Name="LoadDataFromFiles" 
                 Height="25"
+                Margin="0,5"
                 Content="Load Data From Files" 
                 Command="{Binding LoadDataFromFilesCommand}"/>
 
-        <Label Grid.Row="5"
+        <Label Grid.Row="2"
                FontWeight="Bold">| Loaded Files |</Label>
 
-        <ListView Grid.Row="6" 
+        <ListView Grid.Row="3" 
                   Background="#202020"
                   BorderBrush="LightGray"
                   ItemsSource="{Binding Stocks}">
@@ -89,9 +126,10 @@
             </ListView.ItemTemplate>
         </ListView>
 
-        <Button Grid.Row="7" 
+        <Button Grid.Row="4" 
                 Name="CalculateButton" 
                 Height="25"
+                Margin="0,5"
                 Content="Calculate"
                 Command="{Binding CalculateButtonCommand}"/>
     </Grid>

@@ -19,6 +19,7 @@ using PairTradingView.WpfApp.Infra;
 using PairTradingView.WpfApp.Models;
 using PairTradingView.WpfApp.Utils;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Input;
 
@@ -30,6 +31,7 @@ namespace PairTradingView.WpfApp.ViewModels
 
         private const string csvFilesDirectory = "csv-files";
         private Stock[] _stocks;
+        private CsvSeparator _selectedSeparator;
 
         private int _selectedPriceColumnNumber = 4;
         private bool _containsHeader;
@@ -69,6 +71,19 @@ namespace PairTradingView.WpfApp.ViewModels
             }
         }
 
+        public ICollection<CsvSeparator> Separators { get; }
+
+        public CsvSeparator SelectedSeparator
+        {
+            get => _selectedSeparator;
+
+            set
+            {
+                _selectedSeparator = value;
+                OnPropertyChanged();
+            }
+        }
+
         public ICommand LoadDataFromFilesCommand { get; }
         public ICommand CalculateButtonCommand { get; }
 
@@ -76,6 +91,15 @@ namespace PairTradingView.WpfApp.ViewModels
         {
             LoadDataFromFilesCommand = new RelayCommand(x => LoadDataFromFilesAction());
             CalculateButtonCommand = new RelayCommand(x => CalculateButtonAction());
+
+            Separators = new List<CsvSeparator>
+            {
+                CsvSeparator.Comma,
+                CsvSeparator.Space,
+                CsvSeparator.Tab,
+            };
+
+            SelectedSeparator = Separators.FirstOrDefault();  
         }
 
         private void LoadDataFromFilesAction()
@@ -84,7 +108,11 @@ namespace PairTradingView.WpfApp.ViewModels
             {
                 int priceColumn = SelectedPriceColumnNumber;
                 bool header = ContainsHeader;
-                Stocks = CsvUtils.ReadAllDataFrom(csvFilesDirectory, priceColumn, header);
+
+                if (SelectedSeparator?.Value is char separator)
+                {
+                    Stocks = CsvUtils.ReadAllDataFrom(csvFilesDirectory, priceColumn, header, separator);
+                }
             }
             catch (Exception ex)
             {

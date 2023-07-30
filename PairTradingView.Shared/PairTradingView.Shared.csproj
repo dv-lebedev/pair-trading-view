@@ -43,6 +43,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CsvSeparator.cs" />
     <Compile Include="ObservableObject.cs" />
     <Compile Include="Check.cs" />
     <Compile Include="FinancialPair.cs" />

@@ -23,7 +23,7 @@ namespace PairTradingView.Shared
 {
     public static class CsvUtils
     {
-        public static Stock[] ReadAllDataFrom(string directory, int priceIndex, bool containsHeader)
+        public static Stock[] ReadAllDataFrom(string directory, int priceIndex, bool containsHeader, char separator = ',')
         {
             Check.NotNull(directory);
 
@@ -35,7 +35,7 @@ namespace PairTradingView.Shared
             {
                 if (file.EndsWith(".txt") || file.EndsWith(".csv"))
                 {
-                    Stock stock = Read(file, priceIndex, containsHeader);
+                    Stock stock = Read(file, priceIndex, containsHeader, separator);
 
                     stocks.Add(stock);
                 }
@@ -49,7 +49,7 @@ namespace PairTradingView.Shared
             return stocks.ToArray();
         }
 
-        public static Stock Read(string path, int priceIndex, bool containsHeader)
+        public static Stock Read(string path, int priceIndex, bool containsHeader, char separator = ',')
         {
             string[] lines = File.ReadAllLines(path);
 
@@ -59,7 +59,7 @@ namespace PairTradingView.Shared
 
             for (int i = startlineCount; i < lines.Length; i++)
             {
-                string[] cuts = lines[i].Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
+                string[] cuts = lines[i].Split(new[] { separator }, StringSplitOptions.RemoveEmptyEntries);
 
                 if (cuts.Length == 0)
                     throw new FormatException("Check csv files format.");
