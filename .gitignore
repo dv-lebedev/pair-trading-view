@@ -248,3 +248,17 @@ revision.txt
 /App/revision.txt
 *.dll
 *.ods#
+/.vs/PairTradingView/v17/.suo
+/PairTradingView.WpfApp/bin/Debug/PairTradingView.exe
+/PairTradingView.WpfApp/bin/Debug/PairTradingView.pdb
+/PairTradingView.WpfApp/bin/Debug/Statistics.dll
+/PairTradingView.WpfApp/bin/Debug/stock_lots.json
+/PairTradingView.UnitTests/obj/Debug/PairTradingView.UnitTests.csproj.AssemblyReference.cache
+/PairTradingView.WpfApp/obj/Debug/DesignTimeResolveAssemblyReferencesInput.cache
+/PairTradingView.WpfApp/obj/Debug/PairTradingView.exe
+/PairTradingView.WpfApp/obj/Debug/PairTradingView.pdb
+/PairTradingView.WpfApp/obj/Debug/PairTradingView.WpfApp.csproj.AssemblyReference.cache
+/PairTradingView.WpfApp/obj/Debug/PairTradingView.WpfApp.csproj.CoreCompileInputs.cache
+/PairTradingView.WpfApp/obj/Debug/PairTradingView.WpfApp.csproj.FileListAbsolute.txt
+/PairTradingView.WpfApp/obj/Debug/PairTradingView_MarkupCompile.cache
+/PairTradingView.WpfApp/obj/Debug/PairTradingView_MarkupCompile.i.cache
