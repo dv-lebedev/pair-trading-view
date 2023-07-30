@@ -56,9 +56,7 @@ y_tv = fp_tv * w
 
 
 ## Dependencies
-- Statistics https://github.com/dv-lebedev/statistics
-- YahooFinanceQuoteDownloader https://github.com/ovnisoftware/YahooFinanceQuoteDownloader
-- ZedGraph
+- OxyPloy
 
 
 ## License
