@@ -22,14 +22,15 @@
         <Grid Name="grid" 
               Background="#202020">
             
-        <Grid.Resources>
-            <Style TargetType="TextBlock">
-                <Setter Property="Foreground" Value="LightGray"/>
-            </Style>
-            <Style TargetType="TextBox">
-                <Setter Property="Foreground" Value="LightGray"/>
-            </Style>
-        </Grid.Resources>
+            <Grid.Resources>
+                <Style TargetType="TextBlock">
+                    <Setter Property="Foreground" Value="LightGray"/>
+                </Style>
+                <Style TargetType="TextBox">
+                    <Setter Property="Foreground" Value="Black"/>
+                    <Setter Property="Background" Value="LightGray"/>
+                </Style>
+            </Grid.Resources>
         <Grid.RowDefinitions>
             <RowDefinition />
             <RowDefinition />
