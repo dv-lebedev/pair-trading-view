@@ -3,15 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.6.33712.159
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PairTradingView.WinFormsApp", "PairTradingView.WinFormsApp\PairTradingView.WinFormsApp.csproj", "{C08ECBC5-7CEB-4250-A2ED-B95869A4E787}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PairTradingView.UnitTests", "PairTradingView.UnitTests\PairTradingView.UnitTests.csproj", "{33999229-05C3-4D79-9A42-A9B8F09FFEF8}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PairTradingView.Shared", "PairTradingView.Infrastructure\PairTradingView.Shared.csproj", "{962071E7-BB5E-4B39-8811-DB0EDD9BA7F4}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PairTradingView.WpfApp", "PairTradingView.WpfApp\PairTradingView.WpfApp.csproj", "{E6803127-23A2-4B09-9667-262AE2D326BD}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PairTradingView.ConsoleApp", "PairTradingView.ConsoleApp\PairTradingView.ConsoleApp.csproj", "{46C824FD-76F4-4FE9-BC48-F092ABB875E9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -19,10 +15,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{C08ECBC5-7CEB-4250-A2ED-B95869A4E787}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{C08ECBC5-7CEB-4250-A2ED-B95869A4E787}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{C08ECBC5-7CEB-4250-A2ED-B95869A4E787}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{C08ECBC5-7CEB-4250-A2ED-B95869A4E787}.Release|Any CPU.Build.0 = Release|Any CPU
 		{33999229-05C3-4D79-9A42-A9B8F09FFEF8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{33999229-05C3-4D79-9A42-A9B8F09FFEF8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{33999229-05C3-4D79-9A42-A9B8F09FFEF8}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -35,10 +27,6 @@ Global
 		{E6803127-23A2-4B09-9667-262AE2D326BD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E6803127-23A2-4B09-9667-262AE2D326BD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E6803127-23A2-4B09-9667-262AE2D326BD}.Release|Any CPU.Build.0 = Release|Any CPU
-		{46C824FD-76F4-4FE9-BC48-F092ABB875E9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{46C824FD-76F4-4FE9-BC48-F092ABB875E9}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{46C824FD-76F4-4FE9-BC48-F092ABB875E9}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{46C824FD-76F4-4FE9-BC48-F092ABB875E9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -14,8 +14,8 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-using Statistics;
-using Statistics.Models;
+using PairTradingView.Shared.Statistics;
+using PairTradingView.Shared.Statistics.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -53,7 +53,7 @@ namespace PairTradingView.Shared
         protected void SetRegression(double[] x, double[] y)
         {
             Regression = new LinearRegression();
-            Regression.Compute(y.ToDecimal(), x.ToDecimal());
+            Regression.Compute(y, x);
         }
 
         protected void SetValues()
@@ -63,11 +63,11 @@ namespace PairTradingView.Shared
 
             if (Regression.RValue >= 0)
             {
-                DeltaValues = x.Zip(y, (i, j) => j - i * Regression.Beta.ToDouble()).ToArray();
+                DeltaValues = x.Zip(y, (i, j) => j - i * Regression.Beta).ToArray();
             }
             else
             {
-                DeltaValues = x.Zip(y, (i, j) => j + i * Regression.Beta.ToDouble()).ToArray();
+                DeltaValues = x.Zip(y, (i, j) => j + i * Regression.Beta).ToArray();
             }
         }
 

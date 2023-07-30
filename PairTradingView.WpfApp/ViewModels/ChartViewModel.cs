@@ -1,5 +1,5 @@
 ﻿/*
-Copyright(c) 2015-2023 Denis Lebedev
+Copyright(c) 2023 Denis Lebedev
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -21,6 +21,7 @@ using PairTradingView.WpfApp.Models;
 using PairTradingView.WpfApp.Entities;
 using System;
 using PairTradingView.Shared;
+using PairTradingView.Shared.Statistics;
 
 namespace PairTradingView.WpfApp.ViewModels
 {

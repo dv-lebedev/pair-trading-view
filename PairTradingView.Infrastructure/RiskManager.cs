@@ -14,8 +14,7 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-using Statistics;
-using Statistics.Models;
+using PairTradingView.Shared.Statistics.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -76,9 +75,9 @@ namespace PairTradingView.Shared
             foreach (var pair in pairs)
             {
                 var regression = new LinearRegression();
-                regression.Compute(pair.DeltaValues.ToDecimal(), synthIndex.ToDecimal());
+                regression.Compute(pair.DeltaValues, synthIndex);
 
-                pair.Weight = 1 / (1 + Math.Abs(regression.Beta.ToDouble()));
+                pair.Weight = 1 / (1 + Math.Abs(regression.Beta));
 
                 summary += pair.Weight;
             }
@@ -91,7 +90,7 @@ namespace PairTradingView.Shared
 
             foreach (var pair in pairs)
             {
-                double beta = pair.Regression.Beta.ToDouble();
+                double beta = pair.Regression.Beta;
                 double weight = 1.0 / (1.0 + Math.Abs(beta));
 
                 pair.X.TradeVolume = pair.TradeVolume * (weight * Math.Abs(beta));

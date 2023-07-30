@@ -14,15 +14,14 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-using System.Windows.Controls;
-
-namespace PairTradingView.WpfApp.Views
+namespace PairTradingView.Shared.Statistics
 {
-    public partial class SelectedPairInfoView : UserControl
+    public interface IRegressionMethod
     {
-        public SelectedPairInfoView()
-        {
-            InitializeComponent();
-        }
+        double[] Coefs { get; }
+        double[] RSquaredValues { get; }
+        double[] RValues { get; }
+
+        void Compute(double[] y, params double[][] xn);
     }
 }

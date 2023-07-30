@@ -1,5 +1,5 @@
 ﻿/*
-Copyright(c) 2015-2023 Denis Lebedev
+Copyright(c) 2023 Denis Lebedev
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -15,6 +15,7 @@ limitations under the License.
 */
 
 using PairTradingView.Shared;
+using PairTradingView.Shared.Statistics;
 using System.Linq;
 
 namespace PairTradingView.WpfApp.Entities

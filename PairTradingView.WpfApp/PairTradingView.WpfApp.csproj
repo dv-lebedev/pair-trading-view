@@ -47,7 +47,6 @@
       <HintPath>..\packages\OxyPlot.Wpf.1.0.0\lib\net45\OxyPlot.Wpf.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Statistics, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />

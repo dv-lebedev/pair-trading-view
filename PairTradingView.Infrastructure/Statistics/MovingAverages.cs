@@ -16,7 +16,7 @@ limitations under the License.
 
 using System;
 
-namespace PairTradingView.Shared
+namespace PairTradingView.Shared.Statistics
 {
     public static class MovingAverages
     {

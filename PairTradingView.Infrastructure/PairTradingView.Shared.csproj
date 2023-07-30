@@ -33,9 +33,6 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Statistics">
-      <HintPath>..\..\statistics\Statistics\bin\Debug\Statistics.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -51,8 +48,18 @@
     <Compile Include="FinancialPair.cs" />
     <Compile Include="ILogger.cs" />
     <Compile Include="Logger.cs" />
-    <Compile Include="MathUtils.cs" />
-    <Compile Include="MovingAverages.cs" />
+    <Compile Include="Statistics\DifferentLengthException.cs" />
+    <Compile Include="Statistics\IRegression.cs" />
+    <Compile Include="Statistics\IRegressionMethod.cs" />
+    <Compile Include="Statistics\MathUtils.cs" />
+    <Compile Include="Statistics\Matrix.cs" />
+    <Compile Include="Statistics\Methods\BasicRegression.cs" />
+    <Compile Include="Statistics\Methods\OrdinaryLeastSquares.cs" />
+    <Compile Include="Statistics\Models\AutoRegression.cs" />
+    <Compile Include="Statistics\Models\LinearRegression.cs" />
+    <Compile Include="Statistics\Models\LogitRegression.cs" />
+    <Compile Include="Statistics\Models\MultipleLinearRegression.cs" />
+    <Compile Include="Statistics\MovingAverages.cs" />
     <Compile Include="RiskManager.cs" />
     <Compile Include="Stock.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -1,6 +1,5 @@
-﻿
-/*
-Copyright(c) 2015-2017 Denis Lebedev
+﻿/*
+Copyright(c) 2023 Denis Lebedev
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -16,9 +15,8 @@ limitations under the License.
 */
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using PairTradingView.Infrastructure;
-using Statistics;
-using Statistics.Models;
+using PairTradingView.Shared;
+using PairTradingView.Shared.Statistics.Models;
 using System.Linq;
 
 namespace PairTradingView.UnitTests
@@ -70,10 +68,10 @@ namespace PairTradingView.UnitTests
 
         public void CheckRegression(LinearRegression lr)
         {
-            Assert.AreEqual(86.7434, lr.Alpha.ToDouble(), 0.001);
-            Assert.AreEqual(0.0189, lr.Beta.ToDouble(), 0.001);
-            Assert.AreEqual(0.4164, lr.RValue.ToDouble(), 0.001);
-            Assert.AreEqual(0.1734, lr.RSquared.ToDouble(), 0.001);
+            Assert.AreEqual(86.7434, lr.Alpha, 0.001);
+            Assert.AreEqual(0.0189, lr.Beta, 0.001);
+            Assert.AreEqual(0.4164, lr.RValue, 0.001);
+            Assert.AreEqual(0.1734, lr.RSquared, 0.001);
         }
     }
 }
