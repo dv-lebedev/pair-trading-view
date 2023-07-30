@@ -6,8 +6,8 @@
              xmlns:local="clr-namespace:PairTradingView.WpfApp.Views" 
              xmlns:vms="clr-namespace:PairTradingView.WpfApp.ViewModels"
              mc:Ignorable="d" 
-             Height="550" Width="450"
-             MaxHeight="550" MaxWidth="450"
+             Width="450"
+        
              Background="#202020">
     <UserControl.DataContext>
         <vms:FilesLoaderViewModel/>
