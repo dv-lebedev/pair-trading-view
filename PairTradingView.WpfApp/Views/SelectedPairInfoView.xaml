@@ -110,7 +110,6 @@
 
         <TextBox Grid.Column="1" 
                  Grid.Row="1" 
-                 Background="#202020"
                  Width="100" 
                  HorizontalAlignment="Left"
                  MaxHeight="20" 
@@ -125,7 +124,6 @@
 
         <TextBox Grid.Column="1" 
                  Grid.Row="2"  
-                 Background="#202020"
                  Width="100" 
                  HorizontalAlignment="Left" 
                  MaxHeight="20" 
