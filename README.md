@@ -20,6 +20,7 @@ Execute PairTradingView.exe in 'pair-trading-view\PairTradingView.WpfApp\bin\Deb
 
 Set 'Price' column. Put csv files with a historical data into
 'pair-trading-view\PairTradingView.WpfApp\bin\Debug\csv-files' folder.
+Press 'Load Data From File'.
 Press 'Calculate'.
 
 
