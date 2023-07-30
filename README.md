@@ -19,12 +19,11 @@ Execute PairTradingView.exe in 'pair-trading-view\PairTradingView.WpfApp\bin\Deb
 </p>
 
 Set 'Price' column. Put csv files with a historical data into
-'pair-trading-view\PairTradingView.WpfApp\bin\Debug\csv-files' folder. Download csv files if you need by QuoteDownloader.
-Press start.
+'pair-trading-view\PairTradingView.WpfApp\bin\Debug\csv-files' folder.
+Press 'Calculate'.
 
 
 ## Model
-- prices are converted into percentages
 - SI -> synthetic index
 - s -> share
 - fp -> financial pair
