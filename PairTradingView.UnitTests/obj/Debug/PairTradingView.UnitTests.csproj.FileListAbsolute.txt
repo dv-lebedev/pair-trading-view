@@ -59,13 +59,5 @@ C:\Stuff\Programming\pair-trading-view\PairTradingView.UnitTests\obj\Debug\PairT
 C:\Stuff\Programming\pair-trading-view\PairTradingView.UnitTests\obj\Debug\PairTradingView.UnitTests.csproj.CopyComplete
 C:\Stuff\Programming\pair-trading-view\PairTradingView.UnitTests\obj\Debug\PairTradingView.UnitTests.dll
 C:\Stuff\Programming\pair-trading-view\PairTradingView.UnitTests\obj\Debug\PairTradingView.UnitTests.pdb
-C:\Users\TheLebedevs\Source\Repos\pair-trading-view\PairTradingView.UnitTests\obj\Debug\PairTradingView.UnitTests.csproj.AssemblyReference.cache
-C:\Users\TheLebedevs\Source\Repos\pair-trading-view\PairTradingView.UnitTests\obj\Debug\PairTradingView.UnitTests.csproj.CoreCompileInputs.cache
-C:\Users\TheLebedevs\Source\Repos\pair-trading-view\PairTradingView.UnitTests\bin\Debug\PairTradingView.UnitTests.dll
-C:\Users\TheLebedevs\Source\Repos\pair-trading-view\PairTradingView.UnitTests\bin\Debug\PairTradingView.UnitTests.pdb
-C:\Users\TheLebedevs\Source\Repos\pair-trading-view\PairTradingView.UnitTests\bin\Debug\Microsoft.VisualStudio.QualityTools.UnitTestFramework.dll
-C:\Users\TheLebedevs\Source\Repos\pair-trading-view\PairTradingView.UnitTests\bin\Debug\PairTradingView.Infrastructure.dll
-C:\Users\TheLebedevs\Source\Repos\pair-trading-view\PairTradingView.UnitTests\bin\Debug\PairTradingView.Infrastructure.pdb
-C:\Users\TheLebedevs\Source\Repos\pair-trading-view\PairTradingView.UnitTests\obj\Debug\PairTradingView.UnitTests.csproj.CopyComplete
-C:\Users\TheLebedevs\Source\Repos\pair-trading-view\PairTradingView.UnitTests\obj\Debug\PairTradingView.UnitTests.dll
-C:\Users\TheLebedevs\Source\Repos\pair-trading-view\PairTradingView.UnitTests\obj\Debug\PairTradingView.UnitTests.pdb
+C:\Users\TheLebedevs\source\repos\pair-trading-view\PairTradingView.UnitTests\obj\Debug\PairTradingView.UnitTests.csproj.AssemblyReference.cache
+C:\Users\TheLebedevs\source\repos\pair-trading-view\PairTradingView.UnitTests\obj\Debug\PairTradingView.UnitTests.csproj.CoreCompileInputs.cache

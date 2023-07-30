@@ -173,7 +173,6 @@
 
         <TextBox Grid.Column="1" 
                  Grid.Row="7" 
-                 Background="#202020" 
                  Text="{Binding Model.SmaValue, UpdateSourceTrigger=PropertyChanged}"
                  HorizontalAlignment="Left" 
                  VerticalAlignment="Center" 

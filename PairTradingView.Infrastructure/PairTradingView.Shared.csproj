@@ -7,8 +7,8 @@
     <ProjectGuid>{962071E7-BB5E-4B39-8811-DB0EDD9BA7F4}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>PairTradingView.Infrastructure</RootNamespace>
-    <AssemblyName>PairTradingView.Infrastructure</AssemblyName>
+    <RootNamespace>PairTradingView.Shared</RootNamespace>
+    <AssemblyName>PairTradingView.Shared</AssemblyName>
     <TargetFrameworkVersion>v4.8.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />

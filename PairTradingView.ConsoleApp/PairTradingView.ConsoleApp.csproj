@@ -51,9 +51,9 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\PairTradingView.Infrastructure\PairTradingView.Infrastructure.csproj">
+    <ProjectReference Include="..\PairTradingView.Infrastructure\PairTradingView.Shared.csproj">
       <Project>{962071E7-BB5E-4B39-8811-DB0EDD9BA7F4}</Project>
-      <Name>PairTradingView.Infrastructure</Name>
+      <Name>PairTradingView.Shared</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -4,17 +4,17 @@
 winexe
 C#
 .cs
-C:\Users\TheLebedevs\Source\Repos\pair-trading-view\PairTradingView.WpfApp\obj\Debug\
+C:\Users\TheLebedevs\source\repos\pair-trading-view\PairTradingView.WpfApp\obj\Debug\
 PairTradingView.WpfApp
 none
 false
 DEBUG;TRACE
-C:\Users\TheLebedevs\Source\Repos\pair-trading-view\PairTradingView.WpfApp\App.xaml
+C:\Users\TheLebedevs\source\repos\pair-trading-view\PairTradingView.WpfApp\App.xaml
 6-1784535880
 
 22340601623
-121506470878
+1211651117828
 MainWindow.xaml;Views\ChartView.xaml;Views\FilesLoaderView.xaml;Views\GeneralTableView.xaml;Views\MainView.xaml;Views\SelectedPairInfoView.xaml;
 
-False
+True
 

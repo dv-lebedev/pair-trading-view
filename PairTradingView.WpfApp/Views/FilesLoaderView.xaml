@@ -60,9 +60,14 @@
 
         </StackPanel>
 
-        <CheckBox Grid.Row="2"
-                  IsChecked="{Binding ContainsHeader}"
-                  Content="contains header"/>
+
+        <CheckBox
+            Grid.Row="2"
+            IsChecked="{Binding ContainsHeader}"
+            FlowDirection="RightToLeft"
+            HorizontalAlignment="Left">
+            <TextBlock Text="contains header" VerticalAlignment="Center" />
+        </CheckBox>
 
         <Button Grid.Row="3" 
                 Name="LoadDataFromFiles" 

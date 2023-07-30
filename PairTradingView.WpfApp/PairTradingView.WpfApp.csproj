@@ -159,13 +159,13 @@
     <Resource Include="main.ico" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\PairTradingView.Infrastructure\PairTradingView.Infrastructure.csproj">
-      <Project>{962071e7-bb5e-4b39-8811-db0edd9ba7f4}</Project>
-      <Name>PairTradingView.Infrastructure</Name>
-    </ProjectReference>
+    <Folder Include="Converters\" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Converters\" />
+    <ProjectReference Include="..\PairTradingView.Infrastructure\PairTradingView.Shared.csproj">
+      <Project>{962071e7-bb5e-4b39-8811-db0edd9ba7f4}</Project>
+      <Name>PairTradingView.Shared</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

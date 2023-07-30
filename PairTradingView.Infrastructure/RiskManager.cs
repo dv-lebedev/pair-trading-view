@@ -1,6 +1,5 @@
-﻿
-/*
-Copyright(c) 2015-2019 Denis Lebedev
+﻿/*
+Copyright(c) 2023 Denis Lebedev
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -21,7 +20,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace PairTradingView.Infrastructure
+namespace PairTradingView.Shared
 {
     public class RiskManager
     {

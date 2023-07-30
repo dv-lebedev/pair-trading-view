@@ -16,11 +16,11 @@ limitations under the License.
 
 using OxyPlot.Axes;
 using OxyPlot;
-using PairTradingView.Infrastructure;
 using OxyPlot.Series;
 using PairTradingView.WpfApp.Models;
 using PairTradingView.WpfApp.Entities;
 using System;
+using PairTradingView.Shared;
 
 namespace PairTradingView.WpfApp.ViewModels
 {

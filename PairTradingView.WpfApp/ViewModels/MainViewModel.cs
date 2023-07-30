@@ -14,7 +14,8 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-using PairTradingView.Infrastructure;
+
+using PairTradingView.Shared;
 
 namespace PairTradingView.WpfApp.ViewModels
 {
