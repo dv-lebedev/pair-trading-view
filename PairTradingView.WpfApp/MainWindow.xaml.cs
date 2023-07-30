@@ -15,23 +15,15 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-using PairTradingView.Infrastructure;
-using PairTradingView.WpfApp.Logic;
 using System.Windows;
 
 namespace PairTradingView.WpfApp
 {
     public partial class MainWindow : Window
     {
-        private readonly LogicMediator logicMediator;
-
-        public MainWindow(Stock[] stocks)
+        public MainWindow()
         {
             InitializeComponent();
-
-            logicMediator = new LogicMediator(
-                stocks, dataGridControl,
-                infoControl, chartControl);
         }
     }
 }

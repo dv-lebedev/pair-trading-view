@@ -9,7 +9,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>PairTradingView.Infrastructure</RootNamespace>
     <AssemblyName>PairTradingView.Infrastructure</AssemblyName>
-    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.8.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
   </PropertyGroup>
@@ -46,8 +46,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ObservableObject.cs" />
     <Compile Include="Check.cs" />
     <Compile Include="FinancialPair.cs" />
+    <Compile Include="ILogger.cs" />
+    <Compile Include="Logger.cs" />
     <Compile Include="MathUtils.cs" />
     <Compile Include="MovingAverages.cs" />
     <Compile Include="RiskManager.cs" />

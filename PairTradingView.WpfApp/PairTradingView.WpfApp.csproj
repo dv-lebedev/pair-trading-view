@@ -9,7 +9,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>PairTradingView.WpfApp</RootNamespace>
     <AssemblyName>PairTradingView</AssemblyName>
-    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.8.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <WarningLevel>4</WarningLevel>
@@ -68,32 +68,38 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Controls\InfoControl.xaml.cs">
-      <DependentUpon>InfoControl.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\DataGridControl.xaml.cs">
-      <DependentUpon>DataGridControl.xaml</DependentUpon>
-    </Compile>
+    <Compile Include="Converters\RiskLimitConverter.cs" />
     <Compile Include="Entities\ExtFinancialPair.cs" />
     <Compile Include="FilesLoaderWindow.xaml.cs">
       <DependentUpon>FilesLoaderWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Logic\LogicMediator.cs" />
-    <Compile Include="Controls\MyChartControl.xaml.cs">
-      <DependentUpon>MyChartControl.xaml</DependentUpon>
-    </Compile>
+    <Compile Include="Infra\RelayCommand.cs" />
+    <Compile Include="Models\FinancialPairsModel.cs" />
     <Compile Include="Properties\Annotations.cs" />
     <Compile Include="Utils\WindowHelpers.cs" />
     <Compile Include="ViewModels\ChartViewModel.cs" />
+    <Compile Include="ViewModels\ChartViewModel_OLD.cs" />
     <Compile Include="Utils\TextBoxHelpers.cs" />
-    <Page Include="Controls\InfoControl.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Controls\DataGridControl.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
+    <Compile Include="ViewModels\FilesLoaderViewModel.cs" />
+    <Compile Include="ViewModels\GeneralTableViewModel.cs" />
+    <Compile Include="ViewModels\MainViewModel.cs" />
+    <Compile Include="ViewModels\MainWindowViewModel.cs" />
+    <Compile Include="ViewModels\SelectedPairInfoViewModel.cs" />
+    <Compile Include="Views\ChartView.xaml.cs">
+      <DependentUpon>ChartView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\FilesLoaderView.xaml.cs">
+      <DependentUpon>FilesLoaderView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\GeneralTableView.xaml.cs">
+      <DependentUpon>GeneralTableView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\MainView.xaml.cs">
+      <DependentUpon>MainView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SelectedPairInfoView.xaml.cs">
+      <DependentUpon>SelectedPairInfoView.xaml</DependentUpon>
+    </Compile>
     <Page Include="FilesLoaderWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -110,7 +116,23 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="Controls\MyChartControl.xaml">
+    <Page Include="Views\ChartView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\FilesLoaderView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\GeneralTableView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\MainView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\SelectedPairInfoView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -144,13 +166,13 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="main.ico" />
+  </ItemGroup>
+  <ItemGroup>
     <ProjectReference Include="..\PairTradingView.Infrastructure\PairTradingView.Infrastructure.csproj">
       <Project>{962071e7-bb5e-4b39-8811-db0edd9ba7f4}</Project>
       <Name>PairTradingView.Infrastructure</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="main.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

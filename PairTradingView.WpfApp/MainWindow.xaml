@@ -3,37 +3,20 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:PairTradingView.WpfApp"
+        xmlns:local="clr-namespace:PairTradingView.WpfApp" 
+        xmlns:viewmodels="clr-namespace:PairTradingView.WpfApp.ViewModels"
         mc:Ignorable="d"
         Title="Pair Trading View"
         Height="750" 
         Width="1000"
         Background="#202020"
         WindowStartupLocation="CenterScreen">
+    <Window.DataContext>
+        <viewmodels:MainWindowViewModel/>
+    </Window.DataContext>
     <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="186*"/>
-            <RowDefinition Height="133*"/>
-        </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="344*"/>
-            <ColumnDefinition Width="173*"/>
-        </Grid.ColumnDefinitions>
 
-        <local:MyChartControl x:Name="chartControl"
-                              Grid.Column="0"
-                              Grid.Row="0"/>
-
-        <local:InfoControl x:Name="infoControl"
-                            Grid.Column="1"
-                            Grid.Row="0"/>
-
-        <local:DataGridControl x:Name="dataGridControl"
-                               Background="DimGray"
-                               Foreground="LightGray"
-                               Grid.Column="0"
-                               Grid.ColumnSpan="2"
-                               Grid.Row="1"/>
+        <ContentControl Content="{Binding CurrentView}"/>
 
     </Grid>
 </Window>

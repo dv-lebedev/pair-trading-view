@@ -9,7 +9,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>PairTradingView</RootNamespace>
     <AssemblyName>PairTradingView</AssemblyName>
-    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
     <PublishUrl>опубликовать\</PublishUrl>
@@ -53,9 +53,6 @@
     <ApplicationIcon>main.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="PairTradingView.Infrastructure">
-      <HintPath>..\PairTradingView.Infrastructure\bin\Debug\PairTradingView.Infrastructure.dll</HintPath>
-    </Reference>
     <Reference Include="Statistics, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\statistics\Statistics\bin\Debug\Statistics.dll</HintPath>
@@ -158,6 +155,12 @@
       <ProductName>.NET Framework 3.5 SP1</ProductName>
       <Install>false</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\PairTradingView.Infrastructure\PairTradingView.Infrastructure.csproj">
+      <Project>{962071e7-bb5e-4b39-8811-db0edd9ba7f4}</Project>
+      <Name>PairTradingView.Infrastructure</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -9,7 +9,7 @@
         d:DesignWidth="450"
         MaxHeight="350" 
         MaxWidth="450">
-    <Grid Background="#eeeeee" Margin="10">
+    <Grid Background="#eeeeee">
         <Grid.RowDefinitions>
             <RowDefinition Height="7*"/>
             <RowDefinition Height="10*"/>

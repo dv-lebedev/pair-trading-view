@@ -64,9 +64,9 @@ namespace PairTradingView.WpfApp
             }
             else
             {
-                Visibility = Visibility.Hidden;
+               /* Visibility = Visibility.Hidden;
                 new MainWindow(stocks).Show();
-                Close();
+                Close();*/
             }   
         }
     }

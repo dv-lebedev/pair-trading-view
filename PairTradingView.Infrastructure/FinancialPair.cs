@@ -64,11 +64,11 @@ namespace PairTradingView.Infrastructure
 
             if (Regression.RValue >= 0)
             {
-                DeltaValues = x.Zip(y, (i, j) => j  - i * Regression.Beta.ToDouble()).ToArray();
+                DeltaValues = x.Zip(y, (i, j) => j - i * Regression.Beta.ToDouble()).ToArray();
             }
             else
             {
-                DeltaValues = x.Zip(y, (i, j) => j  + i * Regression.Beta.ToDouble()).ToArray();
+                DeltaValues = x.Zip(y, (i, j) => j + i * Regression.Beta.ToDouble()).ToArray();
             }
         }
 

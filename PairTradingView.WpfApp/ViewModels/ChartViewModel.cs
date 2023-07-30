@@ -1,6 +1,5 @@
-﻿
-/*
-Copyright(c) 2015-2019 Denis Lebedev
+﻿/*
+Copyright(c) 2015-2023 Denis Lebedev
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -15,28 +14,54 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-using OxyPlot;
 using OxyPlot.Axes;
-using OxyPlot.Series;
-using OxyPlotDemo.Annotations;
+using OxyPlot;
 using PairTradingView.Infrastructure;
-using System.ComponentModel;
+using OxyPlot.Series;
+using PairTradingView.WpfApp.Models;
+using PairTradingView.WpfApp.Entities;
+using System;
 
-namespace PairTradingView.WpfApp
+namespace PairTradingView.WpfApp.ViewModels
 {
-    public class ChartViewModel : INotifyPropertyChanged
+    public class ChartViewModel : ObservableObject
     {
-        private PlotModel plotModel;
+        private PlotModel _plotModel;
         public PlotModel PlotModel
         {
-            get { return plotModel; }
-            set { plotModel = value; OnPropertyChanged("PlotModel"); }
+            get => _plotModel;
+
+            set 
+            {
+                _plotModel = value; 
+                OnPropertyChanged(); 
+            }
         }
+
+        private readonly FinancialPairsModel Model = FinancialPairsModel.Instance;
 
         public ChartViewModel()
         {
             PlotModel = new PlotModel();
             SetUpModel();
+
+            Model.PairsChanged += (s, e) =>
+            {
+                PlotModel = new PlotModel();
+                SetUpModel();
+            };
+
+            Model.SelectedPairChanged += UpdatePlot;
+
+            Model.SmaValueChanged += UpdatePlot;
+        }
+
+        private void UpdatePlot(object sender, EventArgs e)
+        {
+            if (Model.SelectedPair is ExtFinancialPair pair)
+            {
+                Update(pair.DeltaValues, pair.Name, Model.SmaValue);
+            }
         }
 
         private void SetUpModel()
@@ -56,7 +81,7 @@ namespace PairTradingView.WpfApp
                 IsZoomEnabled = false,
                 IsPanEnabled = false,
                 MajorGridlineStyle = LineStyle.Solid,
-                MinorGridlineStyle = LineStyle.Dot,          
+                MinorGridlineStyle = LineStyle.Dot,
                 TicklineColor = OxyColors.DimGray,
                 AxislineColor = OxyColors.DimGray,
                 ExtraGridlineColor = OxyColors.DimGray,
@@ -66,7 +91,7 @@ namespace PairTradingView.WpfApp
                 TextColor = OxyColors.LightGray,
                 TitleColor = OxyColors.LightGray,
                 Title = "Δ"
-            };  
+            };
             PlotModel.Axes.Add(xAxis);
 
             var yAxis = new LinearAxis()
@@ -75,7 +100,7 @@ namespace PairTradingView.WpfApp
                 IsZoomEnabled = false,
                 IsPanEnabled = false,
                 MajorGridlineStyle = LineStyle.Solid,
-                MinorGridlineStyle = LineStyle.Dot,      
+                MinorGridlineStyle = LineStyle.Dot,
                 TickStyle = TickStyle.None,
                 TextColor = OxyColors.LightGray,
                 TitleColor = OxyColors.LightGray,
@@ -98,6 +123,8 @@ namespace PairTradingView.WpfApp
                 var SMAValues = MovingAverages.SMA(values, SMAPeriod);
                 AddLineSerie("SMA", OxyColor.Parse("#FF0000"), SMAValues, SMAPeriod);
             }
+
+            PlotModel.InvalidatePlot(true);
         }
 
         private void AddLineSerie(string title, OxyColor color, double[] values, int offset = 0)
@@ -111,7 +138,7 @@ namespace PairTradingView.WpfApp
                 CanTrackerInterpolatePoints = false,
                 Color = color,
                 Title = title,
-                
+
                 Smooth = false
             };
 
@@ -121,14 +148,6 @@ namespace PairTradingView.WpfApp
             }
 
             PlotModel.Series.Add(lineSerie);
-        }
-
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        [NotifyPropertyChangedInvocator]
-        protected virtual void OnPropertyChanged(string propertyName)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 }

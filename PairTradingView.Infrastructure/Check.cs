@@ -31,5 +31,18 @@ namespace PairTradingView.Infrastructure
                 }
             }
         }
+
+        public static void ThrowIfNullOrEmpty(string value, string propertyName)
+        {
+            if (value == null)
+            {
+                throw new ArgumentNullException(nameof(propertyName));
+            }
+
+            if (value == string.Empty)
+            {
+                throw new ArgumentException(nameof(propertyName));
+            }
+        }
     }
 }
