@@ -68,8 +68,10 @@ namespace PairTradingView.Shared.Statistics
         {
             if (copy)
             {
+                Check.NotNull(matrix);
+
                 this.matrix = Create(matrix.Length, matrix[0].Length);
-                
+
                 Array.Copy(matrix, this.matrix, matrix.Length);
             }
             else
@@ -98,6 +100,8 @@ namespace PairTradingView.Shared.Statistics
 
         public bool AreEqual(Matrix matrix, double epsilon)
         {
+            Check.NotNull(matrix);
+
             if (this.Rows != matrix.Rows || this.Columns != matrix.Columns)
                 return false;
 
@@ -122,7 +126,9 @@ namespace PairTradingView.Shared.Statistics
                 mx[row] = new double[Rows];
 
                 for (int col = 0; col < Rows; col++)
+                {
                     mx[row][col] = MathUtils.MultiplyArrays(GetRow(row), GetRow(col));
+                }
             }
 
             return new Matrix(mx);
@@ -135,7 +141,9 @@ namespace PairTradingView.Shared.Statistics
             for (int i = 0; i < matrix.Length; i++)
             {
                 for (int j = 0; j < matrix.Length; j++)
+                {
                     mx[i] = MathUtils.MultiplyArrays(matrix[i], y);
+                }
             }
 
             return mx;
@@ -146,7 +154,9 @@ namespace PairTradingView.Shared.Statistics
             int vectorRows = vector.Length;
 
             if (Columns != vectorRows)
+            {
                 throw new ArgumentException("Columns != vectorRows", "vectror");
+            }
 
             double[] result = new double[Rows];
 
@@ -172,6 +182,7 @@ namespace PairTradingView.Shared.Statistics
                     result[i][j] = matrix[i][j];
                 }
             }
+
             return new Matrix(result);
         }
 
@@ -180,6 +191,7 @@ namespace PairTradingView.Shared.Statistics
             int n = matrix.Length;
 
             double[] result = new double[n];
+
             b.CopyTo(result, 0);
 
             for (int i = 1; i < n; i++)
@@ -190,6 +202,7 @@ namespace PairTradingView.Shared.Statistics
                 {
                     sum -= matrix[i][j] * result[j];
                 }
+
                 result[i] = sum;
             }
 
@@ -212,7 +225,6 @@ namespace PairTradingView.Shared.Statistics
 
         public Matrix Decompose(out int[] perm, out int toggle)
         {
-
             int rows = matrix.Length;
             int cols = matrix[0].Length;
 
@@ -280,10 +292,13 @@ namespace PairTradingView.Shared.Statistics
 
             int[] perm;
             int toggle;
+
             double[][] decomposedM = Decompose(out perm, out toggle).GetArray;
 
             if (decomposedM == null)
+            {
                 throw new Exception("Unable to compute inverse.");
+            }
 
             double[] b = new double[n];
 
@@ -291,8 +306,14 @@ namespace PairTradingView.Shared.Statistics
             {
                 for (int j = 0; j < n; j++)
                 {
-                    if (i == perm[j]) b[j] = 1.0;
-                    else b[j] = 0.0;
+                    if (i == perm[j])
+                    {
+                        b[j] = 1.0;
+                    }
+                    else
+                    {
+                        b[j] = 0.0;
+                    }
                 }
 
                 double[] x = new Matrix(decomposedM).HelperSolve(b);
@@ -302,6 +323,7 @@ namespace PairTradingView.Shared.Statistics
                     result[j][i] = x[j];
                 }
             }
+
             return new Matrix(result);
         }
     }
