@@ -35,11 +35,12 @@ namespace PairTradingView.Shared.Statistics
 
         public static double MultiplyArrays(double[] x, double[] y)
         {
-            if (x == null) throw new ArgumentNullException("x");
-            if (y == null) throw new ArgumentNullException("y");
+            Check.NotNull(x, y);
 
             if (x.Length != y.Length)
+            {
                 throw new DifferentLengthException();
+            }
 
             double result = 0;
 
@@ -58,7 +59,7 @@ namespace PairTradingView.Shared.Statistics
 
         public static double Pow(double[] values, double power)
         {
-            if (values == null) throw new ArgumentNullException("values");
+            Check.NotNull(values);
 
             double result = 0;
 
@@ -72,7 +73,7 @@ namespace PairTradingView.Shared.Statistics
 
         public static double GetStandardDeviation(double[] values)
         {
-            if (values == null) throw new ArgumentNullException("values");
+            Check.NotNull(values);
 
             double result = 0;
 
@@ -87,8 +88,12 @@ namespace PairTradingView.Shared.Statistics
 
         public static double[] GetPercents(double[] prices)
         {
-            if (prices == null) throw new ArgumentNullException(nameof(prices));
-            if (prices.Length == 0) throw new ArgumentException(nameof(prices));
+            Check.NotNull(prices);
+
+            if (prices.Length == 0)
+            {
+                throw new ArgumentException(nameof(prices));
+            }
 
             double[] result = new double[prices.Length - 1];
             double first = prices[0];
