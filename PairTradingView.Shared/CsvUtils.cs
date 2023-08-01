@@ -41,7 +41,7 @@ namespace PairTradingView.Shared
                 }
             }
 
-            if(stocks.Count == 0)
+            if (stocks.Count == 0)
             {
                 throw new Exception("Files are not found.");
             }
@@ -70,6 +70,7 @@ namespace PairTradingView.Shared
                 {
                     throw new FormatException($" price = {price} in {path}");
                 }
+
                 result.Add(price);
             }
 

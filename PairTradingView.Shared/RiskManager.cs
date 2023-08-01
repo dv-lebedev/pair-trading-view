@@ -23,8 +23,8 @@ namespace PairTradingView.Shared
 {
     public class RiskManager
     {
-        private FinancialPair[] pairs;
-        private double[] synthIndex;
+        private FinancialPair[] _pairs;
+        private double[] _synthIndex;
 
         public double Balance { get; }
 
@@ -34,7 +34,7 @@ namespace PairTradingView.Shared
 
             if (balance < 0) throw new ArgumentException("[balance] can't have negative value.");
 
-            this.pairs = pairs.ToArray();
+            _pairs = pairs.ToArray();
             Balance = balance;
 
             SetTradeVolumeToDefault();
@@ -43,7 +43,7 @@ namespace PairTradingView.Shared
 
         private void SetTradeVolumeToDefault()
         {
-            foreach (var pair in pairs)
+            foreach (var pair in _pairs)
             {
                 pair.TradeVolume = 0;
                 pair.X.TradeVolume = 0;
@@ -53,18 +53,18 @@ namespace PairTradingView.Shared
 
         private void SetSynthIndex()
         {
-            synthIndex = new double[pairs.First().DeltaValues.Length];
+            _synthIndex = new double[_pairs.First().DeltaValues.Length];
 
-            for (int i = 0; i < pairs.First().DeltaValues.Length; i++)
+            for (int i = 0; i < _pairs.First().DeltaValues.Length; i++)
             {
                 double value = 0;
 
-                for (int j = 0; j < pairs.Length; j++)
+                for (int j = 0; j < _pairs.Length; j++)
                 {
-                    value += pairs[j].DeltaValues[i];
+                    value += _pairs[j].DeltaValues[i];
                 }
 
-                synthIndex[i] += (value / pairs.Length);
+                _synthIndex[i] += (value / _pairs.Length);
             }
         }
 
@@ -72,23 +72,23 @@ namespace PairTradingView.Shared
         {
             double summary = 0;
 
-            foreach (var pair in pairs)
+            foreach (var pair in _pairs)
             {
                 var regression = new LinearRegression();
-                regression.Compute(pair.DeltaValues, synthIndex);
+                regression.Compute(pair.DeltaValues, _synthIndex);
 
                 pair.Weight = 1 / (1 + Math.Abs(regression.Beta));
 
                 summary += pair.Weight;
             }
 
-            foreach (var pair in pairs)
+            foreach (var pair in _pairs)
             {
                 pair.Weight = pair.Weight / summary;
                 pair.TradeVolume = Balance * pair.Weight;
             }
 
-            foreach (var pair in pairs)
+            foreach (var pair in _pairs)
             {
                 double beta = pair.Regression.Beta;
                 double weight = 1.0 / (1.0 + Math.Abs(beta));

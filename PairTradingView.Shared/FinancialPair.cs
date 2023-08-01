@@ -25,14 +25,10 @@ namespace PairTradingView.Shared
     public class FinancialPair
     {
         public string Name => $"{Y.Name} | {X.Name}";
-
         public Stock X { get; }
         public Stock Y { get; }
-
         public LinearRegression Regression { get; set; }
-
         public double[] DeltaValues { get; protected set; }
-
         public double TradeVolume { get; set; }
         public double Weight { get; set; }
 

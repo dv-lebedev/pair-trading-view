@@ -34,6 +34,7 @@ namespace PairTradingView.Shared.Statistics
                 {
                     result[i] += values[j];
                 }
+
                 result[i] /= period;
             }
 
@@ -55,10 +56,14 @@ namespace PairTradingView.Shared.Statistics
                 for (int j = i; j < i + period; j++)
                 {
                     result[i] += values[j] * ++weight;
+
                     weightSumm += weight;
                 }
+
                 result[i] /= weightSumm;
+
                 weight = 0;
+
                 weightSumm = 0;
             }
 
@@ -81,9 +86,12 @@ namespace PairTradingView.Shared.Statistics
                 for (int j = i; j < i + period; j++)
                 {
                     volumeSumm += volumes[j];
+
                     result[i] += values[j] * volumes[j];
                 }
+
                 result[i] /= volumeSumm;
+
                 volumeSumm = 0;
             }
 

@@ -21,16 +21,16 @@ namespace PairTradingView.Shared.Statistics.Methods
 {
     public class BasicRegression : IRegressionMethod
     {
-        private double b0;
-        private double b1;
-        private double rValue;
-        private double rSquared;
+        private double _b0;
+        private double _b1;
+        private double _rValue;
+        private double _rSquared;
 
         public double[] Coefs
         {
             get
             {
-                return new double[] { b0, b1 };
+                return new double[] { _b0, _b1 };
             }
         }
 
@@ -38,7 +38,7 @@ namespace PairTradingView.Shared.Statistics.Methods
         {
             get
             {
-                return new double[] { rSquared };
+                return new double[] { _rSquared };
             }
         }
 
@@ -46,7 +46,7 @@ namespace PairTradingView.Shared.Statistics.Methods
         {
             get
             {
-                return new double[] { rValue };
+                return new double[] { _rValue };
             }
         }
 
@@ -65,10 +65,10 @@ namespace PairTradingView.Shared.Statistics.Methods
             double sx2 = MathUtils.Pow(x, 2) / N - Math.Pow(xAverage, 2);
             double xy = MathUtils.MultiplyArrays(x, y);
             double covariation = xy / N - xAverage * yAverage;
-            b1 = covariation / sx2;
-            b0 = yAverage - b1 * xAverage;
-            rValue = b1 * (MathUtils.GetStandardDeviation(x) / MathUtils.GetStandardDeviation(y));
-            rSquared = Math.Pow(rValue, 2);
+            _b1 = covariation / sx2;
+            _b0 = yAverage - _b1 * xAverage;
+            _rValue = _b1 * (MathUtils.GetStandardDeviation(x) / MathUtils.GetStandardDeviation(y));
+            _rSquared = Math.Pow(_rValue, 2);
         }
     }
 }

@@ -14,11 +14,16 @@
     limitations under the License.
 */
 
+using PairTradingView.Shared;
 using System.Windows;
 
 namespace PairTradingView.WpfApp
 {
     public partial class App : Application
     {
+        private void Application_Exit(object sender, ExitEventArgs e)
+        {
+            Logger.Log.Dispose();
+        }
     }
 }

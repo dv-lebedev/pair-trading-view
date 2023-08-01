@@ -22,7 +22,6 @@ namespace PairTradingView.Shared.Statistics.Models
 {
     public class LogitRegression : IRegression
     {
-
         public IRegressionMethod RegressionMethod { get; set; }
 
         public double[] Coefs

@@ -34,7 +34,6 @@ namespace PairTradingView.WpfApp.ViewModels
         private double _risk;
         private double _riskLimit;
         private double _balance;
-        private double _sma;
 
         public string PairName
         {

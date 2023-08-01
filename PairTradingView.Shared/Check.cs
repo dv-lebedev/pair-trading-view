@@ -22,7 +22,7 @@ namespace PairTradingView.Shared
     {
         public static void NotNull(params object[] items)
         {
-            foreach(var item in items)
+            foreach (var item in items)
             {
                 if (item == null)
                 {

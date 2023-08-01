@@ -20,13 +20,13 @@ namespace PairTradingView.Shared.Statistics
 {
     public class Matrix
     {
-        private double[][] matrix;
+        private double[][] _matrix;
 
         public int Rows
         {
             get
             {
-                return matrix.Length;
+                return _matrix.Length;
             }
         }
 
@@ -34,7 +34,7 @@ namespace PairTradingView.Shared.Statistics
         {
             get
             {
-                return matrix[0].Length;
+                return _matrix[0].Length;
             }
         }
 
@@ -42,26 +42,26 @@ namespace PairTradingView.Shared.Statistics
         {
             get
             {
-                return matrix[row][column];
+                return _matrix[row][column];
             }
         }
 
         public double[] GetRow(int row)
         {
-            return matrix[row];
+            return _matrix[row];
         }
 
         public double[][] GetArray
         {
             get
             {
-                return matrix;
+                return _matrix;
             }
         }
 
         public Matrix(int rows, int columns)
         {
-            this.matrix = Create(rows, columns);
+            this._matrix = Create(rows, columns);
         }
 
         public Matrix(double[][] matrix, bool copy = false)
@@ -70,13 +70,13 @@ namespace PairTradingView.Shared.Statistics
             {
                 Check.NotNull(matrix);
 
-                this.matrix = Create(matrix.Length, matrix[0].Length);
+                this._matrix = Create(matrix.Length, matrix[0].Length);
 
-                Array.Copy(matrix, this.matrix, matrix.Length);
+                Array.Copy(matrix, this._matrix, matrix.Length);
             }
             else
             {
-                this.matrix = matrix;
+                this._matrix = matrix;
             }
         }
 
@@ -136,13 +136,13 @@ namespace PairTradingView.Shared.Statistics
 
         public double[] GetVector(double[] y)
         {
-            double[] mx = new double[matrix.Length];
+            double[] mx = new double[_matrix.Length];
 
-            for (int i = 0; i < matrix.Length; i++)
+            for (int i = 0; i < _matrix.Length; i++)
             {
-                for (int j = 0; j < matrix.Length; j++)
+                for (int j = 0; j < _matrix.Length; j++)
                 {
-                    mx[i] = MathUtils.MultiplyArrays(matrix[i], y);
+                    mx[i] = MathUtils.MultiplyArrays(_matrix[i], y);
                 }
             }
 
@@ -164,7 +164,7 @@ namespace PairTradingView.Shared.Statistics
             {
                 for (int j = 0; j < Columns; j++)
                 {
-                    result[i] += matrix[i][j] * vector[j];
+                    result[i] += _matrix[i][j] * vector[j];
                 }
             }
 
@@ -173,13 +173,13 @@ namespace PairTradingView.Shared.Statistics
 
         public Matrix Duplicate()
         {
-            double[][] result = Create(matrix.Length, matrix[0].Length);
+            double[][] result = Create(_matrix.Length, _matrix[0].Length);
 
-            for (int i = 0; i < matrix.Length; ++i)
+            for (int i = 0; i < _matrix.Length; ++i)
             {
-                for (int j = 0; j < matrix[i].Length; ++j)
+                for (int j = 0; j < _matrix[i].Length; ++j)
                 {
-                    result[i][j] = matrix[i][j];
+                    result[i][j] = _matrix[i][j];
                 }
             }
 
@@ -188,7 +188,7 @@ namespace PairTradingView.Shared.Statistics
 
         public double[] HelperSolve(double[] b)
         {
-            int n = matrix.Length;
+            int n = _matrix.Length;
 
             double[] result = new double[n];
 
@@ -200,13 +200,13 @@ namespace PairTradingView.Shared.Statistics
 
                 for (int j = 0; j < i; j++)
                 {
-                    sum -= matrix[i][j] * result[j];
+                    sum -= _matrix[i][j] * result[j];
                 }
 
                 result[i] = sum;
             }
 
-            result[n - 1] /= matrix[n - 1][n - 1];
+            result[n - 1] /= _matrix[n - 1][n - 1];
 
             for (int i = n - 2; i >= 0; i--)
             {
@@ -214,10 +214,10 @@ namespace PairTradingView.Shared.Statistics
 
                 for (int j = i + 1; j < n; j++)
                 {
-                    sum -= matrix[i][j] * result[j];
+                    sum -= _matrix[i][j] * result[j];
                 }
 
-                result[i] = sum / matrix[i][i];
+                result[i] = sum / _matrix[i][i];
             }
 
             return result;
@@ -225,8 +225,8 @@ namespace PairTradingView.Shared.Statistics
 
         public Matrix Decompose(out int[] perm, out int toggle)
         {
-            int rows = matrix.Length;
-            int cols = matrix[0].Length;
+            int rows = _matrix.Length;
+            int cols = _matrix[0].Length;
 
             if (rows != cols)
                 throw new Exception("Attempt to MatrixDecompose a non-square mattrix");
@@ -287,7 +287,7 @@ namespace PairTradingView.Shared.Statistics
 
         public Matrix Inverse()
         {
-            int n = matrix.Length;
+            int n = _matrix.Length;
             double[][] result = Duplicate().GetArray;
 
             int[] perm;

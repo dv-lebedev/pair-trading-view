@@ -22,21 +22,21 @@ namespace PairTradingView.Shared
 {
     public class Logger : IDisposable, ILogger
     {
-        private const string LOG_FILE = "PairTradingView.log.txt";
-        private const string DT_FMT = "yyyyMMdd_HHmmss.fff";
+        private const string LogFile = "PairTradingView.log.txt";
+        private const string DateTimeFormat = "yyyyMMdd_HHmmss.fff";
 
         private readonly StreamWriter _sw;
 
         public static readonly ILogger Log = new Logger();
 
-        Logger()
+        private Logger()
         {
-            _sw = new StreamWriter(LOG_FILE, true);
+            _sw = new StreamWriter(LogFile, true);
         }
 
         public void Msg(string message)
         {
-            _sw.WriteLine(DateTime.Now.ToString(DT_FMT));
+            _sw.WriteLine(DateTime.Now.ToString(DateTimeFormat));
             _sw.WriteLine(message);
             _sw.WriteLine(Environment.NewLine);
         }

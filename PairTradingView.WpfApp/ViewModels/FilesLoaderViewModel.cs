@@ -27,9 +27,10 @@ namespace PairTradingView.WpfApp.ViewModels
 {
     public class FilesLoaderViewModel : ObservableObject
     {
+        private const string CsvFilesDirectory = "csv-files";
+
         private readonly FinancialPairsModel Model = FinancialPairsModel.Instance;
 
-        private const string csvFilesDirectory = "csv-files";
         private Stock[] _stocks;
         private CsvSeparator _selectedSeparator;
 
@@ -111,7 +112,7 @@ namespace PairTradingView.WpfApp.ViewModels
 
                 if (SelectedSeparator?.Value is char separator)
                 {
-                    Stocks = CsvUtils.ReadAllDataFrom(csvFilesDirectory, priceColumn, header, separator);
+                    Stocks = CsvUtils.ReadAllDataFrom(CsvFilesDirectory, priceColumn, header, separator);
                 }
             }
             catch (Exception ex)
