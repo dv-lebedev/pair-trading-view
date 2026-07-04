@@ -14,32 +14,37 @@
     limitations under the License.
 */
 
-using Microsoft.Extensions.DependencyInjection;
 using PairTradingView.Shared;
 using PairTradingView.WpfApp.Infra;
-using System.Windows;
 
-namespace PairTradingView.WpfApp
+namespace PairTradingView.WpfApp;
+
+internal class Program
 {
-    public partial class App : Application
+    [STAThread]
+    public static void Main(string[] args)
     {
-        public static IServiceProvider? Services { get; private set; }
+        SetupLogging();
+        RunTheApp();
+    }
 
-        public App()
-        {
-            BuildServices();
-        }
+    private static void SetupLogging()
+    {
+    }
 
-        private static void BuildServices()
-        {
-            var sc = new ServiceCollection();
-            sc.AddAsOneServices();
-            Services = sc.BuildServiceProvider();
-        }
+    private static void RunTheApp()
+    {
+        Logger.Log.Msg("Starting WPF application...");
 
-        private void Application_Exit(object sender, ExitEventArgs e)
+        var thread = new Thread(() =>
         {
-            Logger.Log.Dispose();
-        }
+            var app = new App();
+            app.InitializeComponent();
+            app.Run();
+        })
+        {
+            Name = "UI Thread"
+        };
+        thread.RunSTA(inSync: true);
     }
 }
