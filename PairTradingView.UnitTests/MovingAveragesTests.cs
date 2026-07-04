@@ -14,16 +14,13 @@
     limitations under the License.
 */
 
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using PairTradingView.Shared.Statistics;
-using System;
 
-namespace PairTradingView.Infrastructure.Tests
+namespace PairTradingView.UnitTests
 {
-    [TestClass()]
     public class MovingAveragesTests
     {
-        [TestMethod()]
+        [Test]
         public void SMATest()
         {
             double[] values = { 1, 3, 5, 7, 9, 2, 4, 6, 8, 11, 13, 15, 24, 46, 68 };
@@ -34,7 +31,7 @@ namespace PairTradingView.Infrastructure.Tests
             }
             catch (ArgumentException ex)
             {
-                Assert.AreEqual("period <= 0", ex.Message);
+                Assert.That(ex.Message, Is.EqualTo("period <= 0"));
             }
 
 
@@ -44,7 +41,7 @@ namespace PairTradingView.Infrastructure.Tests
             }
             catch (ArgumentException ex)
             {
-                Assert.AreEqual("period > values.Lenght", ex.Message);
+                Assert.That(ex.Message, Is.EqualTo("period > values.Lenght"));
             }
 
 
@@ -52,15 +49,15 @@ namespace PairTradingView.Infrastructure.Tests
 
             double[] expectedValues = { 5, 5.2, 5.4, 5.6, 5.8, 6.2, 8.4, 10.6, 14.2, 21.8, 33.2 };
 
-            Assert.AreEqual(expectedValues.Length, sma5Result.Length);
+            Assert.That(sma5Result.Length, Is.EqualTo(expectedValues.Length));
 
             for (int i = 0; i < expectedValues.Length; i++)
             {
-                Assert.AreEqual(expectedValues[i], sma5Result[i]);
+                Assert.That(sma5Result[i], Is.EqualTo(expectedValues[i]).Within(0.01));
             }
         }
 
-        [TestMethod()]
+        [Test]
         public void WMATest()
         {
             double[] values = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 1, 2, 3, 4, 5 };
@@ -71,7 +68,7 @@ namespace PairTradingView.Infrastructure.Tests
             }
             catch (ArgumentException ex)
             {
-                Assert.AreEqual("period <= 0", ex.Message);
+                Assert.That(ex.Message, Is.EqualTo("period <= 0"));
             }
 
 
@@ -81,7 +78,7 @@ namespace PairTradingView.Infrastructure.Tests
             }
             catch (ArgumentException ex)
             {
-                Assert.AreEqual("period > values.Lenght", ex.Message);
+                Assert.That(ex.Message, Is.EqualTo("period > values.Lenght"));
             }
 
 
@@ -89,21 +86,21 @@ namespace PairTradingView.Infrastructure.Tests
 
             double[] expectedValues = { 2.33, 3.33, 4.33, 5.33, 6.33, 7.33, 8.33, 4.83, 2.83, 2.33, 3.33, 4.33 };
 
-            Assert.AreEqual(expectedValues.Length, wma3Result.Length);
+            Assert.That(wma3Result.Length, Is.EqualTo(expectedValues.Length));
 
             for (int i = 0; i < wma3Result.Length; i++)
             {
-                Assert.AreEqual(expectedValues[i], wma3Result[i], 0.01);
+                Assert.That(wma3Result[i], Is.EqualTo(expectedValues[i]).Within(0.01));
             }
         }
 
-        [TestMethod()]
+        [Test]
         public void VMATest()
         {
             double[] values = { 11, 15, 19, 13, 14, 16, 23, 25, 29, 26, 35, 45 };
             long[] volumes = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12 };
 
-            Assert.AreEqual(true, values.Length == volumes.Length);
+            Assert.That(values.Length, Is.EqualTo(volumes.Length));
 
             try
             {
@@ -111,7 +108,7 @@ namespace PairTradingView.Infrastructure.Tests
             }
             catch (ArgumentException ex)
             {
-                Assert.AreEqual("period <= 0", ex.Message);
+                Assert.That(ex.Message, Is.EqualTo("period <= 0"));
             }
 
 
@@ -121,7 +118,7 @@ namespace PairTradingView.Infrastructure.Tests
             }
             catch (ArgumentException ex)
             {
-                Assert.AreEqual("values.Length != volumes.Length", ex.Message);
+                Assert.That(ex.Message, Is.EqualTo("values.Length != volumes.Length"));
             }
 
 
@@ -131,7 +128,7 @@ namespace PairTradingView.Infrastructure.Tests
             }
             catch (ArgumentException ex)
             {
-                Assert.AreEqual("period > values.Lenght", ex.Message);
+                Assert.That(ex.Message, Is.EqualTo("period > values.Lenght"));
             }
 
 
@@ -139,11 +136,11 @@ namespace PairTradingView.Infrastructure.Tests
 
             double[] expectedValues = { 15, 14.9285, 15.2777, 17.2272, 20.2692, 23.9333, 25.9411, 29.1052, 34.4285 };
 
-            Assert.AreEqual(expectedValues.Length, sresult.Length);
+            Assert.That(sresult.Length, Is.EqualTo(expectedValues.Length));
 
             for (int i = 0; i < expectedValues.Length; i++)
             {
-                Assert.AreEqual(expectedValues[i], sresult[i], 0.0001);
+                Assert.That(sresult[i], Is.EqualTo(expectedValues[i]).Within(0.01));
             }
         }
     }

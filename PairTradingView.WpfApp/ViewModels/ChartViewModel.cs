@@ -67,12 +67,12 @@ namespace PairTradingView.WpfApp.ViewModels
 
         private void SetUpModel()
         {
-            PlotModel.LegendTitle = "";
-            PlotModel.LegendOrientation = LegendOrientation.Horizontal;
-            PlotModel.LegendPlacement = LegendPlacement.Outside;
-            PlotModel.LegendPosition = LegendPosition.TopLeft;
-            PlotModel.LegendBackground = OxyColor.FromAColor(200, OxyColors.White);
-            PlotModel.LegendBorder = OxyColors.White;
+            //PlotModel.LegendTitle = "";
+            //PlotModel.LegendOrientation = LegendOrientation.Horizontal;
+            //PlotModel.LegendPlacement = LegendPlacement.Outside;
+            //PlotModel.LegendPosition = LegendPosition.TopLeft;
+            //PlotModel.LegendBackground = OxyColor.FromAColor(200, OxyColors.White);
+            //PlotModel.LegendBorder = OxyColors.White;
             PlotModel.PlotAreaBorderColor = OxyColors.Transparent;
 
             var xAxis = new LinearAxis()
@@ -140,7 +140,7 @@ namespace PairTradingView.WpfApp.ViewModels
                 Color = color,
                 Title = title,
 
-                Smooth = false
+                //Smooth = false
             };
 
             for (int i = 0; i < values.Length; i++)

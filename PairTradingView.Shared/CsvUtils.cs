@@ -14,10 +14,7 @@
     limitations under the License.
 */
 
-using System;
-using System.Collections.Generic;
 using System.Globalization;
-using System.IO;
 
 namespace PairTradingView.Shared
 {
@@ -29,7 +26,7 @@ namespace PairTradingView.Shared
 
             if (priceIndex < 0) throw new ArgumentException("[priceIndex] can't be less than 0.");
 
-            List<Stock> stocks = new List<Stock>();
+            var stocks = new List<Stock>();
 
             foreach (string file in Directory.EnumerateFiles(directory))
             {
@@ -53,7 +50,7 @@ namespace PairTradingView.Shared
         {
             string[] lines = File.ReadAllLines(path);
 
-            List<double> result = new List<double>();
+            var result = new List<double>();
 
             int startlineCount = containsHeader ? 1 : 0;
 

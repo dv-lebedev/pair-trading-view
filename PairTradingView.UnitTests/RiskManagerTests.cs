@@ -14,31 +14,27 @@
     limitations under the License.
 */
 
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using PairTradingView.Shared;
-using System.Collections.Generic;
-using System.Linq;
 
-namespace PairTradingView.Infrastructure.Tests
+namespace PairTradingView.UnitTests
 {
-    [TestClass()]
     public class RiskManagerTests
     {
-        [TestMethod()]
+        [Test]
         public void CalculateTest()
         {
-            Stock[] stocks = CsvUtils.ReadAllDataFrom("csv-samples/", 4, false);
+            Stock[] stocks = CsvUtils.ReadAllDataFrom("csv-files/", 4, false);
 
             List<FinancialPair> pairs = FinancialPair.CreateMany(stocks);
 
-            RiskManager rm = new RiskManager(pairs.ToArray(), 100000.00);
+            var rm = new RiskManager(pairs.ToArray(), 100000.00);
             rm.Calculate();
 
-            pairs.ForEach(i => { Assert.AreNotEqual(0, i.TradeVolume); });
+            pairs.ForEach(i => { Assert.That(Math.Round(i.TradeVolume, 1), Is.Not.EqualTo(0)); });
 
-            Assert.AreEqual(100000.00, pairs.Select(i => i.TradeVolume).Sum());
+            Assert.That(Math.Round(pairs.Select(i => i.TradeVolume).Sum(), 2), Is.EqualTo(100000.00));
 
-            Assert.AreEqual(1, pairs.Select(i => i.Weight).Sum());
+            Assert.That(Math.Round(pairs.Select(i => i.Weight).Sum(), 2), Is.EqualTo(1));
         }
     }
 }

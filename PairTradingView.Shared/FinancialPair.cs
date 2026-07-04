@@ -16,9 +16,6 @@
 
 using PairTradingView.Shared.Statistics;
 using PairTradingView.Shared.Statistics.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 
 namespace PairTradingView.Shared
 {

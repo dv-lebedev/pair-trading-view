@@ -14,8 +14,6 @@
     limitations under the License.
 */
 
-using System;
-
 namespace PairTradingView.Shared
 {
     public static class Check
