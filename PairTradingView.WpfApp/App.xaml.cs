@@ -19,28 +19,27 @@ using PairTradingView.WpfApp.Infra;
 using Serilog;
 using System.Windows;
 
-namespace PairTradingView.WpfApp
+namespace PairTradingView.WpfApp;
+
+public partial class App : Application
 {
-    public partial class App : Application
+    public static IServiceProvider? Services { get; private set; }
+
+    public App()
     {
-        public static IServiceProvider? Services { get; private set; }
+        BuildServices();
+    }
 
-        public App()
-        {
-            BuildServices();
-        }
+    private static void BuildServices()
+    {
+        var sc = new ServiceCollection();
+        sc.AddAsOneServices();
+        Services = sc.BuildServiceProvider();
+    }
 
-        private static void BuildServices()
-        {
-            var sc = new ServiceCollection();
-            sc.AddAsOneServices();
-            Services = sc.BuildServiceProvider();
-        }
-
-        private void Application_Exit(object sender, ExitEventArgs e)
-        {
-            Log.Information("Application is exiting.");
-            Log.CloseAndFlush();
-        }
+    private void Application_Exit(object sender, ExitEventArgs e)
+    {
+        Log.Information("Application is exiting.");
+        Log.CloseAndFlush();
     }
 }

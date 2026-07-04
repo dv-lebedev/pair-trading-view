@@ -19,35 +19,34 @@ using PairTradingView.WpfApp.Models;
 using PairTradingView.WpfApp.Views;
 using System.Windows.Controls;
 
-namespace PairTradingView.WpfApp.ViewModels
+namespace PairTradingView.WpfApp.ViewModels;
+
+public class MainWindowViewModel : ObservableObject
 {
-    public class MainWindowViewModel : ObservableObject
+    private readonly UserControl FilesLoaderView = new FilesLoaderView();
+    private readonly UserControl MainView = new MainView();
+    private readonly FinancialPairsModel _fpModel;
+
+    private object _currentView;
+
+    public object CurrentView
     {
-        private readonly UserControl FilesLoaderView = new FilesLoaderView();
-        private readonly UserControl MainView = new MainView();
-        private readonly FinancialPairsModel _fpModel;
+        get => _currentView;
 
-        private object _currentView;
-
-        public object CurrentView
+        set
         {
-            get => _currentView;
-
-            set
-            {
-                _currentView = value;
-                OnPropertyChanged();
-            }
+            _currentView = value;
+            OnPropertyChanged();
         }
+    }
 
-        public MainWindowViewModel(FinancialPairsModel financialPairsModel)
-        {
-            _fpModel = financialPairsModel ?? throw new ArgumentNullException(nameof(financialPairsModel));
+    public MainWindowViewModel(FinancialPairsModel financialPairsModel)
+    {
+        _fpModel = financialPairsModel ?? throw new ArgumentNullException(nameof(financialPairsModel));
 
-            CurrentView = FilesLoaderView;
+        CurrentView = FilesLoaderView;
 
-            _fpModel.LoadNewDataRequested += (s, e) => CurrentView = FilesLoaderView;
-            _fpModel.PairsChanged += (s, e) => CurrentView = MainView;
-        }
+        _fpModel.LoadNewDataRequested += (s, e) => CurrentView = FilesLoaderView;
+        _fpModel.PairsChanged += (s, e) => CurrentView = MainView;
     }
 }

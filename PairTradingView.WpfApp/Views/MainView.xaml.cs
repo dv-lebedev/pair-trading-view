@@ -18,14 +18,13 @@ using Microsoft.Extensions.DependencyInjection;
 using PairTradingView.WpfApp.ViewModels;
 using System.Windows.Controls;
 
-namespace PairTradingView.WpfApp.Views
+namespace PairTradingView.WpfApp.Views;
+
+public partial class MainView : UserControl
 {
-    public partial class MainView : UserControl
+    public MainView()
     {
-        public MainView()
-        {
-            InitializeComponent();
-            DataContext = App.Services.GetRequiredService<MainViewModel>();
-        }
+        InitializeComponent();
+        DataContext = App.Services.GetRequiredService<MainViewModel>();
     }
 }

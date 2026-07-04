@@ -22,134 +22,133 @@ using PairTradingView.WpfApp.Entities;
 using PairTradingView.Shared;
 using PairTradingView.Shared.Statistics;
 
-namespace PairTradingView.WpfApp.ViewModels
+namespace PairTradingView.WpfApp.ViewModels;
+
+public class ChartViewModel : ObservableObject
 {
-    public class ChartViewModel : ObservableObject
+    private PlotModel _plotModel;
+    public PlotModel PlotModel
     {
-        private PlotModel _plotModel;
-        public PlotModel PlotModel
-        {
-            get => _plotModel;
+        get => _plotModel;
 
-            set 
-            {
-                _plotModel = value; 
-                OnPropertyChanged(); 
-            }
+        set 
+        {
+            _plotModel = value; 
+            OnPropertyChanged(); 
         }
+    }
 
-        private readonly FinancialPairsModel _fpModel;
+    private readonly FinancialPairsModel _fpModel;
 
-        public ChartViewModel(FinancialPairsModel financialPairsModel)
+    public ChartViewModel(FinancialPairsModel financialPairsModel)
+    {
+        _fpModel = financialPairsModel ?? throw new ArgumentNullException(nameof(financialPairsModel));
+
+        PlotModel = new PlotModel();
+        SetUpModel();
+      
+        _fpModel.PairsChanged += (s, e) =>
         {
-            _fpModel = financialPairsModel ?? throw new ArgumentNullException(nameof(financialPairsModel));
-
             PlotModel = new PlotModel();
             SetUpModel();
-          
-            _fpModel.PairsChanged += (s, e) =>
-            {
-                PlotModel = new PlotModel();
-                SetUpModel();
-            };
+        };
 
-            _fpModel.SelectedPairChanged += UpdatePlot;
+        _fpModel.SelectedPairChanged += UpdatePlot;
 
-            _fpModel.SmaValueChanged += UpdatePlot;
-        }
+        _fpModel.SmaValueChanged += UpdatePlot;
+    }
 
-        private void UpdatePlot(object sender, EventArgs e)
+    private void UpdatePlot(object sender, EventArgs e)
+    {
+        if (_fpModel.SelectedPair is ExtFinancialPair pair)
         {
-            if (_fpModel.SelectedPair is ExtFinancialPair pair)
-            {
-                Update(pair.DeltaValues, pair.Name, _fpModel.SmaValue);
-            }
+            Update(pair.DeltaValues, pair.Name, _fpModel.SmaValue);
         }
+    }
 
-        private void SetUpModel()
+    private void SetUpModel()
+    {
+        //PlotModel.LegendTitle = "";
+        //PlotModel.LegendOrientation = LegendOrientation.Horizontal;
+        //PlotModel.LegendPlacement = LegendPlacement.Outside;
+        //PlotModel.LegendPosition = LegendPosition.TopLeft;
+        //PlotModel.LegendBackground = OxyColor.FromAColor(200, OxyColors.White);
+        //PlotModel.LegendBorder = OxyColors.White;
+        PlotModel.PlotAreaBorderColor = OxyColors.Transparent;
+
+        var xAxis = new LinearAxis()
         {
-            //PlotModel.LegendTitle = "";
-            //PlotModel.LegendOrientation = LegendOrientation.Horizontal;
-            //PlotModel.LegendPlacement = LegendPlacement.Outside;
-            //PlotModel.LegendPosition = LegendPosition.TopLeft;
-            //PlotModel.LegendBackground = OxyColor.FromAColor(200, OxyColors.White);
-            //PlotModel.LegendBorder = OxyColors.White;
-            PlotModel.PlotAreaBorderColor = OxyColors.Transparent;
+            Position = AxisPosition.Left,
 
-            var xAxis = new LinearAxis()
-            {
-                Position = AxisPosition.Left,
+            IsZoomEnabled = false,
+            IsPanEnabled = false,
+            MajorGridlineStyle = LineStyle.Solid,
+            MinorGridlineStyle = LineStyle.Dot,
+            TicklineColor = OxyColors.DimGray,
+            AxislineColor = OxyColors.DimGray,
+            ExtraGridlineColor = OxyColors.DimGray,
+            MajorGridlineColor = OxyColors.DimGray,
+            MinorGridlineColor = OxyColors.DimGray,
+            TickStyle = TickStyle.None,
+            TextColor = OxyColors.LightGray,
+            TitleColor = OxyColors.LightGray,
+            Title = "Δ"
+        };
+        PlotModel.Axes.Add(xAxis);
 
-                IsZoomEnabled = false,
-                IsPanEnabled = false,
-                MajorGridlineStyle = LineStyle.Solid,
-                MinorGridlineStyle = LineStyle.Dot,
-                TicklineColor = OxyColors.DimGray,
-                AxislineColor = OxyColors.DimGray,
-                ExtraGridlineColor = OxyColors.DimGray,
-                MajorGridlineColor = OxyColors.DimGray,
-                MinorGridlineColor = OxyColors.DimGray,
-                TickStyle = TickStyle.None,
-                TextColor = OxyColors.LightGray,
-                TitleColor = OxyColors.LightGray,
-                Title = "Δ"
-            };
-            PlotModel.Axes.Add(xAxis);
-
-            var yAxis = new LinearAxis()
-            {
-                Position = AxisPosition.Bottom,
-                IsZoomEnabled = false,
-                IsPanEnabled = false,
-                MajorGridlineStyle = LineStyle.Solid,
-                MinorGridlineStyle = LineStyle.Dot,
-                TickStyle = TickStyle.None,
-                TextColor = OxyColors.LightGray,
-                TitleColor = OxyColors.LightGray,
-                Title = "t"
-            };
-            PlotModel.Axes.Add(yAxis);
-        }
-
-        public void Update(double[] values, string title, int SMAPeriod = 0)
+        var yAxis = new LinearAxis()
         {
-            PlotModel.Title = title;
-            PlotModel.TitleColor = OxyColors.LightGray;
+            Position = AxisPosition.Bottom,
+            IsZoomEnabled = false,
+            IsPanEnabled = false,
+            MajorGridlineStyle = LineStyle.Solid,
+            MinorGridlineStyle = LineStyle.Dot,
+            TickStyle = TickStyle.None,
+            TextColor = OxyColors.LightGray,
+            TitleColor = OxyColors.LightGray,
+            Title = "t"
+        };
+        PlotModel.Axes.Add(yAxis);
+    }
 
-            PlotModel.Series.Clear();
+    public void Update(double[] values, string title, int SMAPeriod = 0)
+    {
+        PlotModel.Title = title;
+        PlotModel.TitleColor = OxyColors.LightGray;
 
-            AddLineSerie("Δ", OxyColor.Parse("#3399ff"), values, 0);
+        PlotModel.Series.Clear();
 
-            if (SMAPeriod > 0 && SMAPeriod < values.Length)
-            {
-                var SMAValues = MovingAverages.SMA(values, SMAPeriod);
-                AddLineSerie("SMA", OxyColor.Parse("#FF0000"), SMAValues, SMAPeriod);
-            }
+        AddLineSerie("Δ", OxyColor.Parse("#3399ff"), values, 0);
 
-            PlotModel.InvalidatePlot(true);
-        }
-
-        private void AddLineSerie(string title, OxyColor color, double[] values, int offset = 0)
+        if (SMAPeriod > 0 && SMAPeriod < values.Length)
         {
-            var lineSerie = new LineSeries
-            {
-                StrokeThickness = 2,
-                MarkerSize = 3,
-                MarkerStroke = OxyColors.Red,
-                MarkerType = MarkerType.None,
-                CanTrackerInterpolatePoints = false,
-                Color = color,
-                Title = title,
-
-                //Smooth = false
-            };
-
-            for (int i = 0; i < values.Length; i++)
-            {
-                lineSerie.Points.Add(new DataPoint(Axis.ToDouble(i + offset), values[i]));
-            }
-
-            PlotModel.Series.Add(lineSerie);
+            var SMAValues = MovingAverages.SMA(values, SMAPeriod);
+            AddLineSerie("SMA", OxyColor.Parse("#FF0000"), SMAValues, SMAPeriod);
         }
+
+        PlotModel.InvalidatePlot(true);
+    }
+
+    private void AddLineSerie(string title, OxyColor color, double[] values, int offset = 0)
+    {
+        var lineSerie = new LineSeries
+        {
+            StrokeThickness = 2,
+            MarkerSize = 3,
+            MarkerStroke = OxyColors.Red,
+            MarkerType = MarkerType.None,
+            CanTrackerInterpolatePoints = false,
+            Color = color,
+            Title = title,
+
+            //Smooth = false
+        };
+
+        for (int i = 0; i < values.Length; i++)
+        {
+            lineSerie.Points.Add(new DataPoint(Axis.ToDouble(i + offset), values[i]));
+        }
+
+        PlotModel.Series.Add(lineSerie);
     }
 }

@@ -14,12 +14,9 @@
     limitations under the License.
 */
 
-using System;
+namespace PairTradingView.Shared.Statistics;
 
-namespace PairTradingView.Shared.Statistics
+[Serializable]
+public class DifferentLengthException : Exception
 {
-    [Serializable]
-    public class DifferentLengthException : Exception
-    {
-    }
 }

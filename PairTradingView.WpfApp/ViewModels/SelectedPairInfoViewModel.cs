@@ -19,165 +19,163 @@ using PairTradingView.WpfApp.Entities;
 using PairTradingView.WpfApp.Infra;
 using PairTradingView.WpfApp.Models;
 using Serilog;
-using System;
 using System.Windows.Input;
 
-namespace PairTradingView.WpfApp.ViewModels
+namespace PairTradingView.WpfApp.ViewModels;
+
+public class SelectedPairInfoViewModel : ObservableObject
 {
-    public class SelectedPairInfoViewModel : ObservableObject
+    private string _pairName;
+    private string _xName;
+    private string _yName;
+    private double _pairsTradeVolume;
+    private double _yTradeVolume;
+    private double _xTradeVolume;
+    private double _risk;
+    private double _riskLimit;
+    private double _balance;
+
+    private readonly ILogger _log;
+
+    public string PairName
     {
-        private string _pairName;
-        private string _xName;
-        private string _yName;
-        private double _pairsTradeVolume;
-        private double _yTradeVolume;
-        private double _xTradeVolume;
-        private double _risk;
-        private double _riskLimit;
-        private double _balance;
+        get => _pairName;
 
-        private readonly ILogger _log;
-
-        public string PairName
+        set
         {
-            get => _pairName;
-
-            set
-            {
-                _pairName = value;
-                OnPropertyChanged();
-            }
+            _pairName = value;
+            OnPropertyChanged();
         }
+    }
 
-        public string XName
+    public string XName
+    {
+        get => _xName;
+
+        set
         {
-            get => _xName;
-
-            set
-            {
-                _xName = value;
-                OnPropertyChanged();
-            }
+            _xName = value;
+            OnPropertyChanged();
         }
+    }
 
-        public string YName
+    public string YName
+    {
+        get => _yName;
+
+        set
         {
-            get => _yName;
-
-            set
-            {
-                _yName = value;
-                OnPropertyChanged();
-            }
+            _yName = value;
+            OnPropertyChanged();
         }
+    }
 
-        public double PairsTradeVolume
+    public double PairsTradeVolume
+    {
+        get => _pairsTradeVolume;
+
+        set
         {
-            get => _pairsTradeVolume;
-
-            set
-            {
-                _pairsTradeVolume = value;
-                OnPropertyChanged();
-            }
+            _pairsTradeVolume = value;
+            OnPropertyChanged();
         }
+    }
 
-        public double YTradeVolume
+    public double YTradeVolume
+    {
+        get => _yTradeVolume;
+
+        set
         {
-            get => _yTradeVolume;
-
-            set
-            {
-                _yTradeVolume = value;
-                OnPropertyChanged();
-            }
+            _yTradeVolume = value;
+            OnPropertyChanged();
         }
+    }
 
-        public double XTradeVolume
+    public double XTradeVolume
+    {
+        get => _xTradeVolume;
+
+        set
         {
-            get => _xTradeVolume;
-
-            set
-            {
-                _xTradeVolume = value;
-                OnPropertyChanged();
-            }
+            _xTradeVolume = value;
+            OnPropertyChanged();
         }
+    }
 
-        public double Risk
+    public double Risk
+    {
+        get => _risk;
+
+        set
         {
-            get => _risk;
-
-            set
-            {
-                _risk = value;
-                OnPropertyChanged();
-            }
+            _risk = value;
+            OnPropertyChanged();
         }
+    }
 
-        public double RiskLimit
+    public double RiskLimit
+    {
+        get => _riskLimit;
+
+        set
         {
-            get => _riskLimit;
-
-            set
-            {
-                _riskLimit = value;
-                OnPropertyChanged();
-            }
+            _riskLimit = value;
+            OnPropertyChanged();
         }
+    }
 
-        public double Balance
+    public double Balance
+    {
+        get => _balance;
+
+        set
         {
-            get => _balance;
-
-            set
-            {
-                _balance = value;
-                OnPropertyChanged();
-            }
+            _balance = value;
+            OnPropertyChanged();
         }
+    }
 
-        public FinancialPairsModel Model { get; }
+    public FinancialPairsModel Model { get; }
 
-        public ICommand CalulateCommand { get; }
-        public ICommand LoadNewDataCommand { get; }
+    public ICommand CalulateCommand { get; }
+    public ICommand LoadNewDataCommand { get; }
 
-        public SelectedPairInfoViewModel(FinancialPairsModel financialPairsModel, ILogger logger) 
+    public SelectedPairInfoViewModel(FinancialPairsModel financialPairsModel, ILogger logger) 
+    {
+        Model = financialPairsModel ?? throw new ArgumentNullException(nameof(financialPairsModel));
+        _log = logger ?? throw new ArgumentNullException(nameof(logger));
+
+        CalulateCommand = new RelayCommand(x => CalulateCommandAction(), _log);
+        LoadNewDataCommand = new RelayCommand(x => LoadNewDataCommandAction(), _log);
+        Balance = 100_000.00;
+
+        Model.SelectedPairChanged += Instance_SelectedPairChanged;
+    }
+
+    private void LoadNewDataCommandAction()
+    {   
+        Model.LoadNewData();
+    }
+
+    private void Instance_SelectedPairChanged(object sender, EventArgs e)
+    {
+        if (Model.SelectedPair is ExtFinancialPair pair)
         {
-            Model = financialPairsModel ?? throw new ArgumentNullException(nameof(financialPairsModel));
-            _log = logger ?? throw new ArgumentNullException(nameof(logger));
+            PairName = pair.Name;
+            XName = pair.X.Name;
+            YName = pair.Y.Name;
 
-            CalulateCommand = new RelayCommand(x => CalulateCommandAction(), _log);
-            LoadNewDataCommand = new RelayCommand(x => LoadNewDataCommandAction(), _log);
-            Balance = 100_000.00;
-
-            Model.SelectedPairChanged += Instance_SelectedPairChanged;
+            PairsTradeVolume = pair.TradeVolume;
+            XTradeVolume = pair.X.TradeVolume;
+            YTradeVolume = pair.Y.TradeVolume;
+            RiskLimit = pair.TradeVolume * Risk / 100.0;
         }
+    }
 
-        private void LoadNewDataCommandAction()
-        {   
-            Model.LoadNewData();
-        }
-
-        private void Instance_SelectedPairChanged(object sender, EventArgs e)
-        {
-            if (Model.SelectedPair is ExtFinancialPair pair)
-            {
-                PairName = pair.Name;
-                XName = pair.X.Name;
-                YName = pair.Y.Name;
-
-                PairsTradeVolume = pair.TradeVolume;
-                XTradeVolume = pair.X.TradeVolume;
-                YTradeVolume = pair.Y.TradeVolume;
-                RiskLimit = pair.TradeVolume * Risk / 100.0;
-            }
-        }
-
-        private void CalulateCommandAction()
-        {
-            Model.Calculate(Balance);
-            Model.ReselectSelectedPair();
-        }
+    private void CalulateCommandAction()
+    {
+        Model.Calculate(Balance);
+        Model.ReselectSelectedPair();
     }
 }

@@ -18,14 +18,13 @@ using Microsoft.Extensions.DependencyInjection;
 using PairTradingView.WpfApp.ViewModels;
 using System.Windows.Controls;
 
-namespace PairTradingView.WpfApp.Views
+namespace PairTradingView.WpfApp.Views;
+
+public partial class FilesLoaderView : UserControl
 {
-    public partial class FilesLoaderView : UserControl
+    public FilesLoaderView()
     {
-        public FilesLoaderView()
-        {
-            InitializeComponent();
-            DataContext = App.Services.GetService<FilesLoaderViewModel>();
-        }
+        InitializeComponent();
+        DataContext = App.Services.GetService<FilesLoaderViewModel>();
     }
 }

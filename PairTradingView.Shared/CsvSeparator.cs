@@ -14,28 +14,27 @@
     limitations under the License.
 */
 
-namespace PairTradingView.Shared
+namespace PairTradingView.Shared;
+
+public class CsvSeparator
 {
-    public class CsvSeparator
+    public string Name { get; }
+    public char Value { get; }
+
+    private CsvSeparator(string name, char value)
     {
-        public string Name { get; }
-        public char Value { get; }
+        Check.NotNull(name, value);
 
-        private CsvSeparator(string name, char value)
-        {
-            Check.NotNull(name, value);
+        Name = name;
+        Value = value;
+    }
 
-            Name = name;
-            Value = value;
-        }
+    public static readonly CsvSeparator Tab = new CsvSeparator(nameof(Tab), '\t');
+    public static readonly CsvSeparator Comma = new CsvSeparator(nameof(Comma), ',');
+    public static readonly CsvSeparator Space = new CsvSeparator(nameof(Space), ' ');
 
-        public static readonly CsvSeparator Tab = new CsvSeparator(nameof(Tab), '\t');
-        public static readonly CsvSeparator Comma = new CsvSeparator(nameof(Comma), ',');
-        public static readonly CsvSeparator Space = new CsvSeparator(nameof(Space), ' ');
-
-        public override string ToString()
-        {
-            return Name;
-        }
+    public override string ToString()
+    {
+        return Name;
     }
 }

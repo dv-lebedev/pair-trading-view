@@ -16,64 +16,63 @@
 
 using System.Globalization;
 
-namespace PairTradingView.Shared
+namespace PairTradingView.Shared;
+
+public static class CsvUtils
 {
-    public static class CsvUtils
+    public static Stock[] ReadAllDataFrom(string directory, int priceIndex, bool containsHeader, char separator = ',')
     {
-        public static Stock[] ReadAllDataFrom(string directory, int priceIndex, bool containsHeader, char separator = ',')
+        Check.NotNull(directory);
+
+        if (priceIndex < 0) throw new ArgumentException("[priceIndex] can't be less than 0.");
+
+        var stocks = new List<Stock>();
+
+        foreach (string file in Directory.EnumerateFiles(directory))
         {
-            Check.NotNull(directory);
-
-            if (priceIndex < 0) throw new ArgumentException("[priceIndex] can't be less than 0.");
-
-            var stocks = new List<Stock>();
-
-            foreach (string file in Directory.EnumerateFiles(directory))
+            if (file.EndsWith(".txt") || file.EndsWith(".csv"))
             {
-                if (file.EndsWith(".txt") || file.EndsWith(".csv"))
-                {
-                    Stock stock = Read(file, priceIndex, containsHeader, separator);
+                Stock stock = Read(file, priceIndex, containsHeader, separator);
 
-                    stocks.Add(stock);
-                }
+                stocks.Add(stock);
             }
-
-            if (stocks.Count == 0)
-            {
-                throw new Exception("Files are not found.");
-            }
-
-            return stocks.ToArray();
         }
 
-        public static Stock Read(string path, int priceIndex, bool containsHeader, char separator = ',')
+        if (stocks.Count == 0)
         {
-            string[] lines = File.ReadAllLines(path);
+            throw new Exception("Files are not found.");
+        }
 
-            var result = new List<double>();
+        return stocks.ToArray();
+    }
 
-            int startlineCount = containsHeader ? 1 : 0;
+    public static Stock Read(string path, int priceIndex, bool containsHeader, char separator = ',')
+    {
+        string[] lines = File.ReadAllLines(path);
 
-            for (int i = startlineCount; i < lines.Length; i++)
+        var result = new List<double>();
+
+        int startlineCount = containsHeader ? 1 : 0;
+
+        for (int i = startlineCount; i < lines.Length; i++)
+        {
+            string[] cuts = lines[i].Split(new[] { separator }, StringSplitOptions.RemoveEmptyEntries);
+
+            if (cuts.Length == 0)
+                throw new FormatException("Check csv files format.");
+
+            double price = double.Parse(cuts[priceIndex], CultureInfo.InvariantCulture);
+
+            if (price <= 0)
             {
-                string[] cuts = lines[i].Split(new[] { separator }, StringSplitOptions.RemoveEmptyEntries);
-
-                if (cuts.Length == 0)
-                    throw new FormatException("Check csv files format.");
-
-                double price = double.Parse(cuts[priceIndex], CultureInfo.InvariantCulture);
-
-                if (price <= 0)
-                {
-                    throw new FormatException($" price = {price} in {path}");
-                }
-
-                result.Add(price);
+                throw new FormatException($" price = {price} in {path}");
             }
 
-            string name = Path.GetFileNameWithoutExtension(path);
-
-            return new Stock { Name = name, Prices = result.ToArray() };
+            result.Add(price);
         }
+
+        string name = Path.GetFileNameWithoutExtension(path);
+
+        return new Stock { Name = name, Prices = result.ToArray() };
     }
 }

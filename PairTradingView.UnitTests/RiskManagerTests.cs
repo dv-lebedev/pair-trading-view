@@ -16,25 +16,24 @@
 
 using PairTradingView.Shared;
 
-namespace PairTradingView.UnitTests
+namespace PairTradingView.UnitTests;
+
+public class RiskManagerTests
 {
-    public class RiskManagerTests
+    [Test]
+    public void CalculateTest()
     {
-        [Test]
-        public void CalculateTest()
-        {
-            Stock[] stocks = CsvUtils.ReadAllDataFrom("csv-files/", 4, false);
+        Stock[] stocks = CsvUtils.ReadAllDataFrom("csv-files/", 4, false);
 
-            List<FinancialPair> pairs = FinancialPair.CreateMany(stocks);
+        List<FinancialPair> pairs = FinancialPair.CreateMany(stocks);
 
-            var rm = new RiskManager(pairs.ToArray(), 100000.00);
-            rm.Calculate();
+        var rm = new RiskManager(pairs.ToArray(), 100000.00);
+        rm.Calculate();
 
-            pairs.ForEach(i => { Assert.That(Math.Round(i.TradeVolume, 1), Is.Not.EqualTo(0)); });
+        pairs.ForEach(i => { Assert.That(Math.Round(i.TradeVolume, 1), Is.Not.EqualTo(0)); });
 
-            Assert.That(Math.Round(pairs.Select(i => i.TradeVolume).Sum(), 2), Is.EqualTo(100000.00));
+        Assert.That(Math.Round(pairs.Select(i => i.TradeVolume).Sum(), 2), Is.EqualTo(100000.00));
 
-            Assert.That(Math.Round(pairs.Select(i => i.Weight).Sum(), 2), Is.EqualTo(1));
-        }
+        Assert.That(Math.Round(pairs.Select(i => i.Weight).Sum(), 2), Is.EqualTo(1));
     }
 }

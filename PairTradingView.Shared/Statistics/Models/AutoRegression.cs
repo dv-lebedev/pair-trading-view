@@ -15,62 +15,60 @@
 */
 
 using PairTradingView.Shared.Statistics.Methods;
-using System;
 
-namespace PairTradingView.Shared.Statistics.Models
+namespace PairTradingView.Shared.Statistics.Models;
+
+public class AutoRegression : IRegression
 {
-    public class AutoRegression : IRegression
+    public IRegressionMethod RegressionMethod { get; set; }
+
+    public double Alpha
     {
-        public IRegressionMethod RegressionMethod { get; set; }
+        get { return RegressionMethod.Coefs[0]; }
+    }
 
-        public double Alpha
+    public double Beta
+    {
+        get { return RegressionMethod.Coefs[1]; }
+    }
+
+    public double RValue
+    {
+        get { return RegressionMethod.RValues[0]; }
+    }
+
+    public double RSquared
+    {
+        get { return RegressionMethod.RSquaredValues[0]; }
+    }
+
+    public AutoRegression()
+    {
+        RegressionMethod = new OrdinaryLeastSquares();
+    }
+
+    public void Compute(double[] vectror, int lag)
+    {
+        if (vectror == null)
+            throw new ArgumentNullException("vector");
+
+        if (lag >= vectror.Length)
+            throw new IndexOutOfRangeException("lag can't be more or equal x.Length");
+
+        double[] x = new double[vectror.Length - lag];
+
+        for(int i = 0; i < vectror.Length - lag; i++ )
         {
-            get { return RegressionMethod.Coefs[0]; }
+            x[i] = vectror[i];
         }
 
-        public double Beta
+        double[] y = new double[vectror.Length - lag];
+
+        for (int i = lag; i < vectror.Length; i++)
         {
-            get { return RegressionMethod.Coefs[1]; }
+            y[i - lag] = vectror[i];
         }
 
-        public double RValue
-        {
-            get { return RegressionMethod.RValues[0]; }
-        }
-
-        public double RSquared
-        {
-            get { return RegressionMethod.RSquaredValues[0]; }
-        }
-
-        public AutoRegression()
-        {
-            RegressionMethod = new OrdinaryLeastSquares();
-        }
-
-        public void Compute(double[] vectror, int lag)
-        {
-            if (vectror == null)
-                throw new ArgumentNullException("vector");
-
-            if (lag >= vectror.Length)
-                throw new IndexOutOfRangeException("lag can't be more or equal x.Length");
-
-            double[] x = new double[vectror.Length - lag];
-
-            for(int i = 0; i < vectror.Length - lag; i++ )
-            {
-                x[i] = vectror[i];
-            }
-
-            double[] y = new double[vectror.Length - lag];
-
-            for (int i = lag; i < vectror.Length; i++)
-            {
-                y[i - lag] = vectror[i];
-            }
-
-            RegressionMethod.Compute(y, x);
-        }
+        RegressionMethod.Compute(y, x);
     }
 }

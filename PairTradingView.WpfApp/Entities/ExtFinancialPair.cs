@@ -16,33 +16,31 @@
 
 using PairTradingView.Shared;
 using PairTradingView.Shared.Statistics;
-using System.Linq;
 
-namespace PairTradingView.WpfApp.Entities
+namespace PairTradingView.WpfApp.Entities;
+
+public class ExtFinancialPair : FinancialPair
 {
-    public class ExtFinancialPair : FinancialPair
+    public ExtFinancialPair(Stock x, Stock y)
+        : base(x, y)
     {
-        public ExtFinancialPair(Stock x, Stock y)
-            : base(x, y)
-        {
-            DeltaAverage = DeltaValues.Average();
-            DeltaMax = DeltaValues.Max();
-            DeltaMin = DeltaValues.Min();
-            DeltaSD = MathUtils.GetStandardDeviation(DeltaValues);
-            SD_X = X.Deviation;
-            SD_Y = Y.Deviation;
-            DeltaSDMinus3Q = DeltaAverage - (3 * DeltaSD);
-            DeltaSDPlus3Q = DeltaAverage + (3 * DeltaSD);
-        }
-
-        public bool Selected { get; set; }
-        public double DeltaAverage { get; set; }
-        public double DeltaMax { get; set; }
-        public double DeltaMin { get; set; }
-        public double DeltaSD { get; set; }
-        public double SD_X { get; set; }
-        public double SD_Y { get; set; }
-        public double DeltaSDMinus3Q { get; set; }
-        public double DeltaSDPlus3Q { get; set; }
+        DeltaAverage = DeltaValues.Average();
+        DeltaMax = DeltaValues.Max();
+        DeltaMin = DeltaValues.Min();
+        DeltaSD = MathUtils.GetStandardDeviation(DeltaValues);
+        SD_X = X.Deviation;
+        SD_Y = Y.Deviation;
+        DeltaSDMinus3Q = DeltaAverage - (3 * DeltaSD);
+        DeltaSDPlus3Q = DeltaAverage + (3 * DeltaSD);
     }
+
+    public bool Selected { get; set; }
+    public double DeltaAverage { get; set; }
+    public double DeltaMax { get; set; }
+    public double DeltaMin { get; set; }
+    public double DeltaSD { get; set; }
+    public double SD_X { get; set; }
+    public double SD_Y { get; set; }
+    public double DeltaSDMinus3Q { get; set; }
+    public double DeltaSDPlus3Q { get; set; }
 }

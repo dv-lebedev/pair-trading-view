@@ -20,124 +20,123 @@ using PairTradingView.WpfApp.Utils;
 using Serilog;
 using System.Collections.ObjectModel;
 
-namespace PairTradingView.WpfApp.Models
+namespace PairTradingView.WpfApp.Models;
+
+public class FinancialPairsModel : ObservableObject
 {
-    public class FinancialPairsModel : ObservableObject
+    private readonly ILogger _log;
+
+    private ExtFinancialPair _selectedPair;
+    private int _smaValue;
+
+    public ExtFinancialPair SelectedPair
     {
-        private readonly ILogger _log;
+        get => _selectedPair;
 
-        private ExtFinancialPair _selectedPair;
-        private int _smaValue;
-
-        public ExtFinancialPair SelectedPair
+        set
         {
-            get => _selectedPair;
-
-            set
+            if (_selectedPair != value)
             {
-                if (_selectedPair != value)
+                _selectedPair = value;
+                OnPropertyChanged();
+                SelectedPairChanged?.Invoke(this, EventArgs.Empty);
+            }
+        }
+    }
+
+    public int SmaValue
+    {
+        get => _smaValue;
+
+        set
+        {
+            if (_smaValue != value)
+            {
+                _smaValue = value;
+                OnPropertyChanged();
+                SmaValueChanged?.Invoke(this, EventArgs.Empty);
+            }
+        }
+    }
+
+    public event EventHandler SelectedPairChanged;
+    public event EventHandler SmaValueChanged;
+    public event EventHandler LoadNewDataRequested;
+
+    public ObservableCollection<ExtFinancialPair> Pairs { get; }
+
+    public event EventHandler PairsChanged;
+
+    public FinancialPairsModel(ILogger logger)
+    {
+        _log = logger ?? throw new ArgumentNullException(nameof(logger));
+        Pairs = new ObservableCollection<ExtFinancialPair>();
+    }
+
+    public void ReselectSelectedPair()
+    {
+        var pair = SelectedPair;
+        SelectedPair = null;
+        SelectedPair = pair;
+    }
+
+    public void LoadNewData()
+    {
+        LoadNewDataRequested?.Invoke(this, EventArgs.Empty);
+    }
+
+    public void UpdateStocks(Stock[] stocks)
+    {
+        try
+        {
+            var pairs = FinancialPair.CreateMany<ExtFinancialPair>(stocks);
+
+            Pairs.Clear();
+
+            if (pairs != null)
+            {
+                foreach (var pair in pairs)
                 {
-                    _selectedPair = value;
-                    OnPropertyChanged();
-                    SelectedPairChanged?.Invoke(this, EventArgs.Empty);
+                    Pairs.Add(pair);
                 }
             }
+
+            PairsChanged?.Invoke(this, EventArgs.Empty);
         }
-
-        public int SmaValue
+        catch (Exception ex)
         {
-            get => _smaValue;
+            Log.Error(ex, "Error updating stocks");
+            UserNotification.Display(ex.Message);
+        }
+    }
 
-            set
+    public void Calculate(double balance)
+    {
+        try
+        {
+            var checkedPairs = Pairs.Where(i => i.Selected).ToList();
+
+            if (checkedPairs.Count > 0)
             {
-                if (_smaValue != value)
+                //preparation
+                foreach (var pair in Pairs)
                 {
-                    _smaValue = value;
-                    OnPropertyChanged();
-                    SmaValueChanged?.Invoke(this, EventArgs.Empty);
-                }
-            }
-        }
-
-        public event EventHandler SelectedPairChanged;
-        public event EventHandler SmaValueChanged;
-        public event EventHandler LoadNewDataRequested;
-
-        public ObservableCollection<ExtFinancialPair> Pairs { get; }
-
-        public event EventHandler PairsChanged;
-
-        public FinancialPairsModel(ILogger logger)
-        {
-            _log = logger ?? throw new ArgumentNullException(nameof(logger));
-            Pairs = new ObservableCollection<ExtFinancialPair>();
-        }
-
-        public void ReselectSelectedPair()
-        {
-            var pair = SelectedPair;
-            SelectedPair = null;
-            SelectedPair = pair;
-        }
-
-        public void LoadNewData()
-        {
-            LoadNewDataRequested?.Invoke(this, EventArgs.Empty);
-        }
-
-        public void UpdateStocks(Stock[] stocks)
-        {
-            try
-            {
-                var pairs = FinancialPair.CreateMany<ExtFinancialPair>(stocks);
-
-                Pairs.Clear();
-
-                if (pairs != null)
-                {
-                    foreach (var pair in pairs)
-                    {
-                        Pairs.Add(pair);
-                    }
+                    pair.TradeVolume = 0;
+                    pair.X.TradeVolume = 0;
+                    pair.Y.TradeVolume = 0;
                 }
 
-                PairsChanged?.Invoke(this, EventArgs.Empty);
+                new RiskManager(checkedPairs, balance).Calculate();
             }
-            catch (Exception ex)
+            else
             {
-                Log.Error(ex, "Error updating stocks");
-                UserNotification.Display(ex.Message);
+                UserNotification.Display("Pairs are not selected.");
             }
         }
-
-        public void Calculate(double balance)
+        catch (Exception ex)
         {
-            try
-            {
-                var checkedPairs = Pairs.Where(i => i.Selected).ToList();
-
-                if (checkedPairs.Count > 0)
-                {
-                    //preparation
-                    foreach (var pair in Pairs)
-                    {
-                        pair.TradeVolume = 0;
-                        pair.X.TradeVolume = 0;
-                        pair.Y.TradeVolume = 0;
-                    }
-
-                    new RiskManager(checkedPairs, balance).Calculate();
-                }
-                else
-                {
-                    UserNotification.Display("Pairs are not selected.");
-                }
-            }
-            catch (Exception ex)
-            {
-                UserNotification.Display("CalculateRisk => " + ex.Message);
-                _log.Error(ex, "Error calculating risk");
-            }
+            UserNotification.Display("CalculateRisk => " + ex.Message);
+            _log.Error(ex, "Error calculating risk");
         }
     }
 }

@@ -15,46 +15,44 @@
 */
 
 using PairTradingView.Shared.Statistics.Methods;
-using System;
 
-namespace PairTradingView.Shared.Statistics.Models
+namespace PairTradingView.Shared.Statistics.Models;
+
+public class LinearRegression : IRegression
 {
-    public class LinearRegression : IRegression
+    public IRegressionMethod RegressionMethod { get; set; }
+
+    public double Alpha
     {
-        public IRegressionMethod RegressionMethod { get; set; }
+        get { return RegressionMethod.Coefs[0]; }
+    }
 
-        public double Alpha
-        {
-            get { return RegressionMethod.Coefs[0]; }
-        }
+    public double Beta
+    {
+        get { return RegressionMethod.Coefs[1]; }
+    }
 
-        public double Beta
-        {
-            get { return RegressionMethod.Coefs[1]; }
-        }
+    public double RValue
+    {
+        get { return RegressionMethod.RValues[0]; }
+    }
 
-        public double RValue
-        {
-            get { return RegressionMethod.RValues[0]; }
-        }
+    public double RSquared
+    {
+        get { return RegressionMethod.RSquaredValues[0]; }
+    }
 
-        public double RSquared
-        {
-            get { return RegressionMethod.RSquaredValues[0]; }
-        }
+    public LinearRegression()
+    {
+        RegressionMethod = new OrdinaryLeastSquares();
+    }
 
-        public LinearRegression()
-        {
-            RegressionMethod = new OrdinaryLeastSquares();
-        }
+    public void Compute(double[] y, double[] x)
+    {
+        if (y == null) throw new ArgumentNullException("y");
+        if (x == null) throw new ArgumentNullException("x");
+        if (x.Length != y.Length) throw new DifferentLengthException();
 
-        public void Compute(double[] y, double[] x)
-        {
-            if (y == null) throw new ArgumentNullException("y");
-            if (x == null) throw new ArgumentNullException("x");
-            if (x.Length != y.Length) throw new DifferentLengthException();
-
-            RegressionMethod.Compute(y, x);
-        }
+        RegressionMethod.Compute(y, x);
     }
 }

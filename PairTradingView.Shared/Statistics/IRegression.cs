@@ -14,10 +14,9 @@
     limitations under the License.
 */
 
-namespace PairTradingView.Shared.Statistics
+namespace PairTradingView.Shared.Statistics;
+
+public interface IRegression
 {
-    public interface IRegression
-    {
-        IRegressionMethod RegressionMethod { get; }
-    }
+    IRegressionMethod RegressionMethod { get; }
 }

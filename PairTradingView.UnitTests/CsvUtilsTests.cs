@@ -16,35 +16,34 @@
 
 using PairTradingView.Shared;
 
-namespace PairTradingView.UnitTests
+namespace PairTradingView.UnitTests;
+
+public class CsvUtilsTests
 {
-    public class CsvUtilsTests
+    const int NumberOfPrices = 254;
+    const int PriceIndex = 4;
+    const bool ContainsHeader = false;
+
+    [Test]
+    public void Read_Test()
     {
-        const int NumberOfPrices = 254;
-        const int PriceIndex = 4;
-        const bool ContainsHeader = false;
+        Stock lkoh = CsvUtils.Read("csv-files/LKOH.txt", priceIndex: PriceIndex, containsHeader: ContainsHeader);
 
-        [Test]
-        public void Read_Test()
+        Assert.That(lkoh.Prices.Length, Is.EqualTo(NumberOfPrices));
+        Assert.That(Math.Round(lkoh.Prices.First(), 2), Is.EqualTo(3421.5));
+        Assert.That(Math.Round(lkoh.Prices.Last(), 2), Is.EqualTo(4997));
+    }
+
+    [Test]
+    public void ReadAllDataFrom_Test()
+    {
+        Stock[] stocks = CsvUtils.ReadAllDataFrom("csv-files/", priceIndex: PriceIndex, containsHeader: ContainsHeader);
+
+        Assert.That(stocks.Length, Is.EqualTo(8));
+
+        foreach (var stock in stocks)
         {
-            Stock lkoh = CsvUtils.Read("csv-files/LKOH.txt", priceIndex: PriceIndex, containsHeader: ContainsHeader);
-
-            Assert.That(lkoh.Prices.Length, Is.EqualTo(NumberOfPrices));
-            Assert.That(Math.Round(lkoh.Prices.First(), 2), Is.EqualTo(3421.5));
-            Assert.That(Math.Round(lkoh.Prices.Last(), 2), Is.EqualTo(4997));
-        }
-
-        [Test]
-        public void ReadAllDataFrom_Test()
-        {
-            Stock[] stocks = CsvUtils.ReadAllDataFrom("csv-files/", priceIndex: PriceIndex, containsHeader: ContainsHeader);
-
-            Assert.That(stocks.Length, Is.EqualTo(8));
-
-            foreach (var stock in stocks)
-            {
-                Assert.That(stock.Prices.Length, Is.EqualTo(NumberOfPrices));
-            }
+            Assert.That(stock.Prices.Length, Is.EqualTo(NumberOfPrices));
         }
     }
 }

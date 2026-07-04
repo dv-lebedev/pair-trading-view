@@ -17,15 +17,14 @@
 using PairTradingView.Shared;
 using PairTradingView.WpfApp.Models;
 
-namespace PairTradingView.WpfApp.ViewModels
-{
-    public class GeneralTableViewModel : ObservableObject
-    {
-        public FinancialPairsModel Model { get; }
+namespace PairTradingView.WpfApp.ViewModels;
 
-        public GeneralTableViewModel(FinancialPairsModel financialPairsModel)
-        {
-            Model = financialPairsModel ?? throw new ArgumentNullException(nameof(financialPairsModel));
-        }
+public class GeneralTableViewModel : ObservableObject
+{
+    public FinancialPairsModel Model { get; }
+
+    public GeneralTableViewModel(FinancialPairsModel financialPairsModel)
+    {
+        Model = financialPairsModel ?? throw new ArgumentNullException(nameof(financialPairsModel));
     }
 }

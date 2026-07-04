@@ -14,317 +14,314 @@
     limitations under the License.
 */
 
-using System;
+namespace PairTradingView.Shared.Statistics;
 
-namespace PairTradingView.Shared.Statistics
+public class Matrix
 {
-    public class Matrix
+    private double[][] _matrix;
+
+    public int Rows
     {
-        private double[][] _matrix;
-
-        public int Rows
+        get
         {
-            get
-            {
-                return _matrix.Length;
-            }
+            return _matrix.Length;
         }
+    }
 
-        public int Columns
+    public int Columns
+    {
+        get
         {
-            get
-            {
-                return _matrix[0].Length;
-            }
+            return _matrix[0].Length;
         }
+    }
 
-        public double this[int row, int column]
+    public double this[int row, int column]
+    {
+        get
         {
-            get
-            {
-                return _matrix[row][column];
-            }
+            return _matrix[row][column];
         }
+    }
 
-        public double[] GetRow(int row)
+    public double[] GetRow(int row)
+    {
+        return _matrix[row];
+    }
+
+    public double[][] GetArray
+    {
+        get
         {
-            return _matrix[row];
+            return _matrix;
         }
+    }
 
-        public double[][] GetArray
-        {
-            get
-            {
-                return _matrix;
-            }
-        }
+    public Matrix(int rows, int columns)
+    {
+        this._matrix = Create(rows, columns);
+    }
 
-        public Matrix(int rows, int columns)
-        {
-            this._matrix = Create(rows, columns);
-        }
-
-        public Matrix(double[][] matrix, bool copy = false)
-        {
-            if (copy)
-            {
-                Check.NotNull(matrix);
-
-                this._matrix = Create(matrix.Length, matrix[0].Length);
-
-                Array.Copy(matrix, this._matrix, matrix.Length);
-            }
-            else
-            {
-                this._matrix = matrix;
-            }
-        }
-
-        public Matrix(Matrix matrix, bool copy = false)
-            : this(matrix.GetArray, copy)
-        {
-
-        }
-
-        private double[][] Create(int rows, int columns)
-        {
-            var matrix = new double[rows][];
-
-            for (int row = 0; row < rows; row++)
-            {
-                matrix[row] = new double[columns];
-            }
-
-            return matrix;
-        }
-
-        public bool AreEqual(Matrix matrix, double epsilon)
+    public Matrix(double[][] matrix, bool copy = false)
+    {
+        if (copy)
         {
             Check.NotNull(matrix);
 
-            if (this.Rows != matrix.Rows || this.Columns != matrix.Columns)
-                return false;
+            this._matrix = Create(matrix.Length, matrix[0].Length);
 
-            for (int row = 0; row < this.Rows; row++)
-            {
-                for (int col = 0; col < this.Columns; col++)
-                {
-                    if (Math.Abs(this[row, col] - matrix[row, col]) > epsilon)
-                        return false;
-                }
-            }
-
-            return true;
+            Array.Copy(matrix, this._matrix, matrix.Length);
         }
-
-        public Matrix ByMatrix()
+        else
         {
-            double[][] mx = new double[Rows][];
-
-            for (int row = 0; row < Rows; row++)
-            {
-                mx[row] = new double[Rows];
-
-                for (int col = 0; col < Rows; col++)
-                {
-                    mx[row][col] = MathUtils.MultiplyArrays(GetRow(row), GetRow(col));
-                }
-            }
-
-            return new Matrix(mx);
+            this._matrix = matrix;
         }
+    }
 
-        public double[] GetVector(double[] y)
+    public Matrix(Matrix matrix, bool copy = false)
+        : this(matrix.GetArray, copy)
+    {
+
+    }
+
+    private double[][] Create(int rows, int columns)
+    {
+        var matrix = new double[rows][];
+
+        for (int row = 0; row < rows; row++)
         {
-            double[] mx = new double[_matrix.Length];
-
-            for (int i = 0; i < _matrix.Length; i++)
-            {
-                for (int j = 0; j < _matrix.Length; j++)
-                {
-                    mx[i] = MathUtils.MultiplyArrays(_matrix[i], y);
-                }
-            }
-
-            return mx;
+            matrix[row] = new double[columns];
         }
 
-        public double[] VectorProduct(double[] vector)
+        return matrix;
+    }
+
+    public bool AreEqual(Matrix matrix, double epsilon)
+    {
+        Check.NotNull(matrix);
+
+        if (this.Rows != matrix.Rows || this.Columns != matrix.Columns)
+            return false;
+
+        for (int row = 0; row < this.Rows; row++)
         {
-            int vectorRows = vector.Length;
-
-            if (Columns != vectorRows)
+            for (int col = 0; col < this.Columns; col++)
             {
-                throw new ArgumentException("Columns != vectorRows", "vectror");
+                if (Math.Abs(this[row, col] - matrix[row, col]) > epsilon)
+                    return false;
             }
-
-            double[] result = new double[Rows];
-
-            for (int i = 0; i < Rows; i++)
-            {
-                for (int j = 0; j < Columns; j++)
-                {
-                    result[i] += _matrix[i][j] * vector[j];
-                }
-            }
-
-            return result;
         }
 
-        public Matrix Duplicate()
+        return true;
+    }
+
+    public Matrix ByMatrix()
+    {
+        double[][] mx = new double[Rows][];
+
+        for (int row = 0; row < Rows; row++)
         {
-            double[][] result = Create(_matrix.Length, _matrix[0].Length);
+            mx[row] = new double[Rows];
 
-            for (int i = 0; i < _matrix.Length; ++i)
+            for (int col = 0; col < Rows; col++)
             {
-                for (int j = 0; j < _matrix[i].Length; ++j)
-                {
-                    result[i][j] = _matrix[i][j];
-                }
+                mx[row][col] = MathUtils.MultiplyArrays(GetRow(row), GetRow(col));
             }
-
-            return new Matrix(result);
         }
 
-        public double[] HelperSolve(double[] b)
+        return new Matrix(mx);
+    }
+
+    public double[] GetVector(double[] y)
+    {
+        double[] mx = new double[_matrix.Length];
+
+        for (int i = 0; i < _matrix.Length; i++)
         {
-            int n = _matrix.Length;
-
-            double[] result = new double[n];
-
-            b.CopyTo(result, 0);
-
-            for (int i = 1; i < n; i++)
+            for (int j = 0; j < _matrix.Length; j++)
             {
-                double sum = result[i];
-
-                for (int j = 0; j < i; j++)
-                {
-                    sum -= _matrix[i][j] * result[j];
-                }
-
-                result[i] = sum;
+                mx[i] = MathUtils.MultiplyArrays(_matrix[i], y);
             }
-
-            result[n - 1] /= _matrix[n - 1][n - 1];
-
-            for (int i = n - 2; i >= 0; i--)
-            {
-                double sum = result[i];
-
-                for (int j = i + 1; j < n; j++)
-                {
-                    sum -= _matrix[i][j] * result[j];
-                }
-
-                result[i] = sum / _matrix[i][i];
-            }
-
-            return result;
         }
 
-        public Matrix Decompose(out int[] perm, out int toggle)
+        return mx;
+    }
+
+    public double[] VectorProduct(double[] vector)
+    {
+        int vectorRows = vector.Length;
+
+        if (Columns != vectorRows)
         {
-            int rows = _matrix.Length;
-            int cols = _matrix[0].Length;
-
-            if (rows != cols)
-                throw new Exception("Attempt to MatrixDecompose a non-square mattrix");
-
-            int n = rows;
-
-            double[][] result = Duplicate().GetArray;
-
-            perm = new int[n];
-
-            for (int i = 0; i < n; i++)
-            {
-                perm[i] = i;
-            }
-
-            toggle = 1;
-
-            for (int j = 0; j < n - 1; j++)
-            {
-                double colMax = Math.Abs(result[j][j]);
-                int pRow = j;
-
-                for (int i = j + 1; i < n; i++)
-                {
-                    if (result[i][j] > colMax)
-                    {
-                        colMax = result[i][j];
-                        pRow = i;
-                    }
-                }
-
-                if (pRow != j)
-                {
-                    double[] rowPtr = result[pRow];
-                    result[pRow] = result[j];
-                    result[j] = rowPtr;
-
-                    int tmp = perm[pRow];
-                    perm[pRow] = perm[j];
-                    perm[j] = tmp;
-
-                    toggle = -toggle;
-                }
-
-                for (int i = j + 1; i < n; i++)
-                {
-                    result[i][j] /= result[j][j];
-
-                    for (int k = j + 1; k < n; k++)
-                    {
-                        result[i][k] -= result[i][j] * result[j][k];
-                    }
-                }
-            }
-
-            return new Matrix(result);
+            throw new ArgumentException("Columns != vectorRows", "vectror");
         }
 
-        public Matrix Inverse()
+        double[] result = new double[Rows];
+
+        for (int i = 0; i < Rows; i++)
         {
-            int n = _matrix.Length;
-            double[][] result = Duplicate().GetArray;
-
-            int[] perm;
-            int toggle;
-
-            double[][] decomposedM = Decompose(out perm, out toggle).GetArray;
-
-            if (decomposedM == null)
+            for (int j = 0; j < Columns; j++)
             {
-                throw new Exception("Unable to compute inverse.");
+                result[i] += _matrix[i][j] * vector[j];
             }
-
-            double[] b = new double[n];
-
-            for (int i = 0; i < n; i++)
-            {
-                for (int j = 0; j < n; j++)
-                {
-                    if (i == perm[j])
-                    {
-                        b[j] = 1.0;
-                    }
-                    else
-                    {
-                        b[j] = 0.0;
-                    }
-                }
-
-                double[] x = new Matrix(decomposedM).HelperSolve(b);
-
-                for (int j = 0; j < n; j++)
-                {
-                    result[j][i] = x[j];
-                }
-            }
-
-            return new Matrix(result);
         }
+
+        return result;
+    }
+
+    public Matrix Duplicate()
+    {
+        double[][] result = Create(_matrix.Length, _matrix[0].Length);
+
+        for (int i = 0; i < _matrix.Length; ++i)
+        {
+            for (int j = 0; j < _matrix[i].Length; ++j)
+            {
+                result[i][j] = _matrix[i][j];
+            }
+        }
+
+        return new Matrix(result);
+    }
+
+    public double[] HelperSolve(double[] b)
+    {
+        int n = _matrix.Length;
+
+        double[] result = new double[n];
+
+        b.CopyTo(result, 0);
+
+        for (int i = 1; i < n; i++)
+        {
+            double sum = result[i];
+
+            for (int j = 0; j < i; j++)
+            {
+                sum -= _matrix[i][j] * result[j];
+            }
+
+            result[i] = sum;
+        }
+
+        result[n - 1] /= _matrix[n - 1][n - 1];
+
+        for (int i = n - 2; i >= 0; i--)
+        {
+            double sum = result[i];
+
+            for (int j = i + 1; j < n; j++)
+            {
+                sum -= _matrix[i][j] * result[j];
+            }
+
+            result[i] = sum / _matrix[i][i];
+        }
+
+        return result;
+    }
+
+    public Matrix Decompose(out int[] perm, out int toggle)
+    {
+        int rows = _matrix.Length;
+        int cols = _matrix[0].Length;
+
+        if (rows != cols)
+            throw new Exception("Attempt to MatrixDecompose a non-square mattrix");
+
+        int n = rows;
+
+        double[][] result = Duplicate().GetArray;
+
+        perm = new int[n];
+
+        for (int i = 0; i < n; i++)
+        {
+            perm[i] = i;
+        }
+
+        toggle = 1;
+
+        for (int j = 0; j < n - 1; j++)
+        {
+            double colMax = Math.Abs(result[j][j]);
+            int pRow = j;
+
+            for (int i = j + 1; i < n; i++)
+            {
+                if (result[i][j] > colMax)
+                {
+                    colMax = result[i][j];
+                    pRow = i;
+                }
+            }
+
+            if (pRow != j)
+            {
+                double[] rowPtr = result[pRow];
+                result[pRow] = result[j];
+                result[j] = rowPtr;
+
+                int tmp = perm[pRow];
+                perm[pRow] = perm[j];
+                perm[j] = tmp;
+
+                toggle = -toggle;
+            }
+
+            for (int i = j + 1; i < n; i++)
+            {
+                result[i][j] /= result[j][j];
+
+                for (int k = j + 1; k < n; k++)
+                {
+                    result[i][k] -= result[i][j] * result[j][k];
+                }
+            }
+        }
+
+        return new Matrix(result);
+    }
+
+    public Matrix Inverse()
+    {
+        int n = _matrix.Length;
+        double[][] result = Duplicate().GetArray;
+
+        int[] perm;
+        int toggle;
+
+        double[][] decomposedM = Decompose(out perm, out toggle).GetArray;
+
+        if (decomposedM == null)
+        {
+            throw new Exception("Unable to compute inverse.");
+        }
+
+        double[] b = new double[n];
+
+        for (int i = 0; i < n; i++)
+        {
+            for (int j = 0; j < n; j++)
+            {
+                if (i == perm[j])
+                {
+                    b[j] = 1.0;
+                }
+                else
+                {
+                    b[j] = 0.0;
+                }
+            }
+
+            double[] x = new Matrix(decomposedM).HelperSolve(b);
+
+            for (int j = 0; j < n; j++)
+            {
+                result[j][i] = x[j];
+            }
+        }
+
+        return new Matrix(result);
     }
 }

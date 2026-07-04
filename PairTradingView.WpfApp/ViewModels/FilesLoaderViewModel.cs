@@ -19,126 +19,124 @@ using PairTradingView.WpfApp.Infra;
 using PairTradingView.WpfApp.Models;
 using PairTradingView.WpfApp.Utils;
 using Serilog;
-using Serilog.Core;
 using System.Windows.Input;
 
-namespace PairTradingView.WpfApp.ViewModels
+namespace PairTradingView.WpfApp.ViewModels;
+
+public class FilesLoaderViewModel : ObservableObject
 {
-    public class FilesLoaderViewModel : ObservableObject
+    private const string CsvFilesDirectory = "csv-files";
+
+    private readonly FinancialPairsModel _fpModel;
+    private readonly ILogger _logger;
+
+    private Stock[] _stocks;
+    private CsvSeparator _selectedSeparator;
+
+    private int _selectedPriceColumnNumber = 4;
+    private bool _containsHeader;
+
+    public Stock[] Stocks
     {
-        private const string CsvFilesDirectory = "csv-files";
+        get => _stocks;
 
-        private readonly FinancialPairsModel _fpModel;
-        private readonly ILogger _logger;
-
-        private Stock[] _stocks;
-        private CsvSeparator _selectedSeparator;
-
-        private int _selectedPriceColumnNumber = 4;
-        private bool _containsHeader;
-
-        public Stock[] Stocks
+        set
         {
-            get => _stocks;
+            _stocks = value;
+            OnPropertyChanged();
+        }
+    }
 
-            set
+    public int SelectedPriceColumnNumber
+    {
+        get => _selectedPriceColumnNumber;
+
+        set
+        {
+            _selectedPriceColumnNumber = value;
+            OnPropertyChanged();
+        }
+    }
+
+    public int[] PriceColumnNumbers { get; } = Enumerable.Range(1, 20).ToArray();
+
+    public bool ContainsHeader
+    {
+        get => _containsHeader;
+
+        set
+        {
+            _containsHeader = value;
+            OnPropertyChanged();
+        }
+    }
+
+    public ICollection<CsvSeparator> Separators { get; }
+
+    public CsvSeparator SelectedSeparator
+    {
+        get => _selectedSeparator;
+
+        set
+        {
+            _selectedSeparator = value;
+            OnPropertyChanged();
+        }
+    }
+
+    public ICommand LoadDataFromFilesCommand { get; }
+    public ICommand CalculateButtonCommand { get; }
+
+    public FilesLoaderViewModel(FinancialPairsModel financialPairsModel, ILogger logger)
+    {
+        _fpModel = financialPairsModel ?? throw new ArgumentNullException(nameof(financialPairsModel));
+        _logger = logger ?? throw new ArgumentNullException(nameof(logger));
+
+        LoadDataFromFilesCommand = new RelayCommand(x => LoadDataFromFilesAction(), _logger);
+        CalculateButtonCommand = new RelayCommand(x => CalculateButtonAction(), _logger);
+
+        Separators = new List<CsvSeparator>
+        {
+            CsvSeparator.Comma,
+            CsvSeparator.Space,
+            CsvSeparator.Tab,
+        };
+
+        SelectedSeparator = Separators.FirstOrDefault();  
+    }
+
+    private void LoadDataFromFilesAction()
+    {
+        try
+        {
+            int priceColumn = SelectedPriceColumnNumber;
+            bool header = ContainsHeader;
+
+            if (SelectedSeparator?.Value is char separator)
             {
-                _stocks = value;
-                OnPropertyChanged();
+                Stocks = CsvUtils.ReadAllDataFrom(CsvFilesDirectory, priceColumn, header, separator);
             }
         }
-
-        public int SelectedPriceColumnNumber
+        catch (Exception ex)
         {
-            get => _selectedPriceColumnNumber;
-
-            set
-            {
-                _selectedPriceColumnNumber = value;
-                OnPropertyChanged();
-            }
+            _logger.Error(ex, "Error loading data from files");
+            UserNotification.Display(ex);
         }
+    }
 
-        public int[] PriceColumnNumbers { get; } = Enumerable.Range(1, 20).ToArray();
-
-        public bool ContainsHeader
+    private void CalculateButtonAction()
+    {
+        if (Stocks == null || Stocks.Length == 0)
         {
-            get => _containsHeader;
-
-            set
-            {
-                _containsHeader = value;
-                OnPropertyChanged();
-            }
+            UserNotification.Display("No input data.");
         }
-
-        public ICollection<CsvSeparator> Separators { get; }
-
-        public CsvSeparator SelectedSeparator
+        else if (Stocks.Length == 1)
         {
-            get => _selectedSeparator;
-
-            set
-            {
-                _selectedSeparator = value;
-                OnPropertyChanged();
-            }
+            UserNotification.Display("You should have 2 stocks minimum.");
         }
-
-        public ICommand LoadDataFromFilesCommand { get; }
-        public ICommand CalculateButtonCommand { get; }
-
-        public FilesLoaderViewModel(FinancialPairsModel financialPairsModel, ILogger logger)
+        else
         {
-            _fpModel = financialPairsModel ?? throw new ArgumentNullException(nameof(financialPairsModel));
-            _logger = logger ?? throw new ArgumentNullException(nameof(logger));
-
-            LoadDataFromFilesCommand = new RelayCommand(x => LoadDataFromFilesAction(), _logger);
-            CalculateButtonCommand = new RelayCommand(x => CalculateButtonAction(), _logger);
-
-            Separators = new List<CsvSeparator>
-            {
-                CsvSeparator.Comma,
-                CsvSeparator.Space,
-                CsvSeparator.Tab,
-            };
-
-            SelectedSeparator = Separators.FirstOrDefault();  
-        }
-
-        private void LoadDataFromFilesAction()
-        {
-            try
-            {
-                int priceColumn = SelectedPriceColumnNumber;
-                bool header = ContainsHeader;
-
-                if (SelectedSeparator?.Value is char separator)
-                {
-                    Stocks = CsvUtils.ReadAllDataFrom(CsvFilesDirectory, priceColumn, header, separator);
-                }
-            }
-            catch (Exception ex)
-            {
-                _logger.Error(ex, "Error loading data from files");
-                UserNotification.Display(ex);
-            }
-        }
-
-        private void CalculateButtonAction()
-        {
-            if (Stocks == null || Stocks.Length == 0)
-            {
-                UserNotification.Display("No input data.");
-            }
-            else if (Stocks.Length == 1)
-            {
-                UserNotification.Display("You should have 2 stocks minimum.");
-            }
-            else
-            {
-                _fpModel.UpdateStocks(Stocks);
-            }
+            _fpModel.UpdateStocks(Stocks);
         }
     }
 }

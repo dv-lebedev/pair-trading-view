@@ -14,29 +14,25 @@
     limitations under the License.
 */
 
-using System;
-using System.Linq;
+namespace PairTradingView.Shared;
 
-namespace PairTradingView.Shared
+public class Stock : ICloneable
 {
-    public class Stock : ICloneable
+    public string Name { get; set; }
+    public double[] Prices { get; set; }
+    public double Deviation { get; set; }
+    public double TradeVolume { get; set; }
+    public double Weight { get; set; }
+
+    public Stock Copy()
     {
-        public string Name { get; set; }
-        public double[] Prices { get; set; }
-        public double Deviation { get; set; }
-        public double TradeVolume { get; set; }
-        public double Weight { get; set; }
+        Stock stock = MemberwiseClone() as Stock;
+        stock.Prices = Prices.ToArray();
+        return stock;
+    }
 
-        public Stock Copy()
-        {
-            Stock stock = MemberwiseClone() as Stock;
-            stock.Prices = Prices.ToArray();
-            return stock;
-        }
-
-        public object Clone()
-        {
-            return Copy();
-        }
+    public object Clone()
+    {
+        return Copy();
     }
 }

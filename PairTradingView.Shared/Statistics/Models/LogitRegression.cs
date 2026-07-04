@@ -15,67 +15,64 @@
 */
 
 using PairTradingView.Shared.Statistics.Methods;
-using System;
-using System.Linq;
 
-namespace PairTradingView.Shared.Statistics.Models
+namespace PairTradingView.Shared.Statistics.Models;
+
+public class LogitRegression : IRegression
 {
-    public class LogitRegression : IRegression
+    public IRegressionMethod RegressionMethod { get; set; }
+
+    public double[] Coefs
     {
-        public IRegressionMethod RegressionMethod { get; set; }
+        get { return RegressionMethod.Coefs; }
+    }
 
-        public double[] Coefs
+    public double[] RValues
+    {
+        get { return RegressionMethod.RValues; }
+    }
+
+    public double[] RSquaredValues
+    {
+        get { return RegressionMethod.RSquaredValues; }
+    }
+
+    public LogitRegression()
+    {
+        RegressionMethod = new OrdinaryLeastSquares();
+    }
+
+    public void Compute(bool[] y, params double[][] xn)
+    {
+        RegressionMethod.Compute(y.Select(i => Convert.ToDouble(i)).ToArray(), xn);
+    }
+
+    public double PredictValue(params double[] xValues)
+    {
+        if (xValues.Length != Coefs.Length - 1)
+            throw new DifferentLengthException();
+
+        double y = Coefs[0];
+
+        for (int i = 0; i < xValues.Length; i++)
         {
-            get { return RegressionMethod.Coefs; }
+            y += Coefs[i + 1] * xValues[i];
         }
 
-        public double[] RValues
+        return (1 / (1 + Math.Pow(Math.E, -y)));
+    }
+
+    public bool TryPredictValue(out double result, params double[] xValues)
+    {
+        result = 0;
+
+        if (xValues.Length == Coefs.Length - 1)
         {
-            get { return RegressionMethod.RValues; }
+            result = PredictValue(xValues);
+
+            return true;
         }
 
-        public double[] RSquaredValues
-        {
-            get { return RegressionMethod.RSquaredValues; }
-        }
-
-        public LogitRegression()
-        {
-            RegressionMethod = new OrdinaryLeastSquares();
-        }
-
-        public void Compute(bool[] y, params double[][] xn)
-        {
-            RegressionMethod.Compute(y.Select(i => Convert.ToDouble(i)).ToArray(), xn);
-        }
-
-        public double PredictValue(params double[] xValues)
-        {
-            if (xValues.Length != Coefs.Length - 1)
-                throw new DifferentLengthException();
-
-            double y = Coefs[0];
-
-            for (int i = 0; i < xValues.Length; i++)
-            {
-                y += Coefs[i + 1] * xValues[i];
-            }
-
-            return (1 / (1 + Math.Pow(Math.E, -y)));
-        }
-
-        public bool TryPredictValue(out double result, params double[] xValues)
-        {
-            result = 0;
-
-            if (xValues.Length == Coefs.Length - 1)
-            {
-                result = PredictValue(xValues);
-
-                return true;
-            }
-
-            return false;
-        }
+        return false;
     }
 }

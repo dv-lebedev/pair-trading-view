@@ -14,42 +14,40 @@
     limitations under the License.
 */
 
-using System;
 using System.Windows;
 using System.Windows.Controls;
 
-namespace PairTradingView.WpfApp.Utils
+namespace PairTradingView.WpfApp.Utils;
+
+public static class UserNotification
 {
-    public static class UserNotification
+    public static void Display(string message)
     {
-        public static void Display(string message)
+        MessageBox.Show(message, App.Current?.MainWindow?.Title ?? string.Empty);
+    }
+
+    public static void Display(Exception ex)
+    {
+        MessageBox.Show(
+            ex.Message,
+            App.Current?.MainWindow?.Title ?? string.Empty,
+            MessageBoxButton.OK, 
+            MessageBoxImage.Error);
+    }
+
+    public static void Display(this UserControl control, string message)
+    {
+        control.Dispatcher.BeginInvoke((Action)(() =>
         {
             MessageBox.Show(message, App.Current?.MainWindow?.Title ?? string.Empty);
-        }
+        }));
+    }
 
-        public static void Display(Exception ex)
-        {
-            MessageBox.Show(
-                ex.Message,
-                App.Current?.MainWindow?.Title ?? string.Empty,
-                MessageBoxButton.OK, 
-                MessageBoxImage.Error);
-        }
-
-        public static void Display(this UserControl control, string message)
-        {
-            control.Dispatcher.BeginInvoke((Action)(() =>
-            {
-                MessageBox.Show(message, App.Current?.MainWindow?.Title ?? string.Empty);
-            }));
-        }
-
-        public static void Display(this Window control, string message)
-        {
-            control.Dispatcher.BeginInvoke((Action)(() =>
-            { 
-                MessageBox.Show(message, App.Current?.MainWindow?.Title ?? string.Empty); 
-            }));
-        }
+    public static void Display(this Window control, string message)
+    {
+        control.Dispatcher.BeginInvoke((Action)(() =>
+        { 
+            MessageBox.Show(message, App.Current?.MainWindow?.Title ?? string.Empty); 
+        }));
     }
 }
