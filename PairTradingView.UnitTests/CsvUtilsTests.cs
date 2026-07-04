@@ -14,36 +14,36 @@
     limitations under the License.
 */
 
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using PairTradingView.Shared;
-using System.Linq;
 
-namespace PairTradingView.UnitTests
+namespace PairTradingView.UnitTests;
+
+public class CsvUtilsTests
 {
-    [TestClass()]
-    public class CsvUtilsTests
+    const int NumberOfPrices = 254;
+    const int PriceIndex = 4;
+    const bool ContainsHeader = false;
+
+    [Test]
+    public void Read_Test()
     {
-        [TestMethod()]
-        public void Read_Test()
+        Stock lkoh = CsvUtils.Read("csv-files/LKOH.txt", priceIndex: PriceIndex, containsHeader: ContainsHeader);
+
+        Assert.That(lkoh.Prices.Length, Is.EqualTo(NumberOfPrices));
+        Assert.That(Math.Round(lkoh.Prices.First(), 2), Is.EqualTo(3421.5));
+        Assert.That(Math.Round(lkoh.Prices.Last(), 2), Is.EqualTo(4997));
+    }
+
+    [Test]
+    public void ReadAllDataFrom_Test()
+    {
+        Stock[] stocks = CsvUtils.ReadAllDataFrom("csv-files/", priceIndex: PriceIndex, containsHeader: ContainsHeader);
+
+        Assert.That(stocks.Length, Is.EqualTo(8));
+
+        foreach (var stock in stocks)
         {
-            Stock aapl = CsvUtils.Read("csv-samples/AAPL.txt", priceIndex: 4, containsHeader: false);
-
-            Assert.AreEqual(473, aapl.Prices.Length);
-            Assert.AreEqual(553.12999, aapl.Prices.First());
-            Assert.AreEqual(114.18, aapl.Prices.Last());
-        }
-
-        [TestMethod()]
-        public void ReadAllDataFrom_Test()
-        {
-            Stock[] stocks = CsvUtils.ReadAllDataFrom("csv-samples/", priceIndex: 4, containsHeader: false);
-
-            Assert.AreEqual(3, stocks.Length);
-
-            foreach(var stock in stocks)
-            {
-                Assert.AreEqual(473, stock.Prices.Length);
-            }
+            Assert.That(stock.Prices.Length, Is.EqualTo(NumberOfPrices));
         }
     }
 }

@@ -14,16 +14,32 @@
     limitations under the License.
 */
 
-using PairTradingView.Shared;
+using Microsoft.Extensions.DependencyInjection;
+using PairTradingView.WpfApp.Infra;
+using Serilog;
 using System.Windows;
 
-namespace PairTradingView.WpfApp
+namespace PairTradingView.WpfApp;
+
+public partial class App : Application
 {
-    public partial class App : Application
+    public static IServiceProvider? Services { get; private set; }
+
+    public App()
     {
-        private void Application_Exit(object sender, ExitEventArgs e)
-        {
-            Logger.Log.Dispose();
-        }
+        BuildServices();
+    }
+
+    private static void BuildServices()
+    {
+        var sc = new ServiceCollection();
+        sc.AddAsOneServices();
+        Services = sc.BuildServiceProvider();
+    }
+
+    private void Application_Exit(object sender, ExitEventArgs e)
+    {
+        Log.Information("Application is exiting.");
+        Log.CloseAndFlush();
     }
 }

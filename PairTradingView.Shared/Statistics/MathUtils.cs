@@ -14,95 +14,91 @@
     limitations under the License.
 */
 
-using System;
-using System.Linq;
+namespace PairTradingView.Shared.Statistics;
 
-namespace PairTradingView.Shared.Statistics
+public static class MathUtils
 {
-    public static class MathUtils
+    public static double[] GetError(double[] values)
     {
-        public static double[] GetError(double[] values)
+        double[] result = new double[values.Length - 1];
+
+        for (int i = 1; i < values.Length; i++)
         {
-            double[] result = new double[values.Length - 1];
-
-            for (int i = 1; i < values.Length; i++)
-            {
-                result[i - 1] = values[i] - values[i - 1];
-            }
-
-            return result;
+            result[i - 1] = values[i] - values[i - 1];
         }
 
-        public static double MultiplyArrays(double[] x, double[] y)
+        return result;
+    }
+
+    public static double MultiplyArrays(double[] x, double[] y)
+    {
+        Check.NotNull(x, y);
+
+        if (x.Length != y.Length)
         {
-            Check.NotNull(x, y);
-
-            if (x.Length != y.Length)
-            {
-                throw new DifferentLengthException();
-            }
-
-            double result = 0;
-
-            for (int i = 0; i < x.Length; i++)
-            {
-                result += x[i] * y[i];
-            }
-
-            return result;
+            throw new DifferentLengthException();
         }
 
-        public static double Pow(double value, double power)
+        double result = 0;
+
+        for (int i = 0; i < x.Length; i++)
         {
-            return (double)Math.Pow((double)value, power);
+            result += x[i] * y[i];
         }
 
-        public static double Pow(double[] values, double power)
+        return result;
+    }
+
+    public static double Pow(double value, double power)
+    {
+        return (double)Math.Pow((double)value, power);
+    }
+
+    public static double Pow(double[] values, double power)
+    {
+        Check.NotNull(values);
+
+        double result = 0;
+
+        for (int i = 0; i < values.Length; i++)
         {
-            Check.NotNull(values);
-
-            double result = 0;
-
-            for (int i = 0; i < values.Length; i++)
-            {
-                result += Math.Pow(values[i], power);
-            }
-
-            return result;
+            result += Math.Pow(values[i], power);
         }
 
-        public static double GetStandardDeviation(double[] values)
+        return result;
+    }
+
+    public static double GetStandardDeviation(double[] values)
+    {
+        Check.NotNull(values);
+
+        double result = 0;
+
+        double average = values.Average();
+
+        for (int i = 0; i < values.Length; i++)
         {
-            Check.NotNull(values);
+            result += Math.Pow(values[i] - average, 2);
+        }
+        return Math.Sqrt(result /= (values.Length - 1));
+    }
 
-            double result = 0;
+    public static double[] GetPercents(double[] prices)
+    {
+        Check.NotNull(prices);
 
-            double average = values.Average();
-
-            for (int i = 0; i < values.Length; i++)
-            {
-                result += Math.Pow(values[i] - average, 2);
-            }
-            return Math.Sqrt(result /= (values.Length - 1));
+        if (prices.Length == 0)
+        {
+            throw new ArgumentException(nameof(prices));
         }
 
-        public static double[] GetPercents(double[] prices)
+        double[] result = new double[prices.Length - 1];
+        double first = prices[0];
+
+        for (int i = 0; i < result.Length; i++)
         {
-            Check.NotNull(prices);
-
-            if (prices.Length == 0)
-            {
-                throw new ArgumentException(nameof(prices));
-            }
-
-            double[] result = new double[prices.Length - 1];
-            double first = prices[0];
-
-            for (int i = 0; i < result.Length; i++)
-            {
-                result[i] = (prices[i + 1] / first - 1.0) * 100.0;
-            }
-            return result;
+            result[i] = (prices[i + 1] / first - 1.0) * 100.0;
         }
+        return result;
     }
 }

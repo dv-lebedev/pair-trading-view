@@ -14,15 +14,17 @@
     limitations under the License.
 */
 
+using Microsoft.Extensions.DependencyInjection;
+using PairTradingView.WpfApp.ViewModels;
 using System.Windows.Controls;
 
-namespace PairTradingView.WpfApp.Views
+namespace PairTradingView.WpfApp.Views;
+
+public partial class SelectedPairInfoView : UserControl
 {
-    public partial class SelectedPairInfoView : UserControl
+    public SelectedPairInfoView()
     {
-        public SelectedPairInfoView()
-        {
-            InitializeComponent();
-        }
+        InitializeComponent();
+        DataContext = App.Services.GetService<SelectedPairInfoViewModel>();
     }
 }

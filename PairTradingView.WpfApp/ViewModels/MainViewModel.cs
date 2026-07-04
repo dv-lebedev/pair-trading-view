@@ -17,10 +17,9 @@
 
 using PairTradingView.Shared;
 
-namespace PairTradingView.WpfApp.ViewModels
+namespace PairTradingView.WpfApp.ViewModels;
+
+public class MainViewModel : ObservableObject
 {
-    public class MainViewModel : ObservableObject
-    {
-        public MainViewModel() { }
-    }
+    public MainViewModel() { }
 }

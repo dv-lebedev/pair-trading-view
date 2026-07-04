@@ -15,87 +15,83 @@
 */
 
 using PairTradingView.Shared.Statistics.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 
-namespace PairTradingView.Shared
+namespace PairTradingView.Shared;
+
+public class RiskManager
 {
-    public class RiskManager
+    private FinancialPair[] _pairs;
+    private double[] _synthIndex;
+
+    public double Balance { get; }
+
+    public RiskManager(IEnumerable<FinancialPair> pairs, double balance)
     {
-        private FinancialPair[] _pairs;
-        private double[] _synthIndex;
+        Check.NotNull(pairs);
 
-        public double Balance { get; }
+        if (balance < 0) throw new ArgumentException("[balance] can't have negative value.");
 
-        public RiskManager(IEnumerable<FinancialPair> pairs, double balance)
+        _pairs = pairs.ToArray();
+        Balance = balance;
+
+        SetTradeVolumeToDefault();
+        SetSynthIndex();
+    }
+
+    private void SetTradeVolumeToDefault()
+    {
+        foreach (var pair in _pairs)
         {
-            Check.NotNull(pairs);
+            pair.TradeVolume = 0;
+            pair.X.TradeVolume = 0;
+            pair.Y.TradeVolume = 0;
+        }
+    }
 
-            if (balance < 0) throw new ArgumentException("[balance] can't have negative value.");
+    private void SetSynthIndex()
+    {
+        _synthIndex = new double[_pairs.First().DeltaValues.Length];
 
-            _pairs = pairs.ToArray();
-            Balance = balance;
+        for (int i = 0; i < _pairs.First().DeltaValues.Length; i++)
+        {
+            double value = 0;
 
-            SetTradeVolumeToDefault();
-            SetSynthIndex();
+            for (int j = 0; j < _pairs.Length; j++)
+            {
+                value += _pairs[j].DeltaValues[i];
+            }
+
+            _synthIndex[i] += (value / _pairs.Length);
+        }
+    }
+
+    public void Calculate()
+    {
+        double summary = 0;
+
+        foreach (var pair in _pairs)
+        {
+            var regression = new LinearRegression();
+            regression.Compute(pair.DeltaValues, _synthIndex);
+
+            pair.Weight = 1 / (1 + Math.Abs(regression.Beta));
+
+            summary += pair.Weight;
         }
 
-        private void SetTradeVolumeToDefault()
+        foreach (var pair in _pairs)
         {
-            foreach (var pair in _pairs)
-            {
-                pair.TradeVolume = 0;
-                pair.X.TradeVolume = 0;
-                pair.Y.TradeVolume = 0;
-            }
+            pair.Weight = pair.Weight / summary;
+            pair.TradeVolume = Balance * pair.Weight;
         }
 
-        private void SetSynthIndex()
+        foreach (var pair in _pairs)
         {
-            _synthIndex = new double[_pairs.First().DeltaValues.Length];
+            double beta = pair.Regression.Beta;
+            double weight = 1.0 / (1.0 + Math.Abs(beta));
 
-            for (int i = 0; i < _pairs.First().DeltaValues.Length; i++)
-            {
-                double value = 0;
-
-                for (int j = 0; j < _pairs.Length; j++)
-                {
-                    value += _pairs[j].DeltaValues[i];
-                }
-
-                _synthIndex[i] += (value / _pairs.Length);
-            }
-        }
-
-        public void Calculate()
-        {
-            double summary = 0;
-
-            foreach (var pair in _pairs)
-            {
-                var regression = new LinearRegression();
-                regression.Compute(pair.DeltaValues, _synthIndex);
-
-                pair.Weight = 1 / (1 + Math.Abs(regression.Beta));
-
-                summary += pair.Weight;
-            }
-
-            foreach (var pair in _pairs)
-            {
-                pair.Weight = pair.Weight / summary;
-                pair.TradeVolume = Balance * pair.Weight;
-            }
-
-            foreach (var pair in _pairs)
-            {
-                double beta = pair.Regression.Beta;
-                double weight = 1.0 / (1.0 + Math.Abs(beta));
-
-                pair.X.TradeVolume = pair.TradeVolume * (weight * Math.Abs(beta));
-                pair.Y.TradeVolume = pair.TradeVolume * weight;
-            }
+            pair.X.TradeVolume = pair.TradeVolume * (weight * Math.Abs(beta));
+            pair.Y.TradeVolume = pair.TradeVolume * weight;
         }
     }
 }

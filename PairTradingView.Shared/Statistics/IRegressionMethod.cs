@@ -14,14 +14,13 @@
     limitations under the License.
 */
 
-namespace PairTradingView.Shared.Statistics
-{
-    public interface IRegressionMethod
-    {
-        double[] Coefs { get; }
-        double[] RSquaredValues { get; }
-        double[] RValues { get; }
+namespace PairTradingView.Shared.Statistics;
 
-        void Compute(double[] y, params double[][] xn);
-    }
+public interface IRegressionMethod
+{
+    double[] Coefs { get; }
+    double[] RSquaredValues { get; }
+    double[] RValues { get; }
+
+    void Compute(double[] y, params double[][] xn);
 }

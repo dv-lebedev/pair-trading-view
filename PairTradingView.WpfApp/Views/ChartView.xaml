@@ -8,9 +8,6 @@
              xmlns:oxy="http://oxyplot.org/wpf"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <UserControl.DataContext>
-        <viewmodels:ChartViewModel/>
-    </UserControl.DataContext>
     <Grid>
         <oxy:PlotView x:Name="plot" 
                       Background="#202020"

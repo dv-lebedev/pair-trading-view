@@ -14,14 +14,15 @@
     limitations under the License.
 */
 
-using System;
+namespace PairTradingView.WpfApp.Infra;
 
-namespace PairTradingView.Shared
+public static class ThreadExtensions
 {
-    public interface ILogger
+    public static void RunSTA(this Thread thread, bool inSync = true)
     {
-        void Dispose();
-        void Err(Exception ex);
-        void Msg(string message);
+        thread.SetApartmentState(ApartmentState.STA); // Configure for STA
+        thread.Start(); // Start running STA thread for action
+        if (inSync)
+            thread.Join(); // Sync back to running thread
     }
 }

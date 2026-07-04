@@ -7,10 +7,6 @@
              xmlns:viewmodels="clr-namespace:PairTradingView.WpfApp.ViewModels"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <UserControl.DataContext>
-        <viewmodels:SelectedPairInfoViewModel/>
-    </UserControl.DataContext>
-    
     <GroupBox
         Margin="2,9,10,9" 
         BorderThickness="0.5" 

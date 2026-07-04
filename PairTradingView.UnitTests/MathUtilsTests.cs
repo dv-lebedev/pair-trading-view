@@ -14,30 +14,22 @@
     limitations under the License.
 */
 
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using PairTradingView.Shared.Statistics;
 
-namespace PairTradingView.Infrastructure.Tests
+namespace PairTradingView.UnitTests;
+
+public class MathUtilsTests
 {
-    [TestClass()]
-    public class MathUtilsTests
+    [Test]
+    public void GetStandardDeviationTest()
     {
-        [TestMethod()]
-        public void GetStandardDeviationTest()
-        {
-            double[] values = { 1, 3, 5, 7 };
+        double[] values = { 1, 3, 5, 7 };
 
+        double result = MathUtils.GetStandardDeviation(values);
+        Assert.That(result, Is.EqualTo(2.5819).Within(0.0001));
 
-            double result = MathUtils.GetStandardDeviation(values);
-
-            Assert.AreEqual(2.5819, result, 0.0001);
-
-
-            values = new double[] { 1, 2, 4, 5 };
-
-            result = MathUtils.GetStandardDeviation(values);
-
-            Assert.AreEqual(1.8257, result, 0.0001);
-        }
+        values = new double[] { 1, 2, 4, 5 };
+        result = MathUtils.GetStandardDeviation(values);
+        Assert.That(result, Is.EqualTo(1.8257).Within(0.0001));
     }
 }

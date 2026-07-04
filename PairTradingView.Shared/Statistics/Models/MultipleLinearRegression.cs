@@ -16,35 +16,34 @@
 
 using PairTradingView.Shared.Statistics.Methods;
 
-namespace PairTradingView.Shared.Statistics.Models
+namespace PairTradingView.Shared.Statistics.Models;
+
+public class MultipleLinearRegression : IRegression
 {
-    public class MultipleLinearRegression : IRegression
+    public IRegressionMethod RegressionMethod { get; set; }
+
+    public double[] Coefs
     {
-        public IRegressionMethod RegressionMethod { get; set; }
+        get { return RegressionMethod.Coefs; }
+    }
 
-        public double[] Coefs
-        {
-            get { return RegressionMethod.Coefs; }
-        }
+    public double[] RValues
+    {
+        get { return RegressionMethod.RValues; }
+    }
 
-        public double[] RValues
-        {
-            get { return RegressionMethod.RValues; }
-        }
+    public double[] RSquaredValues
+    {
+        get { return RegressionMethod.RSquaredValues; }
+    }
 
-        public double[] RSquaredValues
-        {
-            get { return RegressionMethod.RSquaredValues; }
-        }
+    public MultipleLinearRegression()
+    {
+        RegressionMethod = new OrdinaryLeastSquares();
+    }
 
-        public MultipleLinearRegression()
-        {
-            RegressionMethod = new OrdinaryLeastSquares();
-        }
-
-        public void Compute(double[] y, params double[][] xn)
-        {
-            RegressionMethod.Compute(y, xn);
-        }
+    public void Compute(double[] y, params double[][] xn)
+    {
+        RegressionMethod.Compute(y, xn);
     }
 }

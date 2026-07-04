@@ -14,34 +14,31 @@
     limitations under the License.
 */
 
-using System;
+namespace PairTradingView.Shared;
 
-namespace PairTradingView.Shared
+public static class Check
 {
-    public static class Check
+    public static void NotNull(params object[] items)
     {
-        public static void NotNull(params object[] items)
+        foreach (var item in items)
         {
-            foreach (var item in items)
+            if (item == null)
             {
-                if (item == null)
-                {
-                    throw new ArgumentNullException();
-                }
+                throw new ArgumentNullException();
             }
         }
+    }
 
-        public static void ThrowIfNullOrEmpty(string value, string propertyName)
+    public static void ThrowIfNullOrEmpty(string value, string propertyName)
+    {
+        if (value == null)
         {
-            if (value == null)
-            {
-                throw new ArgumentNullException(nameof(propertyName));
-            }
+            throw new ArgumentNullException(nameof(propertyName));
+        }
 
-            if (value == string.Empty)
-            {
-                throw new ArgumentException(nameof(propertyName));
-            }
+        if (value == string.Empty)
+        {
+            throw new ArgumentException(nameof(propertyName));
         }
     }
 }

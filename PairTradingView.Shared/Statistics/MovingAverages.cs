@@ -14,88 +14,85 @@
     limitations under the License.
 */
 
-using System;
+namespace PairTradingView.Shared.Statistics;
 
-namespace PairTradingView.Shared.Statistics
+public static class MovingAverages
 {
-    public static class MovingAverages
+    public static double[] SMA(double[] values, int period)
     {
-        public static double[] SMA(double[] values, int period)
+        if (values == null) throw new ArgumentNullException("values");
+        if (period > values.Length) throw new ArgumentException("period > values.Lenght");
+        if (period <= 0) throw new ArgumentException("period <= 0");
+
+        double[] result = new double[values.Length - (period - 1)];
+
+        for (int i = 0; i < values.Length - (period - 1); i++)
         {
-            if (values == null) throw new ArgumentNullException("values");
-            if (period > values.Length) throw new ArgumentException("period > values.Lenght");
-            if (period <= 0) throw new ArgumentException("period <= 0");
-
-            double[] result = new double[values.Length - (period - 1)];
-
-            for (int i = 0; i < values.Length - (period - 1); i++)
+            for (int j = i; j < i + period; j++)
             {
-                for (int j = i; j < i + period; j++)
-                {
-                    result[i] += values[j];
-                }
-
-                result[i] /= period;
+                result[i] += values[j];
             }
 
-            return result;
+            result[i] /= period;
         }
 
-        public static double[] WMA(double[] values, int period)
+        return result;
+    }
+
+    public static double[] WMA(double[] values, int period)
+    {
+        if (values == null) throw new ArgumentNullException("values");
+        if (period > values.Length) throw new ArgumentException("period > values.Lenght");
+        if (period <= 0) throw new ArgumentException("period <= 0");
+
+        long weight = 0;
+        long weightSumm = 0;
+        double[] result = new double[values.Length - (period - 1)];
+
+        for (int i = 0; i < values.Length - (period - 1); i++)
         {
-            if (values == null) throw new ArgumentNullException("values");
-            if (period > values.Length) throw new ArgumentException("period > values.Lenght");
-            if (period <= 0) throw new ArgumentException("period <= 0");
-
-            long weight = 0;
-            long weightSumm = 0;
-            double[] result = new double[values.Length - (period - 1)];
-
-            for (int i = 0; i < values.Length - (period - 1); i++)
+            for (int j = i; j < i + period; j++)
             {
-                for (int j = i; j < i + period; j++)
-                {
-                    result[i] += values[j] * ++weight;
+                result[i] += values[j] * ++weight;
 
-                    weightSumm += weight;
-                }
-
-                result[i] /= weightSumm;
-
-                weight = 0;
-
-                weightSumm = 0;
+                weightSumm += weight;
             }
 
-            return result;
+            result[i] /= weightSumm;
+
+            weight = 0;
+
+            weightSumm = 0;
         }
 
-        public static double[] VMA(double[] values, long[] volumes, int period)
+        return result;
+    }
+
+    public static double[] VMA(double[] values, long[] volumes, int period)
+    {
+        if (values == null) throw new ArgumentNullException("values");
+        if (volumes == null) throw new ArgumentNullException("volumes");
+        if (period > values.Length) throw new ArgumentException("period > values.Lenght");
+        if (values.Length != volumes.Length) throw new ArgumentException("values.Length != volumes.Length");
+        if (period <= 0) throw new ArgumentException("period <= 0");
+
+        long volumeSumm = 0;
+        double[] result = new double[values.Length - (period - 1)];
+
+        for (int i = 0; i < values.Length - (period - 1); i++)
         {
-            if (values == null) throw new ArgumentNullException("values");
-            if (volumes == null) throw new ArgumentNullException("volumes");
-            if (period > values.Length) throw new ArgumentException("period > values.Lenght");
-            if (values.Length != volumes.Length) throw new ArgumentException("values.Length != volumes.Length");
-            if (period <= 0) throw new ArgumentException("period <= 0");
-
-            long volumeSumm = 0;
-            double[] result = new double[values.Length - (period - 1)];
-
-            for (int i = 0; i < values.Length - (period - 1); i++)
+            for (int j = i; j < i + period; j++)
             {
-                for (int j = i; j < i + period; j++)
-                {
-                    volumeSumm += volumes[j];
+                volumeSumm += volumes[j];
 
-                    result[i] += values[j] * volumes[j];
-                }
-
-                result[i] /= volumeSumm;
-
-                volumeSumm = 0;
+                result[i] += values[j] * volumes[j];
             }
 
-            return result;
+            result[i] /= volumeSumm;
+
+            volumeSumm = 0;
         }
+
+        return result;
     }
 }

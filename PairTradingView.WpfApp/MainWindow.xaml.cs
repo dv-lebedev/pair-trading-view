@@ -14,15 +14,17 @@
     limitations under the License.
 */
 
+using Microsoft.Extensions.DependencyInjection;
+using PairTradingView.WpfApp.ViewModels;
 using System.Windows;
 
-namespace PairTradingView.WpfApp
+namespace PairTradingView.WpfApp;
+
+public partial class MainWindow : Window
 {
-    public partial class MainWindow : Window
+    public MainWindow()
     {
-        public MainWindow()
-        {
-            InitializeComponent();
-        }
+        InitializeComponent();
+        DataContext = App.Services.GetRequiredService<MainWindowViewModel>();
     }
 }

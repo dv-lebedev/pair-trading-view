@@ -14,15 +14,17 @@
     limitations under the License.
 */
 
+using Microsoft.Extensions.DependencyInjection;
+using PairTradingView.WpfApp.ViewModels;
 using System.Windows.Controls;
 
-namespace PairTradingView.WpfApp.Views
+namespace PairTradingView.WpfApp.Views;
+
+public partial class ChartView : UserControl
 {
-    public partial class ChartView : UserControl
+    public ChartView()
     {
-        public ChartView()
-        {
-            InitializeComponent();
-        }
+        InitializeComponent();
+        DataContext = App.Services.GetRequiredService<ChartViewModel>();
     }
 }
