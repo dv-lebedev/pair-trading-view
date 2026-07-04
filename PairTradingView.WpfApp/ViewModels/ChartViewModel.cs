@@ -19,7 +19,6 @@ using OxyPlot;
 using OxyPlot.Series;
 using PairTradingView.WpfApp.Models;
 using PairTradingView.WpfApp.Entities;
-using System;
 using PairTradingView.Shared;
 using PairTradingView.Shared.Statistics;
 
@@ -39,29 +38,31 @@ namespace PairTradingView.WpfApp.ViewModels
             }
         }
 
-        private readonly FinancialPairsModel Model = FinancialPairsModel.Instance;
+        private readonly FinancialPairsModel _fpModel;
 
-        public ChartViewModel()
+        public ChartViewModel(FinancialPairsModel financialPairsModel)
         {
+            _fpModel = financialPairsModel ?? throw new ArgumentNullException(nameof(financialPairsModel));
+
             PlotModel = new PlotModel();
             SetUpModel();
-
-            Model.PairsChanged += (s, e) =>
+          
+            _fpModel.PairsChanged += (s, e) =>
             {
                 PlotModel = new PlotModel();
                 SetUpModel();
             };
 
-            Model.SelectedPairChanged += UpdatePlot;
+            _fpModel.SelectedPairChanged += UpdatePlot;
 
-            Model.SmaValueChanged += UpdatePlot;
+            _fpModel.SmaValueChanged += UpdatePlot;
         }
 
         private void UpdatePlot(object sender, EventArgs e)
         {
-            if (Model.SelectedPair is ExtFinancialPair pair)
+            if (_fpModel.SelectedPair is ExtFinancialPair pair)
             {
-                Update(pair.DeltaValues, pair.Name, Model.SmaValue);
+                Update(pair.DeltaValues, pair.Name, _fpModel.SmaValue);
             }
         }
 

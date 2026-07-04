@@ -17,6 +17,8 @@
 using Microsoft.Extensions.DependencyInjection;
 using PairTradingView.Shared;
 using PairTradingView.WpfApp.Infra;
+using PairTradingView.WpfApp.Models;
+using PairTradingView.WpfApp.ViewModels;
 using System.Windows;
 
 namespace PairTradingView.WpfApp

@@ -8,9 +8,6 @@
              mc:Ignorable="d" 
              Background="#202020"
              d:DesignHeight="450" d:DesignWidth="800">
-    <UserControl.DataContext>
-        <viewmodels:MainViewModel/>
-    </UserControl.DataContext>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="186*"/>

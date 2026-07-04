@@ -14,14 +14,11 @@
     limitations under the License.
 */
 
-using System;
+namespace PairTradingView.Shared;
 
-namespace PairTradingView.Shared
+public interface ILogger
 {
-    public interface ILogger
-    {
-        void Dispose();
-        void Err(Exception ex);
-        void Msg(string message);
-    }
+    void Dispose();
+    void Err(Exception ex);
+    void Msg(string message);
 }

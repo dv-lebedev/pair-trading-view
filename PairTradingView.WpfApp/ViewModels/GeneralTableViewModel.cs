@@ -21,10 +21,11 @@ namespace PairTradingView.WpfApp.ViewModels
 {
     public class GeneralTableViewModel : ObservableObject
     {
-        public FinancialPairsModel Model { get; } = FinancialPairsModel.Instance;
+        public FinancialPairsModel Model { get; }
 
-        public GeneralTableViewModel()
+        public GeneralTableViewModel(FinancialPairsModel financialPairsModel)
         {
+            Model = financialPairsModel ?? throw new ArgumentNullException(nameof(financialPairsModel));
         }
     }
 }

@@ -18,9 +18,6 @@ using PairTradingView.Shared;
 using PairTradingView.WpfApp.Infra;
 using PairTradingView.WpfApp.Models;
 using PairTradingView.WpfApp.Utils;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Windows.Input;
 
 namespace PairTradingView.WpfApp.ViewModels
@@ -29,7 +26,7 @@ namespace PairTradingView.WpfApp.ViewModels
     {
         private const string CsvFilesDirectory = "csv-files";
 
-        private readonly FinancialPairsModel Model = FinancialPairsModel.Instance;
+        private readonly FinancialPairsModel _fpModel;
 
         private Stock[] _stocks;
         private CsvSeparator _selectedSeparator;
@@ -88,8 +85,10 @@ namespace PairTradingView.WpfApp.ViewModels
         public ICommand LoadDataFromFilesCommand { get; }
         public ICommand CalculateButtonCommand { get; }
 
-        public FilesLoaderViewModel()
+        public FilesLoaderViewModel(FinancialPairsModel financialPairsModel)
         {
+            _fpModel = financialPairsModel ?? throw new ArgumentNullException(nameof(financialPairsModel));
+
             LoadDataFromFilesCommand = new RelayCommand(x => LoadDataFromFilesAction());
             CalculateButtonCommand = new RelayCommand(x => CalculateButtonAction());
 
@@ -134,7 +133,7 @@ namespace PairTradingView.WpfApp.ViewModels
             }
             else
             {
-                Model.UpdateStocks(Stocks);
+                _fpModel.UpdateStocks(Stocks);
             }
         }
     }

@@ -134,13 +134,14 @@ namespace PairTradingView.WpfApp.ViewModels
             }
         }
 
-        public FinancialPairsModel Model { get; } = FinancialPairsModel.Instance;
+        public FinancialPairsModel Model { get; }
 
         public ICommand CalulateCommand { get; }
         public ICommand LoadNewDataCommand { get; }
 
-        public SelectedPairInfoViewModel() 
+        public SelectedPairInfoViewModel(FinancialPairsModel financialPairsModel) 
         {
+            Model = financialPairsModel ?? throw new ArgumentNullException(nameof(financialPairsModel));
             CalulateCommand = new RelayCommand(x => CalulateCommandAction());
             LoadNewDataCommand = new RelayCommand(x => LoadNewDataCommandAction());
             Balance = 100_000.00;

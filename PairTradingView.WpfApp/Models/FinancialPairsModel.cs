@@ -17,9 +17,7 @@
 using PairTradingView.Shared;
 using PairTradingView.WpfApp.Entities;
 using PairTradingView.WpfApp.Utils;
-using System;
 using System.Collections.ObjectModel;
-using System.Linq;
 
 namespace PairTradingView.WpfApp.Models
 {
@@ -64,11 +62,9 @@ namespace PairTradingView.WpfApp.Models
 
         public ObservableCollection<ExtFinancialPair> Pairs { get; }
 
-        public static readonly FinancialPairsModel Instance = new FinancialPairsModel();
-
         public event EventHandler PairsChanged;
 
-        private FinancialPairsModel()
+        public FinancialPairsModel()
         {
             Pairs = new ObservableCollection<ExtFinancialPair>();
         }

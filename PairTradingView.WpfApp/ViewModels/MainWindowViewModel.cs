@@ -25,7 +25,7 @@ namespace PairTradingView.WpfApp.ViewModels
     {
         private readonly UserControl FilesLoaderView = new FilesLoaderView();
         private readonly UserControl MainView = new MainView();
-        private readonly FinancialPairsModel Model = FinancialPairsModel.Instance;
+        private readonly FinancialPairsModel _fpModel;
 
         private object _currentView;
 
@@ -40,12 +40,14 @@ namespace PairTradingView.WpfApp.ViewModels
             }
         }
 
-        public MainWindowViewModel()
+        public MainWindowViewModel(FinancialPairsModel financialPairsModel)
         {
+            _fpModel = financialPairsModel ?? throw new ArgumentNullException(nameof(financialPairsModel));
+
             CurrentView = FilesLoaderView;
 
-            Model.LoadNewDataRequested += (s, e) => CurrentView = FilesLoaderView;
-            Model.PairsChanged += (s, e) => CurrentView = MainView;
+            _fpModel.LoadNewDataRequested += (s, e) => CurrentView = FilesLoaderView;
+            _fpModel.PairsChanged += (s, e) => CurrentView = MainView;
         }
     }
 }

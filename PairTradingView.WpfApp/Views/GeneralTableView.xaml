@@ -7,9 +7,6 @@
              xmlns:viewmodels="clr-namespace:PairTradingView.WpfApp.ViewModels"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <UserControl.DataContext>
-        <viewmodels:GeneralTableViewModel/>
-    </UserControl.DataContext>
     <UserControl.Resources>
         <Style x:Key="DGHeaderStyle" TargetType="{x:Type DataGrid}">
             <Setter Property="ColumnHeaderStyle" Value="{DynamicResource DGCHeaderStyle}"/>
