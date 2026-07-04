@@ -18,6 +18,7 @@ using PairTradingView.Shared;
 using PairTradingView.WpfApp.Entities;
 using PairTradingView.WpfApp.Infra;
 using PairTradingView.WpfApp.Models;
+using Serilog;
 using System;
 using System.Windows.Input;
 
@@ -34,6 +35,8 @@ namespace PairTradingView.WpfApp.ViewModels
         private double _risk;
         private double _riskLimit;
         private double _balance;
+
+        private readonly ILogger _log;
 
         public string PairName
         {
@@ -139,11 +142,13 @@ namespace PairTradingView.WpfApp.ViewModels
         public ICommand CalulateCommand { get; }
         public ICommand LoadNewDataCommand { get; }
 
-        public SelectedPairInfoViewModel(FinancialPairsModel financialPairsModel) 
+        public SelectedPairInfoViewModel(FinancialPairsModel financialPairsModel, ILogger logger) 
         {
             Model = financialPairsModel ?? throw new ArgumentNullException(nameof(financialPairsModel));
-            CalulateCommand = new RelayCommand(x => CalulateCommandAction());
-            LoadNewDataCommand = new RelayCommand(x => LoadNewDataCommandAction());
+            _log = logger ?? throw new ArgumentNullException(nameof(logger));
+
+            CalulateCommand = new RelayCommand(x => CalulateCommandAction(), _log);
+            LoadNewDataCommand = new RelayCommand(x => LoadNewDataCommandAction(), _log);
             Balance = 100_000.00;
 
             Model.SelectedPairChanged += Instance_SelectedPairChanged;

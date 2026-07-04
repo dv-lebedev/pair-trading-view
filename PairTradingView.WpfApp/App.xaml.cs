@@ -15,10 +15,8 @@
 */
 
 using Microsoft.Extensions.DependencyInjection;
-using PairTradingView.Shared;
 using PairTradingView.WpfApp.Infra;
-using PairTradingView.WpfApp.Models;
-using PairTradingView.WpfApp.ViewModels;
+using Serilog;
 using System.Windows;
 
 namespace PairTradingView.WpfApp
@@ -41,7 +39,8 @@ namespace PairTradingView.WpfApp
 
         private void Application_Exit(object sender, ExitEventArgs e)
         {
-            Logger.Log.Dispose();
+            Log.Information("Application is exiting.");
+            Log.CloseAndFlush();
         }
     }
 }

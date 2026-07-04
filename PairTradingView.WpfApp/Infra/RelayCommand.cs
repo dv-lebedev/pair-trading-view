@@ -14,8 +14,7 @@
     limitations under the License.
 */
 
-using PairTradingView.Shared;
-using System;
+using Serilog;
 using System.Windows.Input;
 
 namespace PairTradingView.WpfApp.Infra
@@ -23,12 +22,14 @@ namespace PairTradingView.WpfApp.Infra
     public class RelayCommand : ICommand
     {
         private readonly Action<object> _action;
+        private readonly ILogger _log;
 
         public event EventHandler CanExecuteChanged;
 
-        public RelayCommand(Action<object> action) 
+        public RelayCommand(Action<object> action, ILogger logger) 
         { 
             _action = action ?? throw new ArgumentNullException(nameof(action));
+            _log = logger ?? throw new ArgumentNullException(nameof(logger));
         }
 
         public bool CanExecute(object parameter)
@@ -44,7 +45,7 @@ namespace PairTradingView.WpfApp.Infra
             }
             catch (Exception ex)
             {
-                Logger.Log.Err(ex);
+                _log.Error(ex, "Error executing command");
             }
         }
     }

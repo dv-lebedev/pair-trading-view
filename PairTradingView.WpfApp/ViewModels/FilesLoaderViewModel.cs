@@ -18,6 +18,8 @@ using PairTradingView.Shared;
 using PairTradingView.WpfApp.Infra;
 using PairTradingView.WpfApp.Models;
 using PairTradingView.WpfApp.Utils;
+using Serilog;
+using Serilog.Core;
 using System.Windows.Input;
 
 namespace PairTradingView.WpfApp.ViewModels
@@ -27,6 +29,7 @@ namespace PairTradingView.WpfApp.ViewModels
         private const string CsvFilesDirectory = "csv-files";
 
         private readonly FinancialPairsModel _fpModel;
+        private readonly ILogger _logger;
 
         private Stock[] _stocks;
         private CsvSeparator _selectedSeparator;
@@ -85,12 +88,13 @@ namespace PairTradingView.WpfApp.ViewModels
         public ICommand LoadDataFromFilesCommand { get; }
         public ICommand CalculateButtonCommand { get; }
 
-        public FilesLoaderViewModel(FinancialPairsModel financialPairsModel)
+        public FilesLoaderViewModel(FinancialPairsModel financialPairsModel, ILogger logger)
         {
             _fpModel = financialPairsModel ?? throw new ArgumentNullException(nameof(financialPairsModel));
+            _logger = logger ?? throw new ArgumentNullException(nameof(logger));
 
-            LoadDataFromFilesCommand = new RelayCommand(x => LoadDataFromFilesAction());
-            CalculateButtonCommand = new RelayCommand(x => CalculateButtonAction());
+            LoadDataFromFilesCommand = new RelayCommand(x => LoadDataFromFilesAction(), _logger);
+            CalculateButtonCommand = new RelayCommand(x => CalculateButtonAction(), _logger);
 
             Separators = new List<CsvSeparator>
             {
@@ -116,7 +120,7 @@ namespace PairTradingView.WpfApp.ViewModels
             }
             catch (Exception ex)
             {
-                Logger.Log.Err(ex);
+                _logger.Error(ex, "Error loading data from files");
                 UserNotification.Display(ex);
             }
         }

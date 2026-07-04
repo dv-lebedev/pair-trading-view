@@ -17,12 +17,15 @@
 using PairTradingView.Shared;
 using PairTradingView.WpfApp.Entities;
 using PairTradingView.WpfApp.Utils;
+using Serilog;
 using System.Collections.ObjectModel;
 
 namespace PairTradingView.WpfApp.Models
 {
     public class FinancialPairsModel : ObservableObject
     {
+        private readonly ILogger _log;
+
         private ExtFinancialPair _selectedPair;
         private int _smaValue;
 
@@ -64,8 +67,9 @@ namespace PairTradingView.WpfApp.Models
 
         public event EventHandler PairsChanged;
 
-        public FinancialPairsModel()
+        public FinancialPairsModel(ILogger logger)
         {
+            _log = logger ?? throw new ArgumentNullException(nameof(logger));
             Pairs = new ObservableCollection<ExtFinancialPair>();
         }
 
@@ -101,7 +105,7 @@ namespace PairTradingView.WpfApp.Models
             }
             catch (Exception ex)
             {
-                Logger.Log.Err(ex);
+                Log.Error(ex, "Error updating stocks");
                 UserNotification.Display(ex.Message);
             }
         }
@@ -132,7 +136,7 @@ namespace PairTradingView.WpfApp.Models
             catch (Exception ex)
             {
                 UserNotification.Display("CalculateRisk => " + ex.Message);
-                Logger.Log.Err(ex);
+                _log.Error(ex, "Error calculating risk");
             }
         }
     }

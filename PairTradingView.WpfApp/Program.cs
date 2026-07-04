@@ -14,8 +14,8 @@
     limitations under the License.
 */
 
-using PairTradingView.Shared;
 using PairTradingView.WpfApp.Infra;
+using Serilog;
 
 namespace PairTradingView.WpfApp;
 
@@ -30,11 +30,23 @@ internal class Program
 
     private static void SetupLogging()
     {
+        Log.Logger = new LoggerConfiguration()
+           .MinimumLevel.Verbose()
+           .WriteTo.Debug()                          // Output to VS Debug window
+           .WriteTo.File(
+               path: "logs/ptv-.log",                // File path (relative or absolute)
+               rollingInterval: RollingInterval.Day, // New file each day: ptv-20260704.log
+               retainedFileCountLimit: 7,            // Keep last 7 days
+               outputTemplate: "{Timestamp:yyyy-MM-dd HH:mm:ss.fff} [{Level:u3}] {Message:lj}{NewLine}{Exception}"
+           )
+           .CreateLogger();
+
+        Log.Information("Logging setup complete");
     }
 
     private static void RunTheApp()
     {
-        Logger.Log.Msg("Starting WPF application...");
+        Log.Debug("Starting WPF application...");
 
         var thread = new Thread(() =>
         {
