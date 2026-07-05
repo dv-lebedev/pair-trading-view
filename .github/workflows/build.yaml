@@ -18,7 +18,7 @@ jobs:
         id: nbgv
 
       - name: Show version
-        run: echo "Version = ${{ steps.nbgv.outputs.SemVer2 }}"
+        run: echo "Version = ${{ steps.nbgv.outputs.SimpleVersion }}"
 
       - name: Setup .NET
         uses: actions/setup-dotnet@v3
@@ -32,7 +32,7 @@ jobs:
         run: >
           dotnet publish ./PairTradingView.WpfApp/PairTradingView.WpfApp.csproj
           -c Release
-          -p:Version=${{ steps.nbgv.outputs.SemVer2 }}
+          -p:Version=${{ steps.nbgv.outputs.SimpleVersion }}
           -p:DebugType=None
           -p:DebugSymbols=false
           --self-contained:false
@@ -40,6 +40,6 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
-          name: PairTradingView-${{ steps.nbgv.outputs.SemVer2 }}
+          name: PairTradingView-${{ steps.nbgv.outputs.SimpleVersion }}
           path: ./PairTradingView.WpfApp/bin/Release/net8.0-windows/publish/
 
