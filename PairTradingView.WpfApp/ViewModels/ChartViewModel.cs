@@ -26,6 +26,8 @@ namespace PairTradingView.WpfApp.ViewModels;
 
 public class ChartViewModel : ObservableObject
 {
+    private readonly FinancialPairsModel _fpModel;
+
     private PlotModel _plotModel;
     public PlotModel PlotModel
     {
@@ -37,8 +39,6 @@ public class ChartViewModel : ObservableObject
             OnPropertyChanged(); 
         }
     }
-
-    private readonly FinancialPairsModel _fpModel;
 
     public ChartViewModel(FinancialPairsModel financialPairsModel)
     {

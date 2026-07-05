@@ -28,15 +28,15 @@ public class FilesLoaderViewModel : ObservableObject
     private const string CsvFilesDirectory = "csv-files";
 
     private readonly FinancialPairsModel _fpModel;
-    private readonly ILogger _logger;
+    private readonly ILogger _log;
 
-    private Stock[] _stocks;
+    private Stock[]? _stocks;
     private CsvSeparator _selectedSeparator;
 
     private int _selectedPriceColumnNumber = 4;
     private bool _containsHeader;
 
-    public Stock[] Stocks
+    public Stock[]? Stocks
     {
         get => _stocks;
 
@@ -90,10 +90,10 @@ public class FilesLoaderViewModel : ObservableObject
     public FilesLoaderViewModel(FinancialPairsModel financialPairsModel, ILogger logger)
     {
         _fpModel = financialPairsModel ?? throw new ArgumentNullException(nameof(financialPairsModel));
-        _logger = logger ?? throw new ArgumentNullException(nameof(logger));
+        _log = logger ?? throw new ArgumentNullException(nameof(logger));
 
-        LoadDataFromFilesCommand = new RelayCommand(x => LoadDataFromFilesAction(), _logger);
-        CalculateButtonCommand = new RelayCommand(x => CalculateButtonAction(), _logger);
+        LoadDataFromFilesCommand = new RelayCommand(x => LoadDataFromFilesAction(), _log);
+        CalculateButtonCommand = new RelayCommand(x => CalculateButtonAction(), _log);
 
         Separators = new List<CsvSeparator>
         {
@@ -119,7 +119,7 @@ public class FilesLoaderViewModel : ObservableObject
         }
         catch (Exception ex)
         {
-            _logger.Error(ex, "Error loading data from files");
+            _log.Error(ex, "Error loading data from files");
             UserNotification.Display(ex);
         }
     }
