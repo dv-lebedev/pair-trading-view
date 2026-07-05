@@ -25,6 +25,6 @@ public partial class MainView : UserControl
     public MainView()
     {
         InitializeComponent();
-        DataContext = App.Services.GetRequiredService<MainViewModel>();
+        DataContext = App.Services?.GetRequiredService<MainViewModel>();
     }
 }

@@ -25,6 +25,6 @@ public partial class GeneralTableView : UserControl
     public GeneralTableView()
     {
         InitializeComponent();
-        DataContext = App.Services.GetService<GeneralTableViewModel>();
+        DataContext = App.Services?.GetService<GeneralTableViewModel>();
     }
 }

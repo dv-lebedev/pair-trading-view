@@ -25,6 +25,6 @@ public partial class FilesLoaderView : UserControl
     public FilesLoaderView()
     {
         InitializeComponent();
-        DataContext = App.Services.GetService<FilesLoaderViewModel>();
+        DataContext = App.Services?.GetService<FilesLoaderViewModel>();
     }
 }

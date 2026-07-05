@@ -25,6 +25,6 @@ public partial class ChartView : UserControl
     public ChartView()
     {
         InitializeComponent();
-        DataContext = App.Services.GetRequiredService<ChartViewModel>();
+        DataContext = App.Services?.GetRequiredService<ChartViewModel>();
     }
 }
