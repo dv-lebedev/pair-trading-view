@@ -1,0 +1,41 @@
+name: Build WPF App
+
+on:
+  push:
+    branches: [ master, develop ]
+  pull_request:
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Install Nerdbank.GitVersioning
+        uses: dotnet/nbgv@v0.4
+        id: nbgv
+
+      - name: Show version
+        run: echo "Version = ${{ steps.nbgv.outputs.SemVer2 }}"
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: '8.0.x'
+
+      - name: Publish WPF App
+        run: >
+          dotnet publish ./MyWpfApp/MyWpfApp.csproj
+          -c Release
+          -p:Version=${{ steps.nbgv.outputs.SemVer2 }}
+          -p:DebugType=None
+          -p:DebugSymbols=false
+          --self-contained:false
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: MyWpfApp-${{ steps.nbgv.outputs.SemVer2 }}
+          path: MyWpfApp/bin/Release/net8.0-windows/win-x64/publish/
