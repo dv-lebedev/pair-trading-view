@@ -19,6 +19,7 @@ using PairTradingView.WpfApp.Entities;
 using PairTradingView.WpfApp.Infra;
 using PairTradingView.WpfApp.Models;
 using Serilog;
+using System.Windows;
 using System.Windows.Input;
 
 namespace PairTradingView.WpfApp.ViewModels;
@@ -155,6 +156,15 @@ public class SelectedPairInfoViewModel : ObservableObject
 
     private void LoadNewDataCommandAction()
     {   
+        var dialog = MessageBox.Show(
+            "Are you sure you want to load new data? All current data will be lost.",
+            "Load New Data",
+            MessageBoxButton.YesNo,
+            MessageBoxImage.Warning);
+
+        if (dialog == MessageBoxResult.No)
+            return;
+
         Model.LoadNewData();
     }
 
