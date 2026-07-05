@@ -8,7 +8,12 @@
     <UseWPF>true</UseWPF>
     <StartupObject>PairTradingView.WpfApp.Program</StartupObject>
     <AssemblyName>$(MSBuildProjectName)</AssemblyName>
+    <ApplicationIcon>main.ico</ApplicationIcon>
   </PropertyGroup>
+
+  <ItemGroup>
+    <Content Include="main.ico" />
+  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="10.0.9" />
