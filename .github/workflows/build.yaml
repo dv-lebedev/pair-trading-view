@@ -27,7 +27,7 @@ jobs:
 
       - name: Publish WPF App
         run: >
-          dotnet publish ./MyWpfApp/MyWpfApp.csproj
+          dotnet publish ./PairTradingView/PairTradingView.WpfApp.csproj
           -c Release
           -p:Version=${{ steps.nbgv.outputs.SemVer2 }}
           -p:DebugType=None
@@ -37,5 +37,5 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
-          name: MyWpfApp-${{ steps.nbgv.outputs.SemVer2 }}
-          path: MyWpfApp/bin/Release/net8.0-windows/win-x64/publish/
+          name: PairTradingView-${{ steps.nbgv.outputs.SemVer2 }}
+          path: PairTradingView.WpfApp/bin/Release/net8.0-windows/win-x64/publish/
