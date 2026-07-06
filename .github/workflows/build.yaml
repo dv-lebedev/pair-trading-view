@@ -33,6 +33,8 @@ jobs:
           dotnet publish ./PairTradingView.WpfApp/PairTradingView.WpfApp.csproj
           -c Release
           -p:Version=${{ steps.nbgv.outputs.SimpleVersion }}
+          -p:AssemblyVersion=${{ steps.nbgv.outputs.SimpleVersion }}
+          -p:FileVersion=${{ steps.nbgv.outputs.SimpleVersion }}
           -p:DebugType=None
           -p:DebugSymbols=false
           --self-contained:false
