@@ -9,7 +9,7 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <GroupBox
-        Margin="2,10,10,10" 
+        Margin="2,4,8,8" 
         BorderThickness="0.5" 
         BorderBrush="LightGray">
         <GroupBox.Header>
@@ -17,138 +17,120 @@
         </GroupBox.Header>
 
         <Grid Name="grid" 
+              Margin="4"
               Background="#202020">
-
             <Grid.Resources>
                 <Style TargetType="TextBlock">
                     <Setter Property="Foreground" Value="LightGray"/>
                 </Style>
-                <Style TargetType="TextBox">
-                    <Setter Property="Foreground" Value="Black"/>
-                    <Setter Property="Background" Value="LightGray"/>
-                </Style>
             </Grid.Resources>
             <Grid.RowDefinitions>
-                <RowDefinition />
-                <RowDefinition />
-                <RowDefinition />
-                <RowDefinition />
-                <RowDefinition />
-                <RowDefinition />
-                <RowDefinition />
-                <RowDefinition />
-                <RowDefinition />
-                <RowDefinition Height="4*"/>
+                <RowDefinition Height="32" />
+                <RowDefinition Height="28" />
+                <RowDefinition Height="28" />
+                <RowDefinition Height="28" />
+                <RowDefinition Height="28" />
+                <RowDefinition Height="28" />
+                <RowDefinition Height="28" />
+                <RowDefinition Height="28" />
+                <RowDefinition Height="56" />
+                <RowDefinition Height="4*" />
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="124*" />
-                <ColumnDefinition Width="158*" />
+                <ColumnDefinition Width="4" />
+                <ColumnDefinition />
+                <ColumnDefinition />
+                <ColumnDefinition Width="4" />
             </Grid.ColumnDefinitions>
 
             <TextBlock 
-                Grid.Column="0" 
+                Grid.Column="1" 
                 Grid.Row="1"  
                 Foreground="LightGray"
                 Width="100"
-                HorizontalAlignment="Right" 
+                HorizontalAlignment="Left" 
                 VerticalAlignment="Center" 
                 Height="16" Margin="0,2">Balance $</TextBlock>
 
             <TextBlock 
-                Grid.Column="0" 
+                Grid.Column="1" 
                 Grid.Row="2"  
                 Foreground="LightGray"
                 Width="100" 
-                HorizontalAlignment="Right" 
+                HorizontalAlignment="Left" 
                 VerticalAlignment="Center" 
                 Height="16" Margin="0,2">Risk %</TextBlock>
 
             <TextBlock 
-                Grid.Column="0" 
+                Grid.Column="1" 
                 Grid.Row="3" 
                 Text="{Binding PairName}"
                 Foreground="LightGray"
                 Width="100" 
-                HorizontalAlignment="Right" 
+                HorizontalAlignment="Left" 
                 VerticalAlignment="Center" 
                 Height="16" Margin="0,2"/>
 
             <TextBlock 
-                Grid.Column="0" 
+                Grid.Column="1" 
                 Grid.Row="4" 
                 Text="{Binding XName}"
                 Foreground="LightGray"
                 Width="100" 
-                HorizontalAlignment="Right" 
+                HorizontalAlignment="Left" 
                 VerticalAlignment="Center" 
                 Height="16" Margin="0,2"/>
 
             <TextBlock 
-                Grid.Column="0" 
+                Grid.Column="1" 
                 Grid.Row="5" 
                 Name="yName" 
                 Text="{Binding YName}"
                 Foreground="LightGray"
                 Width="100" 
-                HorizontalAlignment="Right" 
+                HorizontalAlignment="Left" 
                 VerticalAlignment="Center" 
                 Height="16" Margin="0,2"/>
 
             <TextBlock 
-                Grid.Column="0" 
+                Grid.Column="1" 
                 Grid.Row="6"  
                 Foreground="LightGray"
                 Width="100" 
-                HorizontalAlignment="Right" 
+                HorizontalAlignment="Left" 
                 VerticalAlignment="Center"
                 Height="16" Margin="0,2">Risk Limit</TextBlock>
 
             <TextBlock 
-                Grid.Column="0"
+                Grid.Column="1"
                 Grid.Row="7" 
                 Width="100" 
                 Foreground="LightGray"
-                HorizontalAlignment="Right" 
+                HorizontalAlignment="Left" 
                 VerticalAlignment="Center" 
                 Height="16" Margin="0,2">SMA</TextBlock>
 
             <xctk:DecimalUpDown
-                Grid.Column="1"
+                Grid.Column="2"
                 Grid.Row="1"
-                Width="120"
                 MaxHeight="24"
-                HorizontalAlignment="Left"
                 Value="{Binding Balance, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                 Minimum="0"
                 Maximum="1000000000000"
                 Increment="0.01"
-                FormatString="F2">
-                <xctk:DecimalUpDown.Resources>
-                    <Style TargetType="{x:Type xctk:DecimalUpDown}">
-                        <Setter Property="CornerRadius" Value="4"/>
-                    </Style>
-                </xctk:DecimalUpDown.Resources>
-            </xctk:DecimalUpDown>
+                FormatString="F2"/>
 
-            <xctk:DecimalUpDown Grid.Column="1" 
+            <xctk:DecimalUpDown Grid.Column="2" 
                  Grid.Row="2"  
-                 Width="120" 
-                 HorizontalAlignment="Left" 
                  MaxHeight="24" 
                  Value="{Binding Risk, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                  Minimum="0"
                  Maximum="1000000000000"
                  Increment="0.01"
-                 FormatString="F2">
-                <xctk:DecimalUpDown.Resources>
-                    <Style TargetType="{x:Type xctk:DecimalUpDown}">
-                        <Setter Property="CornerRadius" Value="4"/>
-                    </Style>
-                </xctk:DecimalUpDown.Resources>
-            </xctk:DecimalUpDown>
+                 FormatString="F2"/>
 
             <TextBlock 
-                Grid.Column="1" 
+                Grid.Column="2" 
                 Grid.Row="3" 
                 Text="{Binding PairsTradeVolume}"
                 Foreground="LightGray"
@@ -157,7 +139,7 @@
                 Height="16" Width="100" Margin="0,2"/>
 
             <TextBlock 
-                Grid.Column="1" 
+                Grid.Column="2" 
                 Grid.Row="4" 
                 Text="{Binding XTradeVolume, StringFormat=N2}"
                 Foreground="LightGray"
@@ -167,7 +149,7 @@
                 Width="100" Margin="0,2"/>
 
             <TextBlock 
-                Grid.Column="1" 
+                Grid.Column="2" 
                 Grid.Row="5" 
                 Name="yTradeVolume"  
                 Text="{Binding YTradeVolume, StringFormat=N2}"
@@ -178,7 +160,7 @@
                 Width="100" Margin="0,2"/>
 
             <TextBlock 
-                Grid.Column="1"
+                Grid.Column="2"
                 Grid.Row="6" 
                 Text="{Binding RiskLimit, StringFormat=N2}"
                 Foreground="LightGray"
@@ -187,36 +169,30 @@
                 Height="16" Width="100" Margin="0,2"/>
 
             <xctk:DecimalUpDown
-                Grid.Column="1" 
+                Grid.Column="2" 
                 Grid.Row="7" 
                 Value="{Binding Model.SmaValue, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                 Minimum="0"
-                Maximum="1000000000000"
-                HorizontalAlignment="Left" 
+                Maximum="{Binding Model.SmaValueMax}"
                 VerticalAlignment="Center" 
-                Height="24" 
-                Width="120">
-                <xctk:DecimalUpDown.Resources>
-                    <Style TargetType="{x:Type xctk:DecimalUpDown}">
-                        <Setter Property="CornerRadius" Value="4"/>
-                    </Style>
-                </xctk:DecimalUpDown.Resources>
-            </xctk:DecimalUpDown>
+                Height="24" />
 
             <Button 
                 Name="Calculate" 
                 Grid.Row="8" 
+                Grid.Column="1"
                 Grid.ColumnSpan="2"
                 Height="24"
-                Margin="4, 0"
+                Margin="0, 0"
                 Content="Calculate"
                 Command="{Binding CalculateCommand}"/>
 
             <Button     
                 Grid.Row="9"
+                Grid.Column="1"
                 Grid.ColumnSpan="2"
                 Height="24"
-                Margin="4, 0"
+                Margin="0, 0"
                 VerticalAlignment="Bottom"
                 Content="Csv Files"
                 Command="{Binding LoadNewDataCommand}"/>
