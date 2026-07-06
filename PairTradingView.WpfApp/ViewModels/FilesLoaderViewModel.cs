@@ -14,6 +14,7 @@
     limitations under the License.
 */
 
+using CommunityToolkit.Mvvm.ComponentModel;
 using PairTradingView.Shared;
 using PairTradingView.WpfApp.Infra;
 using PairTradingView.WpfApp.Models;
@@ -23,66 +24,28 @@ using System.Windows.Input;
 
 namespace PairTradingView.WpfApp.ViewModels;
 
-public class FilesLoaderViewModel : ObservableObject
+public partial class FilesLoaderViewModel : ObservableObject
 {
     private const string CsvFilesDirectory = "csv-files";
 
     private readonly FinancialPairsModel _fpModel;
     private readonly ILogger _log;
 
+    [ObservableProperty]
     private Stock[]? _stocks;
+
+    [ObservableProperty]
     private CsvSeparator _selectedSeparator;
 
+    [ObservableProperty]
     private int _selectedPriceColumnNumber = 4;
+
+    [ObservableProperty]
     private bool _containsHeader;
-
-    public Stock[]? Stocks
-    {
-        get => _stocks;
-
-        set
-        {
-            _stocks = value;
-            OnPropertyChanged();
-        }
-    }
-
-    public int SelectedPriceColumnNumber
-    {
-        get => _selectedPriceColumnNumber;
-
-        set
-        {
-            _selectedPriceColumnNumber = value;
-            OnPropertyChanged();
-        }
-    }
 
     public int[] PriceColumnNumbers { get; } = Enumerable.Range(1, 20).ToArray();
 
-    public bool ContainsHeader
-    {
-        get => _containsHeader;
-
-        set
-        {
-            _containsHeader = value;
-            OnPropertyChanged();
-        }
-    }
-
     public ICollection<CsvSeparator> Separators { get; }
-
-    public CsvSeparator SelectedSeparator
-    {
-        get => _selectedSeparator;
-
-        set
-        {
-            _selectedSeparator = value;
-            OnPropertyChanged();
-        }
-    }
 
     public ICommand LoadDataFromFilesCommand { get; }
     public ICommand CalculateButtonCommand { get; }

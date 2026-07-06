@@ -14,6 +14,7 @@
     limitations under the License.
 */
 
+using CommunityToolkit.Mvvm.ComponentModel;
 using PairTradingView.Shared;
 using PairTradingView.WpfApp.Entities;
 using PairTradingView.WpfApp.Utils;
@@ -22,7 +23,7 @@ using System.Collections.ObjectModel;
 
 namespace PairTradingView.WpfApp.Models;
 
-public class FinancialPairsModel : ObservableObject
+public partial class FinancialPairsModel : ObservableObject
 {
     private readonly ILogger _log;
 
@@ -35,12 +36,8 @@ public class FinancialPairsModel : ObservableObject
 
         set
         {
-            if (_selectedPair != value)
-            {
-                _selectedPair = value;
-                OnPropertyChanged();
+            if (SetProperty(ref _selectedPair, value))
                 SelectedPairChanged?.Invoke(this, EventArgs.Empty);
-            }
         }
     }
 
@@ -50,12 +47,8 @@ public class FinancialPairsModel : ObservableObject
 
         set
         {
-            if (_smaValue != value)
-            {
-                _smaValue = value;
-                OnPropertyChanged();
+            if (SetProperty(ref _smaValue, value))
                 SmaValueChanged?.Invoke(this, EventArgs.Empty);
-            }
         }
     }
 

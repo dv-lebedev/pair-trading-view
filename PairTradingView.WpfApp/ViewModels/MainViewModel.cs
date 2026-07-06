@@ -15,7 +15,7 @@
 */
 
 
-using PairTradingView.Shared;
+using CommunityToolkit.Mvvm.ComponentModel;
 
 namespace PairTradingView.WpfApp.ViewModels;
 

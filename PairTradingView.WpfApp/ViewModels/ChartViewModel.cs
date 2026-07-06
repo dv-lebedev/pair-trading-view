@@ -19,26 +19,17 @@ using OxyPlot;
 using OxyPlot.Series;
 using PairTradingView.WpfApp.Models;
 using PairTradingView.WpfApp.Entities;
-using PairTradingView.Shared;
 using PairTradingView.Shared.Statistics;
+using CommunityToolkit.Mvvm.ComponentModel;
 
 namespace PairTradingView.WpfApp.ViewModels;
 
-public class ChartViewModel : ObservableObject
+public partial class ChartViewModel : ObservableObject
 {
     private readonly FinancialPairsModel _fpModel;
 
+    [ObservableProperty]
     private PlotModel _plotModel;
-    public PlotModel PlotModel
-    {
-        get => _plotModel;
-
-        set 
-        {
-            _plotModel = value; 
-            OnPropertyChanged(); 
-        }
-    }
 
     public ChartViewModel(FinancialPairsModel financialPairsModel)
     {

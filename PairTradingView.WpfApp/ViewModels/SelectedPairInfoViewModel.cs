@@ -14,7 +14,7 @@
     limitations under the License.
 */
 
-using PairTradingView.Shared;
+using CommunityToolkit.Mvvm.ComponentModel;
 using PairTradingView.WpfApp.Entities;
 using PairTradingView.WpfApp.Infra;
 using PairTradingView.WpfApp.Models;
@@ -24,118 +24,36 @@ using System.Windows.Input;
 
 namespace PairTradingView.WpfApp.ViewModels;
 
-public class SelectedPairInfoViewModel : ObservableObject
+public partial class SelectedPairInfoViewModel : ObservableObject
 {
+    [ObservableProperty]
     private string _pairName;
+
+    [ObservableProperty]
     private string _xName;
+
+    [ObservableProperty]
     private string _yName;
+
+    [ObservableProperty]
     private double _pairsTradeVolume;
+
+    [ObservableProperty]
     private double _yTradeVolume;
+
+    [ObservableProperty]
     private double _xTradeVolume;
+
+    [ObservableProperty]
     private double _risk;
+
+    [ObservableProperty]
     private double _riskLimit;
+
+    [ObservableProperty]
     private double _balance;
 
     private readonly ILogger _log;
-
-    public string PairName
-    {
-        get => _pairName;
-
-        set
-        {
-            _pairName = value;
-            OnPropertyChanged();
-        }
-    }
-
-    public string XName
-    {
-        get => _xName;
-
-        set
-        {
-            _xName = value;
-            OnPropertyChanged();
-        }
-    }
-
-    public string YName
-    {
-        get => _yName;
-
-        set
-        {
-            _yName = value;
-            OnPropertyChanged();
-        }
-    }
-
-    public double PairsTradeVolume
-    {
-        get => _pairsTradeVolume;
-
-        set
-        {
-            _pairsTradeVolume = value;
-            OnPropertyChanged();
-        }
-    }
-
-    public double YTradeVolume
-    {
-        get => _yTradeVolume;
-
-        set
-        {
-            _yTradeVolume = value;
-            OnPropertyChanged();
-        }
-    }
-
-    public double XTradeVolume
-    {
-        get => _xTradeVolume;
-
-        set
-        {
-            _xTradeVolume = value;
-            OnPropertyChanged();
-        }
-    }
-
-    public double Risk
-    {
-        get => _risk;
-
-        set
-        {
-            _risk = value;
-            OnPropertyChanged();
-        }
-    }
-
-    public double RiskLimit
-    {
-        get => _riskLimit;
-
-        set
-        {
-            _riskLimit = value;
-            OnPropertyChanged();
-        }
-    }
-
-    public double Balance
-    {
-        get => _balance;
-
-        set
-        {
-            _balance = value;
-            OnPropertyChanged();
-        }
-    }
 
     public FinancialPairsModel Model { get; }
 
