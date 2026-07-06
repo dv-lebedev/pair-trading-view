@@ -14,7 +14,7 @@ jobs:
         uses: actions/checkout@v3
 
       - name: Install Nerdbank.GitVersioning
-        uses: dotnet/nbgv@v0.4
+        uses: dotnet/nbgv@master
         id: nbgv
 
       - name: Show version
