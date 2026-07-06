@@ -191,7 +191,7 @@
                 Grid.Row="7" 
                 Value="{Binding Model.SmaValue, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                 Minimum="0"
-                Maximum="1000000000000"
+                Maximum="{Binding Model.SmaValueMax}"
                 HorizontalAlignment="Left" 
                 VerticalAlignment="Center" 
                 Height="24" 

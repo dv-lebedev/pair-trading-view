@@ -27,10 +27,13 @@ public partial class FinancialPairsModel : ObservableObject
 {
     private readonly ILogger _log;
 
-    private ExtFinancialPair _selectedPair;
+    private ExtFinancialPair? _selectedPair;
     private int _smaValue;
 
-    public ExtFinancialPair SelectedPair
+    [ObservableProperty]
+    private int _smaValueMax;
+
+    public ExtFinancialPair? SelectedPair
     {
         get => _selectedPair;
 
@@ -95,6 +98,7 @@ public partial class FinancialPairsModel : ObservableObject
             }
 
             PairsChanged?.Invoke(this, EventArgs.Empty);
+            SmaValueMax = Pairs.Min(p => stocks.Min(x => x.Prices.Length));
         }
         catch (Exception ex)
         {
