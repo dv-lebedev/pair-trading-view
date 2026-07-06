@@ -9,7 +9,7 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <GroupBox
-        Margin="2,9,10,9" 
+        Margin="2,10,10,10" 
         BorderThickness="0.5" 
         BorderBrush="LightGray">
         <GroupBox.Header>
@@ -38,11 +38,11 @@
                 <RowDefinition />
                 <RowDefinition />
                 <RowDefinition />
-                <RowDefinition Height="5*"/>
+                <RowDefinition Height="4*"/>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="123*" />
-                <ColumnDefinition Width="157*" />
+                <ColumnDefinition Width="124*" />
+                <ColumnDefinition Width="158*" />
             </Grid.ColumnDefinitions>
 
             <TextBlock 
@@ -194,8 +194,8 @@
                 Maximum="1000000000000"
                 HorizontalAlignment="Left" 
                 VerticalAlignment="Center" 
-                Height="20" 
-                Width="120" >
+                Height="24" 
+                Width="120">
                 <xctk:DecimalUpDown.Resources>
                     <Style TargetType="{x:Type xctk:DecimalUpDown}">
                         <Setter Property="CornerRadius" Value="4"/>
@@ -207,16 +207,16 @@
                 Name="Calculate" 
                 Grid.Row="8" 
                 Grid.ColumnSpan="2"
-                Height="23"
-                Margin="5, 0"
+                Height="24"
+                Margin="4, 0"
                 Content="Calculate"
                 Command="{Binding CalculateCommand}"/>
 
             <Button     
                 Grid.Row="9"
                 Grid.ColumnSpan="2"
-                Height="23"
-                Margin="5, 0"
+                Height="24"
+                Margin="4, 0"
                 VerticalAlignment="Bottom"
                 Content="Csv Files"
                 Command="{Binding LoadNewDataCommand}"/>
