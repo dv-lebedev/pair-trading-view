@@ -109,7 +109,7 @@ public partial class ChartViewModel : ObservableObject
 
         PlotModel.Series.Clear();
 
-        AddLineSerie("Δ", OxyColor.Parse("#3399ff"), values, 0);
+        AddLineSerie("Δ", OxyColor.Parse("#00ffff"), values, 0);
 
         if (SMAPeriod > 0 && SMAPeriod < values.Length)
         {

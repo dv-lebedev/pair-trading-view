@@ -13,7 +13,7 @@
         BorderThickness="0.5" 
         BorderBrush="LightGray">
         <GroupBox.Header>
-            <TextBlock Text="INFO" Foreground="White" FontWeight="Medium"/>
+            <TextBlock Text="INFO" Foreground="White" FontWeight="Bold"/>
         </GroupBox.Header>
 
         <Grid Name="grid" 
@@ -25,7 +25,7 @@
                 </Style>
             </Grid.Resources>
             <Grid.RowDefinitions>
-                <RowDefinition Height="32" />
+                <RowDefinition Height="28" />
                 <RowDefinition Height="28" />
                 <RowDefinition Height="28" />
                 <RowDefinition Height="28" />
