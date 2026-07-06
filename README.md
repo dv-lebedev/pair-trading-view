@@ -1,7 +1,7 @@
 # Pair Trading View
 
 
-**Pair Trading View** - application for visual analysis of synthetic financial instruments based on statistical models. 
+**Pair Trading View** is an application for the visual analysis of synthetic financial instruments based on statistical models. 
 
 **[ PairTradingView.WpfApp ]**
 
@@ -12,16 +12,16 @@
 
 ## How To
 
-Execute PairTradingView.exe in 'pair-trading-view\PairTradingView.WpfApp\bin\Debug'.
+- Execute PairTradingView.exe in 'pair-trading-view\PairTradingView.WpfApp\bin\Debug\net8.0-windows'.
 
 <p align="left">
   <img width="270" alt="pic" src="https://github.com/dv-lebedev/PairTradingView/blob/master/screenshots/appstart.png">
 </p>
 
-Set 'Price' column. Put csv files with a historical data into
-'pair-trading-view\PairTradingView.WpfApp\bin\Debug\csv-files' folder.
-Press 'Load Data From File'.
-Press 'Calculate'.
+- Set the 'Price' column.
+- Put CSV files with historical data into the 'pair-trading-view\PairTradingView.WpfApp\bin\Debug\net8.0-windows\csv-files' folder.
+- Press 'Load Data From Files'.
+- Press 'Calculate'.
 
 
 ## Model
@@ -53,11 +53,6 @@ w = 1.0 / (1.0 + abs(β)
 x_tv = fp_tv * w * abs(β)
 
 y_tv = fp_tv * w
-
-
-## Dependencies
-- OxyPloy
-
 
 ## License
 [Apache 2.0](LICENSE)
