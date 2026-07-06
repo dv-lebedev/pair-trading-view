@@ -24,8 +24,8 @@ public class FinancialPair
     public string Name => $"{Y.Name} | {X.Name}";
     public Stock X { get; }
     public Stock Y { get; }
-    public LinearRegression Regression { get; set; }
-    public double[] DeltaValues { get; protected set; }
+    public LinearRegression? Regression { get; set; }
+    public double[]? DeltaValues { get; protected set; }
     public double TradeVolume { get; set; }
     public double Weight { get; set; }
 
@@ -50,7 +50,12 @@ public class FinancialPair
     }
 
     protected void SetValues()
-    { 
+    {
+        if (Regression == null)
+        {
+            throw new InvalidOperationException("Regression must be computed before setting values.");
+        }
+
         double[] x = X.Prices;
         double[] y = Y.Prices;
 
@@ -79,10 +84,5 @@ public class FinancialPair
             }
         }
         return pairs;
-    }
-
-    public static List<FinancialPair> CreateMany(IEnumerable<Stock> stocks) 
-    {
-        return CreateMany<FinancialPair>(stocks);
     }
 }
