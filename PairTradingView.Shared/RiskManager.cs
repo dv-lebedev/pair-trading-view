@@ -82,7 +82,7 @@ public class RiskManager
         foreach (var pair in _pairs)
         {
             pair.Weight = pair.Weight / summary;
-            pair.TradeVolume = Balance * pair.Weight;
+            pair.TradeVolume = Math.Round(Balance * pair.Weight, 2);
         }
 
         foreach (var pair in _pairs)
@@ -90,8 +90,8 @@ public class RiskManager
             double beta = pair.Regression.Beta;
             double weight = 1.0 / (1.0 + Math.Abs(beta));
 
-            pair.X.TradeVolume = pair.TradeVolume * (weight * Math.Abs(beta));
-            pair.Y.TradeVolume = pair.TradeVolume * weight;
+            pair.X.TradeVolume = Math.Round(pair.TradeVolume * (weight * Math.Abs(beta)), 2);
+            pair.Y.TradeVolume = Math.Round(pair.TradeVolume * weight, 2);
         }
     }
 }
