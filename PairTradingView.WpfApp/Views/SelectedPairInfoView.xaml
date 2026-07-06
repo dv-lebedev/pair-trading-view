@@ -187,7 +187,7 @@
                 Height="23"
                 Margin="5, 0"
                 Content="Calculate"
-                Command="{Binding CalulateCommand}"/>
+                Command="{Binding CalculateCommand}"/>
 
             <Button     
                 Grid.Row="9"

@@ -15,12 +15,11 @@
 */
 
 using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 using PairTradingView.Shared;
-using PairTradingView.WpfApp.Infra;
 using PairTradingView.WpfApp.Models;
 using PairTradingView.WpfApp.Utils;
 using Serilog;
-using System.Windows.Input;
 
 namespace PairTradingView.WpfApp.ViewModels;
 
@@ -47,16 +46,10 @@ public partial class FilesLoaderViewModel : ObservableObject
 
     public ICollection<CsvSeparator> Separators { get; }
 
-    public ICommand LoadDataFromFilesCommand { get; }
-    public ICommand CalculateButtonCommand { get; }
-
     public FilesLoaderViewModel(FinancialPairsModel financialPairsModel, ILogger logger)
     {
         _fpModel = financialPairsModel ?? throw new ArgumentNullException(nameof(financialPairsModel));
         _log = logger ?? throw new ArgumentNullException(nameof(logger));
-
-        LoadDataFromFilesCommand = new RelayCommand(x => LoadDataFromFilesAction(), _log);
-        CalculateButtonCommand = new RelayCommand(x => CalculateButtonAction(), _log);
 
         Separators = new List<CsvSeparator>
         {
@@ -65,10 +58,11 @@ public partial class FilesLoaderViewModel : ObservableObject
             CsvSeparator.Tab,
         };
 
-        SelectedSeparator = Separators.FirstOrDefault();  
+        SelectedSeparator = Separators.FirstOrDefault();
     }
 
-    private void LoadDataFromFilesAction()
+    [RelayCommand]
+    private void LoadDataFromFiles()
     {
         try
         {
@@ -87,19 +81,28 @@ public partial class FilesLoaderViewModel : ObservableObject
         }
     }
 
-    private void CalculateButtonAction()
+    [RelayCommand]
+    private void CalculateButton()
     {
-        if (Stocks == null || Stocks.Length == 0)
+        try
         {
-            UserNotification.Display("No input data.");
+            if (Stocks == null || Stocks.Length == 0)
+            {
+                UserNotification.Display("No input data.");
+            }
+            else if (Stocks.Length == 1)
+            {
+                UserNotification.Display("You should have 2 stocks minimum.");
+            }
+            else
+            {
+                _fpModel.UpdateStocks(Stocks);
+            }
         }
-        else if (Stocks.Length == 1)
+        catch (Exception ex)
         {
-            UserNotification.Display("You should have 2 stocks minimum.");
+            _log.Error(ex, "Error calculating financial pairs");
+            UserNotification.Display(ex);
         }
-        else
-        {
-            _fpModel.UpdateStocks(Stocks);
-        }
-    }
+    }    
 }

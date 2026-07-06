@@ -15,9 +15,10 @@
 */
 
 using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 using PairTradingView.WpfApp.Entities;
-using PairTradingView.WpfApp.Infra;
 using PairTradingView.WpfApp.Models;
+using PairTradingView.WpfApp.Utils;
 using Serilog;
 using System.Windows;
 using System.Windows.Input;
@@ -57,33 +58,52 @@ public partial class SelectedPairInfoViewModel : ObservableObject
 
     public FinancialPairsModel Model { get; }
 
-    public ICommand CalulateCommand { get; }
-    public ICommand LoadNewDataCommand { get; }
-
     public SelectedPairInfoViewModel(FinancialPairsModel financialPairsModel, ILogger logger) 
     {
         Model = financialPairsModel ?? throw new ArgumentNullException(nameof(financialPairsModel));
         _log = logger ?? throw new ArgumentNullException(nameof(logger));
 
-        CalulateCommand = new RelayCommand(x => CalulateCommandAction(), _log);
-        LoadNewDataCommand = new RelayCommand(x => LoadNewDataCommandAction(), _log);
         Balance = 100_000.00;
 
         Model.SelectedPairChanged += Instance_SelectedPairChanged;
     }
 
-    private void LoadNewDataCommandAction()
-    {   
-        var dialog = MessageBox.Show(
-            "Are you sure you want to load new data? All current data will be lost.",
-            "Load New Data",
-            MessageBoxButton.YesNo,
-            MessageBoxImage.Warning);
+    [RelayCommand]
+    private void LoadNewData()
+    {
+        try
+        {
+            var dialog = MessageBox.Show(
+                "Are you sure you want to load new data? All current data will be lost.",
+                "Load New Data",
+                MessageBoxButton.YesNo,
+                MessageBoxImage.Warning);
 
-        if (dialog == MessageBoxResult.No)
-            return;
+            if (dialog == MessageBoxResult.No)
+                return;
 
-        Model.LoadNewData();
+            Model.LoadNewData();
+        }
+        catch (Exception ex)
+        {
+            _log.Error(ex, "Error loading new data");
+            UserNotification.Display(ex);
+        }
+    }
+
+    [RelayCommand]
+    private void Calculate()
+    {
+        try
+        {
+            Model.Calculate(Balance);
+            Model.ReselectSelectedPair();
+        }
+        catch (Exception ex)
+        {
+            _log.Error(ex, "Error calculating");
+            UserNotification.Display(ex);
+        }
     }
 
     private void Instance_SelectedPairChanged(object sender, EventArgs e)
@@ -99,11 +119,5 @@ public partial class SelectedPairInfoViewModel : ObservableObject
             YTradeVolume = pair.Y.TradeVolume;
             RiskLimit = pair.TradeVolume * Risk / 100.0;
         }
-    }
-
-    private void CalulateCommandAction()
-    {
-        Model.Calculate(Balance);
-        Model.ReselectSelectedPair();
     }
 }
