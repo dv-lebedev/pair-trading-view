@@ -20,7 +20,7 @@
 
 - Set the 'Price' column.
 - Put CSV files with historical data into the 'pair-trading-view\PairTradingView.WpfApp\bin\Debug\net8.0-windows\csv-files' folder.
-- Press 'Load Data From File'.
+- Press 'Load Data From Files'.
 - Press 'Calculate'.
 
 
