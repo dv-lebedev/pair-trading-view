@@ -21,7 +21,6 @@ using PairTradingView.WpfApp.Models;
 using PairTradingView.WpfApp.Utils;
 using Serilog;
 using System.Windows;
-using System.Windows.Input;
 
 namespace PairTradingView.WpfApp.ViewModels;
 
