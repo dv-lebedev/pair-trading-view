@@ -12,17 +12,16 @@
 
 ## How To
 
-Execute PairTradingView.exe in 'pair-trading-view\PairTradingView.WpfApp\bin\Debug\net8.0-windows'.
+- Execute PairTradingView.exe in 'pair-trading-view\PairTradingView.WpfApp\bin\Debug\net8.0-windows'.
 
 <p align="left">
   <img width="270" alt="pic" src="https://github.com/dv-lebedev/PairTradingView/blob/master/screenshots/appstart.png">
 </p>
 
-Set the 'Price' column.
-Put CSV files with historical data into the
-'pair-trading-view\PairTradingView.WpfApp\bin\Debug\csv-files' folder.
-Press 'Load Data From File'.
-Press 'Calculate'.
+- Set the 'Price' column.
+- Put CSV files with historical data into the 'pair-trading-view\PairTradingView.WpfApp\bin\Debug\net8.0-windows\csv-files' folder.
+- Press 'Load Data From File'.
+- Press 'Calculate'.
 
 
 ## Model
