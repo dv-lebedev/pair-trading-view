@@ -132,7 +132,7 @@
             <TextBlock 
                 Grid.Column="2" 
                 Grid.Row="3" 
-                Text="{Binding PairsTradeVolume}"
+                Text="{Binding PairsTradeVolume, StringFormat=N2}"
                 Foreground="LightGray"
                 HorizontalAlignment="Left" 
                 VerticalAlignment="Center" 
