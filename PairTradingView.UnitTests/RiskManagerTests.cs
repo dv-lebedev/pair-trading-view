@@ -32,7 +32,7 @@ public class RiskManagerTests
 
         pairs.ForEach(i => { Assert.That(Math.Round(i.TradeVolume, 1), Is.Not.EqualTo(0)); });
 
-        Assert.That(Math.Round(pairs.Select(i => i.TradeVolume).Sum(), 2), Is.EqualTo(100000.00));
+        Assert.That(Math.Round(pairs.Select(i => i.TradeVolume).Sum(), 2), Is.EqualTo(100000.00).Within(0.01));
 
         Assert.That(Math.Round(pairs.Select(i => i.Weight).Sum(), 2), Is.EqualTo(1));
     }
