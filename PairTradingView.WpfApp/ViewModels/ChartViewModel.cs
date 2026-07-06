@@ -19,26 +19,21 @@ using OxyPlot;
 using OxyPlot.Series;
 using PairTradingView.WpfApp.Models;
 using PairTradingView.WpfApp.Entities;
-using PairTradingView.Shared;
 using PairTradingView.Shared.Statistics;
+using CommunityToolkit.Mvvm.ComponentModel;
+using OxyPlot.Legends;
 
 namespace PairTradingView.WpfApp.ViewModels;
 
-public class ChartViewModel : ObservableObject
+public partial class ChartViewModel : ObservableObject
 {
-    private PlotModel _plotModel;
-    public PlotModel PlotModel
-    {
-        get => _plotModel;
-
-        set 
-        {
-            _plotModel = value; 
-            OnPropertyChanged(); 
-        }
-    }
+    private readonly OxyColor DeltaColor = OxyColor.Parse("#00ffff");
+    private readonly OxyColor SMAColor = OxyColor.Parse("#FF0000");
 
     private readonly FinancialPairsModel _fpModel;
+
+    [ObservableProperty]
+    private PlotModel _plotModel;
 
     public ChartViewModel(FinancialPairsModel financialPairsModel)
     {
@@ -68,18 +63,20 @@ public class ChartViewModel : ObservableObject
 
     private void SetUpModel()
     {
-        //PlotModel.LegendTitle = "";
-        //PlotModel.LegendOrientation = LegendOrientation.Horizontal;
-        //PlotModel.LegendPlacement = LegendPlacement.Outside;
-        //PlotModel.LegendPosition = LegendPosition.TopLeft;
-        //PlotModel.LegendBackground = OxyColor.FromAColor(200, OxyColors.White);
-        //PlotModel.LegendBorder = OxyColors.White;
+        PlotModel.Legends.Add(new Legend
+        {
+            LegendPosition = LegendPosition.TopLeft,
+            LegendPlacement = LegendPlacement.Outside,
+            LegendOrientation = LegendOrientation.Horizontal,
+            LegendBackground = OxyColor.FromAColor(200, OxyColors.White),
+            LegendBorder = OxyColors.LightGray,
+        });
+
         PlotModel.PlotAreaBorderColor = OxyColors.Transparent;
 
         var xAxis = new LinearAxis()
         {
             Position = AxisPosition.Left,
-
             IsZoomEnabled = false,
             IsPanEnabled = false,
             MajorGridlineStyle = LineStyle.Solid,
@@ -118,12 +115,12 @@ public class ChartViewModel : ObservableObject
 
         PlotModel.Series.Clear();
 
-        AddLineSerie("Δ", OxyColor.Parse("#3399ff"), values, 0);
+        AddLineSerie("Δ", DeltaColor, values, 0);
 
         if (SMAPeriod > 0 && SMAPeriod < values.Length)
         {
             var SMAValues = MovingAverages.SMA(values, SMAPeriod);
-            AddLineSerie("SMA", OxyColor.Parse("#FF0000"), SMAValues, SMAPeriod);
+            AddLineSerie("SMA", SMAColor, SMAValues, SMAPeriod);
         }
 
         PlotModel.InvalidatePlot(true);
@@ -140,8 +137,6 @@ public class ChartViewModel : ObservableObject
             CanTrackerInterpolatePoints = false,
             Color = color,
             Title = title,
-
-            //Smooth = false
         };
 
         for (int i = 0; i < values.Length; i++)

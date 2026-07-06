@@ -19,16 +19,16 @@ using System.Runtime.CompilerServices;
 
 namespace PairTradingView.Shared;
 
-public class ObservableObject : INotifyPropertyChanged
-{
-    public event PropertyChangedEventHandler PropertyChanged;
+//public class ObservableObject2222 : INotifyPropertyChanged
+//{
+//    public event PropertyChangedEventHandler PropertyChanged;
 
-    public ObservableObject() 
-    { 
-    }
+//    public ObservableObject() 
+//    { 
+//    }
 
-    protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = "")
-    {
-        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-    }
-}
+//    protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = "")
+//    {
+//        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+//    }
+//}

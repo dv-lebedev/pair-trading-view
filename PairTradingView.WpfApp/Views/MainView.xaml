@@ -10,12 +10,12 @@
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="186*"/>
-            <RowDefinition Height="133*"/>
+            <RowDefinition Height="2*"/>
+            <RowDefinition Height="1*"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="344*"/>
-            <ColumnDefinition Width="173*"/>
+            <ColumnDefinition />
+            <ColumnDefinition Width="Auto"/>
         </Grid.ColumnDefinitions>
 
         <local:ChartView
@@ -24,7 +24,9 @@
 
         <local:SelectedPairInfoView
             Grid.Column="1"
-            Grid.Row="0"/>
+            Grid.Row="0"
+            Margin="4"
+            Width="300"/>
 
         <local:GeneralTableView
             Background="DimGray"

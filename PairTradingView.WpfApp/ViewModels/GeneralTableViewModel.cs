@@ -14,12 +14,12 @@
     limitations under the License.
 */
 
-using PairTradingView.Shared;
+using CommunityToolkit.Mvvm.ComponentModel;
 using PairTradingView.WpfApp.Models;
 
 namespace PairTradingView.WpfApp.ViewModels;
 
-public class GeneralTableViewModel : ObservableObject
+public partial class GeneralTableViewModel : ObservableObject
 {
     public FinancialPairsModel Model { get; }
 

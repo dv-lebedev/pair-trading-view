@@ -28,11 +28,16 @@
             CanUserSortColumns="True" 
             GridLinesVisibility="None" 
             AutoGenerateColumns="False" 
-            Grid.Row="1" 
+            Grid.Row="1"
             Grid.ColumnSpan="2" 
             ItemsSource="{Binding Model.Pairs}"
             SelectedItem="{Binding Model.SelectedPair}"
             x:Name="dataGrid">
+            <DataGrid.Resources>
+                <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="Orange"/>
+                <SolidColorBrush x:Key="{x:Static SystemColors.InactiveSelectionHighlightBrushKey}" Color="Orange"/>
+                <SolidColorBrush x:Key="{x:Static SystemColors.HighlightTextBrushKey}" Color="Black"/>
+            </DataGrid.Resources>
             <DataGrid.Columns>
                 <DataGridCheckBoxColumn Binding="{Binding Selected}"/>
                 <DataGridTextColumn Header="X" Binding="{Binding X.Name}" IsReadOnly="True"/>

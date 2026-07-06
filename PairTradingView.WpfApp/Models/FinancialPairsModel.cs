@@ -14,6 +14,7 @@
     limitations under the License.
 */
 
+using CommunityToolkit.Mvvm.ComponentModel;
 using PairTradingView.Shared;
 using PairTradingView.WpfApp.Entities;
 using PairTradingView.WpfApp.Utils;
@@ -22,25 +23,24 @@ using System.Collections.ObjectModel;
 
 namespace PairTradingView.WpfApp.Models;
 
-public class FinancialPairsModel : ObservableObject
+public partial class FinancialPairsModel : ObservableObject
 {
     private readonly ILogger _log;
 
-    private ExtFinancialPair _selectedPair;
+    private ExtFinancialPair? _selectedPair;
     private int _smaValue;
 
-    public ExtFinancialPair SelectedPair
+    [ObservableProperty]
+    private int _smaValueMax;
+
+    public ExtFinancialPair? SelectedPair
     {
         get => _selectedPair;
 
         set
         {
-            if (_selectedPair != value)
-            {
-                _selectedPair = value;
-                OnPropertyChanged();
+            if (SetProperty(ref _selectedPair, value))
                 SelectedPairChanged?.Invoke(this, EventArgs.Empty);
-            }
         }
     }
 
@@ -50,12 +50,8 @@ public class FinancialPairsModel : ObservableObject
 
         set
         {
-            if (_smaValue != value)
-            {
-                _smaValue = value;
-                OnPropertyChanged();
+            if (SetProperty(ref _smaValue, value))
                 SmaValueChanged?.Invoke(this, EventArgs.Empty);
-            }
         }
     }
 
@@ -102,6 +98,7 @@ public class FinancialPairsModel : ObservableObject
             }
 
             PairsChanged?.Invoke(this, EventArgs.Empty);
+            SmaValueMax = Pairs.Min(p => stocks.Min(x => x.Prices.Length));
         }
         catch (Exception ex)
         {

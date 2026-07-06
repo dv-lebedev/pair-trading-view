@@ -25,7 +25,7 @@ public class RiskManagerTests
     {
         Stock[] stocks = CsvUtils.ReadAllDataFrom("csv-files/", 4, false);
 
-        List<FinancialPair> pairs = FinancialPair.CreateMany(stocks);
+        var pairs = FinancialPair.CreateMany<FinancialPair>(stocks);
 
         var rm = new RiskManager(pairs.ToArray(), 100000.00);
         rm.Calculate();

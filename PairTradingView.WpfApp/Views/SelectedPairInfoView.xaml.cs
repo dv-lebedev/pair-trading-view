@@ -25,6 +25,6 @@ public partial class SelectedPairInfoView : UserControl
     public SelectedPairInfoView()
     {
         InitializeComponent();
-        DataContext = App.Services.GetService<SelectedPairInfoViewModel>();
+        DataContext = App.Services?.GetService<SelectedPairInfoViewModel>();
     }
 }

@@ -14,31 +14,21 @@
     limitations under the License.
 */
 
-using PairTradingView.Shared;
+using CommunityToolkit.Mvvm.ComponentModel;
 using PairTradingView.WpfApp.Models;
 using PairTradingView.WpfApp.Views;
 using System.Windows.Controls;
 
 namespace PairTradingView.WpfApp.ViewModels;
 
-public class MainWindowViewModel : ObservableObject
-{
+public partial class MainWindowViewModel : ObservableObject
+{                               
     private readonly UserControl FilesLoaderView = new FilesLoaderView();
     private readonly UserControl MainView = new MainView();
     private readonly FinancialPairsModel _fpModel;
 
+    [ObservableProperty]
     private object _currentView;
-
-    public object CurrentView
-    {
-        get => _currentView;
-
-        set
-        {
-            _currentView = value;
-            OnPropertyChanged();
-        }
-    }
 
     public MainWindowViewModel(FinancialPairsModel financialPairsModel)
     {
