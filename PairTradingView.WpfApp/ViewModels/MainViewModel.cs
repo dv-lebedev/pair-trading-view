@@ -19,7 +19,7 @@ using CommunityToolkit.Mvvm.ComponentModel;
 
 namespace PairTradingView.WpfApp.ViewModels;
 
-public class MainViewModel : ObservableObject
+public partial class MainViewModel : ObservableObject
 {
     public MainViewModel() { }
 }
