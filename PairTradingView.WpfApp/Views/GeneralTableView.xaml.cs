@@ -22,9 +22,17 @@ namespace PairTradingView.WpfApp.Views;
 
 public partial class GeneralTableView : UserControl
 {
+    private readonly GeneralTableViewModel? _vm;
+
     public GeneralTableView()
     {
         InitializeComponent();
-        DataContext = App.Services?.GetService<GeneralTableViewModel>();
+        _vm = App.Services?.GetService<GeneralTableViewModel>();
+        DataContext = _vm;
+    }
+
+    private void DataGrid_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
+    {
+        _vm?.ChangeSelection();
     }
 }

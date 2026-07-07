@@ -32,6 +32,7 @@
             Grid.ColumnSpan="2" 
             ItemsSource="{Binding Model.Pairs}"
             SelectedItem="{Binding Model.SelectedPair}"
+            MouseDoubleClick="DataGrid_MouseDoubleClick"
             x:Name="dataGrid">
             <DataGrid.Resources>
                 <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="Orange"/>

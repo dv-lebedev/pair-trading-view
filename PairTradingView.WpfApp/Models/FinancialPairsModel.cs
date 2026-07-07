@@ -157,4 +157,12 @@ public partial class FinancialPairsModel : ObservableObject
             _log.Error(ex, "Error calculating risk");
         }
     }
+
+    public void ChangeSelection()
+    {
+        if (SelectedPair is not null)
+        {
+            SelectedPair.Selected = !SelectedPair.Selected;
+        }
+    }
 }
