@@ -45,5 +45,5 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: PairTradingView-${{ steps.nbgv.outputs.SimpleVersion }}
-          path: ./PairTradingView.WpfApp/bin/Release/net8.0-windows/publish/
+          path: ./PairTradingView.WpfApp/bin/Release/net8.0-windows/win-x64/publish/
 
