@@ -17,6 +17,7 @@
 using CommunityToolkit.Mvvm.ComponentModel;
 using PairTradingView.WpfApp.Models;
 using PairTradingView.WpfApp.Views;
+using System.Reflection;
 using System.Windows.Controls;
 
 namespace PairTradingView.WpfApp.ViewModels;
@@ -30,6 +31,9 @@ public partial class MainWindowViewModel : ObservableObject
     [ObservableProperty]
     private object _currentView;
 
+    [ObservableProperty]
+    private string _title;
+
     public MainWindowViewModel(FinancialPairsModel financialPairsModel)
     {
         _fpModel = financialPairsModel ?? throw new ArgumentNullException(nameof(financialPairsModel));
@@ -38,5 +42,14 @@ public partial class MainWindowViewModel : ObservableObject
 
         _fpModel.LoadNewDataRequested += (s, e) => CurrentView = FilesLoaderView;
         _fpModel.PairsChanged += (s, e) => CurrentView = MainView;
+
+        SetTitle();
+    }
+
+    private void SetTitle()
+    {
+        Assembly assembly = Assembly.GetExecutingAssembly();
+        var version = assembly?.GetName()?.Version?.ToString(3);
+        Title = $"Pair Trading View - {version ?? ""}";
     }
 }

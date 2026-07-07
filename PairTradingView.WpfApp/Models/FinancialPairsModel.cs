@@ -25,6 +25,7 @@ namespace PairTradingView.WpfApp.Models;
 
 public partial class FinancialPairsModel : ObservableObject
 {
+    private readonly IStockDataProvider _dataProvider;
     private readonly ILogger _log;
 
     private ExtFinancialPair? _selectedPair;
@@ -63,8 +64,9 @@ public partial class FinancialPairsModel : ObservableObject
 
     public event EventHandler PairsChanged;
 
-    public FinancialPairsModel(ILogger logger)
+    public FinancialPairsModel(IStockDataProvider dataProvider, ILogger logger)
     {
+        _dataProvider = dataProvider ?? throw new ArgumentNullException(nameof(dataProvider));
         _log = logger ?? throw new ArgumentNullException(nameof(logger));
         Pairs = new ObservableCollection<ExtFinancialPair>();
     }
@@ -81,11 +83,14 @@ public partial class FinancialPairsModel : ObservableObject
         LoadNewDataRequested?.Invoke(this, EventArgs.Empty);
     }
 
-    public void UpdateStocks(Stock[] stocks)
+    public void UpdatePairs()
     {
         try
         {
+            var stocks = _dataProvider.GetStocks();
             var pairs = FinancialPair.CreateMany<ExtFinancialPair>(stocks);
+
+            _log.Debug("Updating stocks with {Count} pairs", pairs?.Count() ?? 0);
 
             Pairs.Clear();
 

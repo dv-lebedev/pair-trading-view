@@ -28,6 +28,7 @@ public partial class FilesLoaderViewModel : ObservableObject
     private const string CsvFilesDirectory = "csv-files";
 
     private readonly FinancialPairsModel _fpModel;
+    private readonly IStockDataProvider _dataProvider;
     private readonly ILogger _log;
 
     [ObservableProperty]
@@ -46,9 +47,10 @@ public partial class FilesLoaderViewModel : ObservableObject
 
     public ICollection<CsvSeparator> Separators { get; }
 
-    public FilesLoaderViewModel(FinancialPairsModel financialPairsModel, ILogger logger)
+    public FilesLoaderViewModel(FinancialPairsModel financialPairsModel, IStockDataProvider dataProvider, ILogger logger)
     {
         _fpModel = financialPairsModel ?? throw new ArgumentNullException(nameof(financialPairsModel));
+        _dataProvider = dataProvider ?? throw new ArgumentNullException(nameof(dataProvider));
         _log = logger ?? throw new ArgumentNullException(nameof(logger));
 
         Separators = new List<CsvSeparator>
@@ -66,12 +68,17 @@ public partial class FilesLoaderViewModel : ObservableObject
     {
         try
         {
+            _log.Debug("Loading data from files in directory: {Directory}", CsvFilesDirectory);
             int priceColumn = SelectedPriceColumnNumber;
             bool header = ContainsHeader;
 
             if (SelectedSeparator?.Value is char separator)
             {
-                Stocks = CsvUtils.ReadAllDataFrom(CsvFilesDirectory, priceColumn, header, separator);
+                var stocks = CsvUtils.ReadAllDataFrom(CsvFilesDirectory, priceColumn, header, separator);
+                Stocks = stocks;
+
+                _log.Debug("Loaded {Count} stocks from files", stocks.Length);
+                _dataProvider.Init(stocks);
             }
         }
         catch (Exception ex)
@@ -96,7 +103,7 @@ public partial class FilesLoaderViewModel : ObservableObject
             }
             else
             {
-                _fpModel.UpdateStocks(Stocks);
+                _fpModel.UpdatePairs();
             }
         }
         catch (Exception ex)

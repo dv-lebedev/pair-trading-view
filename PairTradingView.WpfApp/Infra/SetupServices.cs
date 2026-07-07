@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
+using PairTradingView.Shared;
 using PairTradingView.WpfApp.Models;
 using PairTradingView.WpfApp.ViewModels;
 using Serilog;
@@ -9,7 +10,11 @@ public static class SetupServices
 {
     public static void AddAsOneServices(this ServiceCollection container)
     {
+        // logging
         container.AddSingleton<ILogger>((sp) => Log.Logger);
+
+        // data
+        container.AddSingleton<IStockDataProvider, StockDataProvider>();
 
         // view models
         container.AddSingleton<FinancialPairsModel>();
