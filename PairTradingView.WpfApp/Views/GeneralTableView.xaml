@@ -32,6 +32,7 @@
             Grid.ColumnSpan="2" 
             ItemsSource="{Binding Model.Pairs}"
             SelectedItem="{Binding Model.SelectedPair}"
+            MouseDoubleClick="DataGrid_MouseDoubleClick"
             x:Name="dataGrid">
             <DataGrid.Resources>
                 <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="Orange"/>
@@ -39,7 +40,7 @@
                 <SolidColorBrush x:Key="{x:Static SystemColors.HighlightTextBrushKey}" Color="Black"/>
             </DataGrid.Resources>
             <DataGrid.Columns>
-                <DataGridCheckBoxColumn Binding="{Binding Selected}"/>
+                <DataGridCheckBoxColumn Binding="{Binding Selected, UpdateSourceTrigger=PropertyChanged}"/>
                 <DataGridTextColumn Header="X" Binding="{Binding X.Name}" IsReadOnly="True"/>
                 <DataGridTextColumn Header="Y" Binding="{Binding Y.Name}" IsReadOnly="True"/>
                 <DataGridTextColumn Header="SD_X" Binding="{Binding SD_X, StringFormat=F4}" IsReadOnly="True"/>

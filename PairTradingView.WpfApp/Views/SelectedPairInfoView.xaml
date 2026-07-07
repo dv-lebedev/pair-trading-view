@@ -63,7 +63,7 @@
 
             <TextBlock 
                 Grid.Column="1" 
-                Grid.Row="3" 
+                Grid.Row="4" 
                 Text="{Binding PairName}"
                 Foreground="LightGray"
                 Width="100" 
@@ -73,7 +73,7 @@
 
             <TextBlock 
                 Grid.Column="1" 
-                Grid.Row="4" 
+                Grid.Row="5" 
                 Text="{Binding XName}"
                 Foreground="LightGray"
                 Width="100" 
@@ -83,7 +83,7 @@
 
             <TextBlock 
                 Grid.Column="1" 
-                Grid.Row="5" 
+                Grid.Row="6" 
                 Name="yName" 
                 Text="{Binding YName}"
                 Foreground="LightGray"
@@ -94,7 +94,7 @@
 
             <TextBlock 
                 Grid.Column="1" 
-                Grid.Row="6"  
+                Grid.Row="7"  
                 Foreground="LightGray"
                 Width="100" 
                 HorizontalAlignment="Left" 
@@ -103,7 +103,7 @@
 
             <TextBlock 
                 Grid.Column="1"
-                Grid.Row="7" 
+                Grid.Row="8" 
                 Width="100" 
                 Foreground="LightGray"
                 HorizontalAlignment="Left" 
@@ -114,7 +114,7 @@
                 Grid.Column="2"
                 Grid.Row="1"
                 MaxHeight="24"
-                Value="{Binding Balance, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                Value="{Binding Balance.Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                 Minimum="0"
                 Maximum="1000000000000"
                 Increment="0.01"
@@ -123,7 +123,7 @@
             <xctk:DecimalUpDown Grid.Column="2" 
                  Grid.Row="2"  
                  MaxHeight="24" 
-                 Value="{Binding Risk, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                 Value="{Binding Risk.Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                  Minimum="0"
                  Maximum="1000000000000"
                  Increment="0.01"
@@ -131,7 +131,7 @@
 
             <TextBlock 
                 Grid.Column="2" 
-                Grid.Row="3" 
+                Grid.Row="4" 
                 Text="{Binding PairsTradeVolume, StringFormat=N2}"
                 Foreground="LightGray"
                 HorizontalAlignment="Left" 
@@ -140,7 +140,7 @@
 
             <TextBlock 
                 Grid.Column="2" 
-                Grid.Row="4" 
+                Grid.Row="5" 
                 Text="{Binding XTradeVolume, StringFormat=N2}"
                 Foreground="LightGray"
                 HorizontalAlignment="Left" 
@@ -150,7 +150,7 @@
 
             <TextBlock 
                 Grid.Column="2" 
-                Grid.Row="5" 
+                Grid.Row="6" 
                 Name="yTradeVolume"  
                 Text="{Binding YTradeVolume, StringFormat=N2}"
                 Foreground="LightGray"
@@ -161,7 +161,7 @@
 
             <TextBlock 
                 Grid.Column="2"
-                Grid.Row="6" 
+                Grid.Row="7" 
                 Text="{Binding RiskLimit, StringFormat=N2}"
                 Foreground="LightGray"
                 HorizontalAlignment="Left" 
@@ -170,22 +170,12 @@
 
             <xctk:DecimalUpDown
                 Grid.Column="2" 
-                Grid.Row="7" 
+                Grid.Row="8" 
                 Value="{Binding Model.SmaValue, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                 Minimum="0"
                 Maximum="{Binding Model.SmaValueMax}"
                 VerticalAlignment="Center" 
                 Height="24" />
-
-            <Button 
-                Name="Calculate" 
-                Grid.Row="8" 
-                Grid.Column="1"
-                Grid.ColumnSpan="2"
-                Height="24"
-                Margin="0, 0"
-                Content="Calculate"
-                Command="{Binding CalculateCommand}"/>
 
             <Button     
                 Grid.Row="9"

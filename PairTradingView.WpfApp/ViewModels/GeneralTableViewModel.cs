@@ -27,4 +27,9 @@ public partial class GeneralTableViewModel : ObservableObject
     {
         Model = financialPairsModel ?? throw new ArgumentNullException(nameof(financialPairsModel));
     }
+
+    public void ChangeSelection()
+    {
+        Model.ChangeSelection();
+    }
 }

@@ -10,6 +10,10 @@ public static class SetupServices
 {
     public static void AddAsOneServices(this ServiceCollection container)
     {
+        // fin
+        container.AddSingleton<Balance>(b => new Balance { Value = 100_000.00 });
+        container.AddSingleton<Risk>();
+
         // logging
         container.AddSingleton<ILogger>((sp) => Log.Logger);
 

@@ -45,26 +45,28 @@ public partial class SelectedPairInfoViewModel : ObservableObject
     private double _xTradeVolume;
 
     [ObservableProperty]
-    private double _risk;
-
-    [ObservableProperty]
     private double _riskLimit;
 
     [ObservableProperty]
-    private double _balance;
+    private Balance _balance;
+
+    [ObservableProperty]
+    private Risk _risk;
 
     private readonly ILogger _log;
 
     public FinancialPairsModel Model { get; }
 
-    public SelectedPairInfoViewModel(FinancialPairsModel financialPairsModel, ILogger logger) 
+    public SelectedPairInfoViewModel(FinancialPairsModel financialPairsModel, Balance balance, Risk risk, ILogger logger) 
     {
         Model = financialPairsModel ?? throw new ArgumentNullException(nameof(financialPairsModel));
         _log = logger ?? throw new ArgumentNullException(nameof(logger));
 
-        Balance = 100_000.00;
+        Balance = balance;
+        Risk = risk;
 
-        Model.SelectedPairChanged += Instance_SelectedPairChanged;
+        Model.SelectedPairChanged += (s,e) => UpdateUI();
+        Model.Calculated += (s,e) => UpdateUI();
     }
 
     [RelayCommand]
@@ -95,7 +97,7 @@ public partial class SelectedPairInfoViewModel : ObservableObject
     {
         try
         {
-            Model.Calculate(Balance);
+            Model.Calculate();
             Model.ReselectSelectedPair();
         }
         catch (Exception ex)
@@ -105,7 +107,7 @@ public partial class SelectedPairInfoViewModel : ObservableObject
         }
     }
 
-    private void Instance_SelectedPairChanged(object sender, EventArgs e)
+    private void UpdateUI()
     {
         if (Model.SelectedPair is ExtFinancialPair pair)
         {
@@ -116,7 +118,7 @@ public partial class SelectedPairInfoViewModel : ObservableObject
             PairsTradeVolume = pair.TradeVolume;
             XTradeVolume = pair.X.TradeVolume;
             YTradeVolume = pair.Y.TradeVolume;
-            RiskLimit = pair.TradeVolume * Risk / 100.0;
+            RiskLimit = pair.TradeVolume * Risk.Value / 100.0;
         }
     }
 }
