@@ -39,7 +39,7 @@ jobs:
           -p:FileVersion=${{ steps.nbgv.outputs.SimpleVersion }}
           -p:DebugType=None
           -p:DebugSymbols=false
-          --self-contained:false
+          --self-contained:true
 
       - name: Upload artifact
         uses: actions/upload-artifact@v4
