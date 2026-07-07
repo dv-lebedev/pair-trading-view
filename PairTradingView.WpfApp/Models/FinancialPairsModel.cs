@@ -34,6 +34,9 @@ public partial class FinancialPairsModel : ObservableObject
     [ObservableProperty]
     private int _smaValueMax;
 
+    [ObservableProperty]
+    private Balance _balance;
+
     public ExtFinancialPair? SelectedPair
     {
         get => _selectedPair;
@@ -59,16 +62,22 @@ public partial class FinancialPairsModel : ObservableObject
     public event EventHandler SelectedPairChanged;
     public event EventHandler SmaValueChanged;
     public event EventHandler LoadNewDataRequested;
+    public event EventHandler Calculated;
 
     public ObservableCollection<ExtFinancialPair> Pairs { get; }
 
     public event EventHandler PairsChanged;
 
-    public FinancialPairsModel(IStockDataProvider dataProvider, ILogger logger)
+    public FinancialPairsModel(IStockDataProvider dataProvider, Balance balance, Risk risk, ILogger logger)
     {
         _dataProvider = dataProvider ?? throw new ArgumentNullException(nameof(dataProvider));
+        _balance = balance ?? throw new ArgumentNullException(nameof(balance));
         _log = logger ?? throw new ArgumentNullException(nameof(logger));
         Pairs = new ObservableCollection<ExtFinancialPair>();
+
+        balance.ValueChanged += (s, e) => Calculate();
+        risk.ValueChanged += (s, e) => Calculate();
+        SelectedPairChanged += (s, e) => Calculate();
     }
 
     public void ReselectSelectedPair()
@@ -92,6 +101,11 @@ public partial class FinancialPairsModel : ObservableObject
 
             _log.Debug("Updating stocks with {Count} pairs", pairs?.Count() ?? 0);
 
+            foreach (var p in Pairs)
+            {
+                p.SelectedChanged -= Pair_SelectedChanged;
+            }
+        
             Pairs.Clear();
 
             if (pairs != null)
@@ -99,6 +113,7 @@ public partial class FinancialPairsModel : ObservableObject
                 foreach (var pair in pairs)
                 {
                     Pairs.Add(pair);
+                    pair.SelectedChanged += Pair_SelectedChanged;
                 }
             }
 
@@ -112,28 +127,29 @@ public partial class FinancialPairsModel : ObservableObject
         }
     }
 
-    public void Calculate(double balance)
+    private void Pair_SelectedChanged(object? sender, EventArgs e) =>  Calculate();
+   
+    public void Calculate()
     {
         try
         {
+            //preparation
+            foreach (var pair in Pairs)
+            {
+                pair.TradeVolume = 0;
+                pair.X.TradeVolume = 0;
+                pair.Y.TradeVolume = 0;
+            }
+
             var checkedPairs = Pairs.Where(i => i.Selected).ToList();
 
             if (checkedPairs.Count > 0)
             {
-                //preparation
-                foreach (var pair in Pairs)
-                {
-                    pair.TradeVolume = 0;
-                    pair.X.TradeVolume = 0;
-                    pair.Y.TradeVolume = 0;
-                }
+                var balanceValue = Balance.Value;
+                new RiskManager(checkedPairs, balanceValue).Calculate();
+            }
 
-                new RiskManager(checkedPairs, balance).Calculate();
-            }
-            else
-            {
-                UserNotification.Display("Pairs are not selected.");
-            }
+            Calculated?.Invoke(this, EventArgs.Empty);
         }
         catch (Exception ex)
         {
