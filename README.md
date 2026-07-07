@@ -22,7 +22,7 @@
 - Put CSV files with historical data into the 'pair-trading-view\PairTradingView.WpfApp\bin\Debug\net8.0-windows\csv-files' folder.
 - Press 'Load Data From Files'.
 - Press 'Calculate'.
-
+- Enter the balance and risk, and select pairs in the table using checkboxes or by double-clicking.
 
 ## Model
 - SI -> synthetic index
